@@ -1,0 +1,13 @@
+// .site-header{
+//   .nav-wrapper{
+//     padding: 0 2rem;
+//   }
+// }
+
+@media only screen and(min-width: $medium-screen-up){
+  .site-header{
+    .nav-wrapper{
+      padding: 0 3rem;
+    }
+  }
+}
