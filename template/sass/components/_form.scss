@@ -1,0 +1,18 @@
+// GLOBAL FORM STYLING
+// NOTE: color for svg should be the same as the input's border
+// change the svg's fill property to achieve this
+
+form{
+  input[type="email"] {
+    background: url('../assets/icons/email.svg') no-repeat 10px center;
+    padding-left: 40px !important;
+  }
+  input[type="password"] {
+    background: url('../assets/icons/lock.svg') no-repeat 10px center;
+    padding-left: 40px !important;
+  }
+  input[name="usr-name"] {
+    background: url('../assets/icons/account.svg') no-repeat 10px center;
+    padding-left: 40px !important;
+  }
+}

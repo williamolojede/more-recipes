@@ -13297,6 +13297,48 @@ section.search input.search__input {
 .top-rated__item .card .card-title {
   margin-top: 0; }
 
+form input[type="email"] {
+  background: url("../assets/icons/email.svg") no-repeat 10px center;
+  padding-left: 40px !important; }
+
+form input[type="password"] {
+  background: url("../assets/icons/lock.svg") no-repeat 10px center;
+  padding-left: 40px !important; }
+
+form input[name="usr-name"] {
+  background: url("../assets/icons/account.svg") no-repeat 10px center;
+  padding-left: 40px !important; }
+
+form.auth-form {
+  width: 100%; }
+  form.auth-form label {
+    display: block;
+    font-size: 1.2rem;
+    margin-bottom: 1rem; }
+  form.auth-form input.form__input {
+    border: 2px solid #ddd;
+    font-size: 1.2rem;
+    border-radius: 4px;
+    padding: 1rem;
+    display: block;
+    height: initial;
+    box-sizing: border-box;
+    transition: 0.1s ease-in border; }
+    form.auth-form input.form__input:focus {
+      border: 1px solid #26a69a;
+      box-shadow: 0 1px 0 0 #26a69a; }
+  form.auth-form button[type="submit"] {
+    background: #ee6e73;
+    border-style: none;
+    font-size: 1.4rem;
+    width: 100%;
+    border-radius: 2px;
+    padding: 1rem;
+    color: #fff;
+    transition: 0.1s ease-in background; }
+    form.auth-form button[type="submit"]:hover {
+      background: #d66368; }
+
 .page-footer {
   padding: 20px 0; }
   .page-footer p {
@@ -13309,3 +13351,24 @@ section.search input.search__input {
 @media only screen and (min-width: 993px) {
   .site-header .nav-wrapper {
     padding: 0 3rem; } }
+
+.page__login {
+  background-color: #ee6e73; }
+  .page__login header {
+    margin-top: 2rem; }
+    .page__login header a {
+      font-size: 2.1rem; }
+  .page__login form {
+    margin-top: 1rem; }
+
+.page__login, .page__register {
+  background-color: #ee6e73; }
+  .page__login header, .page__register header {
+    margin-top: 2rem; }
+    .page__login header a, .page__register header a {
+      font-size: 2.1rem; }
+  .page__login .login-card, .page__login .register-card, .page__register .login-card, .page__register .register-card {
+    float: initial !important;
+    margin-right: auto; }
+  .page__login p a, .page__register p a {
+    text-decoration: underline; }
