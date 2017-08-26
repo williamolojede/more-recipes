@@ -13297,6 +13297,9 @@ section.search input.search__input {
 .top-rated__item .card .card-title {
   margin-top: 0; }
 
+form input {
+  box-sizing: border-box !important; }
+
 form input[type="email"] {
   background: url("../assets/icons/email.svg") no-repeat 10px center;
   padding-left: 40px !important; }
@@ -13322,7 +13325,6 @@ form.auth-form {
     padding: 1rem;
     display: block;
     height: initial;
-    box-sizing: border-box;
     transition: 0.1s ease-in border; }
     form.auth-form input.form__input:focus {
       border: 1px solid #26a69a;
@@ -13457,6 +13459,123 @@ form.auth-form {
       color: #ddd; }
     .recipe__instructions ol li:not(:last-of-type) {
       margin-bottom: 1rem; }
+
+.ingredients-form .ingredients-form__qu {
+  display: flex;
+  justify-content: space-between; }
+  .ingredients-form .ingredients-form__qu label:first-of-type {
+    width: 20%; }
+  .ingredients-form .ingredients-form__qu label:last-of-type {
+    width: 40%; }
+  .ingredients-form .ingredients-form__qu select {
+    display: block; }
+
+.my-recipe__add .my-recipe__add--form input, .my-recipe__add .my-recipe__add--form textarea, .my-recipe__add .my-recipe__add--form fieldset, .my-recipe__add .my-recipe__add--form label {
+  font-size: 1.2rem;
+  display: block;
+  -webkit-appearance: none; }
+
+.my-recipe__add .my-recipe__add--form input, .my-recipe__add .my-recipe__add--form textarea, .my-recipe__add .my-recipe__add--form fieldset, .my-recipe__add .my-recipe__add--form select {
+  border: 2px solid #ddd;
+  padding: .5rem;
+  border-radius: 5px;
+  width: 100%; }
+
+.my-recipe__add .my-recipe__add--form label {
+  color: #000; }
+
+.my-recipe__add .my-recipe__add--form li a i {
+  color: #ee6e73; }
+
+.my-recipe__add .my-recipe__add--form button {
+  background: #ee6e73;
+  border-style: none;
+  font-size: 1.4rem;
+  border-radius: 2px;
+  padding: .5rem;
+  color: #fff;
+  transition: 0.1s ease-in background; }
+  .my-recipe__add .my-recipe__add--form button:hover {
+    background: #d66368; }
+
+.my-recipe__add .my-recipe__add--form input, .my-recipe__add .my-recipe__add--form textarea, .my-recipe__add .my-recipe__add--form select {
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s; }
+  .my-recipe__add .my-recipe__add--form input:focus, .my-recipe__add .my-recipe__add--form textarea:focus, .my-recipe__add .my-recipe__add--form select:focus {
+    outline: none;
+    border: 1px solid #78add8 !important;
+    box-shadow: 0 0 5px 1px #78add8 !important; }
+
+.my-recipe__add .my-recipe__add--form .description-image label textarea {
+  resize: none !important;
+  height: 100px;
+  margin-bottom: 1rem; }
+
+.my-recipe__add .my-recipe__add--form .description-image label:last-of-type div {
+  border: 2px solid #ddd;
+  display: flex;
+  border-radius: 5px;
+  padding: 1rem;
+  align-items: center; }
+  .my-recipe__add .my-recipe__add--form .description-image label:last-of-type div i {
+    color: #039be5;
+    font-size: 2rem;
+    margin-right: 1rem; }
+
+.my-recipe__add .my-recipe__add--form .description-image label:last-of-type input {
+  display: none; }
+
+.my-recipe__add .my-recipe__add--form .ingredients-instruction {
+  margin: 1.5rem 0; }
+  .my-recipe__add .my-recipe__add--form .ingredients-instruction fieldset {
+    padding: 1rem; }
+    .my-recipe__add .my-recipe__add--form .ingredients-instruction fieldset ol {
+      margin-top: 0;
+      padding-left: 1rem; }
+  .my-recipe__add .my-recipe__add--form .ingredients-instruction .ingredients-form.my-recipe__add--form___ingredients {
+    margin-bottom: 1.5rem; }
+
+@media only screen and (min-width: 601px) {
+  .my-recipe__add .my-recipe__add--form .description-image {
+    display: flex;
+    justify-content: space-between; }
+    .my-recipe__add .my-recipe__add--form .description-image label {
+      width: 25%; }
+      .my-recipe__add .my-recipe__add--form .description-image label:first-of-type {
+        width: 70%; }
+      .my-recipe__add .my-recipe__add--form .description-image label:last-of-type div {
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+        justify-content: center;
+        align-items: center;
+        height: 100px; }
+        .my-recipe__add .my-recipe__add--form .description-image label:last-of-type div i {
+          font-size: 2rem;
+          margin-right: 0; }
+  .my-recipe__add .my-recipe__add--form .ingredients-instruction {
+    display: flex;
+    justify-content: space-between; }
+    .my-recipe__add .my-recipe__add--form .ingredients-instruction .ingredients-form.my-recipe__add--form___ingredients {
+      width: 55%;
+      margin-bottom: 0; }
+    .my-recipe__add .my-recipe__add--form .ingredients-instruction .instructions-form.my-recipe__add--form___instructions {
+      width: 40%; } }
+
+.my-recipe__manage table.my-recipe__manage--table td, .my-recipe__manage table.my-recipe__manage--table th {
+  width: calc(100%/3);
+  text-align: center;
+  font-size: 1.5rem; }
+
+.my-recipe__manage table.my-recipe__manage--table .my-recipe__manage--table___action a {
+  font-size: 2rem; }
+  .my-recipe__manage table.my-recipe__manage--table .my-recipe__manage--table___action a:not(:last-of-type) {
+    margin-right: 1.5rem; }
+  .my-recipe__manage table.my-recipe__manage--table .my-recipe__manage--table___action a:last-of-type {
+    color: #ee6e73; }
+
+.my-recipe__manage table.my-recipe__manage--table .my-recipe__manage--table___img img {
+  width: auto;
+  max-height: 100px; }
 
 .page-footer {
   padding: 20px 0; }

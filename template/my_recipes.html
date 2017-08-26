@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MoreRecipes | MyRecipes</title>
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/main.css">
+  
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body class="page page__my-recipe">
+  <header class="site-header">
+    <nav>
+      <div class="nav-wrapper">
+        <a href="/" class="brand-logo">MoreRecipes</a>
+        <ul class="right hide-on-med-and-down">
+          <li><a href="profile.html">Profile</a></li>
+          <li><a href="/signout">Sign Out</a></li>
+        </ul>
+        <ul class="side-nav" id="mobile-nav">
+          <li><a href="profile.html">Profile</a></li>
+          <li><a href="/signout">Sign Out</a></li>
+        </ul>
+        <a href="#" data-activates="mobile-nav" class="button-collapse">
+          <i class="material-icons">menu</i>
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="row intro">
+        <h3>MyRecipes</h3>
+        <p>you can <a href="#add">add</a>, <a href="#manage">modify/delete</a> your recipe here.</p>
+      </div>
+      <div class="row my-recipe__manage" id="manage">
+        <h4>Manage Your Recipes</h4>
+        <table class="my-recipe__manage--table">
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Name</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="my-recipe__manage--table___img">
+                <img src="https://fthmb.tqn.com/4P30MYPyJYr0fxlkBuHmNZg4NO8=/960x0/filters:no_upscale()/about/3167488129_cc7a303896_o-58a6fe3b5f9b58a3c91bf559.jpg" alt="pancake" class="card-image" width="50">
+              </td>
+              <td class="my-recipe__manage--table___name">Pancake</td>
+              <td class="my-recipe__manage--table___action">
+                <a href="/modify">
+                  <i class="mdi mdi-wrench"></i>
+                </a>
+                <a href="/delete">
+                  <i class="mdi mdi-delete"></i>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="my-recipe__add row" id="add">
+        <h4>Add Recipe</h4>
+        <form class="my-recipe__add--form">
+          <label class="my-recipe__add--form___name">
+            Name
+            <input type="text" name="recipe-name" placeholder="e.g: Jollof rice">
+          </label>
+          <!-- description-image wrapper -->
+          <div class="description-image">
+            <label class="my-recipe__add--form___desc">
+              Description
+              <textarea placeholder="e.g: short description..."></textarea>
+            </label>
+            <label class="my-recipe__add--form___img">
+              Image
+              <div>
+                <i class="mdi mdi-plus"></i>
+                <span>No file chosen</span>
+              </div>
+              <input type="file" name="filename" accept="image/gif, image/jpeg, image/png">
+            </label>
+          </div>
+          <!-- ingredients-instruction wrapper -->
+          <div class="ingredients-instruction">
+            <fieldset class="ingredients-form my-recipe__add--form___ingredients">
+              <legend>Ingredient(s):</legend>
+              <ol>
+                <li>
+                  1 1/2 cups all-purpose flour
+                  <a href="/delete">
+                    <i class="mdi mdi-delete"></i>
+                  </a>
+                </li>
+              </ol>
+              <div class="ingredients-form__qu">
+                <label>
+                  Quantity
+                  <input type="text" name="recipe-ingredient__qty" placeholder="3 1/2">
+                </label>
+                <label>
+                  Unit
+                  <select>
+                    <option value="" disabled selected>unit</option>
+                    <option value="teaspoon">teaspoon</option>
+                    <option value="cup">cup</option>
+                  </select>
+                </label>
+                <label>
+                  Name
+                  <input type="text" name="recipe-ingredient__name" placeholder="e.g: egusi">
+                </label>
+              </div>
+              <a href="/add-new" class="add-new">
+                <i class="mdi mdi-plus"></i>
+                <span>Add an ingredient</span>
+              </a>
+            </fieldset>
+            <fieldset class="instructions-form my-recipe__add--form___instructions">
+              <legend>Instruction(s):</legend>
+              <ol>
+                <li>In a large bowl, sift together the flour, baking powder, salt and sugar. Make a well in the center and pour in the milk, egg and melted butter; mix until smooth.
+                  <a href="/delete">
+                    <i class="mdi mdi-delete"></i>
+                  </a>
+                </li>
+              </ol>
+              <label>
+                Step
+                <input type="text" name="recipe-ingredient__name" placeholder="e.g: egusi">
+              </label>
+              
+              <a href="/add-new" class="add-new">
+                <i class="mdi mdi-plus"></i>
+                <span>Add an instruction</span>
+              </a>
+            </fieldset>
+          </div>
+          
+
+          <button type="submit" class="form__submit z-depth-1">Submit</button>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <footer class="page-footer">
+    <div class="container">
+      <p>Crafted with <i class="mdi mdi-heart"></i> by <a href="http://william.ng/" target="_blank">William I. Olojede</a></p>
+    </div>
+  </footer>
+
+  <!-- Javascript  -->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="js/materialize.min.js"></script>
+  <script type="text/javascript" src="js/main.js"></script>
+</body>
+</html>

@@ -3,6 +3,10 @@
 // change the svg's fill property to achieve this
 
 form{
+  input{
+    box-sizing: border-box !important;
+  }
+
   input[type="email"] {
     background: url('../assets/icons/email.svg') no-repeat 10px center;
     padding-left: 40px !important;
