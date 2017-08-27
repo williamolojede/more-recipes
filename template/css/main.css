@@ -13618,6 +13618,13 @@ main {
   .page__recipe main .container .recipe__name {
     margin-top: 0; } }
 
+.page__profile .profile__details label {
+  font-size: 1.2rem;
+  color: initial; }
+  .page__profile .profile__details label input {
+    font-size: 1.2rem;
+    color: #ddd; }
+
 .page__login, .page__register {
   background-color: #ee6e73; }
   .page__login header, .page__register header {
