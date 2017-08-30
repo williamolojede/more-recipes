@@ -1,7 +1,7 @@
-const express = require('express');
-const logger = require('morgan');
-const bodyPaser = require('body-parser');
-const routes = require('./routes');
+import express from 'express';
+import logger from 'morgan';
+import bodyPaser from 'body-parser';
+import routes from './routes';
 
 const app = express();
 

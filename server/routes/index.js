@@ -1,5 +1,5 @@
-const express = require('express');
-const signup = require('./signup');
+import express from 'express';
+import signup from './signup';
 
 const v1 = express.Router();
 
