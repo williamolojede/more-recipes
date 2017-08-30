@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "williamilerioluwase",
+    "password": null,
+    "database": "more-recipes",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "williamilerioluwase",
+    "password": null,
+    "database": "more-recipes_test",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test-local": {
+    "username": "williamilerioluwase",
+    "password": null,
+    "database": "more-recipes_test-local",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}
