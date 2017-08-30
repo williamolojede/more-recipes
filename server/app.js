@@ -13,4 +13,19 @@ app.use(bodyPaser.urlencoded({ extended: false }));
 
 app.use('/api', routes);
 
+// catch 404 and forward to error handler
+app.use((req, res, next) => {
+  const err = new Error('Not Found');
+  err.status = 404;
+  next(err);
+});
+
+// error handler
+// define as the last app.use callback
+app.use((err, req, res, next) => {
+  // defaults to internal server error
+  res.status(err.status || 500);
+  res.send({ message: err.message, });
+});
+
 module.exports = app;
