@@ -13,11 +13,11 @@
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
-  "production": {
-    "username": "root",
+  "test-local": {
+    "username": "williamilerioluwase",
     "password": null,
-    "database": "database_production",
+    "database": "more-recipes_test-local",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "postgres"
   }
 }
