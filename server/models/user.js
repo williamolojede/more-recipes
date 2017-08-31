@@ -1,10 +1,11 @@
+import bcrypt from 'bcrypt';
+
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
     username: {
       allowNull: true,
       unique: true,
-      defaultValue: 'username',
-      validation: {
+      validate: {
         max: 15,
       },
       type: DataTypes.STRING,
@@ -12,33 +13,33 @@ module.exports = (sequelize, DataTypes) => {
     email: {
       allowNull: false,
       unique: true,
-      validation: {
+      validate: {
         isEmail: true,
       },
       type: DataTypes.STRING,
     },
     fullname: {
       allowNull: false,
-      validation: {
+      validate: {
         max: 50,
-        isAlpha: true,
       },
       type: DataTypes.STRING,
     },
     password: {
       allowNull: false,
-      validation: {
-        min: 6,
-      },
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      set(password) {
+        const hash = bcrypt.hashSync(password, 10);
+        this.setDataValue('password', hash);
+      }
     },
   });
 
   User.associate = (models) => {
-    User.hasMany(models.recipe, {
+    User.hasMany(models.Recipe, {
       foreignKey: 'owner',
+      as: 'recipes',
     });
   };
-
   return User;
 };

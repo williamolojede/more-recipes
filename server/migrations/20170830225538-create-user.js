@@ -9,8 +9,7 @@ module.exports = {
     username: {
       allowNull: true,
       unique: true,
-      defaultValue: 'username',
-      validation: {
+      validate: {
         max: 15,
       },
       type: Sequelize.STRING
@@ -18,22 +17,21 @@ module.exports = {
     email: {
       allowNull: false,
       unique: true,
-      validation: {
+      validate: {
         isEmail: true,
       },
       type: Sequelize.STRING
     },
     fullname: {
       allowNull: false,
-      validation: {
+      validate: {
         max: 50,
-        isAlpha: true,
       },
       type: Sequelize.STRING
     },
     password: {
       allowNull: false,
-      validation: {
+      validate: {
         min: 6,
       },
       type: Sequelize.STRING
