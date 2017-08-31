@@ -1,0 +1,30 @@
+.page__recipe{
+  main{
+    .container{
+      padding-top: 5rem;
+      h3 {
+        border-bottom: 2px solid #ddd;
+        padding-bottom: .5rem;
+        margin-bottom: 0;
+        font-size: 2rem;
+      }
+      .recipe__stats,
+      .recipe__reviews{
+        margin-left: 0;
+        margin-right: 0;
+      }
+    }
+  } 
+}
+
+@media #{$medium-and-up} {
+  .page__recipe{
+    main{
+      .container{
+        .recipe__name{
+          margin-top: 0;
+        }
+      }
+    }
+  }
+}
