@@ -28,4 +28,4 @@ app.use((err, req, res, next) => {
   res.send({ message: err.message, });
 });
 
-module.exports = app;
+export default app;
