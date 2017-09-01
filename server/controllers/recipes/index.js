@@ -6,6 +6,7 @@ import deleteRecipe from './deleteRecipe';
 const recipesController = {
   getAllRecipe,
   createRecipe,
+  updateRecipe,
   deleteRecipe
 };
 
