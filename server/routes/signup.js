@@ -7,7 +7,7 @@ router.post('/', (req, res, next) => {
   const { email, fullname, password } = req.body;
   return User
     .create({ email, fullname, password })
-    .then(() => res.status(201).send({ message: 'sucess' }))
+    .then(() => res.status(201).send({ message: 'success' }))
     .catch((error) => {
       const err = new Error(error.errors[0].message);
       err.status = 400;
