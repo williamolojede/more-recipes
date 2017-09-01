@@ -3,6 +3,8 @@ import logger from 'morgan';
 import bodyPaser from 'body-parser';
 import routes from './routes';
 
+const port = parseInt(process.env.PORT, 10) || 3000;
+
 const app = express();
 
 app.use(logger('dev'));
@@ -27,5 +29,7 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500);
   res.send({ message: err.message, });
 });
+
+app.listen(port);
 
 export default app;
