@@ -3,7 +3,7 @@ import logger from 'morgan';
 import bodyPaser from 'body-parser';
 import routes from './routes';
 
-const port = parseInt(process.env.PORT, 10) || 3000;
+const port = parseInt(process.env.PORT, 10) || 8000;
 
 const app = express();
 
@@ -30,6 +30,7 @@ app.use((err, req, res, next) => {
   res.send({ message: err.message, });
 });
 
-app.listen(port);
+// http://www.marcusoft.net/2015/10/eaddrinuse-when-watching-tests-with-mocha-and-supertest.html
+if (!module.parent) { app.listen(port); }
 
 export default app;

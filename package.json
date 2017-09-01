@@ -6,8 +6,9 @@
   "scripts": {
     "start": "nodemon --exec babel-node server/app.js",
     "add-session-store": "psql more-recipes < node_modules/connect-pg-simple/table.sql",
-    "test-local": "set NODE_ENV=test-local&& mocha server/test/test.js",
+    "test-local": "sequelize db:migrate:undo:all --env=test-local&& sequelize db:migrate --env=test-local && NODE_ENV=test-local  mocha --compilers js:babel-core/register --timeout 10000 server/test/test.js",
     "test": "istanbul cover ./node_modules/mocha/bin/_mocha server/test/test.js --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
+    "migrate": "sequelize db:migrate:undo:all&&sequelize db:migrate",
     "shc": "start coverage/lcov-report/index.html",
     "coverage": "set NODE_ENV=test-local&&sequelize db:migrate:undo:all&&sequelize db:migrate&& istanbul cover node_modules/mocha/bin/_mocha server/test/test.js",
     "coveralls": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
