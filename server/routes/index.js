@@ -1,12 +1,10 @@
 import express from 'express';
-import signup from './signup';
-import login from './login';
-import recipe from './recipe';
+import users from './users';
+import recipes from './recipe';
 
 const v1 = express.Router();
 
-v1.use('/v1/user/signup', signup);
-v1.use('/v1/user/login', login);
-v1.use('/v1/recipe', recipe);
+v1.use('/v1/users', users);
+v1.use('/v1/recipe', recipes);
 
 export default v1;

@@ -1,14 +1,10 @@
-import express from 'express';
 import jwt from 'jsonwebtoken';
-import { User } from '../models/index';
-import validateLogin from '../helpers/validateLogIn';
+import { User } from '../../models/index';
+import validateLogin from '../../helpers/validateLogIn';
 
-const router = express.Router();
-
-router.post('/', (req, res, next) => {
+const login = (req, res, next) => {
   // makes sure both email and password are passed
   const validation = validateLogin(req.body);
-
   if (validation.valid) {
     const { email, password } = req.body;
     User.authenticate(email, password, (err, user) => {
@@ -25,6 +21,6 @@ router.post('/', (req, res, next) => {
     err.status = validation.status;
     next(err);
   }
-});
+};
 
-export default router;
+export default login;

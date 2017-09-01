@@ -8,7 +8,7 @@ let userdata = {};
 
 describe('API Integration Tests', () => {
   describe('User signup', () => {
-    const signupURl = `${rootURL}/user/signup`;
+    const signupURl = `${rootURL}/users/signup`;
 
     beforeEach(() => {
       userdata = {

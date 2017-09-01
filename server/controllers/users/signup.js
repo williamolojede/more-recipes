@@ -1,9 +1,6 @@
-import express from 'express';
-import { User } from '../models/index';
+import { User } from '../../models/index';
 
-const router = express.Router();
-
-router.post('/', (req, res, next) => {
+const signup = (req, res, next) => {
   const { email, fullname, password } = req.body;
   return User
     .create({ email, fullname, password })
@@ -13,6 +10,6 @@ router.post('/', (req, res, next) => {
       err.status = 400;
       return next(err);
     });
-});
+};
 
-export default router;
+export default signup;
