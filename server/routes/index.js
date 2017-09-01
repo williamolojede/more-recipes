@@ -1,7 +1,7 @@
 import express from 'express';
 import signup from './signup';
 import login from './login';
-import login from './login';
+import recipe from './recipe';
 
 const v1 = express.Router();
 
