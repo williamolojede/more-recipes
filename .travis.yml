@@ -1,0 +1,18 @@
+language: node_js
+node_js:
+  - "iojs"
+  - "6"
+env:
+  - NODE_ENV=test
+
+cache:
+  directories:
+  - "node_modules"
+
+services:
+  - postgresql
+
+before_script:
+  - createuser more-recipes -s -U postgres
+  - createdb more-recipes_test --username=more-recipes
+  - sequelize db:migrate

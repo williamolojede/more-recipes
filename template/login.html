@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MoreRecipes | Login</title>
+  <link rel="stylesheet" href="css/main.css">
+  
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body class="page page__login">
+  <header class="header center">
+    <a href="/" class="white-text brand-logo">MoreRecipes</a>
+  </header>
+  <main>
+    <div class="container">
+      <div class="row">
+        <div class="login-card card col s11 m6">
+          <div class="card-content">
+            <h1 class="card-title center">Log in to MoreRecipes</h1>
+            <form class="auth-form form" method="post" action="/login/">
+              <input id="usr-email" type="email" name="usr-email" class="form__input" placeholder="email" required>
+              
+              <input id="usr-pswd" type="password" name="usr-pswd" class="form__input"
+              placeholder="password" required>
+
+              <button type="submit" class="form__submit z-depth-1">Login</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <p class="white-text center">Don’t have an account? <a href="register.html" class="white-text">Register now</a></p>
+    </div>
+  </main>
+  <footer class="page-footer">
+    <div class="container">
+      <p>Crafted with <i class="mdi mdi-heart"></i> by <a href="http://william.ng/" target="_blank">William I. Olojede</a></p>
+    </div>
+  </footer>
+</body>
+</html>

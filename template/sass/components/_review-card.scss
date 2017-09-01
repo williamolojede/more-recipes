@@ -1,0 +1,54 @@
+.card.review__card{
+  .card-image{
+    width: 100%;
+    text-align: center;
+    padding: 1rem;
+    // padding: $card-padding;
+    border-bottom: 2px solid #ddd;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    img{
+      width: 80px;
+      height: 80px;
+    }
+    .card-title{
+      color: initial;
+      padding: 0;
+      position: initial;
+      margin-bottom: 0;
+    }
+  }
+  .card-content {
+    width: 100%;
+    min-height: 100px;
+    padding: 1rem;
+  }
+}
+
+@media #{$medium-and-up} {
+  .card.review__card{
+    display: flex;
+    .card-image{
+      width: 30%;
+      text-align: center;
+      // padding: 24px 0;
+      border-right: 2px solid #ddd;
+      border-bottom: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+
+      .card-title{
+        color: initial;
+        padding: 0;
+        position: initial;
+      }
+    }
+    .card-content {
+      width: 70%;
+    }
+  }
+}
