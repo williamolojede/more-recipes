@@ -1,4 +1,5 @@
 import express from 'express';
+import jwt from 'jsonwebtoken';
 import { User } from '../models/index';
 import validateLogin from '../helpers/validateLogIn';
 
@@ -16,7 +17,8 @@ router.post('/', (req, res, next) => {
         err.status = 401;
         return next(err);
       }
-      res.status(201).send({ message: 'sucess', user });
+      const token = jwt.sign({ user }, 'jsninja', { expiresIn: 72000 });
+      res.status(201).send({ message: 'sucess', token });
     });
   } else {
     const err = new Error(validation.message);
