@@ -39,5 +39,58 @@ describe('API Integration Tests', () => {
           done();
         });
     });
+
+    it('return 400 for if no email is passed ', (done) => {
+      const invalidUserData = Object.assign({}, userdata);
+      delete invalidUserData.email;
+
+      request.post(signupURl)
+        .send(invalidUserData)
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.message).to.equal('email field is required');
+          done();
+        });
+    });
+
+    it('return 400 for if no password is passed ', (done) => {
+      const invalidUserData = Object.assign({}, userdata);
+      delete invalidUserData.password;
+
+      request.post(signupURl)
+        .send(invalidUserData)
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.message).to.equal('password field is required');
+          done();
+        });
+    });
+
+    it('return 400 for if both email and password aren\'t passed ', (done) => {
+      const invalidUserData = Object.assign({}, userdata);
+      delete invalidUserData.password;
+      delete invalidUserData.email;
+
+      request.post(signupURl)
+        .send(invalidUserData)
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.message).to.equal('email and password fields are required');
+          done();
+        });
+    });
+
+    it('return 400 for if both email and password aren\'t passed ', (done) => {
+      const invalidUserData = Object.assign({}, userdata);
+      delete invalidUserData.fullname;
+
+      request.post(signupURl)
+        .send(invalidUserData)
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.message).to.equal('fullname field is required');
+          done();
+        });
+    });
   });
 });
