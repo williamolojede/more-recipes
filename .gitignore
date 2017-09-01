@@ -57,11 +57,3 @@ typings/
 # dotenv environment variables file
 .env
 
-# codekit config
-*config.codekit3
-
-# DS_Store
-*.DS_Store
-
-.vscode
-
