@@ -8,6 +8,6 @@ const router = express.Router();
 router.get('/', recipesController.getAllRecipe);
 router.post('/', requiresToken, validateAddRecipe, recipesController.createRecipe);
 // router.put('/:id', recipesController.updateRecipe);
-router.delete('/:id', recipesController.deleteRecipe);
+router.delete('/:id', requiresToken, recipesController.deleteRecipe);
 
 export default router;

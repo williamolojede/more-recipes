@@ -51,7 +51,7 @@ module.exports = (sequelize, DataTypes) => {
         // check if it finds no user
         if (!user) {
           const err = new Error('User not found');
-          err.status = 401;
+          err.status = 404;
           return callback(err);
         }
         const isMatch = bcrypt.compareSync(password, user.password);
