@@ -50,7 +50,6 @@ module.exports = (sequelize, DataTypes) => {
       .then((user) => {
         // check if it finds no user
         if (!user) {
-          console.log(email);
           const err = new Error('User not found');
           err.status = 404;
           return callback(err);
