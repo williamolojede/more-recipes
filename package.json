@@ -10,7 +10,7 @@
     "test": "nyc --require babel-core/register mocha server/test/test.js",
     "migrate": "sequelize db:migrate:undo:all&&sequelize db:migrate",
     "shc": "start coverage/lcov-report/index.html",
-    "coverage": "sequelize db:migrate:undo:all --env=test-local && sequelize db:migrate --env=test-local && NODE_ENV=test-local nyc --require babel-core/register mocha server/test/test.js && rm -rf ./coverage",
+    "coverage": "sequelize db:migrate:undo:all --env=test-local && sequelize db:migrate --env=test-local && NODE_ENV=test-local nyc --require babel-core/register mocha --timeout 10000 server/test/test.js && rm -rf ./coverage",
     "coveralls": "NODE_ENV=test-local nyc --require babel-core/register mocha server/test/test.js && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
   },
   "repository": {
