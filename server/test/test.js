@@ -214,6 +214,31 @@ describe('API Integration Tests', () => {
     // test if both name and decription are passed when creating a recipe
   });
 
+  describe('Get all recipes', () => {
+    // no token
+    // invalid token
+    // succes
+    it('return 200 for successfully getting all recipes', (done) => {
+      request.get(`${recipesURl}`)
+        .send({ token })
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          expect(res.body.message).to.equal('success');
+          expect(res.body.recipes[0].name).to.equal('Fried Rice');
+          done();
+        });
+    });
+
+    it('return 400 if token is not present', (done) => {
+      request.get(`${recipesURl}`)
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.message).to.equal('user authorization token required');
+          done();
+        });
+    });
+  });
+
   describe('Delete Recipe', () => {
     it('return 403 if a user user is not the owner of the recipe', (done) => {
       const anotherToken = jwt.sign({ userID: 15, }, 'jsninja', { expiresIn: '3 days' });
@@ -226,7 +251,7 @@ describe('API Integration Tests', () => {
         });
     });
 
-    it('return 401 if token is not present', (done) => {
+    it('return 400 if token is not present', (done) => {
       request.delete(`${recipesURl}/${recipeId}`)
         .end((err, res) => {
           expect(res.status).to.equal(400);
