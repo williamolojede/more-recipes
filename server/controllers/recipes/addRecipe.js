@@ -1,7 +1,6 @@
 import { Recipe } from '../../models/index';
 
 const addRecipe = (req, res, next) => {
-  console.log(req.userID);
   const { name, description, img_url, ingredients, instructions } = req.body;
   Recipe.create({
     name,
