@@ -5,7 +5,7 @@ import validateAddRecipe from '../middleware/validateAddRecipe';
 
 const router = express.Router();
 
-router.get('/', recipesController.getAllRecipe);
+router.get('/', requiresToken, recipesController.getAllRecipe);
 router.post('/', requiresToken, validateAddRecipe, recipesController.createRecipe);
 // router.put('/:id', recipesController.updateRecipe);
 router.delete('/:id', requiresToken, recipesController.deleteRecipe);
