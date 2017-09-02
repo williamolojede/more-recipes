@@ -1,23 +1,22 @@
-import jwt from 'jsonwebtoken';
 import { Recipe } from '../../models/index';
 
 const deleteRecipe = (req, res, next) => {
-  const { token } = req.query;
-  const decoded = jwt.decode(token);
+  const { userID } = req;
+  // const decoded = jwt.decode(token);
   Recipe.findById(req.params.id)
     .then((recipe) => {
       if (!recipe) {
-        const err = new Error('Not Found');
+        const err = new Error('Recipe not found');
         err.status = 404;
-        next(err);
+        return next(err);
       }
-      if (decoded.user.id !== recipe.owner) {
-        const err = new Error('No Authorization');
-        err.status = 401;
-        next(err);
+      if (userID !== recipe.owner) {
+        const err = new Error('Not authorized to delete this recipe');
+        err.status = 403;
+        return next(err);
       }
       recipe.destroy()
-        .then(output => res.status(200).send(output))
+        .then(() => res.status(410).send({ message: 'success' }))
         .catch(err => console.error(err));
     })
     .catch((error) => {

@@ -1,13 +1,26 @@
+import jwt from 'jsonwebtoken';
 import { expect } from 'chai';
 import supertest from 'supertest';
 import app from '../app';
 
 const request = supertest(app);
 const rootURL = '/api/v1';
+const recipesURl = `${rootURL}/recipes`;
 let data = {};
 let token = '';
+let recipeId;
 
 describe('API Integration Tests', () => {
+  it('return 404 for ant route asides /api', (done) => {
+    request.post('/wrong')
+      .send(data)
+      .end((err, res) => {
+        expect(res.status).to.equal(404);
+        expect(res.body.message).to.equal('Not Found');
+        done();
+      });
+  });
+
   describe('User signup', () => {
     const signupURl = `${rootURL}/users/signup`;
 
@@ -142,11 +155,23 @@ describe('API Integration Tests', () => {
           done();
         });
     });
+
+    it('return 401 for if user is not found for the email passed ', (done) => {
+      const invalidData = Object.assign({}, data);
+      invalidData.email = 'userdefdoesntexist@email.com';
+      // you dont want people know if the email exists or not
+
+      request.post(loginURl)
+        .send(invalidData)
+        .end((err, res) => {
+          expect(res.status).to.equal(401);
+          expect(res.body.message).to.equal('Wrong email or password');
+          done();
+        });
+    });
   });
 
   describe('Add Recipe', () => {
-    const recipesURl = `${rootURL}/recipes`;
-
     beforeEach(() => {
       data = {
         name: 'Fried Rice',
@@ -161,6 +186,7 @@ describe('API Integration Tests', () => {
       request.post(`${recipesURl}?token=${token}`)
         .send(data)
         .end((err, res) => {
+          recipeId = res.body.id;
           // expect(res.status).to.equal(201);
           expect(res.body.message).to.equal('recipe created successfully');
           done();
@@ -186,5 +212,47 @@ describe('API Integration Tests', () => {
     // test if name is passed when creating a recipe
     // test if decription is passed when creating a recipe
     // test if both name and decription are passed when creating a recipe
+  });
+
+  describe('Delete Recipe', () => {
+    it('return 403 if a user user is not the owner of the recipe', (done) => {
+      const anotherToken = jwt.sign({ userID: 15, }, 'jsninja', { expiresIn: '3 days' });
+      request.delete(`${recipesURl}/${recipeId}`)
+        .send({ token: anotherToken })
+        .end((err, res) => {
+          expect(res.status).to.equal(403);
+          expect(res.body.message).to.equal('Not authorized to delete this recipe');
+          done();
+        });
+    });
+
+    it('return 401 if token is not present', (done) => {
+      request.delete(`${recipesURl}/${recipeId}`)
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.message).to.equal('user authorization token required');
+          done();
+        });
+    });
+
+    it('return 404 if recipe is not found', (done) => {
+      request.delete(`${recipesURl}/15`)
+        .send({ token })
+        .end((err, res) => {
+          expect(res.status).to.equal(404);
+          expect(res.body.message).to.equal('Recipe not found');
+          done();
+        });
+    });
+
+    it('return 410 if recipe is deleted', (done) => {
+      request.delete(`${recipesURl}/${recipeId}`)
+        .send({ token })
+        .end((err, res) => {
+          expect(res.status).to.equal(410);
+          expect(res.body.message).to.equal('success');
+          done();
+        });
+    });
   });
 });

@@ -7,11 +7,11 @@
     "start": "nodemon --exec babel-node server/app.js",
     "add-session-store": "psql more-recipes < node_modules/connect-pg-simple/table.sql",
     "test-local": "sequelize db:migrate:undo:all --env=test-local&& sequelize db:migrate --env=test-local && NODE_ENV=test-local  mocha --compilers js:babel-core/register --timeout 10000 server/test/test.js",
-    "test": "istanbul cover mocha --compilers js:babel-core/register server/test/test.js --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
+    "test": "nyc --require babel-core/register mocha server/test/test.js && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
     "migrate": "sequelize db:migrate:undo:all&&sequelize db:migrate",
     "shc": "start coverage/lcov-report/index.html",
-    "coverage": "set NODE_ENV=test-local&&sequelize db:migrate:undo:all&&sequelize db:migrate&& istanbul cover node_modules/mocha/bin/_mocha server/test/test.js",
-    "coveralls": "istanbul cover mocha --compilers js:babel-core/register --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
+    "coverage": "sequelize db:migrate:undo:all --env=test-local && sequelize db:migrate --env=test-local && NODE_ENV=test-local nyc --require babel-core/register mocha server/test/test.js && rm -rf ./coverage",
+    "coveralls": "NODE_ENV=test-local nyc --require babel-core/register mocha server/test/test.js && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
   },
   "repository": {
     "type": "git",
@@ -27,18 +27,20 @@
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-core": "^6.25.0",
+    "babel-plugin-istanbul": "^4.1.4",
     "babel-preset-env": "^1.6.0",
     "babel-preset-es2015": "^6.24.1",
+    "chai": "^4.0.2",
+    "coveralls": "^2.13.1",
     "eslint": "^4.5.0",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.3.0",
-    "chai": "^4.0.2",
-    "coveralls": "^2.13.1",
     "istanbul": "^0.4.5",
     "mocha": "^3.4.2",
     "mocha-lcov-reporter": "^1.3.0",
+    "nyc": "^11.1.0",
     "supertest": "^3.0.0"
   },
   "dependencies": {
