@@ -239,6 +239,71 @@ describe('API Integration Tests', () => {
     });
   });
 
+  describe('Modify a recipe', () => {
+    // TEST TO ADD:  if user passes an invalid property name e:g id,
+
+    it('return 400 if no token is passed', (done) => {
+      request.put(`${recipesURl}/${recipeId}`)
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.message).to.equal('user authorization token required');
+          done();
+        });
+    });
+
+    it('return 400 if update data is not passed', (done) => {
+      request.put(`${recipesURl}/${recipeId}`)
+        .send({ token })
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.message).to.equal('update property required or can not be empty');
+          done();
+        });
+    });
+
+    it('return 403 if a user is not the owner of the recipe', (done) => {
+      const anotherToken = jwt.sign({ userID: 15, }, 'jsninja', { expiresIn: '3 days' });
+      request.put(`${recipesURl}/${recipeId}`)
+        .send({ token: anotherToken, update: { name: 'Jollof Rice' } })
+        .end((err, res) => {
+          expect(res.status).to.equal(403);
+          expect(res.body.message).to.equal('Not authorized to modify this recipe');
+          done();
+        });
+    });
+
+    it('return 404 if recipe is not found', (done) => {
+      request.put(`${recipesURl}/15`)
+        .send({ token, update: { name: 'Jollof Rice' } })
+        .end((err, res) => {
+          expect(res.status).to.equal(404);
+          expect(res.body.message).to.equal('Recipe not found');
+          done();
+        });
+    });
+
+    it('return 400 update object has an invalid key name', (done) => {
+      request.put(`${recipesURl}/${recipeId}`)
+        .send({ token, update: { test: 'Jollof Rice' } })
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.message).to.equal('invalid property name(s) on update object');
+          done();
+        });
+    });
+
+    it('return 200 if the recipe is updated', (done) => {
+      request.put(`${recipesURl}/${recipeId}`)
+        .send({ token, update: { name: 'Jollof Rice' } })
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          expect(res.body.message).to.equal('success');
+          expect(res.body.recipe.name).to.equal('Jollof Rice');
+          done();
+        });
+    });
+  });
+
   describe('Delete Recipe', () => {
     it('return 403 if a user user is not the owner of the recipe', (done) => {
       const anotherToken = jwt.sign({ userID: 15, }, 'jsninja', { expiresIn: '3 days' });
@@ -270,11 +335,11 @@ describe('API Integration Tests', () => {
         });
     });
 
-    it('return 410 if recipe is deleted', (done) => {
+    it('return 204 if recipe is deleted', (done) => {
       request.delete(`${recipesURl}/${recipeId}`)
         .send({ token })
         .end((err, res) => {
-          expect(res.status).to.equal(410);
+          expect(res.status).to.equal(200);
           expect(res.body.message).to.equal('success');
           done();
         });

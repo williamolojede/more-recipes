@@ -3,11 +3,17 @@ import recipesController from '../controllers/recipes';
 import requiresToken from '../middleware/requiresToken';
 import validateAddRecipe from '../middleware/validateAddRecipe';
 
+// could be used on put and delete but the error won't be specific
+// import isOwner from '../middleware/isOwner';
+
 const router = express.Router();
 
-router.get('/', requiresToken, recipesController.getAllRecipe);
-router.post('/', requiresToken, validateAddRecipe, recipesController.createRecipe);
-// router.put('/:id', recipesController.updateRecipe);
-router.delete('/:id', requiresToken, recipesController.deleteRecipe);
+// all recipe routes requires user to have a token
+router.use('*', requiresToken);
+
+router.get('/', recipesController.getAllRecipe);
+router.post('/', validateAddRecipe, recipesController.createRecipe);
+router.put('/:id', recipesController.updateRecipe);
+router.delete('/:id', recipesController.deleteRecipe);
 
 export default router;
