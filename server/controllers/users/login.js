@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import { User } from '../../models/index';
-import validateLogin from '../../helpers/validateLogIn';
+import validateLogin from '../../helpers/validateLogin';
 
 const login = (req, res, next) => {
   // makes sure both email and password are passed
