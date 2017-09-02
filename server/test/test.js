@@ -149,11 +149,11 @@ describe('API Integration Tests', () => {
 
     beforeEach(() => {
       data = {
-        'name': 'Fried Rice',
-        'description': 'Nigerian Fried Rice puts a spicy, flavorful spin on the traditional fried rice and is appealing on its own or served with a variety of other African food.',
-        'img_url': 'http://www.africanbites.com/wp-content/uploads/2014/05/IMG_9677-2-1-150x150.jpg',
-        'ingredients': ['rice', 'canola oil'],
-        'instructions': ['Break up the clumpy rice before starting.', 'Garnish with chopped scallion and serve'],
+        name: 'Fried Rice',
+        description: 'Nigerian Fried Rice puts a spicy, flavorful spin on the traditional fried rice and is appealing on its own or served with a variety of other African food.',
+        img_url: 'http://www.africanbites.com/wp-content/uploads/2014/05/IMG_9677-2-1-150x150.jpg',
+        ingredients: ['rice', 'canola oil'],
+        instructions: ['Break up the clumpy rice before starting.', 'Garnish with chopped scallion and serve'],
       };
     });
 
@@ -174,7 +174,7 @@ describe('API Integration Tests', () => {
         .send(data)
         .end((err, res) => {
           expect(res.status).to.equal(400);
-          expect(res.body.message).to.equal('user token required');
+          expect(res.body.message).to.equal('user authorization token required');
           done();
         });
     });
