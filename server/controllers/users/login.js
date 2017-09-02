@@ -13,7 +13,7 @@ const login = (req, res, next) => {
         err.status = 401;
         return next(err);
       }
-      const token = jwt.sign({ userID: user.id, }, 'jsninja', { expiresIn: 72000 });
+      const token = jwt.sign({ userID: user.id, }, 'jsninja', { expiresIn: '30 days' });
       return res.status(200).send({ message: 'success', token });
     });
   } else {
