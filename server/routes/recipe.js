@@ -17,5 +17,6 @@ router.post('/', validateAddRecipe, recipesController.createRecipe);
 router.put('/:id', recipesController.updateRecipe);
 router.delete('/:id', recipesController.deleteRecipe);
 router.post('/:id/vote-:dir', doesRecipeExist, recipesController.voteRecipe);
+router.post('/:id/favorite', doesRecipeExist, recipesController.favoriteRecipe);
 
 export default router;
