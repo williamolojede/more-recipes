@@ -10,10 +10,10 @@ const addRecipe = (req, res, next) => {
     instructions,
     owner: req.userID
   })
-    .then(recipe => res.status(201).json(recipe))
+    .then(recipe => res.status(201).json({ recipe, message: 'success' }))
     .catch((error) => {
-      const err = new Error(error.errors[0].message);
-      err.status = 400;
+      const err = new Error(error);
+      err.status = 500;
       next(err);
     });
 };
