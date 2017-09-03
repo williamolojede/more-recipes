@@ -182,18 +182,6 @@ describe('API Integration Tests', () => {
       };
     });
 
-    it('return 201 for a successful recipe creation', (done) => {
-      request.post(`${recipesURl}?token=${token}`)
-        .send(data)
-        .end((err, res) => {
-          recipeId = res.body.id;
-          // expect(res.status).to.equal(201);
-          expect(res.body.message).to.equal('recipe created successfully');
-          done();
-        });
-      done();
-    });
-
     // check if token is passed
     it('return 400 if token is not present', (done) => {
       request.post(recipesURl)
@@ -204,6 +192,19 @@ describe('API Integration Tests', () => {
           done();
         });
     });
+
+    it('return 201 for a successful recipe creation', (done) => {
+      request.post(`${recipesURl}?token=${token}`)
+        .send(data)
+        .end((err, res) => {
+          recipeId = res.body.recipe.id;
+          expect(res.status).to.equal(201);
+          expect(res.body.message).to.equal('success');
+          done();
+        });
+    });
+
+
     // test if recipe is created succesfully
     // check if token is passed
     // check if token is outdated
@@ -234,6 +235,106 @@ describe('API Integration Tests', () => {
         .end((err, res) => {
           expect(res.status).to.equal(400);
           expect(res.body.message).to.equal('user authorization token required');
+          done();
+        });
+    });
+  });
+
+  describe('Vote {up, down} a recipe', () => {
+    // if no uid => 400
+    it('return 400 if no token is passed', (done) => {
+      request.post(`${recipesURl}/${recipeId}/vote-up`)
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.message).to.equal('user authorization token required');
+          done();
+        });
+    });
+
+    it('return 400 if no token is passed', (done) => {
+      request.post(`${recipesURl}/${recipeId}/vote-down`)
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.message).to.equal('user authorization token required');
+          done();
+        });
+    });
+
+    // if recipe doesnt exist no vote => 404
+    it('return 404 if recipe is not found', (done) => {
+      request.post(`${recipesURl}/15/vote-up`)
+        .send({ token })
+        .end((err, res) => {
+          expect(res.status).to.equal(404);
+          expect(res.body.message).to.equal('Recipe not found');
+          done();
+        });
+    });
+
+    it('return 404 if recipe is not found', (done) => {
+      request.post(`${recipesURl}/15/vote-down`)
+        .send({ token })
+        .end((err, res) => {
+          expect(res.status).to.equal(404);
+          expect(res.body.message).to.equal('Recipe not found');
+          done();
+        });
+    });
+
+    // if not vote-{up, down} => 404
+    it('return 404 if not vote-{up, down}', (done) => {
+      request.post(`${recipesURl}/${recipeId}/vote-whatever`)
+        .send({ token })
+        .end((err, res) => {
+          expect(res.status).to.equal(404);
+          expect(res.body.message).to.equal('Not Found');
+          done();
+        });
+    });
+
+    // if owner tries to vote on his/her recipe => 403
+    it('return 403 if recipe owner tries to vote', (done) => {
+      request.post(`${recipesURl}/${recipeId}/vote-up`)
+        .send({ token })
+        .end((err, res) => {
+          expect(res.status).to.equal(403);
+          expect(res.body.message).to.equal('you are not allowed to vote on your own recipe');
+          done();
+        });
+    });
+
+    // if everything good => 200
+    it('return 200 if another user tries to vote', (done) => {
+      const anotherToken = jwt.sign({ userID: 15, }, 'jsninja', { expiresIn: '3 days' });
+      request.post(`${recipesURl}/${recipeId}/vote-up`)
+        .send({ token: anotherToken })
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          expect(res.body.message).to.equal('success');
+          done();
+        });
+    });
+
+    // if try vote in an already vote direction => 400
+    it('return 403 if trying to vote in same direction', (done) => {
+      const anotherToken = jwt.sign({ userID: 15, }, 'jsninja', { expiresIn: '3 days' });
+      request.post(`${recipesURl}/${recipeId}/vote-up`)
+        .send({ token: anotherToken })
+        .end((err, res) => {
+          expect(res.status).to.equal(403);
+          expect(res.body.message).to.equal('vote already recorded');
+          done();
+        });
+    });
+
+    // if try vote in a not votes direction => 200 vote gets updated
+    it('return 200 if vote is valid', (done) => {
+      const anotherToken = jwt.sign({ userID: 15, }, 'jsninja', { expiresIn: '3 days' });
+      request.post(`${recipesURl}/${recipeId}/vote-down`)
+        .send({ token: anotherToken })
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          expect(res.body.message).to.equal('success');
           done();
         });
     });
