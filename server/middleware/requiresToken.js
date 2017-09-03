@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import { User } from '../models';
 
 const requiresToken = (req, res, next) => {
   // token could provided via body, as a query string or in the header
@@ -26,8 +27,24 @@ const requiresToken = (req, res, next) => {
     err.status = 403;
     return next(err);
   }
-  req.userID = decoded.userID;
-  return next();
+  User.findById(decoded.userID)
+    .then((user) => {
+      if (!user) {
+        const err = new Error('invalid user authorization token');
+        err.status = 403;
+        return next(err);
+      }
+      req.userID = decoded.userID;
+      return next();
+    })
+    .catch((error) => {
+      const err = new Error(error);
+      err.status = 500;
+      next(err);
+    });
+  // // check if userID exist of users table
+  // req.userID = decoded.userID;
+  // return next();
 };
 
 export default requiresToken;

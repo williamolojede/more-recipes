@@ -30,6 +30,11 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'recipeId',
       as: 'votes',
     });
+
+    Recipe.hasMany(models.Favorite, {
+      foreignKey: 'recipeId',
+      as: 'favorites',
+    });
   };
   return Recipe;
 };
