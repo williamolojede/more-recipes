@@ -40,6 +40,11 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'owner',
       as: 'recipes',
     });
+
+    User.hasMany(models.Favorite, {
+      foreignKey: 'userId',
+      as: 'favorites',
+    });
   };
 
   User.authenticate = (email, password, callback) => {
