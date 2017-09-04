@@ -42,9 +42,6 @@ const requiresToken = (req, res, next) => {
       err.status = 500;
       next(err);
     });
-  // // check if userID exist of users table
-  // req.userID = decoded.userID;
-  // return next();
 };
 
 export default requiresToken;

@@ -5,12 +5,13 @@ import app from '../app';
 
 const request = supertest(app);
 const rootURL = '/api/v1';
-const recipesURl = `${rootURL}/recipes`;
+const recipesUrl = `${rootURL}/recipes`;
+const usersUrl = `${rootURL}/users`;
 let data = {};
 // only used to test actions that requires a logged in user
 let userdata2;
-let token = '';
-let userToken2;
+// first and second user's token
+let userToken1, userToken2;
 // invalid because it won't exist on the user table
 const invalidToken = jwt.sign({ userID: 15, }, 'jsninja', { expiresIn: '3 days' });
 let recipeId;
@@ -42,7 +43,8 @@ describe('API Integration Tests', () => {
         .send(data)
         .end((err, res) => {
           expect(res.status).to.equal(201);
-          expect(res.body.message).to.equal('success');
+          expect(res.body.status).to.equal('success');
+          expect(res.body.message).to.equal('account created');
           done();
         });
     });
@@ -55,7 +57,8 @@ describe('API Integration Tests', () => {
         .send(userdata2)
         .end((err, res) => {
           expect(res.status).to.equal(201);
-          expect(res.body.message).to.equal('success');
+          expect(res.body.status).to.equal('success');
+          expect(res.body.message).to.equal('account created');
           done();
         });
     });
@@ -140,10 +143,25 @@ describe('API Integration Tests', () => {
       request.post(loginURl)
         .send(data)
         .end((err, res) => {
-          token = res.body.token;
+          userToken1 = res.body.token;
           expect(res.status).to.equal(200);
-          expect(res.body.message).to.equal('success');
-          expect(token).to.be.a('string');
+          expect(res.body.status).to.equal('success');
+          expect(userToken1).to.be.a('string');
+          done();
+        });
+    });
+    // wrong password for user 1
+    it('return 401 for wrong password', (done) => {
+      const wrongPassword = Object.assign({}, data);
+      wrongPassword.password = 'wrongpassword';
+
+      request.post(loginURl)
+        .send(wrongPassword)
+        .end((err, res) => {
+          const wrongPasswordToken = res.body.token;
+          expect(res.status).to.equal(401);
+          expect(res.body.message).to.equal('Wrong email or password');
+          expect(wrongPasswordToken).to.be.a('undefined');
           done();
         });
     });
@@ -157,8 +175,8 @@ describe('API Integration Tests', () => {
         .end((err, res) => {
           userToken2 = res.body.token;
           expect(res.status).to.equal(200);
-          expect(res.body.message).to.equal('success');
-          expect(token).to.be.a('string');
+          expect(res.body.status).to.equal('success');
+          expect(userToken2).to.be.a('string');
           done();
         });
     });
@@ -217,7 +235,7 @@ describe('API Integration Tests', () => {
 
     // check if token is passed
     it('return 400 if token is not present', (done) => {
-      request.post(recipesURl)
+      request.post(recipesUrl)
         .send(data)
         .end((err, res) => {
           expect(res.status).to.equal(400);
@@ -228,7 +246,7 @@ describe('API Integration Tests', () => {
 
     // check if a token(invalid) not on the user table is used
     it('return 403 for invalid user token used', (done) => {
-      request.post(`${recipesURl}?token=${invalidToken}`)
+      request.post(`${recipesUrl}?token=${invalidToken}`)
         .send(data)
         .end((err, res) => {
           expect(res.status).to.equal(403);
@@ -243,7 +261,7 @@ describe('API Integration Tests', () => {
     it('return 400 if recipe name is not passed', (done) => {
       const noName = Object.assign({}, data);
       delete noName.name;
-      request.post(`${recipesURl}?token=${token}`)
+      request.post(`${recipesUrl}?token=${userToken1}`)
         .send(noName)
         .end((err, res) => {
           expect(res.status).to.equal(400);
@@ -255,7 +273,7 @@ describe('API Integration Tests', () => {
     it('return 400 if recipe description is not passed', (done) => {
       const noDescription = Object.assign({}, data);
       delete noDescription.description;
-      request.post(`${recipesURl}?token=${token}`)
+      request.post(`${recipesUrl}?token=${userToken1}`)
         .send(noDescription)
         .end((err, res) => {
           expect(res.status).to.equal(400);
@@ -269,7 +287,7 @@ describe('API Integration Tests', () => {
       delete noNameDescription.description;
       delete noNameDescription.name;
 
-      request.post(`${recipesURl}?token=${token}`)
+      request.post(`${recipesUrl}?token=${userToken1}`)
         .send(noNameDescription)
         .end((err, res) => {
           expect(res.status).to.equal(400);
@@ -279,7 +297,7 @@ describe('API Integration Tests', () => {
     });
 
     it('return 201 for a successful recipe creation', (done) => {
-      request.post(`${recipesURl}?token=${token}`)
+      request.post(`${recipesUrl}?token=${userToken1}`)
         .send(data)
         .end((err, res) => {
           recipeId = res.body.recipe.id;
@@ -297,7 +315,7 @@ describe('API Integration Tests', () => {
 
 
     it('return 400 if token is not present', (done) => {
-      request.get(`${recipesURl}`)
+      request.get(`${recipesUrl}`)
         .end((err, res) => {
           expect(res.status).to.equal(400);
           expect(res.body.message).to.equal('user authorization token required');
@@ -307,7 +325,7 @@ describe('API Integration Tests', () => {
 
     // check if a token(invalid) not on the user table is used
     it('return 403 for invalid user token used', (done) => {
-      request.get(`${recipesURl}`)
+      request.get(`${recipesUrl}`)
         .send({ token: invalidToken })
         .end((err, res) => {
           expect(res.status).to.equal(403);
@@ -317,8 +335,8 @@ describe('API Integration Tests', () => {
     });
 
     it('return 200 for successfully getting all recipes', (done) => {
-      request.get(`${recipesURl}`)
-        .send({ token })
+      request.get(`${recipesUrl}`)
+        .send({ token: userToken1 })
         .end((err, res) => {
           expect(res.status).to.equal(200);
           expect(res.body.message).to.equal('success');
@@ -331,7 +349,7 @@ describe('API Integration Tests', () => {
   describe('Vote {up, down} a recipe', () => {
     // if no uid => 400
     it('return 400 if no token is passed', (done) => {
-      request.post(`${recipesURl}/${recipeId}/vote-up`)
+      request.post(`${recipesUrl}/${recipeId}/vote-up`)
         .end((err, res) => {
           expect(res.status).to.equal(400);
           expect(res.body.message).to.equal('user authorization token required');
@@ -340,7 +358,7 @@ describe('API Integration Tests', () => {
     });
 
     it('return 400 if no token is passed', (done) => {
-      request.post(`${recipesURl}/${recipeId}/vote-down`)
+      request.post(`${recipesUrl}/${recipeId}/vote-down`)
         .end((err, res) => {
           expect(res.status).to.equal(400);
           expect(res.body.message).to.equal('user authorization token required');
@@ -350,7 +368,7 @@ describe('API Integration Tests', () => {
 
     // check if a token(invalid) not on the user table is used
     it('return 403 for invalid user token used', (done) => {
-      request.post(`${recipesURl}/${recipeId}/vote-up`)
+      request.post(`${recipesUrl}/${recipeId}/vote-up`)
         .send({ token: invalidToken })
         .end((err, res) => {
           expect(res.status).to.equal(403);
@@ -360,7 +378,7 @@ describe('API Integration Tests', () => {
     });
 
     it('return 403 for invalid user token used', (done) => {
-      request.post(`${recipesURl}/${recipeId}/vote-down`)
+      request.post(`${recipesUrl}/${recipeId}/vote-down`)
         .send({ token: invalidToken })
         .end((err, res) => {
           expect(res.status).to.equal(403);
@@ -371,8 +389,8 @@ describe('API Integration Tests', () => {
 
     // if recipe doesnt exist no vote => 404
     it('return 404 if recipe is not found', (done) => {
-      request.post(`${recipesURl}/15/vote-up`)
-        .send({ token })
+      request.post(`${recipesUrl}/15/vote-up`)
+        .send({ token: userToken1 })
         .end((err, res) => {
           expect(res.status).to.equal(404);
           expect(res.body.message).to.equal('Recipe not found');
@@ -381,8 +399,8 @@ describe('API Integration Tests', () => {
     });
 
     it('return 404 if recipe is not found', (done) => {
-      request.post(`${recipesURl}/15/vote-down`)
-        .send({ token })
+      request.post(`${recipesUrl}/15/vote-down`)
+        .send({ token: userToken1 })
         .end((err, res) => {
           expect(res.status).to.equal(404);
           expect(res.body.message).to.equal('Recipe not found');
@@ -392,8 +410,8 @@ describe('API Integration Tests', () => {
 
     // if not vote-{up, down} => 404
     it('return 404 if not vote-{up, down}', (done) => {
-      request.post(`${recipesURl}/${recipeId}/vote-whatever`)
-        .send({ token })
+      request.post(`${recipesUrl}/${recipeId}/vote-whatever`)
+        .send({ token: userToken1 })
         .end((err, res) => {
           expect(res.status).to.equal(404);
           expect(res.body.message).to.equal('Not Found');
@@ -403,8 +421,8 @@ describe('API Integration Tests', () => {
 
     // if owner tries to vote on his/her recipe => 403
     it('return 403 if recipe owner tries to vote', (done) => {
-      request.post(`${recipesURl}/${recipeId}/vote-up`)
-        .send({ token })
+      request.post(`${recipesUrl}/${recipeId}/vote-up`)
+        .send({ token: userToken1 })
         .end((err, res) => {
           expect(res.status).to.equal(403);
           expect(res.body.message).to.equal('you are not allowed to vote on your own recipe');
@@ -414,7 +432,7 @@ describe('API Integration Tests', () => {
 
     // if everything good => 200
     it('return 200 if another user tries to vote', (done) => {
-      request.post(`${recipesURl}/${recipeId}/vote-up`)
+      request.post(`${recipesUrl}/${recipeId}/vote-up`)
         .send({ token: userToken2 })
         .end((err, res) => {
           expect(res.status).to.equal(200);
@@ -425,7 +443,7 @@ describe('API Integration Tests', () => {
 
     // if try vote in an already vote direction => 400
     it('return 403 if trying to vote in same direction', (done) => {
-      request.post(`${recipesURl}/${recipeId}/vote-up`)
+      request.post(`${recipesUrl}/${recipeId}/vote-up`)
         .send({ token: userToken2 })
         .end((err, res) => {
           expect(res.status).to.equal(403);
@@ -436,7 +454,7 @@ describe('API Integration Tests', () => {
 
     // if try vote in a not voted direction => 200 vote gets updated
     it('return 200 if vote is valid', (done) => {
-      request.post(`${recipesURl}/${recipeId}/vote-down`)
+      request.post(`${recipesUrl}/${recipeId}/vote-down`)
         .send({ token: userToken2 })
         .end((err, res) => {
           expect(res.status).to.equal(200);
@@ -449,7 +467,7 @@ describe('API Integration Tests', () => {
   describe('Favorite a recipe', () => {
     // no user token => 400
     it('return 400 if no token is passed', (done) => {
-      request.post(`${recipesURl}/${recipeId}/favorite`)
+      request.post(`${recipesUrl}/${recipeId}/favorite`)
         .end((err, res) => {
           expect(res.status).to.equal(400);
           expect(res.body.message).to.equal('user authorization token required');
@@ -459,7 +477,7 @@ describe('API Integration Tests', () => {
 
     // invalid token(not on the user table is used) => 403
     it('return 403 for invalid user token used', (done) => {
-      request.post(`${recipesURl}/${recipeId}/favorite`)
+      request.post(`${recipesUrl}/${recipeId}/favorite`)
         .send({ token: invalidToken })
         .end((err, res) => {
           expect(res.status).to.equal(403);
@@ -470,8 +488,8 @@ describe('API Integration Tests', () => {
 
     // if recipe doesnt exist => 404
     it('return 404 if recipe is not found', (done) => {
-      request.post(`${recipesURl}/15/favorite`)
-        .send({ token })
+      request.post(`${recipesUrl}/15/favorite`)
+        .send({ token: userToken1 })
         .end((err, res) => {
           expect(res.status).to.equal(404);
           expect(res.body.message).to.equal('Recipe not found');
@@ -480,8 +498,8 @@ describe('API Integration Tests', () => {
     });
     // if owner tries to favorite on his/her recipe => 403
     it('return 403 if owner tries to favorite', (done) => {
-      request.post(`${recipesURl}/${recipeId}/favorite`)
-        .send({ token })
+      request.post(`${recipesUrl}/${recipeId}/favorite`)
+        .send({ token: userToken1 })
         .end((err, res) => {
           expect(res.status).to.equal(403);
           expect(res.body.message).to.equal('you are not allowed to vote on your own recipe');
@@ -490,7 +508,7 @@ describe('API Integration Tests', () => {
     });
     // if everything good => 200
     it('return 200 if another user tries to favorite', (done) => {
-      request.post(`${recipesURl}/${recipeId}/favorite`)
+      request.post(`${recipesUrl}/${recipeId}/favorite`)
         .send({ token: userToken2 })
         .end((err, res) => {
           expect(res.status).to.equal(200);
@@ -501,7 +519,7 @@ describe('API Integration Tests', () => {
     });
     // if user request again it will undo the favorite
     it('return 200 if another user tries to favorite', (done) => {
-      request.post(`${recipesURl}/${recipeId}/favorite`)
+      request.post(`${recipesUrl}/${recipeId}/favorite`)
         .send({ token: userToken2 })
         .end((err, res) => {
           expect(res.status).to.equal(200);
@@ -509,11 +527,88 @@ describe('API Integration Tests', () => {
           done();
         });
     });
+    // if everything good => 200
+    // this is just to make sure the favorite table isn't empty when its to be tested
+    it('return 200 if another user tries to favorite', (done) => {
+      request.post(`${recipesUrl}/${recipeId}/favorite`)
+        .send({ token: userToken2 })
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          expect(res.body.message).to.equal('recipe added to your favorite list');
+          done();
+        });
+    });
+  });
+
+  describe('Get all user\'s favorite recipe(s)', () => {
+    // note: i'm using two here because only user 2 has favorited something
+    // no user token
+    it('return 400 if no token is passed', (done) => {
+      request.get(`${usersUrl}/2/recipes`)
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.message).to.equal('user authorization token required');
+          done();
+        });
+    });
+    // invalid user token not on Users table
+    it('return 403 for invalid user token used', (done) => {
+      request.get(`${usersUrl}/2/recipes`)
+        .send({ token: invalidToken })
+        .end((err, res) => {
+          expect(res.status).to.equal(403);
+          expect(res.body.message).to.equal('invalid user authorization token');
+          done();
+        });
+    });
+    // user token decoded !== :id
+    it('return 403 for invalid user token used', (done) => {
+      request.get(`${usersUrl}/2/recipes`)
+        .send({ token: userToken1 })
+        .end((err, res) => {
+          expect(res.status).to.equal(403);
+          expect(res.body.message).to.equal('invalid user authorization token or user doesn\'t exist');
+          done();
+        });
+    });
+    // user doesn't exist
+    it('return 403 for invalid user token used', (done) => {
+      request.get(`${usersUrl}/3/recipes`)
+        .send({ token: userToken2 })
+        .end((err, res) => {
+          expect(res.status).to.equal(403);
+          expect(res.body.message).to.equal('invalid user authorization token or user doesn\'t exist');
+          done();
+        });
+    });
+    // user has no favorites
+    it('return 200 for user has no recipes in favorite list', (done) => {
+      request.get(`${usersUrl}/1/recipes`)
+        .send({ token: userToken1 })
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          expect(res.body.recipes).to.be.a('null');
+          expect(res.body.message).to.equal('user has no recipe in his/her favorite list');
+          done();
+        });
+    });
+    //
+    it('return 200 for a user with a favorite list', (done) => {
+      request.get(`${usersUrl}/2/recipes`)
+        .send({ token: userToken2 })
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          expect(res.body.recipes).to.be.a('array');
+          expect(res.body.recipes[0].name).to.equal('Fried Rice');
+          expect(res.body.message).to.equal('1 recipe(s) found in user\'s favorite list');
+          done();
+        });
+    });
   });
 
   describe('Modify a recipe', () => {
     it('return 400 if no token is passed', (done) => {
-      request.put(`${recipesURl}/${recipeId}`)
+      request.put(`${recipesUrl}/${recipeId}`)
         .end((err, res) => {
           expect(res.status).to.equal(400);
           expect(res.body.message).to.equal('user authorization token required');
@@ -522,7 +617,7 @@ describe('API Integration Tests', () => {
     });
 
     it('return 403 for invalid user token used', (done) => {
-      request.put(`${recipesURl}/${recipeId}`)
+      request.put(`${recipesUrl}/${recipeId}`)
         .send({ token: invalidToken, update: { name: 'Jollof Rice' } })
         .end((err, res) => {
           expect(res.status).to.equal(403);
@@ -532,8 +627,8 @@ describe('API Integration Tests', () => {
     });
 
     it('return 400 if update data is not passed', (done) => {
-      request.put(`${recipesURl}/${recipeId}`)
-        .send({ token })
+      request.put(`${recipesUrl}/${recipeId}`)
+        .send({ token: userToken1 })
         .end((err, res) => {
           expect(res.status).to.equal(400);
           expect(res.body.message).to.equal('update property required or can not be empty');
@@ -542,7 +637,7 @@ describe('API Integration Tests', () => {
     });
 
     it('return 403 if a user is not the owner of the recipe', (done) => {
-      request.put(`${recipesURl}/${recipeId}`)
+      request.put(`${recipesUrl}/${recipeId}`)
         .send({ token: userToken2, update: { name: 'Jollof Rice' } })
         .end((err, res) => {
           expect(res.status).to.equal(403);
@@ -552,8 +647,8 @@ describe('API Integration Tests', () => {
     });
 
     it('return 404 if recipe is not found', (done) => {
-      request.put(`${recipesURl}/15`)
-        .send({ token, update: { name: 'Jollof Rice' } })
+      request.put(`${recipesUrl}/15`)
+        .send({ token: userToken1, update: { name: 'Jollof Rice' } })
         .end((err, res) => {
           expect(res.status).to.equal(404);
           expect(res.body.message).to.equal('Recipe not found');
@@ -562,8 +657,8 @@ describe('API Integration Tests', () => {
     });
 
     it('return 400 update object has an invalid key name', (done) => {
-      request.put(`${recipesURl}/${recipeId}`)
-        .send({ token, update: { test: 'Jollof Rice' } })
+      request.put(`${recipesUrl}/${recipeId}`)
+        .send({ token: userToken1, update: { test: 'Jollof Rice' } })
         .end((err, res) => {
           expect(res.status).to.equal(400);
           expect(res.body.message).to.equal('invalid property name(s) on update object');
@@ -572,8 +667,8 @@ describe('API Integration Tests', () => {
     });
 
     it('return 200 if the recipe is updated', (done) => {
-      request.put(`${recipesURl}/${recipeId}`)
-        .send({ token, update: { name: 'Jollof Rice' } })
+      request.put(`${recipesUrl}/${recipeId}`)
+        .send({ token: userToken1, update: { name: 'Jollof Rice' } })
         .end((err, res) => {
           expect(res.status).to.equal(200);
           expect(res.body.message).to.equal('success');
@@ -585,7 +680,7 @@ describe('API Integration Tests', () => {
 
   describe('Delete Recipe', () => {
     it('return 403 if a user user is not the owner of the recipe', (done) => {
-      request.delete(`${recipesURl}/${recipeId}`)
+      request.delete(`${recipesUrl}/${recipeId}`)
         .send({ token: userToken2 })
         .end((err, res) => {
           expect(res.status).to.equal(403);
@@ -595,7 +690,7 @@ describe('API Integration Tests', () => {
     });
 
     it('return 400 if token is not present', (done) => {
-      request.delete(`${recipesURl}/${recipeId}`)
+      request.delete(`${recipesUrl}/${recipeId}`)
         .end((err, res) => {
           expect(res.status).to.equal(400);
           expect(res.body.message).to.equal('user authorization token required');
@@ -604,7 +699,7 @@ describe('API Integration Tests', () => {
     });
 
     it('return 403 for invalid user token used', (done) => {
-      request.delete(`${recipesURl}/${recipeId}`)
+      request.delete(`${recipesUrl}/${recipeId}`)
         .send({ token: invalidToken })
         .end((err, res) => {
           expect(res.status).to.equal(403);
@@ -614,8 +709,8 @@ describe('API Integration Tests', () => {
     });
 
     it('return 404 if recipe is not found', (done) => {
-      request.delete(`${recipesURl}/15`)
-        .send({ token })
+      request.delete(`${recipesUrl}/15`)
+        .send({ token: userToken1 })
         .end((err, res) => {
           expect(res.status).to.equal(404);
           expect(res.body.message).to.equal('Recipe not found');
@@ -624,8 +719,8 @@ describe('API Integration Tests', () => {
     });
 
     it('return 204 if recipe is deleted', (done) => {
-      request.delete(`${recipesURl}/${recipeId}`)
-        .send({ token })
+      request.delete(`${recipesUrl}/${recipeId}`)
+        .send({ token: userToken1 })
         .end((err, res) => {
           expect(res.status).to.equal(200);
           expect(res.body.message).to.equal('success');
