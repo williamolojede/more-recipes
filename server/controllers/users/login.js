@@ -8,13 +8,13 @@ const login = (req, res, next) => {
   if (validation.valid) {
     const { email, password } = req.body;
     User.authenticate(email, password, (err, user) => {
-      if (err || !user) {
+      if (err || !user || err === undefined) {
         const err = new Error('Wrong email or password');
         err.status = 401;
         return next(err);
       }
       const token = jwt.sign({ userID: user.id, }, 'jsninja', { expiresIn: '30 days' });
-      return res.status(200).send({ message: 'success', token });
+      return res.status(200).send({ status: 'success', token });
     });
   } else {
     const err = new Error(validation.message);
