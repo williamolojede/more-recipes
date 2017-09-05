@@ -27,12 +27,6 @@ const updateRecipe = (req, res, next) => {
   }
   Recipe.findById(req.params.id)
     .then((oldRecipe) => {
-      // check if recipe exist
-      if (!oldRecipe) {
-        const err = new Error('Recipe not found');
-        err.status = 404;
-        return next(err);
-      }
       // check if isOwner
       if (userID !== oldRecipe.owner) {
         const err = new Error('Not authorized to modify this recipe');
