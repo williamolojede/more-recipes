@@ -302,45 +302,30 @@ describe('API Integration Tests', () => {
         .end((err, res) => {
           recipeId = res.body.recipe.id;
           expect(res.status).to.equal(201);
-          expect(res.body.message).to.equal('success');
-          done();
-        });
-    });
-  });
-
-  describe('Get all recipes', () => {
-    // no token
-    // invalid token
-    // succes
-
-
-    it('return 400 if token is not present', (done) => {
-      request.get(`${recipesUrl}`)
-        .end((err, res) => {
-          expect(res.status).to.equal(400);
-          expect(res.body.message).to.equal('user authorization token required');
+          expect(res.body.message).to.equal('recipe created successfully');
+          expect(res.body.status).to.equal('success');
+          expect(res.body.recipe).to.be.a('object');
+          expect(res.body.recipe.name).to.equal(data.name);
+          expect(res.body.recipe.description).to.equal(data.description);
           done();
         });
     });
 
-    // check if a token(invalid) not on the user table is used
-    it('return 403 for invalid user token used', (done) => {
-      request.get(`${recipesUrl}`)
-        .send({ token: invalidToken })
-        .end((err, res) => {
-          expect(res.status).to.equal(403);
-          expect(res.body.message).to.equal('invalid user authorization token');
-          done();
-        });
-    });
+    // CREATE RECIPE FOR USER 2
+    it('return 201 for a successful recipe creation', (done) => {
+      const user2Recipe = Object.assign({}, data);
+      user2Recipe.name = 'Jollof Rice';
+      user2Recipe.description = 'It is simply better than ghanian jollof';
 
-    it('return 200 for successfully getting all recipes', (done) => {
-      request.get(`${recipesUrl}`)
-        .send({ token: userToken1 })
+      request.post(`${recipesUrl}?token=${userToken2}`)
+        .send(user2Recipe)
         .end((err, res) => {
-          expect(res.status).to.equal(200);
-          expect(res.body.message).to.equal('success');
-          expect(res.body.recipes[0].name).to.equal('Fried Rice');
+          expect(res.status).to.equal(201);
+          expect(res.body.message).to.equal('recipe created successfully');
+          expect(res.body.status).to.equal('success');
+          expect(res.body.recipe).to.be.a('object');
+          expect(res.body.recipe.name).to.equal(user2Recipe.name);
+          expect(res.body.recipe.description).to.equal(user2Recipe.description);
           done();
         });
     });
@@ -431,8 +416,8 @@ describe('API Integration Tests', () => {
     });
 
     // if everything good => 200
-    it('return 200 if another user tries to vote', (done) => {
-      request.post(`${recipesUrl}/${recipeId}/vote-up`)
+    it('return 200 if vote is valid', (done) => {
+      request.post(`${recipesUrl}/${recipeId}/vote-down`)
         .send({ token: userToken2 })
         .end((err, res) => {
           expect(res.status).to.equal(200);
@@ -443,7 +428,7 @@ describe('API Integration Tests', () => {
 
     // if try vote in an already vote direction => 400
     it('return 403 if trying to vote in same direction', (done) => {
-      request.post(`${recipesUrl}/${recipeId}/vote-up`)
+      request.post(`${recipesUrl}/${recipeId}/vote-down`)
         .send({ token: userToken2 })
         .end((err, res) => {
           expect(res.status).to.equal(403);
@@ -453,8 +438,8 @@ describe('API Integration Tests', () => {
     });
 
     // if try vote in a not voted direction => 200 vote gets updated
-    it('return 200 if vote is valid', (done) => {
-      request.post(`${recipesUrl}/${recipeId}/vote-down`)
+    it('return 200 if another user tries to vote', (done) => {
+      request.post(`${recipesUrl}/${recipeId}/vote-up`)
         .send({ token: userToken2 })
         .end((err, res) => {
           expect(res.status).to.equal(200);
@@ -463,6 +448,201 @@ describe('API Integration Tests', () => {
         });
     });
   });
+
+  describe('Get all recipes', () => {
+    // no token
+    // invalid token
+    // succes
+
+
+    it('return 400 if token is not present', (done) => {
+      request.get(`${recipesUrl}`)
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.message).to.equal('user authorization token required');
+          done();
+        });
+    });
+
+    // check if a token(invalid) not on the user table is used
+    it('return 403 for invalid user token used', (done) => {
+      request.get(`${recipesUrl}`)
+        .send({ token: invalidToken })
+        .end((err, res) => {
+          expect(res.status).to.equal(403);
+          expect(res.body.message).to.equal('invalid user authorization token');
+          done();
+        });
+    });
+
+    it('return 200 for successfully getting all recipes', (done) => {
+      request.get(`${recipesUrl}`)
+        .send({ token: userToken1 })
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          expect(res.body.message).to.equal('success');
+          expect(res.body.recipes.length).to.equal(2);
+          expect(res.body.recipes[0].name).to.equal('Jollof Rice');
+          expect(res.body.recipes[1].name).to.equal('Fried Rice');
+          expect(res.body.recipes[0].owner.id).to.equal(2);
+          expect(res.body.recipes[0].downVote).to.equal(0);
+          expect(res.body.recipes[0].upVote).to.equal(0);
+          expect(res.body.recipes[1].upVote).to.equal(1);
+          expect(res.body.recipes[1].downVote).to.equal(0);
+          expect(res.body.recipes[1].owner.id).to.equal(1);
+          done();
+        });
+    });
+
+    // SORTED LIST OF ALL RECIPES
+    it('return 400 for a wrong sort order', (done) => {
+      request.get(`${recipesUrl}?sort=upvotes&order=somewrongorder`)
+        .send({ token: userToken1 })
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.message).to.equal('invalid sort order');
+          done();
+        });
+    });
+    it('return 200 for successfully returning a sorted recipe list', (done) => {
+      request.get(`${recipesUrl}?sort=upvotes&order=descending`)
+        .send({ token: userToken1 })
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          expect(res.body.message).to.equal('success');
+          expect(res.body.recipes[0].name).to.equal('Fried Rice');
+          done();
+        });
+    });
+    it('return 200 for successfully returning a sorted recipe list', (done) => {
+      request.get(`${recipesUrl}?sort=upvotes&order=ascending`)
+        .send({ token: userToken1 })
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          expect(res.body.message).to.equal('success');
+          expect(res.body.recipes[1].name).to.equal('Fried Rice');
+          done();
+        });
+    });
+  });
+
+  // describe('Vote {up, down} a recipe', () => {
+  //   // if no uid => 400
+  //   it('return 400 if no token is passed', (done) => {
+  //     request.post(`${recipesUrl}/${recipeId}/vote-up`)
+  //       .end((err, res) => {
+  //         expect(res.status).to.equal(400);
+  //         expect(res.body.message).to.equal('user authorization token required');
+  //         done();
+  //       });
+  //   });
+
+  //   it('return 400 if no token is passed', (done) => {
+  //     request.post(`${recipesUrl}/${recipeId}/vote-down`)
+  //       .end((err, res) => {
+  //         expect(res.status).to.equal(400);
+  //         expect(res.body.message).to.equal('user authorization token required');
+  //         done();
+  //       });
+  //   });
+
+  //   // check if a token(invalid) not on the user table is used
+  //   it('return 403 for invalid user token used', (done) => {
+  //     request.post(`${recipesUrl}/${recipeId}/vote-up`)
+  //       .send({ token: invalidToken })
+  //       .end((err, res) => {
+  //         expect(res.status).to.equal(403);
+  //         expect(res.body.message).to.equal('invalid user authorization token');
+  //         done();
+  //       });
+  //   });
+
+  //   it('return 403 for invalid user token used', (done) => {
+  //     request.post(`${recipesUrl}/${recipeId}/vote-down`)
+  //       .send({ token: invalidToken })
+  //       .end((err, res) => {
+  //         expect(res.status).to.equal(403);
+  //         expect(res.body.message).to.equal('invalid user authorization token');
+  //         done();
+  //       });
+  //   });
+
+  //   // if recipe doesnt exist no vote => 404
+  //   it('return 404 if recipe is not found', (done) => {
+  //     request.post(`${recipesUrl}/15/vote-up`)
+  //       .send({ token: userToken1 })
+  //       .end((err, res) => {
+  //         expect(res.status).to.equal(404);
+  //         expect(res.body.message).to.equal('Recipe not found');
+  //         done();
+  //       });
+  //   });
+
+  //   it('return 404 if recipe is not found', (done) => {
+  //     request.post(`${recipesUrl}/15/vote-down`)
+  //       .send({ token: userToken1 })
+  //       .end((err, res) => {
+  //         expect(res.status).to.equal(404);
+  //         expect(res.body.message).to.equal('Recipe not found');
+  //         done();
+  //       });
+  //   });
+
+  //   // if not vote-{up, down} => 404
+  //   it('return 404 if not vote-{up, down}', (done) => {
+  //     request.post(`${recipesUrl}/${recipeId}/vote-whatever`)
+  //       .send({ token: userToken1 })
+  //       .end((err, res) => {
+  //         expect(res.status).to.equal(404);
+  //         expect(res.body.message).to.equal('Not Found');
+  //         done();
+  //       });
+  //   });
+
+  //   // if owner tries to vote on his/her recipe => 403
+  //   it('return 403 if recipe owner tries to vote', (done) => {
+  //     request.post(`${recipesUrl}/${recipeId}/vote-up`)
+  //       .send({ token: userToken1 })
+  //       .end((err, res) => {
+  //         expect(res.status).to.equal(403);
+  //         expect(res.body.message).to.equal('you are not allowed to vote on your own recipe');
+  //         done();
+  //       });
+  //   });
+
+  //   // if everything good => 200
+  //   it('return 200 if another user tries to vote', (done) => {
+  //     request.post(`${recipesUrl}/${recipeId}/vote-up`)
+  //       .send({ token: userToken2 })
+  //       .end((err, res) => {
+  //         expect(res.status).to.equal(200);
+  //         expect(res.body.message).to.equal('success');
+  //         done();
+  //       });
+  //   });
+
+  //   // if try vote in an already vote direction => 400
+  //   it('return 403 if trying to vote in same direction', (done) => {
+  //     request.post(`${recipesUrl}/${recipeId}/vote-up`)
+  //       .send({ token: userToken2 })
+  //       .end((err, res) => {
+  //         expect(res.status).to.equal(403);
+  //         expect(res.body.message).to.equal('vote already recorded');
+  //         done();
+  //       });
+  //   });
+
+  //   // if try vote in a not voted direction => 200 vote gets updated
+  //   it('return 200 if vote is valid', (done) => {
+  //     request.post(`${recipesUrl}/${recipeId}/vote-down`)
+  //       .send({ token: userToken2 })
+  //       .end((err, res) => {
+  //         expect(res.status).to.equal(200);
+  //         expect(res.body.message).to.equal('success');
+  //         done();
+  //       });
+  //   });
+  // });
 
   describe('Favorite a recipe', () => {
     // no user token => 400
