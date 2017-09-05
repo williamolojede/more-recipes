@@ -5,11 +5,6 @@ const deleteRecipe = (req, res, next) => {
   // const decoded = jwt.decode(token);
   Recipe.findById(req.params.id)
     .then((recipe) => {
-      if (!recipe) {
-        const err = new Error('Recipe not found');
-        err.status = 404;
-        return next(err);
-      }
       if (userID !== recipe.owner) {
         const err = new Error('Not authorized to delete this recipe');
         err.status = 403;
@@ -20,7 +15,7 @@ const deleteRecipe = (req, res, next) => {
         .catch(err => console.error(err));
     })
     .catch((error) => {
-      const err = new Error(error.errors[0].message);
+      const err = new Error(error);
       err.status = 401;
       next(err);
     });

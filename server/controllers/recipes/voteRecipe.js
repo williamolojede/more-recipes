@@ -1,4 +1,4 @@
-import { Vote, Recipe } from '../../models/index';
+import { Vote } from '../../models/index';
 
 const voteRecipe = (req, res, next) => {
   const { dir, id } = req.params;
@@ -10,15 +10,10 @@ const voteRecipe = (req, res, next) => {
     return next(err);
   }
 
-  Vote.findAll({ where: { recipeId: id }, include: { model: Recipe } })
+  Vote.findAll({ where: { recipeId: id } })
     .then((votes) => {
       // check if the votes table is empty i:e its the first vote for the recipe
       if (votes.length === 0) {
-        if (req.recipeOwner === userID) {
-          const err = new Error('you are not allowed to vote on your own recipe');
-          err.status = 403;
-          return next(err);
-        }
         return Vote.create({
           userId: userID,
           recipeId: id,
@@ -31,21 +26,12 @@ const voteRecipe = (req, res, next) => {
             return next(err);
           });
       }
-      // index doesn't matter because all votes has the same recipe
-      const recipe = votes[0].Recipe.dataValues;
       // get list of voters for a recipe
       const alreadyVoted = [];
       votes.forEach((el) => {
         alreadyVoted.push(el.dataValues.userId);
       });
-      // recipe owner already exist on req object but this made me
-      // know how to use include so am not removing it!!!
-      if (recipe.owner === userID) {
-        const err = new Error('you are not allowed to vote on your own recipe');
-        err.status = 403;
-        return next(err);
-        // check if current user id exist on the vote table for a particular recipe
-      } else if (alreadyVoted.includes(userID)) {
+      if (alreadyVoted.includes(userID)) {
         // get cuurent user's vote
         const userVote = votes.filter(el => el.dataValues.userId === userID)[0];
         // if current votetype === previous votetype => reject

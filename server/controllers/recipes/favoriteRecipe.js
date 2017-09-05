@@ -1,15 +1,8 @@
 import { Favorite } from '../../models/index';
 
 const favoriteRecipe = (req, res, next) => {
-  const { userID, recipeOwner } = req;
+  const { userID } = req;
   const recipeId = req.params.id;
-
-  // ensures owner doesn't favorite their own recipe
-  if (recipeOwner === userID) {
-    const err = new Error('you are not allowed to vote on your own recipe');
-    err.status = 403;
-    return next(err);
-  }
 
   Favorite.findAll({ where: { recipeId } })
     .then((favorites) => {
