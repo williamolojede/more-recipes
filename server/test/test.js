@@ -570,13 +570,43 @@ describe('API Integration Tests', () => {
         });
     });
 
-    // if everything good => 200
-    it('return 200 if another user tries to review', (done) => {
+    it('return 400 if no content is passed', (done) => {
       request.post(`${recipesUrl}/${recipeId}/reviews`)
         .send({ token: userToken2 })
         .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.message).to.equal('the content of your review can not be empty');
+          done();
+        });
+    });
+
+    it('return 400 if content is passed but is an empty string', (done) => {
+      request.post(`${recipesUrl}/${recipeId}/reviews`)
+        .send({ token: userToken2, content: '     ' })
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.message).to.equal('the content of your review can not be empty');
+          done();
+        });
+    });
+
+    // if everything good => 200
+    it('return 200 if another user tries to review', (done) => {
+      request.post(`${recipesUrl}/${recipeId}/reviews`)
+        .send({ token: userToken2, content: 'this recipe is shit' })
+        .end((err, res) => {
           expect(res.status).to.equal(200);
-          expect(res.body.message).to.equal('success');
+          expect(res.body.message).to.equal('your review has been recorded');
+          done();
+        });
+    });
+
+    it('return 403 if another user tries to review again', (done) => {
+      request.post(`${recipesUrl}/${recipeId}/reviews`)
+        .send({ token: userToken2, content: 'this recipe is shit' })
+        .end((err, res) => {
+          expect(res.status).to.equal(403);
+          expect(res.body.message).to.equal('you already wrote a review for this recipe');
           done();
         });
     });

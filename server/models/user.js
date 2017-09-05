@@ -45,6 +45,11 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'userId',
       as: 'favorites',
     });
+
+    User.hasMany(models.Review, {
+      foreignKey: 'userId',
+      as: 'reviews',
+    });
   };
 
   User.authenticate = (email, password, callback) => {
