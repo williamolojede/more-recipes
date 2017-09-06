@@ -16,4 +16,4 @@ before_script:
   - createdb more-recipes_test --username=more-recipes
   - sequelize db:migrate
 
-after_script: npm run coverage
+after_script: cat ./coverage/lcov.info
