@@ -3,7 +3,7 @@ env:
     - CC_TEST_REPORTER_ID: "e895d45cfaffba8fb9a9fb36c8b3175563b0292e639308921059da19bf4fc5d2"
 language: node_js
 node_js:
-  - "6"
+  - 6.10.0
 env:
   - NODE_ENV=test
 
@@ -29,4 +29,6 @@ before_script:
 
 after_success: npm run coverage
 
-after_script: ls
+after_script:
+  - ls coverage
+  - nyc report
