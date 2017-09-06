@@ -14,7 +14,7 @@ const signup = (req, res, next) => {
     .create({ email, fullname, password })
     .then(() => res.status(201).send({ status: 'success', message: 'account created' }))
     .catch((error) => {
-      const err = new Error(error.errors[0].message);
+      const err = new Error(error);
       err.status = 400;
       return next(err);
     });
