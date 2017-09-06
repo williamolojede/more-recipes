@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon --exec babel-node server/app.js",
     "test-local": "npm run migrate-test && cross-env NODE_ENV=test-local nyc mocha --timeout 10000 server/test/test.js",
-    "test": "cross-env NODE_ENV=test nyc mocha server/test/test.js",
+    "test": "cross-env NODE_ENV=test nyc _mocha --report lcovonly --reporter spec  --timeout 10000 server/test/test.js",
     "migrate": "sequelize db:migrate:undo:all&&sequelize db:migrate",
     "migrate-test": "sequelize db:migrate:undo:all --env=test-local&&sequelize db:migrate --env=test-local",
     "shc": "start coverage/lcov-report/index.html",
