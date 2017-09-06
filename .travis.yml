@@ -3,7 +3,7 @@ env:
     - CC_TEST_REPORTER_ID: "e895d45cfaffba8fb9a9fb36c8b3175563b0292e639308921059da19bf4fc5d2"
 language: node_js
 node_js:
-  - 6.10.0
+  - "6.10.0"
 env:
   - NODE_ENV=test
 
@@ -25,10 +25,5 @@ before_script:
   - createuser more-recipes -s -U postgres
   - createdb more-recipes_test --username=more-recipes
   - sequelize db:migrate
-  - ls
 
 after_success: npm run coverage
-
-after_script:
-  - ls coverage
-  - nyc report
