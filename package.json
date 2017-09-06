@@ -5,12 +5,12 @@
   "main": "server/app.js",
   "scripts": {
     "start": "nodemon --exec babel-node server/app.js",
-    "test-local": "npm run migrate-test && NODE_ENV=test-local nyc --reporter=html --reporter=text  mocha --compilers js:babel-core/register --timeout 10000 server/test/test.js",
-    "test": "mocha --require babel-core/register server/test/test.js",
+    "test-local": "npm run migrate-test && NODE_ENV=test-local nyc --reporter=text  mocha --compilers js:babel-core/register --timeout 10000 server/test/test.js",
+    "test": "nyc --reporter=lcov --reporter=text-lcov mocha --require babel-core/register server/test/test.js | coveralls",
     "migrate": "sequelize db:migrate:undo:all&&sequelize db:migrate",
     "migrate-test": "sequelize db:migrate:undo:all --env=test-local&&sequelize db:migrate --env=test-local",
     "shc": "start coverage/lcov-report/index.html",
-    "coverage": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",
