@@ -15,3 +15,5 @@ before_script:
   - createuser more-recipes -s -U postgres
   - createdb more-recipes_test --username=more-recipes
   - sequelize db:migrate
+
+after_success: npm run coverage
