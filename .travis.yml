@@ -16,7 +16,7 @@ addons:
     repo_token: "e895d45cfaffba8fb9a9fb36c8b3175563b0292e639308921059da19bf4fc5d2"
 
 script:
-  - npm run tests
+  - npm run test
 
 services:
   - postgresql
