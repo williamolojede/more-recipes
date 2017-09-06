@@ -15,5 +15,6 @@ ratings:
   paths:
   - "server/**/*.js"
 exclude_paths:
-- "node_modules/"
-- "template/*"
+  - "node_modules/"
+  - "template/*"
+  - "server/test"
