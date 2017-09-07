@@ -404,17 +404,6 @@ describe('API Integration Tests', () => {
         });
     });
 
-    // // if owner tries to vote on his/her recipe => 403
-    // it('return 403 if recipe owner tries to vote', (done) => {
-    //   request.post(`${recipesUrl}/${recipeId}/vote-up`)
-    //     .send({ token: userToken1 })
-    //     .end((err, res) => {
-    //       expect(res.status).to.equal(403);
-    //       expect(res.body.message).to.equal('you are not allowed to perform this action on your own recipe');
-    //       done();
-    //     });
-    // });
-
     // if owner tries vote everything good => 200
     it('return 200 for valid upVote', (done) => {
       request.post(`${recipesUrl}/${recipeId}/vote-up`)
