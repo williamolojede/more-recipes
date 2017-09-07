@@ -4,7 +4,7 @@ import systemErrorHandler from '../../helpers/systemErrorHandler';
 const reviewRecipe = (req, res, next) => {
   const { content } = req.body;
   const { userID } = req;
-  const recipeId = req.params.id;
+  const recipeID = req.params.id;
 
   // check if user already created review
   // check if no content is sent
@@ -13,18 +13,16 @@ const reviewRecipe = (req, res, next) => {
     err.status = 400;
     return next(err);
   }
+  // abstracted the favorite creation so i'm not duplicating the code
+  const createReview = (userId, copy, recipeId) => Review.create({ userId, recipeId })
+    .then(() => res.status(200).send({ status: 'success', message: 'your review has been recorded' }))
+    .catch(error => systemErrorHandler(error, next));
 
-  Review.findAll({ where: { recipeId } })
+  Review.findAll({ where: { recipeId: recipeID } })
     .then((reviews) => {
       // check if the favorite table is empty i:e its the first favorite for the recipe
       if (reviews.length === 0) {
-        return Review.create({
-          userId: userID,
-          content,
-          recipeId
-        })
-          .then(() => res.status(200).send({ status: 'success', message: 'your review has been recorded' }))
-          .catch(error => systemErrorHandler(error, next));
+        return createReview(userID, content, recipeID);
       }
 
       // get list of all userId that has already reviewed the recipe
@@ -38,13 +36,8 @@ const reviewRecipe = (req, res, next) => {
         err.status = 403;
         return next(err);
       }
-      Review.create({
-        userId: userID,
-        content,
-        recipeId
-      })
-        .then(() => res.status(200).send({ status: 'success', message: 'your review has been recorded' }))
-        .catch(error => systemErrorHandler(error, next));
+
+      createReview(userID, content, recipeID);
     });
 };
 
