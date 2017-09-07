@@ -1,4 +1,5 @@
 import { Recipe, Favorite } from '../../models/index';
+import systemErrorHandler from '../../helpers/systemErrorHandler';
 
 const getUserFavorites = (req, res, next) => {
   const { userID } = req;
@@ -23,7 +24,8 @@ const getUserFavorites = (req, res, next) => {
         recipes.push(el.dataValues.Recipe.dataValues);
       });
       return res.status(200).send({ status: 'success', recipes, message: `${favoritesCount} recipe(s) found in user's favorite list` });
-    });
+    })
+    .catch(error => systemErrorHandler(error, next));
 };
 
 export default getUserFavorites;

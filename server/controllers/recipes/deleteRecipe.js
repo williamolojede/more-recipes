@@ -1,4 +1,5 @@
 import { Recipe } from '../../models/index';
+import systemErrorHandler from '../../helpers/systemErrorHandler';
 
 const deleteRecipe = (req, res, next) => {
   const { userID } = req;
@@ -14,11 +15,7 @@ const deleteRecipe = (req, res, next) => {
         .then(() => res.status(200).send({ message: 'success' }))
         .catch(err => console.error(err));
     })
-    .catch((error) => {
-      const err = new Error(error);
-      err.status = 401;
-      next(err);
-    });
+    .catch(error => systemErrorHandler(error, next));
 };
 
 export default deleteRecipe;

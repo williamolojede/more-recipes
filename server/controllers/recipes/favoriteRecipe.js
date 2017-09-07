@@ -1,46 +1,40 @@
 import { Favorite } from '../../models/index';
+import systemErrorHandler from '../../helpers/systemErrorHandler';
 
 const favoriteRecipe = (req, res, next) => {
   const { userID } = req;
-  const recipeId = req.params.id;
+  const recipeID = req.params.id;
 
-  Favorite.findAll({ where: { recipeId } })
+  // abstracted the favorite creation so i'm not duplicating the code
+  const createFavorite = (userId, recipeId) => Favorite.create({ userId, recipeId })
+    .then(() => next())
+    .catch(error => systemErrorHandler(error, next));
+
+  Favorite.findAll({ where: { recipeId: recipeID } })
     .then((favorites) => {
       // check if the favorite table is empty i:e its the first favorite for the recipe
       if (favorites.length === 0) {
-        return Favorite.create({
-          userId: userID,
-          recipeId
-        })
-          .then(() => res.status(200).send({ status: 'success', message: 'recipe added to your favorite list' }))
-          .catch((error) => {
-            const err = new Error(error);
-            err.status = 500;
-            return next(err);
-          });
+        return createFavorite(userID, recipeID);
       }
+
       // get list of all userId that has already favorited the recipe
       const alreadyfavorited = [];
       favorites.forEach((el) => {
         alreadyfavorited.push(el.dataValues.userId);
       });
+
       const userFavorite = favorites.filter(el => el.dataValues.userId === userID)[0];
+
       // if current user already favorited => remove
       if (alreadyfavorited.includes(userID)) {
         return Favorite.findById(userFavorite.dataValues.id)
           .then(favorite => favorite.destroy())
-          .then(() => res.status(200).send({ message: 'recipe removed from your favorite list', status: 'success' }));
+          .then(() => {
+            req.favoriteDelete = 'true';
+            next();
+          });
       }
-      Favorite.create({
-        userId: userID,
-        recipeId
-      })
-        .then(() => res.status(200).send({ status: 'success', message: 'recipe added to your favorite list' }))
-        .catch((error) => {
-          const err = new Error(error);
-          err.status = 500;
-          return next(err);
-        });
+      createFavorite(userID, recipeID);
     });
 };
 

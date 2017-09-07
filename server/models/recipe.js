@@ -18,7 +18,23 @@ module.exports = (sequelize, DataTypes) => {
     },
     instructions: {
       type: DataTypes.ARRAY(DataTypes.STRING)
-    }
+    },
+    upVoteCount: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+    },
+    downVoteCount: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+    },
+    favoriteCount: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+    },
+    viewCount: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+    },
   });
   Recipe.associate = (models) => {
     Recipe.belongsTo(models.User, {

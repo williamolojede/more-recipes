@@ -1,4 +1,5 @@
 import { Recipe } from '../../models/index';
+import systemErrorHandler from '../../helpers/systemErrorHandler';
 
 const updateRecipe = (req, res, next) => {
   const { userID } = req;
@@ -41,17 +42,9 @@ const updateRecipe = (req, res, next) => {
       }
       oldRecipe.update(req.body.update)
         .then(newRecipe => res.status(200).send({ message: 'success', recipe: newRecipe }))
-        .catch((error) => {
-          const err = new Error(error);
-          err.status = 500;
-          next(err);
-        });
+        .catch(error => systemErrorHandler(error, next));
     })
-    .catch((error) => {
-      const err = new Error(error);
-      err.status = 500;
-      next(err);
-    });
+    .catch(error => systemErrorHandler(error, next));
 };
 
 export default updateRecipe;
