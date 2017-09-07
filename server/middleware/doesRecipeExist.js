@@ -1,4 +1,5 @@
 import { Recipe } from '../models';
+import systemErrorHandler from '../helpers/systemErrorHandler';
 
 const doesRecipeExist = (req, res, next) => {
   Recipe.findById(req.params.id)
@@ -11,11 +12,7 @@ const doesRecipeExist = (req, res, next) => {
       req.recipeOwner = recipe.owner;
       return next();
     })
-    .catch((error) => {
-      const err = new Error(error);
-      err.status = 500;
-      next(err);
-    });
+    .catch(error => systemErrorHandler(error, next));
 };
 
 export default doesRecipeExist;

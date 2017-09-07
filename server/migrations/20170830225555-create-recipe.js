@@ -25,6 +25,22 @@ module.exports = {
     instructions: {
       type: Sequelize.ARRAY(Sequelize.STRING)
     },
+    upVoteCount: {
+      type: Sequelize.INTEGER,
+      defaultValue: 0,
+    },
+    downVoteCount: {
+      type: Sequelize.INTEGER,
+      defaultValue: 0,
+    },
+    favoriteCount: {
+      type: Sequelize.INTEGER,
+      defaultValue: 0,
+    },
+    viewCount: {
+      type: Sequelize.INTEGER,
+      defaultValue: 0,
+    },
     createdAt: {
       allowNull: false,
       type: Sequelize.DATE

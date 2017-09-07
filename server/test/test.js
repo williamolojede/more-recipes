@@ -404,46 +404,77 @@ describe('API Integration Tests', () => {
         });
     });
 
-    // if owner tries to vote on his/her recipe => 403
-    it('return 403 if recipe owner tries to vote', (done) => {
+    // // if owner tries to vote on his/her recipe => 403
+    // it('return 403 if recipe owner tries to vote', (done) => {
+    //   request.post(`${recipesUrl}/${recipeId}/vote-up`)
+    //     .send({ token: userToken1 })
+    //     .end((err, res) => {
+    //       expect(res.status).to.equal(403);
+    //       expect(res.body.message).to.equal('you are not allowed to perform this action on your own recipe');
+    //       done();
+    //     });
+    // });
+
+    // if owner tries vote everything good => 200
+    it('return 200 for valid upVote', (done) => {
       request.post(`${recipesUrl}/${recipeId}/vote-up`)
         .send({ token: userToken1 })
         .end((err, res) => {
-          expect(res.status).to.equal(403);
-          expect(res.body.message).to.equal('you are not allowed to perform this action on your own recipe');
-          done();
-        });
-    });
-
-    // if everything good => 200
-    it('return 200 if vote is valid', (done) => {
-      request.post(`${recipesUrl}/${recipeId}/vote-down`)
-        .send({ token: userToken2 })
-        .end((err, res) => {
           expect(res.status).to.equal(200);
-          expect(res.body.message).to.equal('success');
-          done();
-        });
-    });
-
-    // if try vote in an already vote direction => 400
-    it('return 403 if trying to vote in same direction', (done) => {
-      request.post(`${recipesUrl}/${recipeId}/vote-down`)
-        .send({ token: userToken2 })
-        .end((err, res) => {
-          expect(res.status).to.equal(403);
-          expect(res.body.message).to.equal('vote already recorded');
+          expect(res.body.recipe.upVoteCount).to.equal(1);
+          expect(res.body.recipe.downVoteCount).to.equal(0);
+          expect(res.body.status).to.equal('success');
           done();
         });
     });
 
     // if try vote in a not voted direction => 200 vote gets updated
-    it('return 200 if another user tries to vote', (done) => {
-      request.post(`${recipesUrl}/${recipeId}/vote-up`)
+    it('return 200 for user downVote after upVote', (done) => {
+      request.post(`${recipesUrl}/${recipeId}/vote-down`)
+        .send({ token: userToken1 })
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          expect(res.body.recipe.upVoteCount).to.equal(0);
+          expect(res.body.recipe.downVoteCount).to.equal(1);
+          expect(res.body.status).to.equal('success');
+          done();
+        });
+    });
+
+    // if another user tries everything good => 200
+    it('return 200 for valid downVote', (done) => {
+      request.post(`${recipesUrl}/${recipeId}/vote-down`)
         .send({ token: userToken2 })
         .end((err, res) => {
           expect(res.status).to.equal(200);
-          expect(res.body.message).to.equal('success');
+          expect(res.body.recipe.upVoteCount).to.equal(0);
+          expect(res.body.recipe.downVoteCount).to.equal(2);
+          expect(res.body.status).to.equal('success');
+          done();
+        });
+    });
+
+    // if user try vote in an already vote direction delete vote
+    it('return 200 for downVote after downVote', (done) => {
+      request.post(`${recipesUrl}/${recipeId}/vote-down`)
+        .send({ token: userToken2 })
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          expect(res.body.recipe.upVoteCount).to.equal(0);
+          expect(res.body.recipe.downVoteCount).to.equal(1);
+          expect(res.body.status).to.equal('success');
+          done();
+        });
+    });
+    // just to increase the upvote count of recipe 1
+    it('return 200 for valid owner vote up', (done) => {
+      request.post(`${recipesUrl}/${recipeId}/vote-up`)
+        .send({ token: userToken1 })
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          expect(res.body.recipe.upVoteCount).to.equal(1);
+          expect(res.body.recipe.downVoteCount).to.equal(0);
+          expect(res.body.status).to.equal('success');
           done();
         });
     });
@@ -484,12 +515,12 @@ describe('API Integration Tests', () => {
           expect(res.body.recipes.length).to.equal(2);
           expect(res.body.recipes[0].name).to.equal('Jollof Rice');
           expect(res.body.recipes[1].name).to.equal('Fried Rice');
-          expect(res.body.recipes[0].owner.id).to.equal(2);
-          expect(res.body.recipes[0].downVote).to.equal(0);
-          expect(res.body.recipes[0].upVote).to.equal(0);
-          expect(res.body.recipes[1].upVote).to.equal(1);
-          expect(res.body.recipes[1].downVote).to.equal(0);
-          expect(res.body.recipes[1].owner.id).to.equal(1);
+          expect(res.body.recipes[0].User.id).to.equal(2);
+          expect(res.body.recipes[0].downVoteCount).to.equal(0);
+          expect(res.body.recipes[0].upVoteCount).to.equal(0);
+          expect(res.body.recipes[1].upVoteCount).to.equal(1);
+          expect(res.body.recipes[1].downVoteCount).to.equal(0);
+          expect(res.body.recipes[1].User.id).to.equal(1);
           done();
         });
     });
@@ -511,16 +542,6 @@ describe('API Integration Tests', () => {
           expect(res.status).to.equal(200);
           expect(res.body.message).to.equal('success');
           expect(res.body.recipes[0].name).to.equal('Fried Rice');
-          done();
-        });
-    });
-    it('return 200 for successfully returning a sorted recipe list', (done) => {
-      request.get(`${recipesUrl}?sort=upvotes&order=ascending`)
-        .send({ token: userToken1 })
-        .end((err, res) => {
-          expect(res.status).to.equal(200);
-          expect(res.body.message).to.equal('success');
-          expect(res.body.recipes[1].name).to.equal('Fried Rice');
           done();
         });
     });
@@ -555,17 +576,6 @@ describe('API Integration Tests', () => {
         .end((err, res) => {
           expect(res.status).to.equal(404);
           expect(res.body.message).to.equal('Recipe not found');
-          done();
-        });
-    });
-
-    // if owner tries to review his/her recipe => 403
-    it('return 403 if recipe owner tries to review', (done) => {
-      request.post(`${recipesUrl}/${recipeId}/reviews`)
-        .send({ token: userToken1 })
-        .end((err, res) => {
-          expect(res.status).to.equal(403);
-          expect(res.body.message).to.equal('you are not allowed to perform this action on your own recipe');
           done();
         });
     });
@@ -644,6 +654,7 @@ describe('API Integration Tests', () => {
           done();
         });
     });
+
     // if owner tries to favorite on his/her recipe => 403
     it('return 403 if owner tries to favorite', (done) => {
       request.post(`${recipesUrl}/${recipeId}/favorite`)
@@ -660,6 +671,7 @@ describe('API Integration Tests', () => {
         .send({ token: userToken2 })
         .end((err, res) => {
           expect(res.status).to.equal(200);
+          expect(res.body.recipe.favoriteCount).to.equal(1);
           expect(res.body.message).to.equal('recipe added to your favorite list');
           expect(res.body.status).to.equal('success');
           done();
@@ -671,6 +683,8 @@ describe('API Integration Tests', () => {
         .send({ token: userToken2 })
         .end((err, res) => {
           expect(res.status).to.equal(200);
+          expect(res.body.recipe.favoriteCount).to.equal(0);
+          expect(res.body.status).to.equal('success');
           expect(res.body.message).to.equal('recipe removed from your favorite list');
           done();
         });
@@ -682,6 +696,8 @@ describe('API Integration Tests', () => {
         .send({ token: userToken2 })
         .end((err, res) => {
           expect(res.status).to.equal(200);
+          expect(res.body.recipe.favoriteCount).to.equal(1);
+          expect(res.body.status).to.equal('success');
           expect(res.body.message).to.equal('recipe added to your favorite list');
           done();
         });

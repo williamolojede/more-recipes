@@ -24,6 +24,9 @@
       "html",
       "text-summary"
     ],
+    "exclude": [
+      "server/test"
+    ],
     "sourceMap": false,
     "instrument": false
   },

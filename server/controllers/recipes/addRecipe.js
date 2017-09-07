@@ -1,4 +1,5 @@
 import { Recipe } from '../../models/index';
+import systemErrorHandler from '../../helpers/systemErrorHandler';
 
 const addRecipe = (req, res, next) => {
   const { name, description, img_url, ingredients, instructions } = req.body;
@@ -11,11 +12,7 @@ const addRecipe = (req, res, next) => {
     owner: req.userID
   })
     .then(recipe => res.status(201).json({ recipe, message: 'recipe created successfully', status: 'success' }))
-    .catch((error) => {
-      const err = new Error(error);
-      err.status = 500;
-      next(err);
-    });
+    .catch(error => systemErrorHandler(error, next));
 };
 
 export default addRecipe;

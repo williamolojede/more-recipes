@@ -1,4 +1,5 @@
 import { Review } from '../../models/index';
+import systemErrorHandler from '../../helpers/systemErrorHandler';
 
 const reviewRecipe = (req, res, next) => {
   const { content } = req.body;
@@ -23,11 +24,7 @@ const reviewRecipe = (req, res, next) => {
           recipeId
         })
           .then(() => res.status(200).send({ status: 'success', message: 'your review has been recorded' }))
-          .catch((error) => {
-            const err = new Error(error);
-            err.status = 500;
-            return next(err);
-          });
+          .catch(error => systemErrorHandler(error, next));
       }
 
       // get list of all userId that has already reviewed the recipe
@@ -47,11 +44,7 @@ const reviewRecipe = (req, res, next) => {
         recipeId
       })
         .then(() => res.status(200).send({ status: 'success', message: 'your review has been recorded' }))
-        .catch((error) => {
-          const err = new Error(error);
-          err.status = 500;
-          return next(err);
-        });
+        .catch(error => systemErrorHandler(error, next));
     });
 };
 

@@ -1,4 +1,5 @@
 import { Vote } from '../../models/index';
+import systemErrorHandler from '../../helpers/systemErrorHandler';
 
 const voteRecipe = (req, res, next) => {
   const { dir, id } = req.params;
@@ -10,53 +11,52 @@ const voteRecipe = (req, res, next) => {
     return next(err);
   }
 
+  // abstracted the vote creation so i'm not duplicating the code
+  const createVote = (userId, recipeId, voteType) => Vote.create({ userId, recipeId, voteType })
+    .then(() => next())
+    .catch(error => systemErrorHandler(error, next));
+
+  // find all votes for the current recipes
   Vote.findAll({ where: { recipeId: id } })
     .then((votes) => {
       // check if the votes table is empty i:e its the first vote for the recipe
+      // don't do any checking
       if (votes.length === 0) {
-        return Vote.create({
-          userId: userID,
-          recipeId: id,
-          voteType: dir
-        })
-          .then(() => res.status(200).send({ message: 'success' }))
-          .catch((error) => {
-            const err = new Error(error);
-            err.status = 500;
-            return next(err);
-          });
+        return createVote(userID, id, dir);
       }
+
       // get list of voters for a recipe
       const alreadyVoted = [];
       votes.forEach((el) => {
         alreadyVoted.push(el.dataValues.userId);
       });
+
       if (alreadyVoted.includes(userID)) {
-        // get cuurent user's vote
+        // get current user's vote
         const userVote = votes.filter(el => el.dataValues.userId === userID)[0];
-        // if current votetype === previous votetype => reject
+
+        // delete the vote
+        // if current votetype === previous votetype delete and
         if (userVote.dataValues.voteType === dir) {
-          const err = new Error('vote already recorded');
-          err.status = 403;
-          return next(err);
+          return Vote.findById(userVote.dataValues.id)
+            .then(vote => vote.destroy())
+            .then(() => {
+              // req.removePrevious = true;
+              next();
+            });
         }
+
+        // change the vote
         // else change vote type
         return Vote.findById(userVote.dataValues.id)
           .then(vote => vote.update({ voteType: dir }))
-          .then(() => res.status(200).send({ message: 'success' }));
+          .then(() => {
+            // req.removePrevious = true;
+            next();
+          });
       }
 
-      Vote.create({
-        userId: userID,
-        recipeId: id,
-        voteType: dir
-      })
-        .then(() => res.status(200).send({ message: 'success' }))
-        .catch((error) => {
-          const err = new Error(error);
-          err.status = 500;
-          return next(err);
-        });
+      createVote(userID, id, dir);
     });
 };
 

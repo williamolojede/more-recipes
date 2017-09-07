@@ -1,9 +1,11 @@
 import validateLogin from './validateLogin';
 import validateSignup from './validateSignup';
+import errorHandler from './errorHandler';
 
 const helpers = {
   validateLogin,
-  validateSignup
+  validateSignup,
+  errorHandler
 };
 
 

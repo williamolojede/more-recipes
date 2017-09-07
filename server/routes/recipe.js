@@ -4,6 +4,8 @@ import requiresToken from '../middleware/requiresToken';
 import validateAddRecipe from '../middleware/validateAddRecipe';
 import doesRecipeExist from '../middleware/doesRecipeExist';
 import ownerNotAllowed from '../middleware/ownerNotAllowed';
+import countVotes from '../middleware/countVotes';
+import countFavorites from '../middleware/countFavorites';
 
 // could be used on put and delete but the error won't be specific
 // import isOwner from '../middleware/isOwner';
@@ -23,10 +25,10 @@ router.put('/:id', recipesController.updateRecipe);
 router.delete('/:id', recipesController.deleteRecipe);
 
 // checks if the user is owner is allowed to perform action on recipe
-router.use('/:id/*', ownerNotAllowed);
+// router.use('/:id/*', ownerNotAllowed);
 
-router.post('/:id/vote-:dir', recipesController.voteRecipe);
-router.post('/:id/favorite', recipesController.favoriteRecipe);
+router.post('/:id/vote-:dir', recipesController.voteRecipe, countVotes);
+router.post('/:id/favorite', ownerNotAllowed, recipesController.favoriteRecipe, countFavorites);
 router.post('/:id/reviews', recipesController.reviewRecipe);
 
 export default router;
