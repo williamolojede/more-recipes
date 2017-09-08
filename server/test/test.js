@@ -14,6 +14,7 @@ let userdata2;
 let userToken1, userToken2;
 // invalid because it won't exist on the user table
 const invalidToken = jwt.sign({ userID: 15, }, 'jsninja', { expiresIn: '3 days' });
+const expiredToken = jwt.sign({ userID: 15, }, 'jsninja', { expiresIn: '2s' });
 let recipeId;
 
 describe('API Integration Tests', () => {
@@ -244,6 +245,18 @@ describe('API Integration Tests', () => {
         });
     });
 
+    // check if a token(expired) not on the user table is used
+    it('return 403 for expired user token used', (done) => {
+      setTimeout(() => {
+        request.post(`${recipesUrl}?token=${expiredToken}`)
+          .send(data)
+          .end((err, res) => {
+            expect(res.status).to.equal(403);
+            expect(res.body.message).to.equal('expired user authorization token');
+            done();
+          });
+      }, 3000);
+    });
     // check if a token(invalid) not on the user table is used
     it('return 403 for invalid user token used', (done) => {
       request.post(`${recipesUrl}?token=${invalidToken}`)
