@@ -13,7 +13,7 @@ const deleteRecipe = (req, res, next) => {
       }
       recipe.destroy()
         .then(() => res.status(200).send({ message: 'success' }))
-        .catch(err => console.error(err));
+        .catch(error => systemErrorHandler(error, next));
     })
     .catch(error => systemErrorHandler(error, next));
 };
