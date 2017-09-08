@@ -1,4 +1,4 @@
-import { Review } from '../../models/index';
+import { Review, Recipe } from '../../models/index';
 import systemErrorHandler from '../../helpers/systemErrorHandler';
 
 const reviewRecipe = (req, res, next) => {
@@ -14,8 +14,13 @@ const reviewRecipe = (req, res, next) => {
     return next(err);
   }
   // abstracted the favorite creation so i'm not duplicating the code
-  const createReview = (userId, copy, recipeId) => Review.create({ userId, recipeId })
-    .then(() => res.status(200).send({ status: 'success', message: 'your review has been recorded' }))
+  const createReview = (userId, copy, recipeId) => Review.create({
+    userId,
+    recipeId,
+    content: copy
+  })
+    .then(() => Recipe.findById(recipeID, { include: [{ model: Review, as: 'reviews' }] }))
+    .then(recipe => res.status(200).send({ status: 'success', recipe, message: 'your review has been recorded' }))
     .catch(error => systemErrorHandler(error, next));
 
   Review.findAll({ where: { recipeId: recipeID } })
@@ -42,3 +47,4 @@ const reviewRecipe = (req, res, next) => {
 };
 
 export default reviewRecipe;
+
