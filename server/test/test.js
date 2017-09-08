@@ -594,7 +594,12 @@ describe('API Integration Tests', () => {
       request.post(`${recipesUrl}/${recipeId}/reviews`)
         .send({ token: userToken2, content: 'this recipe is shit' })
         .end((err, res) => {
+          console.log(res.body.recipe.reviews[0].content);
           expect(res.status).to.equal(200);
+          expect(res.body.recipe).to.be.a('object');
+          expect(res.body.recipe.reviews).to.be.a('array');
+          expect(res.body.recipe.reviews.length).to.be.equal(1);
+          expect(res.body.recipe.reviews[0].content).to.be.equal('this recipe is shit');
           expect(res.body.message).to.equal('your review has been recorded');
           done();
         });
@@ -882,3 +887,4 @@ describe('API Integration Tests', () => {
     });
   });
 });
+
