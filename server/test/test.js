@@ -594,7 +594,6 @@ describe('API Integration Tests', () => {
       request.post(`${recipesUrl}/${recipeId}/reviews`)
         .send({ token: userToken2, content: 'this recipe is shit' })
         .end((err, res) => {
-          console.log(res.body.recipe.reviews[0].content);
           expect(res.status).to.equal(200);
           expect(res.body.recipe).to.be.a('object');
           expect(res.body.recipe.reviews).to.be.a('array');
