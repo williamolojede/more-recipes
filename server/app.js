@@ -24,6 +24,7 @@ app.use((req, res, next) => {
 
 // error handler
 // define as the last app.use callback
+/* eslint no-unused-vars: 0 */
 app.use((err, req, res, next) => {
   // defaults to internal server error
   res.status(err.status || 500);
