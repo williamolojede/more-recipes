@@ -13460,16 +13460,6 @@ form.auth-form {
     .recipe__instructions ol li:not(:last-of-type) {
       margin-bottom: 1rem; }
 
-.ingredients-form .ingredients-form__qu {
-  display: flex;
-  justify-content: space-between; }
-  .ingredients-form .ingredients-form__qu label:first-of-type {
-    width: 20%; }
-  .ingredients-form .ingredients-form__qu label:last-of-type {
-    width: 40%; }
-  .ingredients-form .ingredients-form__qu select {
-    display: block; }
-
 .my-recipe__add .my-recipe__add--form input, .my-recipe__add .my-recipe__add--form textarea, .my-recipe__add .my-recipe__add--form fieldset, .my-recipe__add .my-recipe__add--form label {
   font-size: 1.2rem;
   display: block;
@@ -13561,21 +13551,28 @@ form.auth-form {
     .my-recipe__add .my-recipe__add--form .ingredients-instruction .instructions-form.my-recipe__add--form___instructions {
       width: 40%; } }
 
-.my-recipe__manage table.my-recipe__manage--table td, .my-recipe__manage table.my-recipe__manage--table th {
-  width: calc(100%/3);
-  text-align: center;
-  font-size: 1.5rem; }
-
-.my-recipe__manage table.my-recipe__manage--table .my-recipe__manage--table___action a {
-  font-size: 2rem; }
-  .my-recipe__manage table.my-recipe__manage--table .my-recipe__manage--table___action a:not(:last-of-type) {
-    margin-right: 1.5rem; }
-  .my-recipe__manage table.my-recipe__manage--table .my-recipe__manage--table___action a:last-of-type {
-    color: #ee6e73; }
-
-.my-recipe__manage table.my-recipe__manage--table .my-recipe__manage--table___img img {
-  width: auto;
-  max-height: 100px; }
+.my-recipe__manage {
+  padding: 0 !important; }
+  .my-recipe__manage table.my-recipe__manage--table td, .my-recipe__manage table.my-recipe__manage--table th {
+    width: calc(100%/3);
+    font-size: 1.5rem;
+    padding: 1rem 0 0 !important; }
+  .my-recipe__manage table.my-recipe__manage--table th:last-of-type {
+    text-align: right; }
+  .my-recipe__manage table.my-recipe__manage--table thead {
+    border-bottom: 2px solid #ddd; }
+  .my-recipe__manage table.my-recipe__manage--table tr:nth-child(even) {
+    border-top: 1px solid #ddd; }
+  .my-recipe__manage table.my-recipe__manage--table tfoot {
+    border-top: 2px solid #ddd; }
+  .my-recipe__manage table.my-recipe__manage--table .my-recipe__manage--table___action {
+    text-align: right; }
+    .my-recipe__manage table.my-recipe__manage--table .my-recipe__manage--table___action a {
+      font-size: 2rem; }
+      .my-recipe__manage table.my-recipe__manage--table .my-recipe__manage--table___action a:not(:last-of-type) {
+        margin-right: 1.5rem; }
+      .my-recipe__manage table.my-recipe__manage--table .my-recipe__manage--table___action a:last-of-type {
+        color: #ee6e73; }
 
 .page-footer {
   padding: 20px 0; }

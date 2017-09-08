@@ -20,12 +20,10 @@
           <a href="/" class="brand-logo">MoreRecipes</a>
           <ul class="right hide-on-med-and-down">
             <li><a href="my_recipes.html">My Recipes</a></li>
-            <li><a href="favorites.html">Favorite(s)</a></li>
             <li><a href="/signout">Sign Out</a></li>
           </ul>
           <ul class="side-nav" id="mobile-nav">
             <li><a href="my_recipes.html">My Recipes</a></li>
-            <li><a href="favorites.html">Favorite(s)</a></li>
             <li><a href="/signout">Sign Out</a></li>
           </ul>
           <a href="#" data-activates="mobile-nav" class="button-collapse">
@@ -46,6 +44,159 @@
             Email
             <input type="text" value="tayelolu.johnson@mail.com" disabled>
           </label>
+        </section>
+
+        <section class="profile__actions">
+          <div class="row">
+            <h3>Recipes</h3>
+            <div class="col s12 ">
+              <ul class="tabs z-depth-1">
+                  <li class="tab col s4">
+                    <a  href="#add">Add</a>
+                  </li>
+                  <li class="tab col s4">
+                      <a href="#manage">Manage</a>
+                    </li>
+                  <li class="tab col s4">
+                    <a href="#favorites">Favorite(s)</a>
+                  </li>
+              </ul>
+            </div>
+            <div id="add" class="col s12 my-recipe__add z-depth-1">
+              <form class="my-recipe__add--form">
+                <label class="my-recipe__add--form___name">
+                  Name
+                  <input type="text" name="recipe-name" placeholder="e.g: Jollof rice">
+                </label>
+                <!-- description-image wrapper -->
+                <div class="description-image">
+                  <label class="my-recipe__add--form___desc">
+                    Description
+                    <textarea placeholder="e.g: short description..."></textarea>
+                  </label>
+                  <label class="my-recipe__add--form___img">
+                    Image
+                    <div>
+                      <i class="mdi mdi-plus"></i>
+                      <span>No file chosen</span>
+                    </div>
+                    <input type="file" name="filename" accept="image/gif, image/jpeg, image/png">
+                  </label>
+                </div>
+                <!-- ingredients-instruction wrapper -->
+                <div class="ingredients-instruction">
+                  <fieldset class="ingredients-form my-recipe__add--form___ingredients">
+                    <legend>Ingredient(s):</legend>
+                    <ol>
+                      <li>
+                        1 1/2 cups all-purpose flour
+                        <a href="/delete">
+                          <i class="mdi mdi-delete"></i>
+                        </a>
+                      </li>
+                    </ol>
+                    <input type="text" name="recipe-ingredient__name" placeholder="e.g: egusi">
+                    <a href="/add-new" class="add-new">
+                      <i class="mdi mdi-plus"></i>
+                      <span>Add an ingredient</span>
+                    </a>
+                  </fieldset>
+                  <fieldset class="instructions-form my-recipe__add--form___instructions">
+                    <legend>Instruction(s):</legend>
+                    <ol>
+                      <li>In a large bowl, sift together the flour, baking powder, salt and sugar. Make a well in the center and pour in the milk, egg and melted butter; mix until smooth.
+                        <a href="/delete">
+                          <i class="mdi mdi-delete"></i>
+                        </a>
+                      </li>
+                    </ol>
+                    <input type="text" name="recipe-ingredient__name" placeholder="e.g: egusi">
+                    <a href="/add-new" class="add-new">
+                      <i class="mdi mdi-plus"></i>
+                      <span>Add an instruction</span>
+                    </a>
+                  </fieldset>
+                </div>
+                <button type="submit" class="form__submit z-depth-1">Submit</button>
+              </form>
+            </div>
+            <div class="col s12 my-recipe__manage z-depth-1" id="manage">
+              <table class="my-recipe__manage--table">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="my-recipe__manage--table___name">Pancake</td>
+                    <td class="my-recipe__manage--table___action">
+                      <a href="/modify">
+                        <i class="mdi mdi-wrench"></i>
+                      </a>
+                      <a href="/delete">
+                        <i class="mdi mdi-delete"></i>
+                      </a>
+                    </td>
+                  </tr>
+                  <tr>
+                      <td class="my-recipe__manage--table___name">Pancake</td>
+                      <td class="my-recipe__manage--table___action">
+                        <a href="/modify">
+                          <i class="mdi mdi-wrench"></i>
+                        </a>
+                        <a href="/delete">
+                          <i class="mdi mdi-delete"></i>
+                        </a>
+                      </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <th>Name</th>
+                    <th>Actions</th>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+            <div class="col s12 my-recipe__manage z-depth-1" id="favorites">
+              <table class="my-recipe__manage--table">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="my-recipe__manage--table___name">Pancake</td>
+                    <td class="my-recipe__manage--table___action">
+                      <a href="/delete">
+                        <i class="mdi mdi-delete"></i>
+                      </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="my-recipe__manage--table___name">Pancake</td>
+                    <td class="my-recipe__manage--table___action">
+                      <a href="/delete">
+                        <i class="mdi mdi-delete"></i>
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td>Name</td>
+                    <td>Actions</td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+          <!-- <div></div>
+          <div></div> -->
         </section>
       </div>
     </main>

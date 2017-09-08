@@ -1,13 +1,32 @@
 .my-recipe__manage{
+  padding: 0 !important;
   table.my-recipe__manage--table{
 
     td, th{
       width: calc(100%/3);
-      text-align: center;
       font-size: 1.5rem;
+      padding: 1rem 0 0 !important;
     }
-    
+
+    th{
+      
+      &:last-of-type{
+        text-align: right;
+      }
+    }
+    thead{
+      border-bottom: 2px solid #ddd;
+    }
+    tr{
+      &:nth-child(even) {
+        border-top: 1px solid #ddd;
+      }
+    }
+    tfoot{
+      border-top: 2px solid #ddd;
+    }
     .my-recipe__manage--table___action{
+      text-align: right;
       a{
         font-size: 2rem;
         &:not(:last-of-type){
@@ -20,12 +39,6 @@
     }
     .my-recipe__manage--table___name{
       // font-size: 1.5rem;
-    }
-    .my-recipe__manage--table___img{
-      img{
-        width: auto;
-        max-height: 100px;
-      } 
     }
   }
 }
