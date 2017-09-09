@@ -13,17 +13,17 @@
 </head>
 <body class="page page__recipe">
   <header class="site-header">
-    <nav>
-      <div class="nav-wrapper">
+    <nav class="site-header__nav">
+      <div class="nav-wrapper container">
         <a href="/" class="brand-logo">MoreRecipes</a>
         <ul class="right hide-on-med-and-down">
-          <li><a href="my_recipes.html">My Recipes</a></li>
-          <li><a href="login.html">Login</a></li>
+          <li><a href="profile.html">Profile</a></li>
+          <li><a href="login.html">Log in</a></li>
           <li><a href="register.html">Register</a></li>
         </ul>
         <ul class="side-nav" id="mobile-nav">
-          <li><a href="my_recipes.html">My Recipes</a></li>
-          <li><a href="login.html">Login</a></li>
+          <li><a href="profile.html">Profile</a></li>
+          <li><a href="login.html">Log in</a></li>
           <li><a href="register.html">Register</a></li>
         </ul>
         <a href="#" data-activates="mobile-nav" class="button-collapse">
@@ -45,7 +45,10 @@
       </div>
       <div class="row recipe__stats">
         <ul>
-          <li class="views"><p>20 views</p></li>
+          <li class="views">
+            <i class="mdi mdi-eye"></i>
+            <span>120</span>
+          </li>
           <li class="vote vote__up views">
             <a href="/vote-up">
               <i class="mdi mdi-thumb-up"></i>

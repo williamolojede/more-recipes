@@ -15,17 +15,17 @@
 </head>
 <body class="page page__home">
   <header class="site-header">
-    <nav>
-      <div class="nav-wrapper">
+    <nav class="site-header__nav">
+      <div class="nav-wrapper container">
         <a href="/" class="brand-logo">MoreRecipes</a>
         <ul class="right hide-on-med-and-down">
-          <li><a href="my_recipes.html">My Recipes</a></li>
-          <li><a href="login.html">Login</a></li>
+          <li><a href="profile.html">Profile</a></li>
+          <li><a href="login.html">Log in</a></li>
           <li><a href="register.html">Register</a></li>
         </ul>
         <ul class="side-nav" id="mobile-nav">
-          <li><a href="my_recipes.html">My Recipes</a></li>
-          <li><a href="login.html">Login</a></li>
+          <li><a href="profile.html">Profile</a></li>
+          <li><a href="login.html">Log in</a></li>
           <li><a href="register.html">Register</a></li>
         </ul>
         <a href="#" data-activates="mobile-nav" class="button-collapse">
@@ -33,64 +33,134 @@
         </a>
       </div>
     </nav>
+    <section class="site-header__hero">
+        <input class="site-header__hero--input" type="text" placeholder="find a recipe">
+    </section>
   </header>
   <main>
     <div class="container">
-      <section class="search">
-        <input class="search__input" type="text" placeholder="search for recipe...">
-      </section>  
-      <section class="top-rated">
-        <h1>Top Rated</h1>
+      <section class="page__home--top-rated">
+        <header>
+          <h1>Top Rated</h1>
+        </header>
         <ul class="top-rated__list row">
           <li class="top-rated__item col s12 m4 l4 x3">
-            <div class="card">
+            <div class="recipe-card card">
               <img
               src="https://fthmb.tqn.com/4P30MYPyJYr0fxlkBuHmNZg4NO8=/960x0/filters:no_upscale()/about/3167488129_cc7a303896_o-58a6fe3b5f9b58a3c91bf559.jpg"
-              alt="pancake" class="card-image">
+              alt="pancake" class="recipe-card__img card-image">
               <div class="card-content">
-                <h4 class="card-title">Pancake</h4>  
-                <p>Who doesn’t love pancakes in the morning? These delicious vanilla pancakes are
-                  thick and make great belly-warmers for the colder days of the year. Kids and
-                  adults alike will enjoy these pancakes before school or work.</p>
+                <h4 class="recipe-card__title card-title">Pancake</h4>  
+                <p class="recipe-card__description">Who doesn’t love pancakes in the morning? These delicious vanilla pancakes are thick and </p>
               </div>
-              <div class="card-action">
-                <a href="details.html">Read more</a>
+              <div class="card-action recipe-card__info">
+                <img src="https://roadwaytravels.com/img/userDefaultIcon.png" alt="" class="recipe-card__info---img">
+                <div class="recipe-card__info">
+                  <span><span class="recipe-card__info-by">Recipe by</span> John Doe</span>
+                  <ul class="recipe-card__info--stats">
+                    <li class="stats__favorite">
+                      <i class="mdi mdi-heart"></i>
+                      <span>120</span>
+                    </li>
+                    <li class="stats__vote-up">
+                      <i class="mdi mdi-thumb-up"></i>
+                      <span>120</span>
+                    </li>
+                    <li class="stats__vote-down">
+                      <i class="mdi mdi-thumb-down"></i>
+                      <span>120</span>
+                    </li>
+                    <li class="stats__view">
+                      <i class="mdi mdi-eye"></i>
+                      <span>120</span>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </li>
           <li class="top-rated__item col s12 m4 l4 x3">
-            <div class="card">
+            <div class="recipe-card card">
               <img
               src="https://fthmb.tqn.com/4P30MYPyJYr0fxlkBuHmNZg4NO8=/960x0/filters:no_upscale()/about/3167488129_cc7a303896_o-58a6fe3b5f9b58a3c91bf559.jpg"
-              alt="pancake" class="card-image">
+              alt="pancake" class="recipe-card__img card-image">
               <div class="card-content">
-                <h4 class="card-title">Pancake</h4>  
-                <p>Who doesn’t love pancakes in the morning? These delicious vanilla pancakes are
-                  thick and make great belly-warmers for the colder days of the year. Kids and
-                  adults alike will enjoy these pancakes before school or work.</p>
+                <h4 class="recipe-card__title card-title">Pancake</h4>  
+                <p class="recipe-card__description">Who doesn’t love pancakes in the morning? These delicious vanilla pancakes are thick and </p>
               </div>
-              <div class="card-action">
-                <a href="details.html">Read more</a>
+              <div class="card-action recipe-card__info">
+                <img src="https://roadwaytravels.com/img/userDefaultIcon.png" alt="" class="recipe-card__info---img">
+                <div class="recipe-card__info">
+                  <span><span class="recipe-card__info-by">Recipe by</span> John Doe</span>
+                  <ul class="recipe-card__info--stats">
+                    <li class="stats__favorite">
+                      <i class="mdi mdi-heart"></i>
+                      <span>120</span>
+                    </li>
+                    <li class="stats__vote-up">
+                      <i class="mdi mdi-thumb-up"></i>
+                      <span>120</span>
+                    </li>
+                    <li class="stats__vote-down">
+                      <i class="mdi mdi-thumb-down"></i>
+                      <span>120</span>
+                    </li>
+                    <li class="stats__view">
+                      <i class="mdi mdi-eye"></i>
+                      <span>120</span>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </li>
           <li class="top-rated__item col s12 m4 l4 x3">
-            <div class="card">
+            <div class="recipe-card card">
               <img
               src="https://fthmb.tqn.com/4P30MYPyJYr0fxlkBuHmNZg4NO8=/960x0/filters:no_upscale()/about/3167488129_cc7a303896_o-58a6fe3b5f9b58a3c91bf559.jpg"
-              alt="pancake" class="card-image">
+              alt="pancake" class="recipe-card__img card-image">
               <div class="card-content">
-                <h4 class="card-title">Pancake</h4>  
-                <p>Who doesn’t love pancakes in the morning? These delicious vanilla pancakes are
-                  thick and make great belly-warmers for the colder days of the year. Kids and
-                  adults alike will enjoy these pancakes before school or work.</p>
+                <h4 class="recipe-card__title card-title">Pancake</h4>  
+                <p class="recipe-card__description">Who doesn’t love pancakes in the morning? These delicious vanilla pancakes are thick and </p>
               </div>
-              <div class="card-action">
-                <a href="details.html">Read more</a>
+              <div class="card-action recipe-card__info">
+                <img src="https://roadwaytravels.com/img/userDefaultIcon.png" alt="" class="recipe-card__info---img">
+                <div class="recipe-card__info">
+                  <span><span class="recipe-card__info-by">Recipe by</span> John Doe</span>
+                  <ul class="recipe-card__info--stats">
+                    <li class="stats__favorite">
+                      <i class="mdi mdi-heart"></i>
+                      <span>120</span>
+                    </li>
+                    <li class="stats__vote-up">
+                      <i class="mdi mdi-thumb-up"></i>
+                      <span>120</span>
+                    </li>
+                    <li class="stats__vote-down">
+                      <i class="mdi mdi-thumb-down"></i>
+                      <span>120</span>
+                    </li>
+                    <li class="stats__view">
+                      <i class="mdi mdi-eye"></i>
+                      <span>120</span>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </li>
         </ul>
+        <footer>
+          <ul class="pagination">
+            <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+            <li class="active"><a href="#!">1</a></li>
+            <li class="waves-effect"><a href="#!">2</a></li>
+            <li class="waves-effect"><a href="#!">3</a></li>
+            <li class="waves-effect"><a href="#!">4</a></li>
+            <li class="waves-effect"><a href="#!">5</a></li>
+            <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+          </ul>
+        </footer>
       </section>
     </div>
   </main>

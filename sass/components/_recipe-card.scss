@@ -1,0 +1,42 @@
+.recipe-card{
+
+  .recipe-card__description {
+    color: #7f7f7f !important;
+  }
+  .recipe-card__info-by{
+    color: #7f7f7f;
+  }
+  .card-content, .card-action{
+      padding: .5rem 1rem;
+  }
+  .card-action{
+    display: flex;
+    img{
+      width: 45px;
+      height: 45px;
+      margin-right: 1rem;
+    }
+    div{
+      flex: 1;
+
+      ul{
+        display: flex;
+        justify-content: space-between;
+        
+        li{
+          display: inline-block;
+          i{
+            font-size: 1.2rem;
+            &.mdi-heart{ color: #FEAA26; }
+            &.mdi-thumb-up{ color: #00A900; }
+            &.mdi-thumb-down{ color: red; }
+            &.mdi-eye{ color: #5B96C4; }
+          }
+          span{
+            font-size: .8rem;
+          }
+        }
+      }
+    }
+  }
+}
