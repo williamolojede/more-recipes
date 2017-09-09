@@ -10,6 +10,18 @@
       p{
         margin: 0;
       }
+      &.views{
+        i, span{ color: #5B96C4; }
+      }
+      &.favorite{
+        a{ color: #FEAA26; }
+      }
+      &.vote__down{
+        a{ color: red; }
+      }
+      &.vote__up{
+        a{ color: #00A900; }
+      }
     }
   }
 }

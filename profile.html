@@ -47,17 +47,17 @@
         <section class="profile__actions">
           <div class="row">
             <h3>Recipes</h3>
-            <div class="col s12 ">
+            <div>
               <ul class="tabs z-depth-1">
-                  <li class="tab col s4">
-                    <a  href="#add">Add</a>
-                  </li>
-                  <li class="tab col s4">
-                      <a href="#manage">Manage</a>
-                    </li>
-                  <li class="tab col s4">
-                    <a href="#favorites">Favorite(s)</a>
-                  </li>
+                <li class="tab col s4">
+                  <a  href="#add">Add</a>
+                </li>
+                <li class="tab col s4">
+                  <a href="#manage">Manage</a>
+                </li>
+                <li class="tab col s4">
+                  <a href="#favorites">Favorite(s)</a>
+                </li>
               </ul>
             </div>
             <div id="add" class="col s12 my-recipe__add z-depth-1">
@@ -128,7 +128,9 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td class="my-recipe__manage--table___name">Pancake</td>
+                    <td class="my-recipe__manage--table___name">
+                      <a href="details.html">Pancake</a>
+                    </td>
                     <td class="my-recipe__manage--table___action">
                       <a href="/modify">
                         <i class="mdi mdi-wrench"></i>
@@ -139,21 +141,30 @@
                     </td>
                   </tr>
                   <tr>
-                      <td class="my-recipe__manage--table___name">Pancake</td>
-                      <td class="my-recipe__manage--table___action">
-                        <a href="/modify">
-                          <i class="mdi mdi-wrench"></i>
-                        </a>
-                        <a href="/delete">
-                          <i class="mdi mdi-delete"></i>
-                        </a>
-                      </td>
-                    </tr>
+                    <td class="my-recipe__manage--table___name">
+                      <a href="details.html">Pancake</a>
+                    </td>
+                    <td class="my-recipe__manage--table___action">
+                      <a href="/modify">
+                        <i class="mdi mdi-wrench"></i>
+                      </a>
+                      <a href="/delete">
+                        <i class="mdi mdi-delete"></i>
+                      </a>
+                    </td>
+                  </tr>
                 </tbody>
                 <tfoot>
                   <tr>
-                    <th>Name</th>
-                    <th>Actions</th>
+                    <td colspan="2">
+                      <ul class="pagination">
+                        <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+                        <li class="active"><a href="#!">1</a></li>
+                        <li class="waves-effect"><a href="#!">2</a></li>
+                        <li class="waves-effect"><a href="#!">3</a></li>
+                        <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+                      </ul>
+                    </td>
                   </tr>
                 </tfoot>
               </table>
@@ -185,16 +196,19 @@
                   </tr>
                 </tbody>
                 <tfoot>
-                  <tr>
-                    <td>Name</td>
-                    <td>Actions</td>
-                  </tr>
+                  <td colspan="2">
+                    <ul class="pagination">
+                      <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+                      <li class="active"><a href="#!">1</a></li>
+                      <li class="waves-effect"><a href="#!">2</a></li>
+                      <li class="waves-effect"><a href="#!">3</a></li>
+                      <li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+                    </ul>
+                  </td>
                 </tfoot>
               </table>
             </div>
           </div>
-          <!-- <div></div>
-          <div></div> -->
         </section>
       </div>
     </main>

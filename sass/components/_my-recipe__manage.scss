@@ -5,7 +5,7 @@
     td, th{
       width: calc(100%/3);
       font-size: 1.5rem;
-      padding: 1rem 0 0 !important;
+      padding: 1rem !important;
     }
 
     th{
@@ -22,8 +22,14 @@
         border-top: 1px solid #ddd;
       }
     }
+    td.my-recipe__manage--table___name a{
+      color: initial;
+    }
     tfoot{
       border-top: 2px solid #ddd;
+      td {
+        text-align: center;
+      }
     }
     .my-recipe__manage--table___action{
       text-align: right;
@@ -36,9 +42,6 @@
           color: $site-bg;
         }
       }
-    }
-    .my-recipe__manage--table___name{
-      // font-size: 1.5rem;
     }
   }
 }

@@ -13461,6 +13461,14 @@ form.auth-form {
     font-size: 1.2rem; }
     .recipe__stats ul li p {
       margin: 0; }
+    .recipe__stats ul li.views i, .recipe__stats ul li.views span {
+      color: #5B96C4; }
+    .recipe__stats ul li.favorite a {
+      color: #FEAA26; }
+    .recipe__stats ul li.vote__down a {
+      color: red; }
+    .recipe__stats ul li.vote__up a {
+      color: #00A900; }
 
 .recipe__ingredients ul li {
   background: url("../assets/icons/plus-circle-outline.svg") no-repeat left center;
@@ -13591,15 +13599,19 @@ form.auth-form {
   .my-recipe__manage table.my-recipe__manage--table td, .my-recipe__manage table.my-recipe__manage--table th {
     width: calc(100%/3);
     font-size: 1.5rem;
-    padding: 1rem 0 0 !important; }
+    padding: 1rem !important; }
   .my-recipe__manage table.my-recipe__manage--table th:last-of-type {
     text-align: right; }
   .my-recipe__manage table.my-recipe__manage--table thead {
     border-bottom: 2px solid #ddd; }
   .my-recipe__manage table.my-recipe__manage--table tr:nth-child(even) {
     border-top: 1px solid #ddd; }
+  .my-recipe__manage table.my-recipe__manage--table td.my-recipe__manage--table___name a {
+    color: initial; }
   .my-recipe__manage table.my-recipe__manage--table tfoot {
     border-top: 2px solid #ddd; }
+    .my-recipe__manage table.my-recipe__manage--table tfoot td {
+      text-align: center; }
   .my-recipe__manage table.my-recipe__manage--table .my-recipe__manage--table___action {
     text-align: right; }
     .my-recipe__manage table.my-recipe__manage--table .my-recipe__manage--table___action a {
@@ -13683,6 +13695,9 @@ main {
   .page__profile .profile__details label input {
     font-size: 1.2rem;
     color: #ddd; }
+
+.page__profile .profile__actions .my-recipe__add {
+  padding: 2rem; }
 
 .page__home .page__home--top-rated h1 {
   text-align: center;
