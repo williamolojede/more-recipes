@@ -13626,7 +13626,7 @@ form.auth-form {
 
 .page__home .site-header {
   height: 75vh;
-  background: url("../../assets/images/hero.jpg");
+  background: url("../assets/images/hero.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -13694,7 +13694,7 @@ main {
   text-align: center; }
 
 .page__login, .page__register {
-  background: url("../../assets/images/hero.jpg");
+  background: url("../assets/images/hero.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center; }
