@@ -482,6 +482,59 @@ describe('API Integration Tests', () => {
     });
   });
 
+  describe('Get a single recipe', () => {
+    // no token
+    // invalid token
+    // recipe doesn't exist
+    // everything good
+
+    it('return 400 if token is not present', (done) => {
+      request.get(`${recipesUrl}/${recipeId}`)
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.message).to.equal('user authorization token required');
+          done();
+        });
+    });
+
+    it('return 403 for invalid user token used', (done) => {
+      request.get(`${recipesUrl}/${recipeId}`)
+        .send({ token: invalidToken })
+        .end((err, res) => {
+          expect(res.status).to.equal(403);
+          expect(res.body.message).to.equal('invalid user authorization token');
+          done();
+        });
+    });
+
+    // if recipe doesnt exist => 404
+    it('return 404 if recipe is not found', (done) => {
+      request.get(`${recipesUrl}/15`)
+        .send({ token: userToken1 })
+        .end((err, res) => {
+          expect(res.status).to.equal(404);
+          expect(res.body.message).to.equal('Recipe not found');
+          done();
+        });
+    });
+
+    it('return 200 for successfully getting all recipes', (done) => {
+      request.get(`${recipesUrl}/${recipeId}`)
+        .send({ token: userToken1 })
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          expect(res.body.message).to.equal('success');
+          expect(res.body.recipe.name).to.equal('Fried Rice');
+          expect(res.body.recipe.User.id).to.equal(1);
+          expect(res.body.recipe.img_url).to.equal('http://www.africanbites.com/wp-content/uploads/2014/05/IMG_9677-2-1-150x150.jpg');
+          expect(res.body.recipe.downVoteCount).to.equal(0);
+          expect(res.body.recipe.upVoteCount).to.equal(1);
+          expect(res.body.recipe.viewCount).to.equal(0);
+          done();
+        });
+    });
+  });
+
   describe('Get all recipes', () => {
     // no token
     // invalid token

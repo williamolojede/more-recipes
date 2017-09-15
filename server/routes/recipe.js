@@ -21,6 +21,7 @@ router.post('/', validateAddRecipe, recipesController.createRecipe);
 // checks if the recipe to be accessed exist
 router.use('/:id', doesRecipeExist);
 
+router.get('/:id', recipesController.getSingleRecipe);
 router.put('/:id', recipesController.updateRecipe);
 router.delete('/:id', recipesController.deleteRecipe);
 
