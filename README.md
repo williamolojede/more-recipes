@@ -29,12 +29,14 @@ A RESTful API built for users to share their awesome and exciting recipes ideas 
   - Deletes a recipe
 - **`GET` /recipes**
   - Get all recipes
+- **`GET` /recipes/:id**
+  - Get a single recipe
 - **`POST` /recipes/:id/reviews**
   - Post new review for a recipe
 - **`POST` /recipes/:id/favorite**
   - Favorite a recipe
 - **`POST` /recipes/:id/vote-:dir**
-  - Vote a recipe in `dir` {up or down}
+  - Vote on a recipe `dir`: {up or down}
 
 ### USERS
 
