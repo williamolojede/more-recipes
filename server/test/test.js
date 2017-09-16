@@ -317,6 +317,20 @@ describe('API Integration Tests', () => {
           done();
         });
     });
+
+    it('return 400 if recipe name contains only whitespace(s)', (done) => {
+      const whitespaceName = Object.assign({}, data);
+      whitespaceName.name = '';
+
+      request.post(`${recipesUrl}?token=${userToken1}`)
+        .send(whitespaceName)
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.message).to.equal('recipe name can not be empty');
+          done();
+        });
+    });
+
     // test if decription is passed when creating a recipe
     it('return 400 if recipe description is not passed', (done) => {
       const noDescription = Object.assign({}, data);
@@ -329,6 +343,20 @@ describe('API Integration Tests', () => {
           done();
         });
     });
+
+    it('return 400 if recipe description contains only whitespace(s)', (done) => {
+      const whitespaceDescription = Object.assign({}, data);
+      whitespaceDescription.description = '';
+
+      request.post(`${recipesUrl}?token=${userToken1}`)
+        .send(whitespaceDescription)
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.message).to.equal('recipe description can not be empty');
+          done();
+        });
+    });
+
     // test if both name and decription are passed when creating a recipe
     it('return 400 if recipe name and description are not passed', (done) => {
       const noNameDescription = Object.assign({}, data);
@@ -340,6 +368,58 @@ describe('API Integration Tests', () => {
         .end((err, res) => {
           expect(res.status).to.equal(400);
           expect(res.body.message).to.equal('Recipe name and description are required');
+          done();
+        });
+    });
+
+    it('return 400 if invalid img url string is passed', (done) => {
+      const invalidUrl = Object.assign({}, data);
+      invalidUrl.img_url = 'https://www.google.com.ng/';
+
+      request.post(`${recipesUrl}?token=${userToken1}`)
+        .send(invalidUrl)
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.message).to.equal('invalid recipe image url');
+          done();
+        });
+    });
+
+    it('return 400 if recipe img url contains only whitespace(s)', (done) => {
+      const emptyUrl = Object.assign({}, data);
+      emptyUrl.img_url = '';
+
+      request.post(`${recipesUrl}?token=${userToken1}`)
+        .send(emptyUrl)
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.message).to.equal('recipe img url can not be empty');
+          done();
+        });
+    });
+
+    it('return 400 if recipe instructions is empty', (done) => {
+      const emptyInstructions = Object.assign({}, data);
+      emptyInstructions.instructions = [''];
+
+      request.post(`${recipesUrl}?token=${userToken1}`)
+        .send(emptyInstructions)
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.message).to.equal('recipe instructions can not be empty');
+          done();
+        });
+    });
+
+    it('return 400 if recipe ingredients is empty', (done) => {
+      const emptyIngredients = Object.assign({}, data);
+      emptyIngredients.ingredients = [''];
+
+      request.post(`${recipesUrl}?token=${userToken1}`)
+        .send(emptyIngredients)
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.message).to.equal('recipe ingredients can not be empty');
           done();
         });
     });

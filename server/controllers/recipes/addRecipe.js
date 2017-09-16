@@ -12,7 +12,10 @@ const addRecipe = (req, res, next) => {
     owner: req.userID
   })
     .then(recipe => res.status(201).json({ recipe, message: 'recipe created successfully', status: 'success' }))
-    .catch(error => systemErrorHandler(error, next));
+    .catch(error => systemErrorHandler({
+      msg: error.errors[0].message,
+      code: 400
+    }, next));
 };
 
 export default addRecipe;
