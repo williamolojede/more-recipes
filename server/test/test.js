@@ -66,25 +66,60 @@ describe('API Integration Tests', () => {
 
     it('return 400 for an already existing email ', (done) => {
       const invalidData = Object.assign({}, data);
-      invalidData.username = 'exampleuser2';
+      invalidData.fullname = 'exampleuser2';
       request.post(signupURl)
         .send(invalidData)
         .end((err, res) => {
           expect(res.status).to.equal(400);
-          expect(res.body.message).to.equal('email must be unique');
+          expect(res.body.message).to.equal('user with email already exists');
           done();
         });
     });
 
-    it('return 400 for if no email is passed ', (done) => {
+    it('return 400 for if no email property is passed ', (done) => {
       const invalidData = Object.assign({}, data);
       delete invalidData.email;
-
       request.post(signupURl)
         .send(invalidData)
         .end((err, res) => {
           expect(res.status).to.equal(400);
           expect(res.body.message).to.equal('email field is required');
+          done();
+        });
+    });
+
+    it('return 400 for if email contains only whitespace(s)', (done) => {
+      const invalidData = Object.assign({}, data);
+      invalidData.email = '';
+      request.post(signupURl)
+        .send(invalidData)
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.message).to.equal('email can not be empty');
+          done();
+        });
+    });
+
+    it('return 400 for if password contains only whitespace(s)', (done) => {
+      const invalidData = Object.assign({}, data);
+      invalidData.password = '';
+      request.post(signupURl)
+        .send(invalidData)
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.message).to.equal('password can not be empty');
+          done();
+        });
+    });
+
+    it('return 400 for if password is less than 6 characters', (done) => {
+      const invalidData = Object.assign({}, data);
+      invalidData.password = '12345';
+      request.post(signupURl)
+        .send(invalidData)
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.message).to.equal('Password must be minimum of 6 characters');
           done();
         });
     });
@@ -116,7 +151,7 @@ describe('API Integration Tests', () => {
         });
     });
 
-    it('return 400 for if both email and password aren\'t passed ', (done) => {
+    it('return 400 for if fullname isn\'t passed ', (done) => {
       const invalidData = Object.assign({}, data);
       delete invalidData.fullname;
 

@@ -12,9 +12,19 @@ module.exports = (sequelize, DataTypes) => {
     },
     email: {
       allowNull: false,
-      unique: true,
+      unique: {
+        args: true,
+        msg: 'user with email already exists'
+      },
       validate: {
-        isEmail: true,
+        notEmpty: {
+          args: true,
+          msg: 'email can not be empty'
+        },
+        isEmail: {
+          args: true,
+          msg: 'enter a valid email address'
+        }
       },
       type: DataTypes.STRING,
     },
@@ -28,6 +38,12 @@ module.exports = (sequelize, DataTypes) => {
     password: {
       allowNull: false,
       type: DataTypes.STRING,
+      validate: {
+        min: {
+          args: 6,
+          msg: 'password must be minimum of 6 characters'
+        }
+      },
       set(password) {
         const hash = bcrypt.hashSync(password, 10);
         this.setDataValue('password', hash);
