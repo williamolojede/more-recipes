@@ -1,12 +1,17 @@
 import express from 'express';
 import userController from '../controllers/users';
-import requiresToken from '../middlewares/requiresToken';
+import middlewares from '../middlewares';
 
 
 const router = express.Router();
 
 router.post('/signup', userController.signup);
+
 router.post('/login', userController.login);
-router.get('/:uid/recipes', requiresToken, userController.getUserFavorites);
+
+router.get('/:uid/recipes',
+  middlewares.requiresToken,
+  userController.getUserFavorites
+);
 
 export default router;

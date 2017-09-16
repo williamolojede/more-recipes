@@ -66,25 +66,60 @@ describe('API Integration Tests', () => {
 
     it('return 400 for an already existing email ', (done) => {
       const invalidData = Object.assign({}, data);
-      invalidData.username = 'exampleuser2';
+      invalidData.fullname = 'exampleuser2';
       request.post(signupURl)
         .send(invalidData)
         .end((err, res) => {
           expect(res.status).to.equal(400);
-          expect(res.body.message).to.equal('email must be unique');
+          expect(res.body.message).to.equal('user with email already exists');
           done();
         });
     });
 
-    it('return 400 for if no email is passed ', (done) => {
+    it('return 400 for if no email property is passed ', (done) => {
       const invalidData = Object.assign({}, data);
       delete invalidData.email;
-
       request.post(signupURl)
         .send(invalidData)
         .end((err, res) => {
           expect(res.status).to.equal(400);
           expect(res.body.message).to.equal('email field is required');
+          done();
+        });
+    });
+
+    it('return 400 for if email contains only whitespace(s)', (done) => {
+      const invalidData = Object.assign({}, data);
+      invalidData.email = '';
+      request.post(signupURl)
+        .send(invalidData)
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.message).to.equal('email can not be empty');
+          done();
+        });
+    });
+
+    it('return 400 for if password contains only whitespace(s)', (done) => {
+      const invalidData = Object.assign({}, data);
+      invalidData.password = '';
+      request.post(signupURl)
+        .send(invalidData)
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.message).to.equal('password can not be empty');
+          done();
+        });
+    });
+
+    it('return 400 for if password is less than 6 characters', (done) => {
+      const invalidData = Object.assign({}, data);
+      invalidData.password = '12345';
+      request.post(signupURl)
+        .send(invalidData)
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.message).to.equal('Password must be minimum of 6 characters');
           done();
         });
     });
@@ -116,7 +151,7 @@ describe('API Integration Tests', () => {
         });
     });
 
-    it('return 400 for if both email and password aren\'t passed ', (done) => {
+    it('return 400 for if fullname isn\'t passed ', (done) => {
       const invalidData = Object.assign({}, data);
       delete invalidData.fullname;
 
@@ -282,6 +317,20 @@ describe('API Integration Tests', () => {
           done();
         });
     });
+
+    it('return 400 if recipe name contains only whitespace(s)', (done) => {
+      const whitespaceName = Object.assign({}, data);
+      whitespaceName.name = '';
+
+      request.post(`${recipesUrl}?token=${userToken1}`)
+        .send(whitespaceName)
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.message).to.equal('recipe name can not be empty');
+          done();
+        });
+    });
+
     // test if decription is passed when creating a recipe
     it('return 400 if recipe description is not passed', (done) => {
       const noDescription = Object.assign({}, data);
@@ -294,6 +343,20 @@ describe('API Integration Tests', () => {
           done();
         });
     });
+
+    it('return 400 if recipe description contains only whitespace(s)', (done) => {
+      const whitespaceDescription = Object.assign({}, data);
+      whitespaceDescription.description = '';
+
+      request.post(`${recipesUrl}?token=${userToken1}`)
+        .send(whitespaceDescription)
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.message).to.equal('recipe description can not be empty');
+          done();
+        });
+    });
+
     // test if both name and decription are passed when creating a recipe
     it('return 400 if recipe name and description are not passed', (done) => {
       const noNameDescription = Object.assign({}, data);
@@ -305,6 +368,58 @@ describe('API Integration Tests', () => {
         .end((err, res) => {
           expect(res.status).to.equal(400);
           expect(res.body.message).to.equal('Recipe name and description are required');
+          done();
+        });
+    });
+
+    it('return 400 if invalid img url string is passed', (done) => {
+      const invalidUrl = Object.assign({}, data);
+      invalidUrl.img_url = 'https://www.google.com.ng/';
+
+      request.post(`${recipesUrl}?token=${userToken1}`)
+        .send(invalidUrl)
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.message).to.equal('invalid recipe image url');
+          done();
+        });
+    });
+
+    it('return 400 if recipe img url contains only whitespace(s)', (done) => {
+      const emptyUrl = Object.assign({}, data);
+      emptyUrl.img_url = '';
+
+      request.post(`${recipesUrl}?token=${userToken1}`)
+        .send(emptyUrl)
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.message).to.equal('recipe img url can not be empty');
+          done();
+        });
+    });
+
+    it('return 400 if recipe instructions is empty', (done) => {
+      const emptyInstructions = Object.assign({}, data);
+      emptyInstructions.instructions = [''];
+
+      request.post(`${recipesUrl}?token=${userToken1}`)
+        .send(emptyInstructions)
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.message).to.equal('recipe instructions can not be empty');
+          done();
+        });
+    });
+
+    it('return 400 if recipe ingredients is empty', (done) => {
+      const emptyIngredients = Object.assign({}, data);
+      emptyIngredients.ingredients = [''];
+
+      request.post(`${recipesUrl}?token=${userToken1}`)
+        .send(emptyIngredients)
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.message).to.equal('recipe ingredients can not be empty');
           done();
         });
     });
@@ -674,6 +789,21 @@ describe('API Integration Tests', () => {
     });
 
     // if everything good => 200
+    it('return 200 if owner tries to review', (done) => {
+      request.post(`${recipesUrl}/${recipeId}/reviews`)
+        .send({ token: userToken1, content: 'i created a shitty recipe' })
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          expect(res.body.recipe).to.be.a('object');
+          expect(res.body.recipe.reviews).to.be.a('array');
+          expect(res.body.recipe.reviews.length).to.be.equal(1);
+          expect(res.body.recipe.reviews[0].content).to.be.equal('i created a shitty recipe');
+          expect(res.body.message).to.equal('your review has been recorded');
+          done();
+        });
+    });
+
+    // if everything good => 200
     it('return 200 if another user tries to review', (done) => {
       request.post(`${recipesUrl}/${recipeId}/reviews`)
         .send({ token: userToken2, content: 'this recipe is shit' })
@@ -681,8 +811,8 @@ describe('API Integration Tests', () => {
           expect(res.status).to.equal(200);
           expect(res.body.recipe).to.be.a('object');
           expect(res.body.recipe.reviews).to.be.a('array');
-          expect(res.body.recipe.reviews.length).to.be.equal(1);
-          expect(res.body.recipe.reviews[0].content).to.be.equal('this recipe is shit');
+          expect(res.body.recipe.reviews.length).to.be.equal(2);
+          expect(res.body.recipe.reviews[1].content).to.be.equal('this recipe is shit');
           expect(res.body.message).to.equal('your review has been recorded');
           done();
         });
@@ -897,12 +1027,23 @@ describe('API Integration Tests', () => {
         });
     });
 
+
     it('return 400 update object has an invalid key name', (done) => {
       request.put(`${recipesUrl}/${recipeId}`)
         .send({ token: userToken1, update: { test: 'Jollof Rice' } })
         .end((err, res) => {
           expect(res.status).to.equal(400);
           expect(res.body.message).to.equal('invalid property name(s) on update object');
+          done();
+        });
+    });
+
+    it('return 400 if property\'s value contains whitespace(s) only', (done) => {
+      request.put(`${recipesUrl}/${recipeId}`)
+        .send({ token: userToken1, update: { name: '' } })
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.message).to.equal('recipe name can not be empty');
           done();
         });
     });

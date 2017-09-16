@@ -3,7 +3,7 @@ import systemErrorHandler from '../helpers/systemErrorHandler';
 
 let error;
 
-systemErrorHandler('some error', (err) => {
+systemErrorHandler({ msg: 'some error' }, (err) => {
   error = err;
 });
 

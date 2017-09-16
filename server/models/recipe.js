@@ -3,21 +3,55 @@ module.exports = (sequelize, DataTypes) => {
     name: {
       allowNull: false,
       type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: 'recipe name can not be empty'
+        }
+      }
     },
     description: {
       allowNull: false,
       type: DataTypes.TEXT,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: 'recipe description can not be empty'
+        }
+      }
     },
     img_url: {
       allowNull: true,
       defaultValue: 'no-img',
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: 'recipe img url can not be empty'
+        },
+        is: {
+          args: /\.(jpeg|jpg|gif|png)$/,
+          msg: 'invalid recipe image url'
+        }
+      }
     },
     ingredients: {
-      type: DataTypes.ARRAY(DataTypes.TEXT)
+      type: DataTypes.ARRAY(DataTypes.TEXT),
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: 'recipe ingredients can not be empty'
+        }
+      }
     },
     instructions: {
-      type: DataTypes.ARRAY(DataTypes.STRING)
+      type: DataTypes.ARRAY(DataTypes.STRING),
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: 'recipe instructions can not be empty'
+        }
+      }
     },
     upVoteCount: {
       type: DataTypes.INTEGER,

@@ -42,7 +42,10 @@ const updateRecipe = (req, res, next) => {
       }
       oldRecipe.update(req.body.update)
         .then(newRecipe => res.status(200).send({ message: 'success', recipe: newRecipe }))
-        .catch(error => systemErrorHandler(error, next));
+        .catch(error => systemErrorHandler({
+          msg: error.errors[0].message,
+          code: 400
+        }, next));
     })
     .catch(error => systemErrorHandler(error, next));
 };

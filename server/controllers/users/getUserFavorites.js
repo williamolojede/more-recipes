@@ -5,8 +5,10 @@ const getUserFavorites = (req, res, next) => {
   const { userID } = req;
   const { uid } = req.params;
   // checks if the userID gotten from decoding the token === uid in the request parameter
-  // also the userID forms that a user with the token exists on the user table do if
-  // the uid doesn't match it it means it doesnt exist
+  // two conditions if they are not equal:
+  // 1. token for user A is used to get user B's favorite
+  // 2. the uid doesn't exist on the user table
+
   if (userID !== parseInt(uid, 10)) {
     const err = new Error('invalid user authorization token or user doesn\'t exist');
     err.status = 403;
