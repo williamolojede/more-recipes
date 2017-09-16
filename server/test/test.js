@@ -789,6 +789,21 @@ describe('API Integration Tests', () => {
     });
 
     // if everything good => 200
+    it('return 200 if owner tries to review', (done) => {
+      request.post(`${recipesUrl}/${recipeId}/reviews`)
+        .send({ token: userToken1, content: 'i created a shitty recipe' })
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          expect(res.body.recipe).to.be.a('object');
+          expect(res.body.recipe.reviews).to.be.a('array');
+          expect(res.body.recipe.reviews.length).to.be.equal(1);
+          expect(res.body.recipe.reviews[0].content).to.be.equal('i created a shitty recipe');
+          expect(res.body.message).to.equal('your review has been recorded');
+          done();
+        });
+    });
+
+    // if everything good => 200
     it('return 200 if another user tries to review', (done) => {
       request.post(`${recipesUrl}/${recipeId}/reviews`)
         .send({ token: userToken2, content: 'this recipe is shit' })
@@ -796,8 +811,8 @@ describe('API Integration Tests', () => {
           expect(res.status).to.equal(200);
           expect(res.body.recipe).to.be.a('object');
           expect(res.body.recipe.reviews).to.be.a('array');
-          expect(res.body.recipe.reviews.length).to.be.equal(1);
-          expect(res.body.recipe.reviews[0].content).to.be.equal('this recipe is shit');
+          expect(res.body.recipe.reviews.length).to.be.equal(2);
+          expect(res.body.recipe.reviews[1].content).to.be.equal('this recipe is shit');
           expect(res.body.message).to.equal('your review has been recorded');
           done();
         });

@@ -37,7 +37,6 @@ const reviewRecipe = (req, res, next) => {
         err.status = 403;
         return next(err);
       }
-
       createReview(userID, content, recipeID);
     });
 };
