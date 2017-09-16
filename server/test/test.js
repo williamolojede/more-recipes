@@ -517,7 +517,7 @@ describe('API Integration Tests', () => {
           done();
         });
     });
-
+    // Vote Count is unique to the user id
     it('return 200 for successfully getting all recipes', (done) => {
       request.get(`${recipesUrl}/${recipeId}`)
         .send({ token: userToken1 })
@@ -529,7 +529,25 @@ describe('API Integration Tests', () => {
           expect(res.body.recipe.img_url).to.equal('http://www.africanbites.com/wp-content/uploads/2014/05/IMG_9677-2-1-150x150.jpg');
           expect(res.body.recipe.downVoteCount).to.equal(0);
           expect(res.body.recipe.upVoteCount).to.equal(1);
-          expect(res.body.recipe.viewCount).to.equal(0);
+          expect(res.body.recipe.viewCount).to.equal(1);
+          done();
+        });
+    });
+    it('voteCount remains the same for the same user', (done) => {
+      request.get(`${recipesUrl}/${recipeId}`)
+        .send({ token: userToken1 })
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          expect(res.body.message).to.equal('success');
+          expect(res.body.recipe.viewCount).to.equal(1);
+          done();
+        });
+    });
+    it('voteCount increases for another user', (done) => {
+      request.get(`${recipesUrl}/${recipeId}`)
+        .send({ token: userToken2 })
+        .end((err, res) => {
+          expect(res.body.recipe.viewCount).to.equal(2);
           done();
         });
     });

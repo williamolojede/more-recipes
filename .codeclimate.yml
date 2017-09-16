@@ -19,3 +19,4 @@ exclude_paths:
   - "template/*"
   - "server/test"
   - "server/migrations"
+  - "server/models"

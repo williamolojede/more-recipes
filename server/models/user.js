@@ -50,6 +50,11 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'userId',
       as: 'reviews',
     });
+
+    User.hasMany(models.View, {
+      foreignKey: 'userId',
+      as: 'views',
+    });
   };
 
   User.authenticate = (email, password, callback) => {
