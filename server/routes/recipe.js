@@ -1,11 +1,12 @@
 import express from 'express';
 import recipesController from '../controllers/recipes';
-import requiresToken from '../middleware/requiresToken';
-import validateAddRecipe from '../middleware/validateAddRecipe';
-import doesRecipeExist from '../middleware/doesRecipeExist';
-import ownerNotAllowed from '../middleware/ownerNotAllowed';
-import countVotes from '../middleware/countVotes';
-import countFavorites from '../middleware/countFavorites';
+import requiresToken from '../middlewares/requiresToken';
+import validateAddRecipe from '../middlewares/validateAddRecipe';
+import doesRecipeExist from '../middlewares/doesRecipeExist';
+import ownerNotAllowed from '../middlewares/ownerNotAllowed';
+import countVotes from '../middlewares/countVotes';
+import countFavorites from '../middlewares/countFavorites';
+import middlewares from '../middlewares';
 
 // could be used on put and delete but the error won't be specific
 // import isOwner from '../middleware/isOwner';
@@ -21,9 +22,10 @@ router.post('/', validateAddRecipe, recipesController.createRecipe);
 // checks if the recipe to be accessed exist
 router.use('/:id', doesRecipeExist);
 
-router.get('/:id', recipesController.getSingleRecipe);
-router.put('/:id', recipesController.updateRecipe);
-router.delete('/:id', recipesController.deleteRecipe);
+router.route('/:id')
+  .get(middlewares.countViews, recipesController.getSingleRecipe)
+  .put(recipesController.updateRecipe)
+  .delete(recipesController.deleteRecipe);
 
 // checks if the user is owner is allowed to perform action on recipe
 // router.use('/:id/*', ownerNotAllowed);
