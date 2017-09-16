@@ -1012,12 +1012,23 @@ describe('API Integration Tests', () => {
         });
     });
 
+
     it('return 400 update object has an invalid key name', (done) => {
       request.put(`${recipesUrl}/${recipeId}`)
         .send({ token: userToken1, update: { test: 'Jollof Rice' } })
         .end((err, res) => {
           expect(res.status).to.equal(400);
           expect(res.body.message).to.equal('invalid property name(s) on update object');
+          done();
+        });
+    });
+
+    it('return 400 if property\'s value contains whitespace(s) only', (done) => {
+      request.put(`${recipesUrl}/${recipeId}`)
+        .send({ token: userToken1, update: { name: '' } })
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.message).to.equal('recipe name can not be empty');
           done();
         });
     });
