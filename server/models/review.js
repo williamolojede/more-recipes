@@ -1,6 +1,18 @@
 module.exports = (sequelize, DataTypes) => {
   const Review = sequelize.define('Review', {
-    content: DataTypes.STRING
+    content: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      // the reason for this becasue custom allownull message isn't available yet in sequelize
+      // https://github.com/sequelize/sequelize/issues/1500
+      defaultValue: '',
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: 'the content of your review can not be empty'
+        }
+      },
+    }
   });
 
   Review.associate = (models) => {

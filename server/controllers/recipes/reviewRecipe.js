@@ -6,13 +6,6 @@ const reviewRecipe = (req, res, next) => {
   const { userID } = req;
   const recipeID = req.params.id;
 
-  // check if user already created review
-  // check if no content is sent
-  if (!content || content.trim() === '') {
-    const err = new Error('the content of your review can not be empty');
-    err.status = 400;
-    return next(err);
-  }
   // abstracted the favorite creation so i'm not duplicating the code
   const createReview = (userId, copy, recipeId) => Review.create({
     userId,
@@ -21,7 +14,10 @@ const reviewRecipe = (req, res, next) => {
   })
     .then(() => Recipe.findById(recipeID, { include: [{ model: Review, as: 'reviews' }] }))
     .then(recipe => res.status(200).send({ status: 'success', recipe, message: 'your review has been recorded' }))
-    .catch(error => systemErrorHandler(error, next));
+    .catch(error => systemErrorHandler({
+      msg: error.errors[0].message,
+      code: 400
+    }, next));
 
   Review.findAll({ where: { recipeId: recipeID } })
     .then((reviews) => {
