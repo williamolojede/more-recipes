@@ -18,7 +18,7 @@ const expiredToken = jwt.sign({ userID: 15, }, 'jsninja', { expiresIn: '2s' });
 let recipeId;
 
 describe('API Integration Tests', () => {
-  it('return 404 for ant route asides /api', (done) => {
+  it('return 404 for any route asides /api', (done) => {
     request.post('/wrong')
       .send(data)
       .end((err, res) => {
@@ -33,9 +33,11 @@ describe('API Integration Tests', () => {
 
     beforeEach(() => {
       data = {
-        fullname: 'example user',
-        password: '123456',
-        email: 'example@user.com',
+        user: {
+          fullname: 'example user',
+          password: '123456',
+          email: 'example@user.com',
+        }
       };
     });
 
@@ -46,6 +48,10 @@ describe('API Integration Tests', () => {
           expect(res.status).to.equal(201);
           expect(res.body.status).to.equal('success');
           expect(res.body.message).to.equal('account created');
+          expect(res.body.token).to.be.a('string');
+          expect(res.body.user.id).to.equal(1);
+          expect(res.body.user.email).to.equal('example@user.com');
+          expect(res.body.user.fullname).to.equal('example user');
           done();
         });
     });
@@ -53,20 +59,24 @@ describe('API Integration Tests', () => {
     // another user signup
     it('return 201 for a successful account creation', (done) => {
       userdata2 = Object.assign({}, data);
-      userdata2.email = 'test@test.com';
+      userdata2.user.email = 'test@test.com';
       request.post(signupURl)
         .send(userdata2)
         .end((err, res) => {
           expect(res.status).to.equal(201);
           expect(res.body.status).to.equal('success');
           expect(res.body.message).to.equal('account created');
+          expect(res.body.token).to.be.a('string');
+          expect(res.body.user.id).to.equal(2);
+          expect(res.body.user.email).to.equal('test@test.com');
+          expect(res.body.user.fullname).to.equal('example user');
           done();
         });
     });
 
     it('return 400 for an already existing email ', (done) => {
       const invalidData = Object.assign({}, data);
-      invalidData.fullname = 'exampleuser2';
+      invalidData.user.fullname = 'example user2';
       request.post(signupURl)
         .send(invalidData)
         .end((err, res) => {
@@ -78,7 +88,7 @@ describe('API Integration Tests', () => {
 
     it('return 400 for if no email property is passed ', (done) => {
       const invalidData = Object.assign({}, data);
-      delete invalidData.email;
+      delete invalidData.user.email;
       request.post(signupURl)
         .send(invalidData)
         .end((err, res) => {
@@ -90,7 +100,7 @@ describe('API Integration Tests', () => {
 
     it('return 400 for if email contains only whitespace(s)', (done) => {
       const invalidData = Object.assign({}, data);
-      invalidData.email = '';
+      invalidData.user.email = '';
       request.post(signupURl)
         .send(invalidData)
         .end((err, res) => {
@@ -102,7 +112,7 @@ describe('API Integration Tests', () => {
 
     it('return 400 for if password contains only whitespace(s)', (done) => {
       const invalidData = Object.assign({}, data);
-      invalidData.password = '';
+      invalidData.user.password = '';
       request.post(signupURl)
         .send(invalidData)
         .end((err, res) => {
@@ -114,7 +124,7 @@ describe('API Integration Tests', () => {
 
     it('return 400 for if password is less than 6 characters', (done) => {
       const invalidData = Object.assign({}, data);
-      invalidData.password = '12345';
+      invalidData.user.password = '12345';
       request.post(signupURl)
         .send(invalidData)
         .end((err, res) => {
@@ -126,7 +136,7 @@ describe('API Integration Tests', () => {
 
     it('return 400 for if no password is passed ', (done) => {
       const invalidData = Object.assign({}, data);
-      delete invalidData.password;
+      delete invalidData.user.password;
 
       request.post(signupURl)
         .send(invalidData)
@@ -139,8 +149,8 @@ describe('API Integration Tests', () => {
 
     it('return 400 for if both email and password aren\'t passed ', (done) => {
       const invalidData = Object.assign({}, data);
-      delete invalidData.password;
-      delete invalidData.email;
+      delete invalidData.user.password;
+      delete invalidData.user.email;
 
       request.post(signupURl)
         .send(invalidData)
@@ -153,7 +163,7 @@ describe('API Integration Tests', () => {
 
     it('return 400 for if fullname isn\'t passed ', (done) => {
       const invalidData = Object.assign({}, data);
-      delete invalidData.fullname;
+      delete invalidData.user.fullname;
 
       request.post(signupURl)
         .send(invalidData)
