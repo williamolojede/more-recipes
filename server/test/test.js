@@ -231,6 +231,19 @@ describe('API Integration Tests', () => {
         });
     });
 
+    it('return 400 if auth property is not is not passed', (done) => {
+      const invalidData = Object.assign({}, data);
+      delete invalidData.auth;
+
+      request.post(loginURl)
+        .send(invalidData)
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.message).to.equal('auth property is required on request body, see documentation');
+          done();
+        });
+    });
+
     it('return 400 for if no password is passed ', (done) => {
       const invalidData = Object.assign({}, data);
       delete invalidData.auth.password;
