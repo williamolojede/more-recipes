@@ -4,24 +4,28 @@
     "password": null,
     "database": "more-recipes",
     "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "logging": false
   },
   "test": {
     "username": "more-recipes",
     "password": null,
     "database": "more-recipes_test",
     "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "logging": false
   },
   "test-local": {
     "username": "williamilerioluwase",
     "password": null,
     "database": "more-recipes_test-local",
     "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "logging": false
   },
   "production": {
-    "use_env_variable": "DATABASE_URL"
+    "use_env_variable": "DATABASE_URL",
+    "logging": false
   }
 }
 

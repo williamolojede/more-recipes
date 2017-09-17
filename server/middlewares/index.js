@@ -6,6 +6,7 @@ import countVotes from './countVotes';
 import countFavorites from './countFavorites';
 import ownerNotAllowed from './ownerNotAllowed';
 import validateLogin from './validateLogin';
+import validateSignup from './validateSignup';
 
 const middlewares = {
   countViews,
@@ -15,7 +16,8 @@ const middlewares = {
   countVotes,
   countFavorites,
   ownerNotAllowed,
-  validateLogin
+  validateLogin,
+  validateSignup
 };
 
 export default middlewares;
