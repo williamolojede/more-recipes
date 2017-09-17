@@ -2,7 +2,13 @@
 // https://github.com/sequelize/sequelize/issues/1500#issuecomment-322009204
 
 const validateAddRecipe = (req, res, next) => {
-  const { name, description } = req.body;
+  if (req.body.recipe === undefined) {
+    const err = new Error('Recipe property is required on request body, see documentation');
+    err.status = 400;
+    return next(err);
+  }
+
+  const { name, description } = req.body.recipe;
   if (name === undefined && description === undefined) {
     const err = new Error('Recipe name and description are required');
     err.status = 400;

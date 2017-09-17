@@ -2,7 +2,7 @@ import { Recipe } from '../../models/index';
 import systemErrorHandler from '../../helpers/systemErrorHandler';
 
 const addRecipe = (req, res, next) => {
-  const { name, description, img_url, ingredients, instructions } = req.body;
+  const { name, description, img_url, ingredients, instructions } = req.body.recipe;
   Recipe.create({
     name,
     description,

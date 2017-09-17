@@ -18,7 +18,7 @@ const expiredToken = jwt.sign({ userID: 15, }, 'jsninja', { expiresIn: '2s' });
 let recipeId;
 
 describe('API Integration Tests', () => {
-  it('return 404 for ant route asides /api', (done) => {
+  it('return 404 for any route asides /api', (done) => {
     request.post('/wrong')
       .send(data)
       .end((err, res) => {
@@ -33,9 +33,11 @@ describe('API Integration Tests', () => {
 
     beforeEach(() => {
       data = {
-        fullname: 'example user',
-        password: '123456',
-        email: 'example@user.com',
+        user: {
+          fullname: 'example user',
+          password: '123456',
+          email: 'example@user.com',
+        }
       };
     });
 
@@ -46,6 +48,10 @@ describe('API Integration Tests', () => {
           expect(res.status).to.equal(201);
           expect(res.body.status).to.equal('success');
           expect(res.body.message).to.equal('account created');
+          expect(res.body.token).to.be.a('string');
+          expect(res.body.user.id).to.equal(1);
+          expect(res.body.user.email).to.equal('example@user.com');
+          expect(res.body.user.fullname).to.equal('example user');
           done();
         });
     });
@@ -53,20 +59,24 @@ describe('API Integration Tests', () => {
     // another user signup
     it('return 201 for a successful account creation', (done) => {
       userdata2 = Object.assign({}, data);
-      userdata2.email = 'test@test.com';
+      userdata2.user.email = 'test@test.com';
       request.post(signupURl)
         .send(userdata2)
         .end((err, res) => {
           expect(res.status).to.equal(201);
           expect(res.body.status).to.equal('success');
           expect(res.body.message).to.equal('account created');
+          expect(res.body.token).to.be.a('string');
+          expect(res.body.user.id).to.equal(2);
+          expect(res.body.user.email).to.equal('test@test.com');
+          expect(res.body.user.fullname).to.equal('example user');
           done();
         });
     });
 
     it('return 400 for an already existing email ', (done) => {
       const invalidData = Object.assign({}, data);
-      invalidData.fullname = 'exampleuser2';
+      invalidData.user.fullname = 'example user2';
       request.post(signupURl)
         .send(invalidData)
         .end((err, res) => {
@@ -78,7 +88,7 @@ describe('API Integration Tests', () => {
 
     it('return 400 for if no email property is passed ', (done) => {
       const invalidData = Object.assign({}, data);
-      delete invalidData.email;
+      delete invalidData.user.email;
       request.post(signupURl)
         .send(invalidData)
         .end((err, res) => {
@@ -90,7 +100,7 @@ describe('API Integration Tests', () => {
 
     it('return 400 for if email contains only whitespace(s)', (done) => {
       const invalidData = Object.assign({}, data);
-      invalidData.email = '';
+      invalidData.user.email = '';
       request.post(signupURl)
         .send(invalidData)
         .end((err, res) => {
@@ -102,7 +112,7 @@ describe('API Integration Tests', () => {
 
     it('return 400 for if password contains only whitespace(s)', (done) => {
       const invalidData = Object.assign({}, data);
-      invalidData.password = '';
+      invalidData.user.password = '';
       request.post(signupURl)
         .send(invalidData)
         .end((err, res) => {
@@ -114,7 +124,7 @@ describe('API Integration Tests', () => {
 
     it('return 400 for if password is less than 6 characters', (done) => {
       const invalidData = Object.assign({}, data);
-      invalidData.password = '12345';
+      invalidData.user.password = '12345';
       request.post(signupURl)
         .send(invalidData)
         .end((err, res) => {
@@ -126,7 +136,7 @@ describe('API Integration Tests', () => {
 
     it('return 400 for if no password is passed ', (done) => {
       const invalidData = Object.assign({}, data);
-      delete invalidData.password;
+      delete invalidData.user.password;
 
       request.post(signupURl)
         .send(invalidData)
@@ -139,8 +149,8 @@ describe('API Integration Tests', () => {
 
     it('return 400 for if both email and password aren\'t passed ', (done) => {
       const invalidData = Object.assign({}, data);
-      delete invalidData.password;
-      delete invalidData.email;
+      delete invalidData.user.password;
+      delete invalidData.user.email;
 
       request.post(signupURl)
         .send(invalidData)
@@ -153,7 +163,7 @@ describe('API Integration Tests', () => {
 
     it('return 400 for if fullname isn\'t passed ', (done) => {
       const invalidData = Object.assign({}, data);
-      delete invalidData.fullname;
+      delete invalidData.user.fullname;
 
       request.post(signupURl)
         .send(invalidData)
@@ -170,8 +180,10 @@ describe('API Integration Tests', () => {
 
     beforeEach(() => {
       data = {
-        password: '123456',
-        email: 'example@user.com',
+        auth: {
+          password: '123456',
+          email: 'example@user.com',
+        }
       };
     });
     // main user login
@@ -182,6 +194,8 @@ describe('API Integration Tests', () => {
           userToken1 = res.body.token;
           expect(res.status).to.equal(200);
           expect(res.body.status).to.equal('success');
+          expect(res.body.user.id).to.equal(1);
+          expect(res.body.user.email).to.equal('example@user.com');
           expect(userToken1).to.be.a('string');
           done();
         });
@@ -189,7 +203,7 @@ describe('API Integration Tests', () => {
     // wrong password for user 1
     it('return 401 for wrong password', (done) => {
       const wrongPassword = Object.assign({}, data);
-      wrongPassword.password = 'wrongpassword';
+      wrongPassword.auth.password = 'wrongpassword';
 
       request.post(loginURl)
         .send(wrongPassword)
@@ -205,7 +219,7 @@ describe('API Integration Tests', () => {
     // another user login
     it('return 200 for a successful login', (done) => {
       userdata2 = Object.assign({}, data);
-      userdata2.email = 'test@test.com';
+      userdata2.auth.email = 'test@test.com';
       request.post(loginURl)
         .send(userdata2)
         .end((err, res) => {
@@ -217,9 +231,22 @@ describe('API Integration Tests', () => {
         });
     });
 
+    it('return 400 if auth property is not is not passed', (done) => {
+      const invalidData = Object.assign({}, data);
+      delete invalidData.auth;
+
+      request.post(loginURl)
+        .send(invalidData)
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.message).to.equal('auth property is required on request body, see documentation');
+          done();
+        });
+    });
+
     it('return 400 for if no password is passed ', (done) => {
       const invalidData = Object.assign({}, data);
-      delete invalidData.password;
+      delete invalidData.auth.password;
 
       request.post(loginURl)
         .send(invalidData)
@@ -232,7 +259,7 @@ describe('API Integration Tests', () => {
 
     it('return 400 for if no email is passed ', (done) => {
       const invalidData = Object.assign({}, data);
-      delete invalidData.email;
+      delete invalidData.auth.email;
 
       request.post(loginURl)
         .send(invalidData)
@@ -245,7 +272,7 @@ describe('API Integration Tests', () => {
 
     it('return 401 for if user is not found for the email passed ', (done) => {
       const invalidData = Object.assign({}, data);
-      invalidData.email = 'userdefdoesntexist@email.com';
+      invalidData.auth.email = 'userdefdoesntexist@email.com';
       // you dont want people know if the email exists or not
 
       request.post(loginURl)
@@ -261,11 +288,13 @@ describe('API Integration Tests', () => {
   describe('Add Recipe', () => {
     beforeEach(() => {
       data = {
-        name: 'Fried Rice',
-        description: 'Nigerian Fried Rice puts a spicy, flavorful spin on the traditional fried rice and is appealing on its own or served with a variety of other African food.',
-        img_url: 'http://www.africanbites.com/wp-content/uploads/2014/05/IMG_9677-2-1-150x150.jpg',
-        ingredients: ['rice', 'canola oil'],
-        instructions: ['Break up the clumpy rice before starting.', 'Garnish with chopped scallion and serve'],
+        recipe: {
+          name: 'Fried Rice',
+          description: 'Nigerian Fried Rice puts a spicy, flavorful spin on the traditional fried rice and is appealing on its own or served with a variety of other African food.',
+          img_url: 'http://www.africanbites.com/wp-content/uploads/2014/05/IMG_9677-2-1-150x150.jpg',
+          ingredients: ['rice', 'canola oil'],
+          instructions: ['Break up the clumpy rice before starting.', 'Garnish with chopped scallion and serve'],
+        }
       };
     });
 
@@ -303,12 +332,21 @@ describe('API Integration Tests', () => {
         });
     });
 
-    // check if token is outdated
-    // check if token is invalid/tampered with
-    // test if name is passed when creating a recipe
+    it('return 400 if recipe property is not is not passed', (done) => {
+      const noName = Object.assign({}, data);
+      delete noName.recipe;
+      request.post(`${recipesUrl}?token=${userToken1}`)
+        .send(noName)
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.message).to.equal('Recipe property is required on request body, see documentation');
+          done();
+        });
+    });
+
     it('return 400 if recipe name is not passed', (done) => {
       const noName = Object.assign({}, data);
-      delete noName.name;
+      delete noName.recipe.name;
       request.post(`${recipesUrl}?token=${userToken1}`)
         .send(noName)
         .end((err, res) => {
@@ -320,7 +358,7 @@ describe('API Integration Tests', () => {
 
     it('return 400 if recipe name contains only whitespace(s)', (done) => {
       const whitespaceName = Object.assign({}, data);
-      whitespaceName.name = '';
+      whitespaceName.recipe.name = '';
 
       request.post(`${recipesUrl}?token=${userToken1}`)
         .send(whitespaceName)
@@ -334,7 +372,7 @@ describe('API Integration Tests', () => {
     // test if decription is passed when creating a recipe
     it('return 400 if recipe description is not passed', (done) => {
       const noDescription = Object.assign({}, data);
-      delete noDescription.description;
+      delete noDescription.recipe.description;
       request.post(`${recipesUrl}?token=${userToken1}`)
         .send(noDescription)
         .end((err, res) => {
@@ -346,7 +384,7 @@ describe('API Integration Tests', () => {
 
     it('return 400 if recipe description contains only whitespace(s)', (done) => {
       const whitespaceDescription = Object.assign({}, data);
-      whitespaceDescription.description = '';
+      whitespaceDescription.recipe.description = '';
 
       request.post(`${recipesUrl}?token=${userToken1}`)
         .send(whitespaceDescription)
@@ -360,8 +398,8 @@ describe('API Integration Tests', () => {
     // test if both name and decription are passed when creating a recipe
     it('return 400 if recipe name and description are not passed', (done) => {
       const noNameDescription = Object.assign({}, data);
-      delete noNameDescription.description;
-      delete noNameDescription.name;
+      delete noNameDescription.recipe.description;
+      delete noNameDescription.recipe.name;
 
       request.post(`${recipesUrl}?token=${userToken1}`)
         .send(noNameDescription)
@@ -374,7 +412,7 @@ describe('API Integration Tests', () => {
 
     it('return 400 if invalid img url string is passed', (done) => {
       const invalidUrl = Object.assign({}, data);
-      invalidUrl.img_url = 'https://www.google.com.ng/';
+      invalidUrl.recipe.img_url = 'https://www.google.com.ng/';
 
       request.post(`${recipesUrl}?token=${userToken1}`)
         .send(invalidUrl)
@@ -387,7 +425,7 @@ describe('API Integration Tests', () => {
 
     it('return 400 if recipe img url contains only whitespace(s)', (done) => {
       const emptyUrl = Object.assign({}, data);
-      emptyUrl.img_url = '';
+      emptyUrl.recipe.img_url = '';
 
       request.post(`${recipesUrl}?token=${userToken1}`)
         .send(emptyUrl)
@@ -400,7 +438,7 @@ describe('API Integration Tests', () => {
 
     it('return 400 if recipe instructions is empty', (done) => {
       const emptyInstructions = Object.assign({}, data);
-      emptyInstructions.instructions = [''];
+      emptyInstructions.recipe.instructions = [''];
 
       request.post(`${recipesUrl}?token=${userToken1}`)
         .send(emptyInstructions)
@@ -413,7 +451,7 @@ describe('API Integration Tests', () => {
 
     it('return 400 if recipe ingredients is empty', (done) => {
       const emptyIngredients = Object.assign({}, data);
-      emptyIngredients.ingredients = [''];
+      emptyIngredients.recipe.ingredients = [''];
 
       request.post(`${recipesUrl}?token=${userToken1}`)
         .send(emptyIngredients)
@@ -433,8 +471,14 @@ describe('API Integration Tests', () => {
           expect(res.body.message).to.equal('recipe created successfully');
           expect(res.body.status).to.equal('success');
           expect(res.body.recipe).to.be.a('object');
-          expect(res.body.recipe.name).to.equal(data.name);
-          expect(res.body.recipe.description).to.equal(data.description);
+          expect(res.body.recipe.name).to.equal(data.recipe.name);
+          expect(res.body.recipe.description).to.equal(data.recipe.description);
+          expect(res.body.recipe.upVoteCount).to.equal(0);
+          expect(res.body.recipe.downVoteCount).to.equal(0);
+          expect(res.body.recipe.favoriteCount).to.equal(0);
+          expect(res.body.recipe.viewCount).to.equal(0);
+          expect(res.body.recipe.owner).to.equal(1);
+          expect(res.body.recipe.id).to.equal(1);
           done();
         });
     });
@@ -442,8 +486,8 @@ describe('API Integration Tests', () => {
     // CREATE RECIPE FOR USER 2
     it('return 201 for a successful recipe creation', (done) => {
       const user2Recipe = Object.assign({}, data);
-      user2Recipe.name = 'Jollof Rice';
-      user2Recipe.description = 'It is simply better than ghanian jollof';
+      user2Recipe.recipe.name = 'Jollof Rice';
+      user2Recipe.recipe.description = 'It is simply better than ghanian jollof';
 
       request.post(`${recipesUrl}?token=${userToken2}`)
         .send(user2Recipe)
@@ -452,8 +496,14 @@ describe('API Integration Tests', () => {
           expect(res.body.message).to.equal('recipe created successfully');
           expect(res.body.status).to.equal('success');
           expect(res.body.recipe).to.be.a('object');
-          expect(res.body.recipe.name).to.equal(user2Recipe.name);
-          expect(res.body.recipe.description).to.equal(user2Recipe.description);
+          expect(res.body.recipe.name).to.equal(user2Recipe.recipe.name);
+          expect(res.body.recipe.description).to.equal(user2Recipe.recipe.description);
+          expect(res.body.recipe.upVoteCount).to.equal(0);
+          expect(res.body.recipe.downVoteCount).to.equal(0);
+          expect(res.body.recipe.favoriteCount).to.equal(0);
+          expect(res.body.recipe.viewCount).to.equal(0);
+          expect(res.body.recipe.owner).to.equal(2);
+          expect(res.body.recipe.id).to.equal(2);
           done();
         });
     });
