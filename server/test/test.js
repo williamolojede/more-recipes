@@ -180,8 +180,10 @@ describe('API Integration Tests', () => {
 
     beforeEach(() => {
       data = {
-        password: '123456',
-        email: 'example@user.com',
+        auth: {
+          password: '123456',
+          email: 'example@user.com',
+        }
       };
     });
     // main user login
@@ -192,6 +194,8 @@ describe('API Integration Tests', () => {
           userToken1 = res.body.token;
           expect(res.status).to.equal(200);
           expect(res.body.status).to.equal('success');
+          expect(res.body.user.id).to.equal(1);
+          expect(res.body.user.email).to.equal('example@user.com');
           expect(userToken1).to.be.a('string');
           done();
         });
@@ -199,7 +203,7 @@ describe('API Integration Tests', () => {
     // wrong password for user 1
     it('return 401 for wrong password', (done) => {
       const wrongPassword = Object.assign({}, data);
-      wrongPassword.password = 'wrongpassword';
+      wrongPassword.auth.password = 'wrongpassword';
 
       request.post(loginURl)
         .send(wrongPassword)
@@ -215,7 +219,7 @@ describe('API Integration Tests', () => {
     // another user login
     it('return 200 for a successful login', (done) => {
       userdata2 = Object.assign({}, data);
-      userdata2.email = 'test@test.com';
+      userdata2.auth.email = 'test@test.com';
       request.post(loginURl)
         .send(userdata2)
         .end((err, res) => {
@@ -229,7 +233,7 @@ describe('API Integration Tests', () => {
 
     it('return 400 for if no password is passed ', (done) => {
       const invalidData = Object.assign({}, data);
-      delete invalidData.password;
+      delete invalidData.auth.password;
 
       request.post(loginURl)
         .send(invalidData)
@@ -242,7 +246,7 @@ describe('API Integration Tests', () => {
 
     it('return 400 for if no email is passed ', (done) => {
       const invalidData = Object.assign({}, data);
-      delete invalidData.email;
+      delete invalidData.auth.email;
 
       request.post(loginURl)
         .send(invalidData)
@@ -255,7 +259,7 @@ describe('API Integration Tests', () => {
 
     it('return 401 for if user is not found for the email passed ', (done) => {
       const invalidData = Object.assign({}, data);
-      invalidData.email = 'userdefdoesntexist@email.com';
+      invalidData.auth.email = 'userdefdoesntexist@email.com';
       // you dont want people know if the email exists or not
 
       request.post(loginURl)
