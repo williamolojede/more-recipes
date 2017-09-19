@@ -1,0 +1,49 @@
+.review__card.review__card-edit{
+  .card-content{
+    position: relative;
+    padding: 0;
+    max-height: 100px;
+
+    textarea{
+      resize: none;
+      width: 100%;
+      height: 100px;
+      // outline: none;
+      border: none;
+      font-size: 1.2rem;
+      padding: .5rem;
+      box-sizing: border-box;
+      transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+
+      &:focus{
+        outline: none;
+        border-color: #78add8;
+        box-shadow: 0 0 5px 1px #78add8;
+      }
+    }
+
+    button{
+      position: absolute;
+      bottom: 1rem;
+      right: 1rem;
+      background-color: $site-bg;
+      border: none;
+      padding: .5rem;
+      color: #fff;
+      border-radius: 3px;
+    }
+  }
+}
+
+@media #{$medium-and-up} {
+  .review__card.review__card-edit{
+    .card-content{
+      max-height: initial;
+      textarea{
+        height: 100%;
+        padding: 1rem;
+        font-size: 1.2rem;
+      }
+    }
+  }
+}

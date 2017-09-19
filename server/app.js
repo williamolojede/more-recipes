@@ -1,4 +1,5 @@
 import express from 'express';
+import path from 'path';
 import logger from 'morgan';
 import bodyPaser from 'body-parser';
 import routes from './routes';
@@ -14,6 +15,13 @@ app.use(bodyPaser.json());
 app.use(bodyPaser.urlencoded({ extended: false }));
 
 app.use('/api', routes);
+
+// STATIC FILE FOR REACT FRONTEND
+app.use('/static', express.static(path.resolve(__dirname, '..', 'dist/client')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '..', 'dist', 'client/index.html'));
+});
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
