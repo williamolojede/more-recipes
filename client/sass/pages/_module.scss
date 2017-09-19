@@ -1,10 +1,14 @@
 @import "login";
 @import "details";
 @import "profile";
+@import "home";
 
 // GLOBAL STYLES FOR PAGES
 .page__login, .page__register{
-  background-color: $site-bg;
+  background: url('../assets/images/hero.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 
   header{
     margin-top: 2rem;
