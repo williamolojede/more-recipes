@@ -54,8 +54,4 @@ module.exports = {
       filename: 'css/style.css',
     })
   ]
-  // ,
-  // devServer: {
-  //   noInfo: true
-  // }
 };

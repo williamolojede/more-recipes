@@ -1,5 +1,3 @@
-const path = require('path');
-const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
@@ -12,8 +10,6 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
 module.exports = {
   entry: {
     app: [
-      // 'eventsource-polyfill', // necessary for hot reloading with IE,
-      'webpack-hot-middleware/client',
       './client/index.js',
     ]
   },
@@ -47,15 +43,9 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
     HtmlWebpackPluginConfig,
     new ExtractTextPlugin({
       filename: 'css/style.css',
     })
   ]
-  // ,
-  // devServer: {
-  //   noInfo: true
-  // }
 };
