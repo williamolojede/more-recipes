@@ -13,7 +13,8 @@
     "migrate": "sequelize db:migrate:undo:all&&sequelize db:migrate",
     "migrate-test": "sequelize db:migrate:undo:all --env=test-local&&sequelize db:migrate --env=test-local",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "clean": "rimraf dist"
+    "clean": "rimraf dist",
+    "heroku-postbuild": "npm run build:prod"
   },
   "nyc": {
     "require": [
