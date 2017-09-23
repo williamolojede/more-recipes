@@ -1,11 +1,30 @@
 import express from 'express';
+import path from 'path';
 import logger from 'morgan';
 import bodyPaser from 'body-parser';
+import webpack from 'webpack';
+import webpackDevMiddleware from 'webpack-dev-middleware';
+import webpackHotMiddleware from 'webpack-hot-middleware';
+import config from '../webpack.config';
+
 import routes from './routes';
 
 const port = parseInt(process.env.PORT, 10) || 8000;
 
 const app = express();
+
+// Run Webpack dev server in development mode
+if (process.env.NODE_ENV === 'development') {
+  const compiler = webpack(config);
+  app.use(webpackDevMiddleware(compiler, {
+    noInfo: true,
+    publicPath: config.output.publicPath,
+    hot: true
+  }));
+  app.use(webpackHotMiddleware(compiler, {
+    reload: true // reload page when webpack gets stuck
+  }));
+}
 
 app.use(logger('dev'));
 
@@ -14,6 +33,13 @@ app.use(bodyPaser.json());
 app.use(bodyPaser.urlencoded({ extended: false }));
 
 app.use('/api', routes);
+
+// STATIC FILE FOR REACT FRONTEND
+app.use('/static', express.static(path.resolve(__dirname, '..', 'dist/client')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '..', 'dist', 'client/index.html'));
+});
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

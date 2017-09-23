@@ -1,0 +1,35 @@
+.recipe__instructions{
+  ol{
+    counter-reset: item 00;
+    list-style-type: none;
+    padding-left: 0;
+
+    li {
+      counter-increment: item;
+      padding-left: 50px;
+      padding-right: .5rem;
+      position: relative;
+      font-size: 1.2rem;
+
+      &::before{
+        content: counter(item);
+        display: block;
+        // padding: .5rem;
+        font-size: 1.2rem;
+        border: 2px solid currentColor;
+        line-height: 36px;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        text-align: center;
+        position: absolute;
+        left: 0;
+        color: #ddd;
+      }
+
+      &:not(:last-of-type){
+        margin-bottom: 1rem;
+      }
+    }
+  }
+}
