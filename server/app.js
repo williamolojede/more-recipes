@@ -35,11 +35,11 @@ app.use(bodyPaser.urlencoded({ extended: false }));
 
 // API DOCUMENTATION
 app.get('/api/docs', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '..', 'dist', 'docs/index.html'));
+  res.sendFile(path.resolve(__dirname, '..', 'docs/index.html'));
 });
 
 // STATIC FILE FOR API DOCUMENTATION
-app.use('/api/docs-assets', express.static(path.resolve(__dirname, '..', 'dist/docs')));
+app.use('/api/docs-assets', express.static(path.resolve(__dirname, '..', 'docs')));
 
 // API ROUTES
 app.use('/api', routes);
