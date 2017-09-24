@@ -17,7 +17,7 @@
     "migrate-test": "sequelize db:migrate:undo:all --env=test-local&&sequelize db:migrate --env=test-local",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "clean": "rimraf dist",
-    "heroku-postbuild": "npm run build:prod && npm build:docs:prod"
+    "heroku-postbuild": "npm run build:prod && npm run build:docs:prod"
   },
   "nyc": {
     "require": [
