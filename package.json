@@ -6,6 +6,9 @@
   "scripts": {
     "start": "babel-node server/app.js",
     "start:dev": "cross-env NODE_ENV=development nodemon --exec babel-node server/app.js",
+    "start:docs": "cd docs-src && bundle exec middleman server",
+    "build:docs": "cd docs-src && bundle exec middleman build --clean",
+    "build:docs:prod": "cd docs-src && bundle install && bundle exec middleman build --clean",
     "build:prod": "npm run clean && webpack -p --config webpack.config.prod.js",
     "build:dev": "npm run clean && webpack -p --config webpack.config.dev.js",
     "test-local": "npm run migrate-test && cross-env NODE_ENV=test-local nyc mocha --timeout 10000 server/test",
@@ -14,7 +17,7 @@
     "migrate-test": "sequelize db:migrate:undo:all --env=test-local&&sequelize db:migrate --env=test-local",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "clean": "rimraf dist",
-    "heroku-postbuild": "npm run build:prod"
+    "heroku-postbuild": "npm run build:prod && npm build:docs:prod"
   },
   "nyc": {
     "require": [

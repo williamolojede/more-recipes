@@ -32,11 +32,22 @@ app.use(bodyPaser.json());
 
 app.use(bodyPaser.urlencoded({ extended: false }));
 
+
+// API DOCUMENTATION
+app.get('/api/docs', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '..', 'dist', 'docs/index.html'));
+});
+
+// STATIC FILE FOR API DOCUMENTATION
+app.use('/api/docs-assets', express.static(path.resolve(__dirname, '..', 'dist/docs')));
+
+// API ROUTES
 app.use('/api', routes);
 
 // STATIC FILE FOR REACT FRONTEND
 app.use('/static', express.static(path.resolve(__dirname, '..', 'dist/client')));
 
+// RENDER REACT FRONTEND
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '..', 'dist', 'client/index.html'));
 });
