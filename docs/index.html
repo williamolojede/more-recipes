@@ -251,7 +251,25 @@
                     <a href="#create-recipe" class="toc-h2 toc-link" data-title="Recipes">Create Recipe</a>
                   </li>
                   <li>
-                    <a href="#modify-recipe" class="toc-h2 toc-link" data-title="Recipes">Modify Recipe</a>
+                    <a href="#get-all-recipes" class="toc-h2 toc-link" data-title="Recipes">Get all recipes</a>
+                  </li>
+                  <li>
+                    <a href="#get-a-recipe" class="toc-h2 toc-link" data-title="Recipes">Get a Recipe</a>
+                  </li>
+                  <li>
+                    <a href="#modify-a-recipe" class="toc-h2 toc-link" data-title="Recipes">Modify a Recipe</a>
+                  </li>
+                  <li>
+                    <a href="#vote-on-a-recipe" class="toc-h2 toc-link" data-title="Recipes">Vote on a Recipe</a>
+                  </li>
+                  <li>
+                    <a href="#favorite-a-recipe" class="toc-h2 toc-link" data-title="Recipes">Favorite a Recipe</a>
+                  </li>
+                  <li>
+                    <a href="#write-review-on-a-recipe" class="toc-h2 toc-link" data-title="Recipes">Write review on a Recipe</a>
+                  </li>
+                  <li>
+                    <a href="#delete-a-recipe" class="toc-h2 toc-link" data-title="Recipes">Delete a Recipe</a>
                   </li>
               </ul>
           </li>
@@ -406,7 +424,8 @@ You must replace <code>averylongrandom.jsonwebtokenstring.requiredforauthenticat
 <ul>
 <li>Endpoint: <code>/users/:uid/recipes</code></li>
 <li>Verb: <code>GET</code></li>
-<li>Requires: token</li>
+<li><code>:uid</code>: user id</li>
+<li><strong>Requires: token</strong></li>
 </ul>
 <h3 id='response-3'>Response</h3>
 <ul>
@@ -467,14 +486,105 @@ You must replace <code>averylongrandom.jsonwebtokenstring.requiredforauthenticat
 <ul>
 <li>Endpoint: <code>/recipes</code></li>
 <li>Verb: <code>POST</code></li>
-<li>Requires: token</li>
+<li><strong>Requires: token</strong></li>
 </ul>
 <h3 id='response-4'>Response</h3>
 <ul>
 <li>StatusCode: <code>201: Created</code></li>
 <li>Body: <code>(application/json)</code></li>
 </ul>
-<h2 id='modify-recipe'>Modify Recipe</h2>
+<h2 id='get-all-recipes'>Get all recipes</h2>
+<blockquote>
+<p>Response Body</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"recipes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"very distasteful dish"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is the recipe for a very delicious dish"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"img_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://imgurlfordish.com/verydelicousdish.jpg"</span><span class="p">,</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+        </span><span class="s2">"User"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John doe"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ogbono"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"some random recipe"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"img_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://images.meredith.com/fitness/images/recipe/ss_R137043.jpg"</span><span class="p">,</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+        </span><span class="s2">"User"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jane Doe"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="err">...</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='request-5'>Request</h3>
+<ul>
+<li>Endpoint: <code>/recipes</code></li>
+<li>Verb: <code>GET</code></li>
+<li><strong>Requires: token</strong></li>
+</ul>
+<h3 id='response-5'>Response</h3>
+<ul>
+<li>StatusCode: <code>200: Ok</code></li>
+<li>Body: <code>(application/json)</code></li>
+</ul>
+<h2 id='get-a-recipe'>Get a Recipe</h2>
+<blockquote>
+<p>Response Body</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"recipe"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"very delicious dish"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is the recipe for a very delicious dish"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"img_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://imgurlfordish.com/verydelicousdish.jpg"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"ingredients"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"ingredient 1"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"ingredient 2"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"instructions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"This is the first step in cooking this delicious dish"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"Thix is the next step"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"upVoteCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"downVoteCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"favoriteCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"viewCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-19T00:01:20.221Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-25T07:07:43.303Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"owner"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"reviews"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="s2">"User"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John doe"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='request-6'>Request</h3>
+<ul>
+<li>Endpoint: <code>/recipes/:id</code></li>
+<li>Verb: <code>GET</code></li>
+<li><code>:id</code>: recipe id</li>
+<li><strong>Requires: token</strong></li>
+</ul>
+<h3 id='response-6'>Response</h3>
+<ul>
+<li>StatusCode: <code>200: Ok</code></li>
+<li>Body: <code>(application/json)</code></li>
+</ul>
+<h2 id='modify-a-recipe'>Modify a Recipe</h2>
 <blockquote>
 <p>Request Body</p>
 </blockquote>
@@ -500,22 +610,147 @@ You must replace <code>averylongrandom.jsonwebtokenstring.requiredforauthenticat
       </span><span class="s2">"owner"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='request-5'>Request</h3>
+</span></code></pre><h3 id='request-7'>Request</h3>
 <ul>
 <li>Endpoint: <code>/recipes/:id</code></li>
 <li>Verb: <code>PUT</code></li>
-<li>Requires: token</li>
+<li><strong>Requires: token</strong></li>
+<li><code>:id</code>: recipe id</li>
 <li>Must be owner</li>
 </ul>
-<h3 id='response-5'>Response</h3>
+<h3 id='response-7'>Response</h3>
+<ul>
+<li>StatusCode: <code>200: Ok</code></li>
+<li>Body: <code>(application/json)</code></li>
+</ul>
+<h2 id='vote-on-a-recipe'>Vote on a Recipe</h2>
+<blockquote>
+<p>Response Body</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"recipe"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"very distasteful dish"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is the recipe for a very delicious dish"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"img_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://imgurlfordish.com/verydelicousdish.jpg"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"upVoteCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"downVoteCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="err">...</span><span class="w">
+      </span><span class="s2">"favoriteCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"viewCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"owner"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='request-8'>Request</h3>
+<ul>
+<li>Endpoint: <code>/recipes/:id/vote-:dir</code></li>
+<li>Verb: <code>POST</code></li>
+<li><code>:id</code>: recipe id</li>
+<li><code>:dir</code>: vote direction <code>up</code> or <code>down</code></li>
+<li><strong>Requires: token</strong></li>
+</ul>
+<h3 id='response-8'>Response</h3>
+<ul>
+<li>StatusCode: <code>200: Ok</code></li>
+<li>Body: <code>(application/json)</code></li>
+</ul>
+<h2 id='favorite-a-recipe'>Favorite a Recipe</h2>
+<blockquote>
+<p>Response Body</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"recipe"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"very distasteful dish"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is the recipe for a very delicious dish"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"img_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://imgurlfordish.com/verydelicousdish.jpg"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"upVoteCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"downVoteCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="err">...</span><span class="w">
+      </span><span class="s2">"favoriteCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"viewCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"owner"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='request-9'>Request</h3>
+<ul>
+<li>Endpoint: <code>/recipes/:id/favorite</code></li>
+<li>Verb: <code>POST</code></li>
+<li><code>:id</code>: recipe id</li>
+<li><strong>Requires: token</strong></li>
+</ul>
+<h3 id='response-9'>Response</h3>
+<ul>
+<li>StatusCode: <code>200: Ok</code></li>
+<li>Body: <code>(application/json)</code></li>
+</ul>
+<h2 id='write-review-on-a-recipe'>Write review on a Recipe</h2>
+<blockquote>
+<p>Request Body</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Whoever told u that u can cook is a bloody liar"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Response Body</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"recipe"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"very distasteful dish"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is the recipe for a very delicious dish"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"img_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://imgurlfordish.com/verydelicousdish.jpg"</span><span class="p">,</span><span class="w">
+      </span><span class="err">...</span><span class="w">
+      </span><span class="s2">"reviews"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Whoever told u that u can cook is a bloody liar"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-25T08:34:51.952Z"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-25T08:34:51.952Z"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"recipeId"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"userId"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"your review has been recorded"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='request-10'>Request</h3>
+<ul>
+<li>Endpoint: <code>/recipes/:id/reviews</code></li>
+<li>Verb: <code>POST</code></li>
+<li><code>:id</code>: recipe id</li>
+<li><strong>Requires: token</strong></li>
+</ul>
+<h3 id='response-10'>Response</h3>
+<ul>
+<li>StatusCode: <code>200: Ok</code></li>
+<li>Body: <code>(application/json)</code></li>
+</ul>
+<h2 id='delete-a-recipe'>Delete a Recipe</h2>
+<blockquote>
+<p>Response Body</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='request-11'>Request</h3>
+<ul>
+<li>Endpoint: <code>/recipes/:id</code></li>
+<li>Verb: <code>DELETE</code></li>
+<li><strong>Requires: token</strong></li>
+<li><strong>Must be owner</strong></li>
+</ul>
+<h3 id='response-11'>Response</h3>
 <ul>
 <li>StatusCode: <code>200: Ok</code></li>
 <li>Body: <code>(application/json)</code></li>
 </ul>
 <h1 id='errors'>Errors</h1>
-<aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Slate allows you to optionally separate out your docs into many files...just save them to the `includes` folder and add them to the top of your `index.md`'s frontmatter. Files are included in the order listed.</aside>
-
-<p>The Kittn API uses the following error codes:</p>
+<p>The MoreRecipes API uses the following error codes:</p>
 
 <table><thead>
 <tr>
@@ -525,47 +760,23 @@ You must replace <code>averylongrandom.jsonwebtokenstring.requiredforauthenticat
 </thead><tbody>
 <tr>
 <td>400</td>
-<td>Bad Request -- Your request sucks.</td>
+<td>Bad Request</td>
 </tr>
 <tr>
 <td>401</td>
-<td>Unauthorized -- Your API key is wrong.</td>
+<td>Unauthorized</td>
 </tr>
 <tr>
 <td>403</td>
-<td>Forbidden -- The kitten requested is hidden for administrators only.</td>
+<td>Forbidden</td>
 </tr>
 <tr>
 <td>404</td>
-<td>Not Found -- The specified kitten could not be found.</td>
-</tr>
-<tr>
-<td>405</td>
-<td>Method Not Allowed -- You tried to access a kitten with an invalid method.</td>
-</tr>
-<tr>
-<td>406</td>
-<td>Not Acceptable -- You requested a format that isn&#39;t json.</td>
-</tr>
-<tr>
-<td>410</td>
-<td>Gone -- The kitten requested has been removed from our servers.</td>
-</tr>
-<tr>
-<td>418</td>
-<td>I&#39;m a teapot.</td>
-</tr>
-<tr>
-<td>429</td>
-<td>Too Many Requests -- You&#39;re requesting too many kittens! Slow down!</td>
+<td>Not Found</td>
 </tr>
 <tr>
 <td>500</td>
-<td>Internal Server Error -- We had a problem with our server. Try again later.</td>
-</tr>
-<tr>
-<td>503</td>
-<td>Service Unavailable -- We&#39;re temporarily offline for maintenance. Please try again later.</td>
+<td>Internal Server Error</td>
 </tr>
 </tbody></table>
 
