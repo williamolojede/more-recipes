@@ -13,36 +13,12 @@ A RESTful API built for users to share their awesome and exciting recipes ideas 
  1. Postgresql
  1. Express
  1. Sequelize
+ 1. React
+ 1. Redux
 
 
-## Endpoints
------
+## API Documentation
+The API has routes, each dedicated to a single task that uses HTTP response codes to indicate request success or errors. The full documentation can be found [here](https://more-recipes.herokuapp.com/api/docs)
 
-**BASE_URL:** `https://more-recipes.herokuapp.com/api/v1/`
-
-### RECIPES
-- **`POST` /recipes**
-  - Creates new recipe
-- **`PUT` /recipes/:id**
-  - Updates a recipe
-- **`DELETE` /recipes/:id**
-  - Deletes a recipe
-- **`GET` /recipes**
-  - Get all recipes
-- **`GET` /recipes/:id**
-  - Get a single recipe
-- **`POST` /recipes/:id/reviews**
-  - Post new review for a recipe
-- **`POST` /recipes/:id/favorite**
-  - Favorite a recipe
-- **`POST` /recipes/:id/vote-:dir**
-  - Vote on a recipe `dir`: {up or down}
-
-### USERS
-
-- **`GET` /users/:uid/recipes**
-  - Returns all user's favorite recipes
-- **`POST` /users/signin**
-  - Creates a new user, returns user token
-- **`POST` /users/login**
-  - Logs in user, returns user token
+## Demo
+View the web client live [here](https://more-recipes.herokuapp.com/)

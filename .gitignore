@@ -66,3 +66,4 @@ typings/
 .vscode
 
 dist/
+docs-src/
