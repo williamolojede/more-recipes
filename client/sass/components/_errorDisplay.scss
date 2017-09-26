@@ -1,0 +1,19 @@
+.error{
+  background: #FD5459;
+  padding: .5rem;
+  display: flex;
+
+  .error__cancel{
+    margin: 0 .5rem;
+  }
+
+  .error__message,
+  .error__cancel{
+    color: white !important;
+    font-weight: bold;
+  }
+  .error__message{
+    flex: 1;
+    text-align: center;
+  }
+}

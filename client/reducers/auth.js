@@ -13,6 +13,7 @@ const auth = (state = initialState, action) => {
       return Object.assign({}, state, {
         isFetching: false,
         isAuthenticated: true,
+        errorMessage: '',
         user: action.user
       });
     case LOGIN_FAILURE:

@@ -10,6 +10,7 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
 });
 
 module.exports = {
+  devtool: 'inline-source-map',
   entry: {
     app: [
       // 'eventsource-polyfill', // necessary for hot reloading with IE,
