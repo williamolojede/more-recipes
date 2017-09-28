@@ -59,5 +59,9 @@ const loginUser = (creds) => {
   };
 };
 
+export const setUserData = ({ user, token }) => (dispatch) => {
+  dispatch(receiveLogin({ user, token }));
+};
+
 
 export default loginUser;
