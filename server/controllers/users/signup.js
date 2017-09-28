@@ -13,7 +13,7 @@ const signup = (req, res, next) => {
         status: 'success',
         message: 'account created',
         user: userDetails,
-        token: jwtAuth.encode({ userID: userDetails.id, })
+        token: jwtAuth.encode({ user: userDetails, })
       });
     })
     .catch(error => systemErrorHandler({
