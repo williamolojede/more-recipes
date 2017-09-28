@@ -4,6 +4,13 @@
 @import "home";
 
 // GLOBAL STYLES FOR PAGES
+.page{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .page__login, .page__register{
   background: url('../assets/images/hero.jpg');
   background-size: cover;

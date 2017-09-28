@@ -10,17 +10,23 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
 });
 
 module.exports = {
+  devtool: 'inline-source-map',
   entry: {
     app: [
       // 'eventsource-polyfill', // necessary for hot reloading with IE,
       'webpack-hot-middleware/client',
-      './client/index.js',
+      './client/index.jsx',
     ]
   },
   output: {
     path: `${__dirname}/dist/client`,
     filename: 'js/bundle.js',
     publicPath: '/static/',
+  },
+  node: {
+    net: 'empty',
+    tls: 'empty',
+    dns: 'empty'
   },
   module: {
     loaders: [

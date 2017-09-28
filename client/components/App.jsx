@@ -2,15 +2,32 @@
  * Root Component
  */
 import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import requireAuthentication from '../utils/requiresAuth.jsx';
 
+
+import Home from './Home/Home.jsx';
+import Login from './Login/Login.jsx';
+
+/**
+ * @export
+ * @class App
+ * @extends {Component}
+ */
 class App extends React.Component {
+  /**
+   * @returns {component} returns a component that matches a provided path
+   * @memberof App
+   */
   render() {
     return (
-      <div className='page page__home'>
-        <h1 style={{textAlign: 'center'}}>Something Awesome is coming 😎🔥</h1>
-      </div>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={requireAuthentication(Home)} />
+          <Route path="/login" component={Login} />
+        </Switch>
+      </BrowserRouter>
     );
   }
 }
-
 export default App;
