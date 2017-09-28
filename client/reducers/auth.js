@@ -14,6 +14,7 @@ const auth = (state = initialState, action) => {
         isFetching: false,
         isAuthenticated: true,
         errorMessage: '',
+        token: action.token,
         user: action.user
       });
     case LOGIN_FAILURE:

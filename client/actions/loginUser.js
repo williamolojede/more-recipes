@@ -14,11 +14,11 @@ const requestLogin = creds => ({
   creds
 });
 
-const receiveLogin = user => ({
+const receiveLogin = ({ user, token }) => ({
   type: LOGIN_SUCCESS,
   isFetching: false,
   isAuthenticated: true,
-  id_token: user.id_token,
+  token,
   user,
 });
 
@@ -44,10 +44,11 @@ const loginUser = (creds) => {
     dispatch(requestLogin(creds));
     return axios.post('/api/v1/users/login', body)
       .then((res) => {
+        const { user, token } = res.data;
         // If login was successful, set the token in local storage
-        localStorage.setItem('id_token', res.data.token);
+        localStorage.setItem('token', token);
         // Dispatch the success action
-        dispatch(receiveLogin(res.data.user));
+        dispatch(receiveLogin({ user, token }));
       })
       .catch((err) => {
         // Dispatch the error action

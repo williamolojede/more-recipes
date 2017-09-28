@@ -1,6 +1,7 @@
 {
   "root": true,
   "extends": "airbnb",
+  "parser": "babel-eslint",
   "env": {
     "node": true,
     "browser": true,
@@ -24,13 +25,13 @@
       "requireParamDescription": false,
       "requireReturnDescription": true
     }],
-    "require-jsdoc": ["error", {
-        "require": {
-            "FunctionDeclaration": true,
-            "MethodDefinition": true,
-            "ClassDeclaration": true
-        }
-    }],
+    // "require-jsdoc": ["error", {
+    //     "require": {
+    //         "FunctionDeclaration": true,
+    //         "MethodDefinition": true,
+    //         "ClassDeclaration": true
+    //     }
+    // }],
     "react/prefer-stateless-function": [0, { "ignorePureComponents": true }],
     "react/jsx-uses-react": 2,
     "react/react-in-jsx-scope": 2

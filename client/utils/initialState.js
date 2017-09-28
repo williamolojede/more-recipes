@@ -2,7 +2,7 @@
 
 const initialState = {
   isFetching: false,
-  isAuthenticated: !!localStorage.getItem('id_token')
+  isAuthenticated: !!localStorage.getItem('token')
 };
 
 export default initialState;

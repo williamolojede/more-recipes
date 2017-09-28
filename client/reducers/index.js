@@ -10,7 +10,7 @@ import auth from './auth';
 
 const rootReducer = combineReducers({
   auth,
-  routing: routerReducer
+  router: routerReducer
 });
 
 
