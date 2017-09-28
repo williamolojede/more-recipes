@@ -18,7 +18,6 @@ const requiresToken = (req, res, next) => {
   try {
     const decoded = jwt.verify(token, 'jsninja');
     user = decoded.user;
-    console.log(decoded);
   } catch (error) {
     // check if token is outdated
     if (error.name === 'TokenExpiredError') {
