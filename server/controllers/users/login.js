@@ -16,7 +16,7 @@ const login = (req, res, next) => {
     return res.status(200).send({
       status: 'success',
       user: userDetails,
-      token: jwtAuth.encode({ userID: userDetails.id, })
+      token: jwtAuth.encode({ user: userDetails })
     });
   });
 };

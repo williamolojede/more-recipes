@@ -5,7 +5,8 @@ import systemErrorHandler from '../helpers/systemErrorHandler';
 const requiresToken = (req, res, next) => {
   // token could provided via body, as a query string or in the header
   const token = req.body.token || req.query.token || req.headers.token;
-  let decoded;
+  // the decoded
+  let user;
   // check if token is passed
   if (!token) {
     const err = new Error('user authorization token required');
@@ -15,7 +16,9 @@ const requiresToken = (req, res, next) => {
 
   // check if token is valid
   try {
-    decoded = jwt.verify(token, 'jsninja');
+    const decoded = jwt.verify(token, 'jsninja');
+    user = decoded.user;
+    console.log(decoded);
   } catch (error) {
     // check if token is outdated
     if (error.name === 'TokenExpiredError') {
@@ -28,14 +31,15 @@ const requiresToken = (req, res, next) => {
     err.status = 403;
     return next(err);
   }
-  User.findById(decoded.userID)
-    .then((user) => {
-      if (!user) {
+  // check if user exists
+  User.findById(user.id)
+    .then((userData) => {
+      if (!userData) {
         const err = new Error('invalid user authorization token');
         err.status = 403;
         return next(err);
       }
-      req.userID = decoded.userID;
+      req.userID = user.id;
       return next();
     })
     .catch(error => systemErrorHandler(error, next));

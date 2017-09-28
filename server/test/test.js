@@ -13,8 +13,9 @@ let userdata2;
 // first and second user's token
 let userToken1, userToken2;
 // invalid because it won't exist on the user table
-const invalidToken = jwt.sign({ userID: 15, }, 'jsninja', { expiresIn: '3 days' });
-const expiredToken = jwt.sign({ userID: 15, }, 'jsninja', { expiresIn: '2s' });
+// the shape of valid token would be an object(user) with id key among others
+const invalidToken = jwt.sign({ user: { id: 15 } }, 'jsninja', { expiresIn: '3 days' });
+const expiredToken = jwt.sign({ user: { id: 15 } }, 'jsninja', { expiresIn: '2s' });
 let recipeId;
 
 describe('API Integration Tests', () => {
