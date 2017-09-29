@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { batchActions } from 'redux-batched-actions';
+import { setFetching, unsetFetching } from './fetching';
 
 // There are three possible states for our login
 // process and we need actions for each of them
@@ -6,17 +8,8 @@ export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 
-
-const requestLogin = creds => ({
-  type: LOGIN_REQUEST,
-  isFetching: true,
-  isAuthenticated: false,
-  creds
-});
-
 const receiveLogin = ({ user, token }) => ({
   type: LOGIN_SUCCESS,
-  isFetching: false,
   isAuthenticated: true,
   token,
   user,
@@ -25,7 +18,6 @@ const receiveLogin = ({ user, token }) => ({
 
 const loginError = message => ({
   type: LOGIN_FAILURE,
-  isFetching: false,
   isAuthenticated: false,
   message
 });
@@ -41,24 +33,35 @@ const loginUser = (creds) => {
 
   return (dispatch) => {
     // We dispatch requestLogin to kickoff the call to the API
-    dispatch(requestLogin(creds));
+    dispatch(setFetching());
     return axios.post('/api/v1/users/login', body)
       .then((res) => {
         const { user, token } = res.data;
         // If login was successful, set the token in local storage
         localStorage.setItem('token', token);
-        // Dispatch the success action
-        dispatch(receiveLogin({ user, token }));
+        // Dispatch the success action and unset fetching
+        dispatch(
+          batchActions([
+            receiveLogin({ user, token }),
+            unsetFetching()
+          ])
+        );
       })
       .catch((err) => {
-        // Dispatch the error action
+        // Dispatch the error action and unset fetching
         if (err.response) {
-          dispatch(loginError(err.response.data.message));
+          dispatch(
+            batchActions([
+              loginError(err.response.data.message),
+              unsetFetching()
+            ])
+          );
         }
       });
   };
 };
 
+// add user and token to the store
 export const setUserData = ({ user, token }) => (dispatch) => {
   dispatch(receiveLogin({ user, token }));
 };

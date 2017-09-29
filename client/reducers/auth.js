@@ -1,17 +1,13 @@
-import initialState from '../utils/initialState';
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE } from '../actions/types';
+import { LOGIN_SUCCESS, LOGIN_FAILURE } from '../actions/types';
+
+const initialState = {
+  isAuthenticated: !!localStorage.getItem('token')
+};
 
 const auth = (state = initialState, action) => {
   switch (action.type) {
-    case LOGIN_REQUEST:
-      return Object.assign({}, state, {
-        isFetching: true,
-        isAuthenticated: false,
-        user: action.creds
-      });
     case LOGIN_SUCCESS:
       return Object.assign({}, state, {
-        isFetching: false,
         isAuthenticated: true,
         errorMessage: '',
         token: action.token,
@@ -19,7 +15,6 @@ const auth = (state = initialState, action) => {
       });
     case LOGIN_FAILURE:
       return Object.assign({}, state, {
-        isFetching: false,
         isAuthenticated: false,
         errorMessage: action.message
       });
