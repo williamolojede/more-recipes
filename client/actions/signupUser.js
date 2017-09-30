@@ -1,43 +1,44 @@
 import axios from 'axios';
 import { batchActions } from 'redux-batched-actions';
 import { setFetching, unsetFetching } from './fetching';
-import { LOGIN_SUCCESS, LOGIN_FAILURE } from './types';
+import { SIGNUP_SUCCESS, SIGNUP_FAILURE } from './types';
 
-const receiveLogin = ({ user, token }) => ({
-  type: LOGIN_SUCCESS,
+const receiveSignup = ({ user, token }) => ({
+  type: SIGNUP_SUCCESS,
   isAuthenticated: true,
   token,
   user,
 });
 
 
-const loginError = message => ({
-  type: LOGIN_FAILURE,
+const signupError = message => ({
+  type: SIGNUP_FAILURE,
   isAuthenticated: false,
   message
 });
 
 
-const loginUser = (creds) => {
+const signupUser = (creds) => {
   const body = {
-    auth: {
+    user: {
       email: creds.email,
-      password: creds.password
+      password: creds.password,
+      fullname: creds.fullname
     }
   };
 
   return (dispatch) => {
     // We dispatch requestLogin to kickoff the call to the API
     dispatch(setFetching());
-    return axios.post('/api/v1/users/login', body)
+    return axios.post('/api/v1/users/signup', body)
       .then((res) => {
         const { user, token } = res.data;
-        // If login was successful, set the token in local storage
+        // If signup was successful, set the token in local storage
         localStorage.setItem('token', token);
         // Dispatch the success action and unset fetching
         dispatch(
           batchActions([
-            receiveLogin({ user, token }),
+            receiveSignup({ user, token }),
             unsetFetching()
           ])
         );
@@ -47,7 +48,7 @@ const loginUser = (creds) => {
         if (err.response) {
           dispatch(
             batchActions([
-              loginError(err.response.data.message),
+              signupError(err.response.data.message),
               unsetFetching()
             ])
           );
@@ -56,10 +57,4 @@ const loginUser = (creds) => {
   };
 };
 
-// add user and token to the store
-export const setUserData = ({ user, token }) => (dispatch) => {
-  dispatch(receiveLogin({ user, token }));
-};
-
-
-export default loginUser;
+export default signupUser;

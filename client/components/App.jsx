@@ -8,6 +8,7 @@ import requireAuthentication from '../utils/requiresAuth.jsx';
 
 import Home from './Home/Home.jsx';
 import Login from './Login/Login.jsx';
+import Signup from './Signup/Signup.jsx';
 
 /**
  * @export
@@ -25,6 +26,7 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/" component={requireAuthentication(Home)} />
           <Route path="/login" component={Login} />
+          <Route path="/signup" component={Signup} />
         </Switch>
       </BrowserRouter>
     );

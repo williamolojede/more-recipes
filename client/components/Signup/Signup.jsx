@@ -8,25 +8,13 @@ import AuthForm from '../shared/AuthForm.jsx';
 import Preloader from '../shared/Preloader.jsx';
 import ErrorDisplay from '../shared/ErrorDisplay.jsx';
 
-import loginUser from '../../actions/loginUser';
+import signupUser from '../../actions/signupUser';
 
-/**
- * @class Login
- * @extends {Component}
- */
-class Login extends Component {
-  /**
-   * @param {object} formData -
-   * @returns {undefined} - return nothing
-   */
-  userLogin = (formData) => {
-    this.props.dispatch(loginUser(formData));
+class Signup extends Component {
+  userSignup = (formData) => {
+    this.props.dispatch(signupUser(formData));
   }
 
-  /**
-   * @returns {view} - Renders tht login page view
-   * @memberof Login
-   */
   render() {
     const { isFetching, errorMessage, isAuthenticated, location } = this.props;
     const { from } = location.state || { from: { pathname: '/' } };
@@ -37,41 +25,39 @@ class Login extends Component {
     }
 
     return (
-      <div className="page page__login">
+      <div className="page page__register">
         <header className="header center">
           <a href="/" className="white-text brand-logo">MoreRecipes</a>
         </header>
-
         <main>
           <div className="container">
             <div className="row">
-              <div className="login-card card col s11 m6">
+              <div className="register-card card col s11 m6">
                 <div className="card-content">
                   {
                     errorMessage ? <ErrorDisplay message={errorMessage} /> : null
                   }
-                  <h1 className="card-title center">Log in to MoreRecipes</h1>
-                  <AuthForm type="login" authFormSubmit={this.userLogin} />
+                  <h1 className="card-title center">Create a MoreRecipes Account</h1>
+                  <AuthForm type="signup" authFormSubmit={this.userSignup} />
                 </div>
               </div>
             </div>
             <p className="white-text center">
-            Have an account already?
-              <Link to="/signup" className="white-text"> Login now</Link>
+              Don’t have an account?
+              <Link to="/login" className="white-text"> Log in now</Link>
             </p>
             {
               isFetching ? <Preloader /> : null
             }
           </div>
         </main>
-
         <Footer />
       </div>
     );
   }
 }
 
-Login.propTypes = {
+Signup.propTypes = {
   dispatch: PropTypes.func.isRequired,
   isFetching: PropTypes.bool.isRequired,
   errorMessage: PropTypes.string,
@@ -90,4 +76,5 @@ const mapStateToProps = ({ auth, isFetching }) => {
   };
 };
 
-export default connect(mapStateToProps)(Login);
+export default connect(mapStateToProps)(Signup);
+

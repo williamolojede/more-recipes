@@ -17,6 +17,9 @@ class AuthForm extends React.Component {
     const password = this.passwordInput.value;
     if (this.props.type === 'login') {
       this.props.authFormSubmit({ email, password });
+    } else if (this.props.type === 'signup') {
+      const fullname = this.fullnameInput.value;
+      this.props.authFormSubmit({ email, password, fullname });
     }
 
     this.authForm.reset();
@@ -38,8 +41,9 @@ class AuthForm extends React.Component {
               type="text"
               name="usr-name"
               className="form__input"
-              placeholder="name"
+              placeholder="fullname"
               required
+              ref={(node) => { this.fullnameInput = node; }}
             />
             :
             null
