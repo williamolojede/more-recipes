@@ -8,7 +8,13 @@ import AuthForm from '../shared/AuthForm.jsx';
 import Preloader from '../shared/Preloader.jsx';
 import ErrorDisplay from '../shared/ErrorDisplay.jsx';
 
+import signupUser from '../../actions/signupUser';
+
 class Signup extends Component {
+  userSignup = (formData) => {
+    this.props.dispatch(signupUser(formData));
+  }
+
   render() {
     const { isFetching, errorMessage, isAuthenticated, location } = this.props;
     const { from } = location.state || { from: { pathname: '/' } };
@@ -32,13 +38,13 @@ class Signup extends Component {
                     errorMessage ? <ErrorDisplay message={errorMessage} /> : null
                   }
                   <h1 className="card-title center">Create a MoreRecipes Account</h1>
-                  <AuthForm type="signup" />
+                  <AuthForm type="signup" authFormSubmit={this.userSignup} />
                 </div>
               </div>
             </div>
             <p className="white-text center">
               Don’t have an account?
-              <Link to="/login" className="white-text"> Register now</Link>
+              <Link to="/login" className="white-text"> Log in now</Link>
             </p>
             {
               isFetching ? <Preloader /> : null
@@ -59,8 +65,8 @@ Signup.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired
 };
 
-const mapStateToProps = ({ auth }) => {
-  const { isAuthenticated, errorMessage, user, isFetching } = auth;
+const mapStateToProps = ({ auth, isFetching }) => {
+  const { isAuthenticated, errorMessage, user } = auth;
   // whichever is undefined thats is not in auth wont be added to the props
   return {
     isAuthenticated,
