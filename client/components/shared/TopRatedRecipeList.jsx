@@ -1,5 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+
+import { topRatedRecipeListPropTypes } from '../../config/proptypes';
 
 import RecipeCard from './RecipeCard/RecipeCard.jsx';
 
@@ -13,8 +14,6 @@ const TopRatedRecipeList = props => (
   </ul>
 );
 
-TopRatedRecipeList.propTypes = {
-  recipes: PropTypes.arrayOf(PropTypes.object).isRequired
-};
+TopRatedRecipeList.propTypes = topRatedRecipeListPropTypes;
 
 export default TopRatedRecipeList;

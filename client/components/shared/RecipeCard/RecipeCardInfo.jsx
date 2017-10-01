@@ -1,6 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
+import { recipeCardInfoPropTypes } from '../../../config/proptypes';
 import defaultConfig from '../../../config/default';
 
 
@@ -41,16 +41,5 @@ const RecipeCardInfo = (props) => {
   );
 };
 
-RecipeCardInfo.propTypes = {
-  info: PropTypes.shape({
-    User: PropTypes.shape({
-      imgUrl: PropTypes.string,
-      fullname: PropTypes.string.isRequired
-    }).isRequired,
-    upVoteCount: PropTypes.number.isRequired,
-    downVoteCount: PropTypes.number.isRequired,
-    favoriteCount: PropTypes.number.isRequired,
-    viewCount: PropTypes.number.isRequired,
-  }).isRequired
-};
+RecipeCardInfo.propTypes = recipeCardInfoPropTypes;
 export default RecipeCardInfo;

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
+
+import { recipeCardPropTypes } from '../../../config/proptypes';
 
 import RecipeCardInfo from './RecipeCardInfo.jsx';
 
@@ -46,13 +47,6 @@ const RecipeCard = (props) => {
 };
 
 // NOTE: not all keys are checked since they'll also be checked in `RecipeCardInfo`
-RecipeCard.propTypes = {
-  recipe: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    img_url: PropTypes.string
-  }).isRequired
-};
+RecipeCard.propTypes = recipeCardPropTypes;
 
 export default RecipeCard;

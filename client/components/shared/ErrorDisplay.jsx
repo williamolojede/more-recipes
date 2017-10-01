@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { errorDisplayPropTypes } from '../../config/proptypes';
 
 const ErrorDisplay = props => (
   <div className="error z-depth-1">
@@ -8,8 +8,6 @@ const ErrorDisplay = props => (
   </div>
 );
 
-ErrorDisplay.propTypes = {
-  message: PropTypes.string.isRequired
-};
+ErrorDisplay.propTypes = errorDisplayPropTypes;
 
 export default ErrorDisplay;

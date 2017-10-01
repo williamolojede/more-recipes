@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+
 import { connect } from 'react-redux';
+
+import { homePagePropTypes } from '../../config/proptypes';
 
 import fetchTopRecipes from '../../actions/fetchRecipe';
 
@@ -46,11 +48,7 @@ class Home extends Component {
   }
 }
 
-Home.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  isFetching: PropTypes.bool.isRequired,
-  recipes: PropTypes.arrayOf(PropTypes.object).isRequired,
-};
+Home.propTypes = homePagePropTypes;
 
 const mapStateToProps = ({ recipes, isFetching }) => ({
   recipes,
