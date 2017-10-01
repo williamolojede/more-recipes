@@ -1,24 +1,58 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
 import RecipeCardInfo from './RecipeCardInfo.jsx';
 
-const RecipeCard = () => (
-  <div className="recipe-card card">
-    <Link to="/repcipe/1">
-      <img
-        src="https://fthmb.tqn.com/4P30MYPyJYr0fxlkBuHmNZg4NO8=/960x0/filters:no_upscale()/about/3167488129_cc7a303896_o-58a6fe3b5f9b58a3c91bf559.jpg"
-        alt="pancake"
-        className="recipe-card__img card-image"
-      />
-    </Link>
-    <div className="card-content">
-      <Link to="/repcipe/1">
-        <h4 className="recipe-card__title card-title">Pancake</h4>
+const RecipeCard = (props) => {
+  const {
+    id,
+    name,
+    description,
+    img_url,
+    upVoteCount,
+    downVoteCount,
+    favoriteCount,
+    viewCount,
+    User
+  } = props.recipe;
+
+  const recipeInfo = {
+    upVoteCount,
+    downVoteCount,
+    favoriteCount,
+    viewCount,
+    User
+  };
+
+  return (
+    <div className="recipe-card card">
+      <Link to={`/repcipe/${id}`}>
+        <img
+          src={img_url}
+          alt="pancake"
+          className="recipe-card__img card-image"
+        />
       </Link>
-      <p className="recipe-card__description">Who doesn’t love pancakes in the morning? These delicious vanilla pancakes are thick and </p>
+      <div className="card-content">
+        <Link to={`/repcipe/${id}`}>
+          <h4 className="recipe-card__title card-title">{name}</h4>
+        </Link>
+        <p className="recipe-card__description">{description}</p>
+      </div>
+      <RecipeCardInfo info={recipeInfo} />
     </div>
-    <RecipeCardInfo />
-  </div>
-);
+  );
+};
+
+// NOTE: not all keys are checked since they'll also be checked in `RecipeCardInfo`
+RecipeCard.propTypes = {
+  recipe: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    img_url: PropTypes.string
+  }).isRequired
+};
 
 export default RecipeCard;

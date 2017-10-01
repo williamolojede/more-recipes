@@ -1,35 +1,24 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
+import fetchTopRecipes from '../../actions/fetchRecipe';
 
 import TopRatedRecipeList from '../shared/TopRatedRecipeList.jsx';
 import Preloader from '../shared/Preloader.jsx';
-/**
- * @export
- * @class App
- * @extends {Component}
- */
+import SiteNav from '../shared/SiteNav.jsx';
+
 class Home extends Component {
-  /**
-   * @returns {component} returns a component that matches a provided path
-   * @memberof App
-   */
+  componentDidMount() {
+    this.props.dispatch(fetchTopRecipes());
+  }
+
   render() {
+    const { isFetching, recipes } = this.props;
     return (
       <div className="page page__home">
         <header className="site-header">
-          <nav className="site-header__nav">
-            <div className="nav-wrapper container">
-              <a href="/" className="brand-logo">MoreRecipes</a>
-              <ul className="right hide-on-med-and-down">
-                <li><a href="profile.html">Profile</a></li>
-              </ul>
-              <ul className="side-nav" id="mobile-nav">
-                <li><a href="profile.html">Profile</a></li>
-              </ul>
-              <a href="#" data-activates="mobile-nav" className="button-collapse">
-                <i className="material-icons">menu</i>
-              </a>
-            </div>
-          </nav>
+          <SiteNav />
           <section className="site-header__hero">
             <input className="site-header__hero--input" type="text" placeholder="find a recipe" />
           </section>
@@ -40,10 +29,9 @@ class Home extends Component {
               <header>
                 <h1>Top Rated</h1>
               </header>
-              {/* {
-                isFetching ? <Preloader /> : <TopRatedRecipeList />
-              } */}
-              <TopRatedRecipeList />
+              {
+                isFetching ? <Preloader /> : <TopRatedRecipeList recipes={recipes} />
+              }
             </section>
           </div>
         </main>
@@ -58,4 +46,15 @@ class Home extends Component {
   }
 }
 
-export default Home;
+Home.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  recipes: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
+
+const mapStateToProps = ({ recipes, isFetching }) => ({
+  recipes,
+  isFetching
+});
+
+export default connect(mapStateToProps)(Home);

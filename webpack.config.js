@@ -1,4 +1,3 @@
-const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -13,9 +12,10 @@ module.exports = {
   devtool: 'inline-source-map',
   entry: {
     app: [
-      // 'eventsource-polyfill', // necessary for hot reloading with IE,
       'webpack-hot-middleware/client',
+
       './client/index.jsx',
+      // the app entry point
     ]
   },
   output: {
@@ -23,6 +23,8 @@ module.exports = {
     filename: 'js/bundle.js',
     publicPath: '/static/',
   },
+
+  // used to prevent error when using jsonwebtoken npm package on client
   node: {
     net: 'empty',
     tls: 'empty',
@@ -32,7 +34,10 @@ module.exports = {
     loaders: [
       {
         test: /\.jsx*$/,
-        loader: 'babel-loader',
+        loader: [
+          'react-hot-loader', // activate HMR
+          'babel-loader'
+        ],
         exclude: /node_modules/
       },
       {
@@ -54,7 +59,11 @@ module.exports = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
+    // enable HMR globally
+
     new webpack.NoEmitOnErrorsPlugin(),
+    // do not emit compiled assets that include errors
+
     HtmlWebpackPluginConfig,
     new ExtractTextPlugin({
       filename: 'css/style.css',
