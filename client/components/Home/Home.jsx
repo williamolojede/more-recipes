@@ -15,8 +15,27 @@ class Home extends Component {
     this.props.dispatch(fetchTopRecipes());
   }
 
-  render() {
+  /**
+   *  @return {jsx} - the view to be rendered
+   */
+  renderBody = () => {
     const { isFetching, recipes } = this.props;
+
+    if (isFetching) {
+      return (<Preloader />);
+    } else if (!isFetching && recipes.length === 0) {
+      return (
+        <p className="no-recipes">
+          Sorry no recipes present at the moment
+          <span role="img" aria-label="sad">😢  </span>, please try again later
+          <span role="img" aria-label="please">🙏</span>
+        </p>
+      );
+    }
+    return (<TopRatedRecipeList recipes={recipes} />);
+  }
+
+  render() {
     return (
       <div className="page page__home">
         <header className="site-header">
@@ -32,7 +51,7 @@ class Home extends Component {
                 <h1>Top Rated</h1>
               </header>
               {
-                isFetching ? <Preloader /> : <TopRatedRecipeList recipes={recipes} />
+                this.renderBody()
               }
             </section>
           </div>
