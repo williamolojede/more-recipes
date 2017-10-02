@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { batchActions } from 'redux-batched-actions';
 import { setFetching, unsetFetching } from './fetching';
-import { LOGIN_SUCCESS, LOGIN_FAILURE } from './types';
+import { LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT_SUCCESS } from './types';
 
 const receiveLogin = ({ user, token }) => ({
   type: LOGIN_SUCCESS,
@@ -10,6 +10,9 @@ const receiveLogin = ({ user, token }) => ({
   user,
 });
 
+const receiveLogout = () => ({
+  type: LOGOUT_SUCCESS,
+});
 
 const loginError = message => ({
   type: LOGIN_FAILURE,
@@ -61,5 +64,15 @@ export const setUserData = ({ user, token }) => (dispatch) => {
   dispatch(receiveLogin({ user, token }));
 };
 
+export const logoutUser = () => (dispatch) => {
+  dispatch(setFetching());
+  localStorage.removeItem('token');
+  dispatch(
+    batchActions([
+      receiveLogout(),
+      unsetFetching()
+    ])
+  );
+};
 
 export default loginUser;

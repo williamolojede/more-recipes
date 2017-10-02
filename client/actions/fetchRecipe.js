@@ -22,8 +22,7 @@ const fetchTopRecipes = () => (dispatch) => {
       );
     })
     .catch((err) => {
-      // console.log(err.response.data.message);
-      console.log(err.message);
+      console.log(err.message || err.response.data.message);
       dispatch(unsetFetching());
     });
 };
