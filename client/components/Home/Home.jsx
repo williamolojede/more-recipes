@@ -1,25 +1,77 @@
 import React, { Component } from 'react';
 
-/**
- * @export
- * @class App
- * @extends {Component}
- */
+import { connect } from 'react-redux';
+
+import { homePagePropTypes } from '../../config/proptypes';
+
+import fetchTopRecipes from '../../actions/fetchRecipe';
+
+import TopRatedRecipeList from '../shared/TopRatedRecipeList.jsx';
+import Preloader from '../shared/Preloader.jsx';
+import SiteNav from '../shared/SiteNav.jsx';
+
 class Home extends Component {
+  componentDidMount() {
+    this.props.dispatch(fetchTopRecipes());
+  }
+
   /**
-   * @returns {component} returns a component that matches a provided path
-   * @memberof App
+   *  @return {jsx} - the view to be rendered
    */
+  renderBody = () => {
+    const { isFetching, recipes } = this.props;
+
+    if (isFetching) {
+      return (<Preloader />);
+    } else if (!isFetching && recipes.length === 0) {
+      return (
+        <p className="no-recipes">
+          Sorry no recipes present at the moment
+          <span role="img" aria-label="sad">😢  </span>, please try again later
+          <span role="img" aria-label="please">🙏</span>
+        </p>
+      );
+    }
+    return (<TopRatedRecipeList recipes={recipes} />);
+  }
+
   render() {
     return (
       <div className="page page__home">
-        <h1 style={{ textAlign: 'center' }}>
-          Something Awesome is coming
-          <span role="img" aria-label="cool-fire">😎🔥</span>
-        </h1>
+        <header className="site-header">
+          <SiteNav />
+          <section className="site-header__hero">
+            <input className="site-header__hero--input" type="text" placeholder="find a recipe" />
+          </section>
+        </header>
+        <main>
+          <div className="container">
+            <section className="page__home--top-rated">
+              <header>
+                <h1>Top Rated</h1>
+              </header>
+              {
+                this.renderBody()
+              }
+            </section>
+          </div>
+        </main>
+
+        <footer className="page-footer">
+          <div className="container">
+            <p>Crafted with <i className="mdi mdi-heart" /> by <a href="http://william.ng/" target="_blank" rel="noopener noreferrer">William I. Olojede</a></p>
+          </div>
+        </footer>
       </div>
     );
   }
 }
 
-export default Home;
+Home.propTypes = homePagePropTypes;
+
+const mapStateToProps = ({ recipes, isFetching }) => ({
+  recipes,
+  isFetching
+});
+
+export default connect(mapStateToProps)(Home);

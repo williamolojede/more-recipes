@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
+
+import { authPropTypes } from '../../config/proptypes';
 
 import Footer from '../shared/Footer.jsx';
 import AuthForm from '../shared/AuthForm.jsx';
@@ -43,7 +44,7 @@ class Signup extends Component {
               </div>
             </div>
             <p className="white-text center">
-              Don’t have an account?
+              Have an account already?
               <Link to="/login" className="white-text"> Log in now</Link>
             </p>
             {
@@ -57,13 +58,7 @@ class Signup extends Component {
   }
 }
 
-Signup.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  isFetching: PropTypes.bool.isRequired,
-  errorMessage: PropTypes.string,
-  location: PropTypes.object,
-  isAuthenticated: PropTypes.bool.isRequired
-};
+Signup.propTypes = authPropTypes;
 
 const mapStateToProps = ({ auth, isFetching }) => {
   const { isAuthenticated, errorMessage, user } = auth;

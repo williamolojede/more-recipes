@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { authFormPropTypes } from '../../config/proptypes';
 
 /**
  * @class AuthForm
@@ -80,9 +80,6 @@ class AuthForm extends React.Component {
   }
 }
 
-AuthForm.propTypes = {
-  type: PropTypes.string.isRequired,
-  authFormSubmit: PropTypes.func.isRequired,
-};
+AuthForm.propTypes = authFormPropTypes;
 
 export default AuthForm;

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
+
+import { authPropTypes } from '../../config/proptypes';
 
 import Footer from '../shared/Footer.jsx';
 import AuthForm from '../shared/AuthForm.jsx';
@@ -56,8 +57,8 @@ class Login extends Component {
               </div>
             </div>
             <p className="white-text center">
-            Have an account already?
-              <Link to="/signup" className="white-text"> Login now</Link>
+            Don’t have an account?
+              <Link to="/signup" className="white-text"> Signup now</Link>
             </p>
             {
               isFetching ? <Preloader /> : null
@@ -71,13 +72,12 @@ class Login extends Component {
   }
 }
 
-Login.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  isFetching: PropTypes.bool.isRequired,
-  errorMessage: PropTypes.string,
-  location: PropTypes.object,
-  isAuthenticated: PropTypes.bool.isRequired
+Login.defaultProps = {
+  // the error message should not be fined by default
+  errorMessage: undefined
 };
+
+Login.propTypes = authPropTypes;
 
 const mapStateToProps = ({ auth, isFetching }) => {
   const { isAuthenticated, errorMessage, user } = auth;

@@ -1,4 +1,10 @@
-import { LOGIN_SUCCESS, LOGIN_FAILURE, SIGNUP_SUCCESS, SIGNUP_FAILURE } from '../actions/types';
+import {
+  LOGIN_SUCCESS,
+  LOGIN_FAILURE,
+  SIGNUP_SUCCESS,
+  SIGNUP_FAILURE,
+  LOGOUT_SUCCESS
+} from '../actions/types';
 
 const initialState = {
   isAuthenticated: !!localStorage.getItem('token')
@@ -19,6 +25,10 @@ const auth = (state = initialState, action) => {
       return Object.assign({}, state, {
         isAuthenticated: false,
         errorMessage: action.message
+      });
+    case LOGOUT_SUCCESS:
+      return Object.assign({}, state, {
+        isAuthenticated: false
       });
     default:
       return state;
