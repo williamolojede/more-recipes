@@ -7,6 +7,7 @@ import requireAuthentication from '../utils/requiresAuth.jsx';
 
 
 import Home from './Home/Home.jsx';
+import SingleRecipe from './SingleRecipe/SingleRecipe.jsx';
 import Login from './Login/Login.jsx';
 import Signup from './Signup/Signup.jsx';
 
@@ -25,6 +26,7 @@ class App extends React.Component {
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={requireAuthentication(Home)} />
+          <Route exact path="/recipe/:id" component={requireAuthentication(SingleRecipe)} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
         </Switch>

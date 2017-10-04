@@ -3,6 +3,8 @@ import React from 'react';
 import { recipeCardInfoPropTypes } from '../../../config/proptypes';
 import defaultConfig from '../../../config/default';
 
+import RecipeStats from '../RecipeStats.jsx';
+
 
 const RecipeCardInfo = (props) => {
   const { User, upVoteCount, downVoteCount, favoriteCount, viewCount } = props.info;
@@ -18,6 +20,7 @@ const RecipeCardInfo = (props) => {
       />
       <div className="recipe-card__info">
         <span><span className="recipe-card__info-by">Recipe by</span> {User.fullname}</span>
+        <RecipeStats />
         <ul className="recipe-card__info--stats">
           <li className="stats__favorite">
             <i className="mdi mdi-heart" />
