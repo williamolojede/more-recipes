@@ -16,27 +16,8 @@
       height: 45px;
       margin-right: 1rem;
     }
-    div{
+    .recipe-card__info{
       flex: 1;
-
-      ul{
-        display: flex;
-        justify-content: space-between;
-        
-        li{
-          display: inline-block;
-          i{
-            font-size: 1.2rem;
-            &.mdi-heart{ color: #FEAA26; }
-            &.mdi-thumb-up{ color: #00A900; }
-            &.mdi-thumb-down{ color: red; }
-            &.mdi-eye{ color: #5B96C4; }
-          }
-          span{
-            font-size: .8rem;
-          }
-        }
-      }
     }
   }
 }

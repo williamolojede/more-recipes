@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { homePagePropTypes } from '../../config/proptypes';
 
-import fetchTopRecipes from '../../actions/fetchRecipe';
+import { fetchTopRecipes } from '../../actions/fetchRecipe';
 
 import TopRatedRecipeList from '../shared/TopRatedRecipeList.jsx';
 import Preloader from '../shared/Preloader.jsx';

@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
+import { fetchSingleRecipes } from '../../actions/fetchRecipe';
+
+import Preloader from '../shared/Preloader.jsx';
 import SiteNav from '../shared/SiteNav.jsx';
 import SiteFooter from '../shared/SiteFooter.jsx';
 import IngredientsList from '../shared/IngredientsList.jsx';
@@ -8,38 +12,77 @@ import Reviews from '../shared/Reviews/Reviews.jsx';
 import RecipeStats from '../shared/RecipeStats.jsx';
 
 class SingleRecipe extends Component {
+  componentDidMount() {
+    this.props.dispatch(fetchSingleRecipes(this.props.match.params.id));
+  }
+
   render() {
+    const {
+      name,
+      description,
+      img_url,
+      ingredients,
+      instructions,
+      reviews,
+      upVoteCount,
+      downVoteCount,
+      favoriteCount,
+      viewCount,
+      User
+    } = this.props.recipe;
+
+    const stats = {
+      upVoteCount,
+      downVoteCount,
+      favoriteCount,
+      viewCount
+    };
+
+    if (Object.keys(this.props.recipe).length === 0) return null;
+
     return (
-      <div className="page page__recipe">
-        <header className="site-header">
-          <SiteNav />
-        </header>
-        <main>
-          <div className="container">
-            <div className="row">
-              <div className="col s12 m5">
-                <img src="https://fthmb.tqn.com/4P30MYPyJYr0fxlkBuHmNZg4NO8=/960x0/filters:no_upscale()/about/3167488129_cc7a303896_o-58a6fe3b5f9b58a3c91bf559.jpg" alt="pancake" />
+      this.props.isFetching ?
+        <Preloader />
+        :
+        <div className="page page__recipe">
+          <header className="site-header">
+            <SiteNav />
+          </header>
+          <main>
+            <div className="container">
+              <div className="row">
+                <div className="col s12 m5">
+                  <img src={img_url} alt={name} />
+                </div>
+                <div className="col s12 m7">
+                  <h4 className="recipe__name">{name}</h4>
+                  <p className="recipe__description">{description}</p>
+                </div>
               </div>
-              <div className="col s12 m7">
-                <h4 className="recipe__name">Pancake</h4>
-                <p className="recipe__description">Who knew that ricotta cheese could make a basic pancake recipe so elevated and chic? These pancakes are sweet, beautiful, and deliciously fluffy.  It's all about the simple and perfect ingredients!  Fresh eggs, in season blueberries, and buying a really nice ricotta cheese make for an amazing dish ( I feel like Ina, when I say that ).  Add in some fresh lemon zest and you've got zesty, sweet, decadent pancakes!</p>
+              <div className="row recipe__stats">
+                <RecipeStats stats={stats} />
+                <a href="#write-review" className="write-review">
+                  Write Review
+                </a>
               </div>
+              <div className="row">
+                <IngredientsList ingredients={ingredients} />
+                <div className="hide-on-small-only col m1" />
+                <InstructionsList instructions={instructions} />
+              </div>
+              <Reviews reviews={reviews} user={this.props.user} />
             </div>
-            <div className="row recipe__stats">
-              <RecipeStats />
-            </div>
-            <div className="row">
-              <IngredientsList />
-              <div className="hide-on-small-only col m1" />
-              <InstructionsList />
-            </div>
-            <Reviews />
-          </div>
-        </main>
-        <SiteFooter />
-      </div>
+          </main>
+          <SiteFooter />
+        </div>
     );
   }
 }
 
-export default SingleRecipe;
+const mapStateToProps = ({ recipe, isFetching, auth}) => ({
+  recipe,
+  isFetching,
+  user: auth.user
+});
+
+export default connect(mapStateToProps)(SingleRecipe);

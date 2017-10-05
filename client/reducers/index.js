@@ -9,11 +9,13 @@ import { routerReducer } from 'react-router-redux';
 import auth from './auth';
 import isFetching from './isFetching';
 import recipes from './recipes';
+import recipe from './recipe';
 
 const rootReducer = combineReducers({
   auth,
   isFetching,
   recipes,
+  recipe,
   router: routerReducer
 });
 

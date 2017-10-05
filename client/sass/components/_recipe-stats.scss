@@ -1,7 +1,7 @@
 ul.recipe-stats {
   display: flex;
-  border: 2px solid #ddd;
-  justify-content: center;
+  // border: 2px solid #ddd;
+  justify-content: space-between;
 
   li{
     // padding: 1rem !important;
@@ -9,17 +9,26 @@ ul.recipe-stats {
     p{
       margin: 0;
     }
+    i {
+      font-size: 1.2rem;
+    }
+    span{
+      font-size: .8rem;
+    }
+    a{
+      margin: 0 !important;
+    }
     &.recipe-stats__views{
-      i, span{ color: #5B96C4; }
+      i, span{ color: #5B96C4 !important; }
     }
     &.recipe-stats__favorite{
-      a{ color: #FEAA26; }
+      a{ color: #FEAA26 !important; }
     }
     &.recipe-stats__vote-down{
-      a{ color: red; }
+      a{ color: red !important; }
     }
     &.recipe-stats__vote-up{
-      a{ color: #00A900; }
+      a{ color: #00A900 !important; }
     }
   }
 }

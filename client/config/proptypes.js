@@ -59,3 +59,14 @@ export const homePagePropTypes = {
   isFetching: PropTypes.bool.isRequired,
   recipes: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
+
+// User Prototype
+export const userPrototypes = {
+  fullname: PropTypes.string.isRequired,
+  imgUrl: PropTypes.string
+};
+
+export const userImgPropTypes = {
+  user: PropTypes.shape(userPrototypes).isRequired,
+  type: PropTypes.string.isRequired
+};

@@ -1,15 +1,29 @@
 import React from 'react';
-import ReviewsList from './ReviewsList.jsx';
+import PropTypes from 'prop-types';
+
+import { userPrototypes } from '../../../config/proptypes';
+
+import Review from './Review.jsx';
 import AddReviewForm from './AddReviewForm.jsx';
 
-const Reviews = () => (
+const Reviews = ({ reviews, user }) => (
   <div className="recipe__reviews row">
     <h3>Reviews</h3>
     <ul className="review__list">
-      <ReviewsList />
-      <AddReviewForm />
+      {
+        reviews.length === 0 ?
+          <li className="no-reviews" >eyah <span role="img" aria-label="sad">😢  </span> no reviews yet</li>
+          :
+          reviews.map((review, i) => <Review review={review} key={i} />)
+      }
+      {/* <ReviewsList /> */}
+      <AddReviewForm user={user} />
     </ul>
   </div>
 );
+
+Reviews.propTypes = {
+  user: PropTypes.shape(userPrototypes).isRequired
+};
 
 export default Reviews;
