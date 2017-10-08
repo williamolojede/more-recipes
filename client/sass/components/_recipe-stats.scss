@@ -15,20 +15,24 @@ ul.recipe-stats {
     span{
       font-size: .8rem;
     }
-    a{
+    button{
       margin: 0 !important;
+      -webkit-appearance: none;
+      border: 0;
+      padding: 0;
+      background: none;
     }
     &.recipe-stats__views{
       i, span{ color: #5B96C4 !important; }
     }
     &.recipe-stats__favorite{
-      a{ color: #FEAA26 !important; }
+      button{ color: #FEAA26 !important; }
     }
     &.recipe-stats__vote-down{
-      a{ color: red !important; }
+      button{ color: red !important; }
     }
     &.recipe-stats__vote-up{
-      a{ color: #00A900 !important; }
+      button{ color: #00A900 !important; }
     }
   }
 }

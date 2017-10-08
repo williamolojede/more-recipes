@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchSingleRecipes } from '../../actions/fetchRecipe';
+import { fetchSingleRecipes, vote, favorite } from '../../actions/fetchRecipe';
 
 import Preloader from '../shared/Preloader.jsx';
 import SiteNav from '../shared/SiteNav.jsx';
@@ -16,8 +16,17 @@ class SingleRecipe extends Component {
     this.props.dispatch(fetchSingleRecipes(this.props.match.params.id));
   }
 
+  vote = (dir) => {
+    this.props.dispatch(vote(dir, this.props.recipe.id));
+  }
+
+  favorite = () => {
+    this.props.dispatch(favorite(this.props.recipe.id));
+  }
+
   render() {
     const {
+      id,
       name,
       description,
       img_url,
@@ -60,7 +69,7 @@ class SingleRecipe extends Component {
                 </div>
               </div>
               <div className="row recipe__stats">
-                <RecipeStats stats={stats} />
+                <RecipeStats stats={stats} vote={this.vote} favorite={this.favorite} />
                 <a href="#write-review" className="write-review">
                   Write Review
                 </a>
@@ -70,7 +79,7 @@ class SingleRecipe extends Component {
                 <div className="hide-on-small-only col m1" />
                 <InstructionsList instructions={instructions} />
               </div>
-              <Reviews reviews={reviews} user={this.props.user} />
+              <Reviews reviews={reviews} user={this.props.user} id={id} />
             </div>
           </main>
           <SiteFooter />
@@ -79,7 +88,7 @@ class SingleRecipe extends Component {
   }
 }
 
-const mapStateToProps = ({ recipe, isFetching, auth}) => ({
+const mapStateToProps = ({ recipe, isFetching, auth }) => ({
   recipe,
   isFetching,
   user: auth.user

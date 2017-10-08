@@ -48,3 +48,54 @@ export const fetchTopRecipes = () => (dispatch) => {
       dispatch(unsetFetching());
     });
 };
+
+export const postReview = (content, id) => (dispatch) => {
+  dispatch(setFetching());
+  return instance.post(`/recipes/${id}/reviews`, { content })
+    .then((res) => {
+      dispatch(
+        batchActions([
+          recieveSingleRecipe(res.data.recipe),
+          unsetFetching()
+        ])
+      );
+    })
+    .catch((err) => {
+      console.log(err.response.data.message || err.message);
+      dispatch(unsetFetching());
+    });
+};
+
+export const vote = (dir, id) => (dispatch) => {
+  dispatch(setFetching());
+  return instance.post(`/recipes/${id}/vote-${dir}`)
+    .then((res) => {
+      dispatch(
+        batchActions([
+          recieveSingleRecipe(res.data.recipe),
+          unsetFetching()
+        ])
+      );
+    })
+    .catch((err) => {
+      console.log(err.response.data.message || err.message);
+      dispatch(unsetFetching());
+    });
+};
+
+export const favorite = id => (dispatch) => {
+  dispatch(setFetching());
+  return instance.post(`/recipes/${id}/favorite`)
+    .then((res) => {
+      dispatch(
+        batchActions([
+          recieveSingleRecipe(res.data.recipe),
+          unsetFetching()
+        ])
+      );
+    })
+    .catch((err) => {
+      console.log(err.response.data.message || err.message);
+      dispatch(unsetFetching());
+    });
+};

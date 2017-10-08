@@ -6,7 +6,7 @@ import { userPrototypes } from '../../../config/proptypes';
 import Review from './Review.jsx';
 import AddReviewForm from './AddReviewForm.jsx';
 
-const Reviews = ({ reviews, user }) => (
+const Reviews = ({ reviews, user, id }) => (
   <div className="recipe__reviews row">
     <h3>Reviews</h3>
     <ul className="review__list">
@@ -16,8 +16,7 @@ const Reviews = ({ reviews, user }) => (
           :
           reviews.map((review, i) => <Review review={review} key={i} />)
       }
-      {/* <ReviewsList /> */}
-      <AddReviewForm user={user} />
+      <AddReviewForm user={user} id={id} />
     </ul>
   </div>
 );

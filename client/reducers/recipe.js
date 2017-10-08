@@ -6,7 +6,7 @@ import { RECIEVE_SINGLE_RECIPE } from '../actions/types';
 const recipe = (state = {}, action) => {
   switch (action.type) {
     case RECIEVE_SINGLE_RECIPE:
-      return action.recipe;
+      return Object.assign({}, state, action.recipe);
     default:
       return state;
   }

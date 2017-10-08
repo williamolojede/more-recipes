@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, compose, applyMiddleware } from 'redux';
 import { routerMiddleware } from 'react-router-redux';
 import { enableBatching } from 'redux-batched-actions';
 import createHistory from 'history/createBrowserHistory';
@@ -12,9 +12,12 @@ const middleware = routerMiddleware(history);
 
 const store = createStore(
   enableBatching(rootReducer), // to enable calling dispacth with multiple actions
-  applyMiddleware(
-    thunk,
-    middleware
+  compose(
+    applyMiddleware(
+      thunk,
+      middleware
+    ),
+    window.devToolsExtension ? window.devToolsExtension() : f => f
   )
 );
 
