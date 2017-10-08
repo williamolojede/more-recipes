@@ -1,14 +1,11 @@
 import { Recipe } from '../models';
 import systemErrorHandler from '../helpers/systemErrorHandler';
+import itemDoesNotExist from '../helpers/itemDoesNotExist';
 
 const doesRecipeExist = (req, res, next) => {
   Recipe.findById(req.params.id)
     .then((recipe) => {
-      if (!recipe) {
-        const err = new Error('Recipe not found');
-        err.status = 404;
-        return next(err);
-      }
+      itemDoesNotExist(recipe, 'Recipe', next);
       req.recipeOwner = recipe.owner;
       return next();
     })

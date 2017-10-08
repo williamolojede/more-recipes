@@ -49,6 +49,20 @@ module.exports = (sequelize, DataTypes) => {
         this.setDataValue('password', hash);
       }
     },
+    imgUrl: {
+      allowNull: true,
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: {
+          args: true,
+          msg: 'user img url can not be empty'
+        },
+        is: {
+          args: /\.(jpeg|jpg|gif|png)$/,
+          msg: 'invalid user image url'
+        }
+      }
+    }
   });
 
   User.associate = (models) => {

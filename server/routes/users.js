@@ -15,6 +15,17 @@ router.post('/login',
   userController.login
 );
 
+router.get('/:uid',
+  middlewares.requiresToken,
+  middlewares.doesUserExist,
+  userController.getUserDetails
+);
+
+// router.get('/:uid/recipes',
+//   middlewares.requiresToken,
+//   userController.getUserRecipes
+// );
+
 router.get('/:uid/recipes',
   middlewares.requiresToken,
   userController.getUserFavorites
