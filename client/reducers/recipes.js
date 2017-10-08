@@ -1,3 +1,7 @@
+/**
+ * Reducer for All Recipe
+ */
+
 import { RECIEVE_TOP_RATED_RECIPE } from '../actions/types';
 
 const recipes = (state = [], action) => {

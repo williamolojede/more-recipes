@@ -28,7 +28,7 @@ const RecipeCard = (props) => {
 
   return (
     <div className="recipe-card card">
-      <Link to={`/repcipe/${id}`}>
+      <Link to={`/recipe/${id}`}>
         <img
           src={img_url}
           alt="pancake"
@@ -36,7 +36,7 @@ const RecipeCard = (props) => {
         />
       </Link>
       <div className="card-content">
-        <Link to={`/repcipe/${id}`}>
+        <Link to={`/recipe/${id}`}>
           <h4 className="recipe-card__title card-title">{name}</h4>
         </Link>
         <p className="recipe-card__description">{description}</p>

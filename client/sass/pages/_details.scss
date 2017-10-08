@@ -13,8 +13,26 @@
         margin-left: 0;
         margin-right: 0;
       }
+
+      .recipe__stats{
+        display: flex;
+        border: 2px solid #ddd;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.2rem !important;
+        li{
+          margin-right: 2rem;
+          i, span{
+            font-size: 1.2rem !important;
+          }
+
+        }
+        .write-review{
+          font-size: 1.2rem;
+        }
+      }
     }
-  } 
+  }
 }
 
 @media #{$medium-and-up} {

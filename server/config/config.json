@@ -1,6 +1,6 @@
 {
   "development": {
-    "username": "williamilerioluwase",
+    "username": "william",
     "password": null,
     "database": "more-recipes",
     "host": "127.0.0.1",
@@ -16,7 +16,7 @@
     "logging": false
   },
   "test-local": {
-    "username": "williamilerioluwase",
+    "username": "william",
     "password": null,
     "database": "more-recipes_test-local",
     "host": "127.0.0.1",

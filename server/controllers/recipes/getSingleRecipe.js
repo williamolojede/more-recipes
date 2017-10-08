@@ -6,7 +6,13 @@ const reviewRecipe = (req, res, next) => {
 
   Recipe.findById(id, {
     include: [
-      { model: Review, as: 'reviews' },
+      {
+        model: Review,
+        as: 'reviews',
+        include: [
+          { model: User, attributes: ['id', 'username', 'fullname'] }
+        ]
+      },
       { model: User, attributes: ['id', 'username', 'fullname'] }
     ]
   })

@@ -1,27 +1,39 @@
-.recipe__stats{
-  ul {
-    display: flex;
-    border: 2px solid #ddd;
-    justify-content: center;
+ul.recipe-stats {
+  display: flex;
+  // border: 2px solid #ddd;
+  justify-content: space-between;
 
-    li{
-      padding: 1rem !important;
+  li{
+    // padding: 1rem !important;
+    font-size: 1.2rem;
+    p{
+      margin: 0;
+    }
+    i {
       font-size: 1.2rem;
-      p{
-        margin: 0;
-      }
-      &.views{
-        i, span{ color: #5B96C4; }
-      }
-      &.favorite{
-        a{ color: #FEAA26; }
-      }
-      &.vote__down{
-        a{ color: red; }
-      }
-      &.vote__up{
-        a{ color: #00A900; }
-      }
+    }
+    span{
+      font-size: .8rem;
+    }
+    button{
+      margin: 0 !important;
+      -webkit-appearance: none;
+      border: 0;
+      padding: 0;
+      background: none;
+    }
+    &.recipe-stats__views{
+      i, span{ color: #5B96C4 !important; }
+    }
+    &.recipe-stats__favorite{
+      button{ color: #FEAA26 !important; }
+    }
+    &.recipe-stats__vote-down{
+      button{ color: red !important; }
+    }
+    &.recipe-stats__vote-up{
+      button{ color: #00A900 !important; }
     }
   }
 }
+

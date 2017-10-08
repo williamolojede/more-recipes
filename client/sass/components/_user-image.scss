@@ -1,0 +1,38 @@
+.user-image{
+  .user-image__no-img,
+  .user-image__img{
+    width: 45px;
+    height: 45px;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+  }
+  .user-image__no-img{
+    text-align: center;
+    color: #ddd;
+    line-height: 45px;
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+
+  &.inRecipeCard{
+    .user-image__no-img,
+    .user-image__img{
+      margin-right: 1rem;
+    }
+  }
+
+  &.inReview{
+    .user-image__no-img,
+    .user-image__img{
+      width: 80px;
+      height: 80px;
+    }
+
+    .user-image__no-img{
+      line-height: 80px;
+      font-size: 2rem;
+    }
+  }
+
+
+}
