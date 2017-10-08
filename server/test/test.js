@@ -510,6 +510,70 @@ describe('API Integration Tests', () => {
     });
   });
 
+  describe('Get User Detail', () => {
+    // main user login
+    it('return 400 if no token is passed', (done) => {
+      request.get(`${usersUrl}/1`)
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.message).to.equal('user authorization token required');
+          done();
+        });
+    });
+
+    // invalid user token not on Users table
+    it('return 403 for invalid user token used', (done) => {
+      request.get(`${usersUrl}/1`)
+        .send({ token: invalidToken })
+        .end((err, res) => {
+          expect(res.status).to.equal(403);
+          expect(res.body.message).to.equal('invalid user authorization token');
+          done();
+        });
+    });
+    // user doesn't exist
+    it('return 404 if user not found', (done) => {
+      request.get(`${usersUrl}/3`)
+        .send({ token: userToken2 })
+        .end((err, res) => {
+          expect(res.status).to.equal(404);
+          expect(res.body.message).to.equal('user not found');
+          done();
+        });
+    });
+
+
+    it('return 200 when a user is found(requested by another user)', (done) => {
+      request.get(`${usersUrl}/1`)
+        .send({ token: userToken2 })
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          expect(res.body.user).to.be.a('object');
+          expect(res.body.user.id).to.equal(1);
+          expect(res.body.user.recipes).to.be.a('array');
+          expect(res.body.user.favorites).to.be.a('array');
+          expect(res.body.message).to.equal('user found');
+          expect(res.body.asOwner).to.equal(false);
+          done();
+        });
+    });
+
+    it('return 200 when a user is found(requested by the user)', (done) => {
+      request.get(`${usersUrl}/1`)
+        .send({ token: userToken1 })
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          expect(res.body.user).to.be.a('object');
+          expect(res.body.user.id).to.equal(1);
+          expect(res.body.user.recipes).to.be.a('array');
+          expect(res.body.user.favorites).to.be.a('array');
+          expect(res.body.message).to.equal('user found');
+          expect(res.body.asOwner).to.equal(true);
+          done();
+        });
+    });
+  });
+
   describe('Vote {up, down} a recipe', () => {
     // if no uid => 400
     it('return 400 if no token is passed', (done) => {
