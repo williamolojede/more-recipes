@@ -549,6 +549,10 @@ describe('API Integration Tests', () => {
         .end((err, res) => {
           expect(res.status).to.equal(200);
           expect(res.body.user).to.be.a('object');
+          expect(res.body.user.username).to.be.a('null');
+          expect(res.body.user.imgUrl).to.be.a('null');
+          expect(res.body.user.email).to.equal('example@user.com');
+          expect(res.body.user.fullname).to.equal('example user');
           expect(res.body.user.id).to.equal(1);
           expect(res.body.user.recipes).to.be.a('array');
           expect(res.body.user.favorites).to.be.a('array');
@@ -564,6 +568,10 @@ describe('API Integration Tests', () => {
         .end((err, res) => {
           expect(res.status).to.equal(200);
           expect(res.body.user).to.be.a('object');
+          expect(res.body.user.username).to.be.a('null');
+          expect(res.body.user.imgUrl).to.be.a('null');
+          expect(res.body.user.email).to.equal('example@user.com');
+          expect(res.body.user.fullname).to.equal('example user');
           expect(res.body.user.id).to.equal(1);
           expect(res.body.user.recipes).to.be.a('array');
           expect(res.body.user.favorites).to.be.a('array');
