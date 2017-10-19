@@ -2,6 +2,7 @@
   background: #FD5459;
   padding: .5rem;
   display: flex;
+  align-items:  center;
 
   .error__cancel{
     margin: 0 .5rem;
@@ -15,5 +16,6 @@
   .error__message{
     flex: 1;
     text-align: center;
+    margin: 0;
   }
 }

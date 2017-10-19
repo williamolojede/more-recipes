@@ -10,12 +10,14 @@ import auth from './auth';
 import isFetching from './isFetching';
 import recipes from './recipes';
 import recipe from './recipe';
+import userProfile from './userProfile';
 
 const rootReducer = combineReducers({
   auth,
   isFetching,
   recipes,
   recipe,
+  userProfile,
   router: routerReducer
 });
 

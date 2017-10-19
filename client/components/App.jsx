@@ -10,6 +10,7 @@ import Home from './Home/Home.jsx';
 import SingleRecipe from './SingleRecipe/SingleRecipe.jsx';
 import Login from './Login/Login.jsx';
 import Signup from './Signup/Signup.jsx';
+import Profile from './Profile/Profile.jsx';
 
 /**
  * @export
@@ -27,6 +28,7 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/" component={requireAuthentication(Home)} />
           <Route exact path="/recipe/:id" component={requireAuthentication(SingleRecipe)} />
+          <Route path="/user/:uid" component={requireAuthentication(Profile)} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
         </Switch>

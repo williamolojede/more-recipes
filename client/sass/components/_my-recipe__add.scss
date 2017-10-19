@@ -1,7 +1,7 @@
 .my-recipe__add{
   .my-recipe__add--form{
 
-    input, textarea, fieldset, label{
+    input, textarea, fieldset, label, .label{
       font-size: 1.2rem;
       display: block;
       -webkit-appearance:none;
@@ -33,12 +33,12 @@
       padding: .5rem;
       color: #fff;
       transition: 0.1s ease-in background;
-      
+
       &:hover{
         background: $site-bg * .9;
       }
     }
-    
+
     input, textarea, select{
       transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 
@@ -57,25 +57,74 @@
           resize: none !important;
           height: 100px;
           margin-bottom: 1rem;
-        }
 
-        &:last-of-type{
-          div{
-            border: 2px solid $site-border;
+          @media #{$medium-and-up} {
+            height: calc(100% - 1.5rem);
+            margin-bottom: 0;
+          }
+        }
+      }
+
+      .my-recipe__add--form___img{
+        .label{
+          margin: 0;
+        }
+        .image-upload{
+          border: 2px solid $site-border;
+          padding: 1rem;
+          border-radius: $border-radius;
+
+          .image-upload__preview{
+            position: relative;
+            min-height: 120px;
+            max-height: 300px;
+            overflow: hidden;
+          }
+
+          .image-upload__progress{
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
             display: flex;
-            border-radius: $border-radius;
-            padding: 1rem;
+            justify-content: center;
             align-items: center;
 
-            i {
-              color: $site-link;
-              font-size: 2rem;
-              margin-right: 1rem;
+            img {
+              width: 50px;
+              height: 50px;
             }
           }
-          input{
-            display: none;
+
+          label{
+            text-align: center;
+            display: block;
+            width: 100%;
+            padding: .5rem 0;
+            background-color: #eff3f6;
+            border-radius: $border-radius;
+            cursor: pointer;
+            margin-top: .5rem;
+            border: 1px solid #ddd;
           }
+        }
+
+        input{
+          display: none;
+        }
+      }
+
+      @media #{$medium-and-up} {
+        display: flex;
+        justify-content: space-between;
+
+        .my-recipe__add--form___desc{
+          width: 65%;
+        }
+
+        .my-recipe__add--form___img{
+          width: 30%;
         }
       }
     }
@@ -89,6 +138,15 @@
         ol{
           margin-top: 0;
           padding-left: 1rem; // same as the padding on the parent so as to pull to the start of the parent's padding
+
+          li{
+            max-width: 100%;
+            word-break: break-all;
+          }
+        }
+        textarea{
+          resize: none !important;
+          max-width: 100%;
         }
       }
 
@@ -97,42 +155,23 @@
         margin-bottom: 1.5rem;
       }
     }
+    .form-btns {
+      .form-btn {
+        &.form-btn__cancel{
+          margin-right: 1.2rem;
+        }
+      }
+    }
 
+    .form__submit:disabled {
+      background: #d66368;
+    }
   }
 }
 
 @media #{$medium-and-up} {
   .my-recipe__add{
     .my-recipe__add--form{
-      .description-image{
-        display: flex;
-        justify-content: space-between;
-
-        label{
-          width: 25%;
-
-          &:first-of-type{
-            width: 70%;
-          }
-
-          &:last-of-type{
-            div{
-              display: flex;
-              flex-direction: column;
-              padding: 1rem;
-              justify-content: center;
-              align-items: center;
-              height: 100px;
-              
-              i{
-                font-size: 2rem;
-                margin-right: 0;
-              }
-            }
-          }
-        }
-      }
-
       .ingredients-instruction{
         display: flex;
         justify-content: space-between;

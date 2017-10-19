@@ -55,7 +55,7 @@ class SingleRecipe extends Component {
         :
         <div className="page page__recipe">
           <header className="site-header">
-            <SiteNav />
+            <SiteNav user={this.props.user} />
           </header>
           <main>
             <div className="container">
