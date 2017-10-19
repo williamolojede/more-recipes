@@ -2,6 +2,10 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+const dotenv = require('dotenv');
+
+dotenv.config();
+
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   template: './client/index.html',
   filename: 'index.html',
@@ -52,11 +56,17 @@ module.exports = {
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
       sourceMap: true,
-      comments: false
+      comments: false,
+      minimize: true,
     }),
     HtmlWebpackPluginConfig,
     new ExtractTextPlugin({
       filename: 'css/style.css',
+    }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        FIREBASE_STORAGE_BUCKET: JSON.stringify(process.env.FIREBASE_STORAGE_BUCKET)
+      }
     })
   ]
 };

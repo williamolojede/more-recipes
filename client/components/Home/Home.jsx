@@ -40,7 +40,7 @@ class Home extends Component {
     return (
       <div className="page page__home">
         <header className="site-header">
-          <SiteNav />
+          <SiteNav user={this.props.user} />
           <section className="site-header__hero">
             <input className="site-header__hero--input" type="text" placeholder="find a recipe" />
           </section>
@@ -65,8 +65,9 @@ class Home extends Component {
 
 Home.propTypes = homePagePropTypes;
 
-const mapStateToProps = ({ recipes, isFetching }) => ({
+const mapStateToProps = ({ recipes, isFetching, auth }) => ({
   recipes,
+  user: auth.user,
   isFetching
 });
 

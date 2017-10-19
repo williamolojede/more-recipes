@@ -10,7 +10,7 @@ const getUserDetails = (req, res, next) => {
     where: { id: req.params.uid },
     include: [
       { model: Recipe, as: 'recipes' },
-      { model: Favorite, as: 'favorites' }
+      { model: Favorite, as: 'favorites', include: { model: Recipe } }
     ]
   })
     .then((user) => {

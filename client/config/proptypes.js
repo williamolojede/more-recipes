@@ -70,3 +70,12 @@ export const userImgPropTypes = {
   user: PropTypes.shape(userPrototypes).isRequired,
   type: PropTypes.string.isRequired
 };
+
+
+export const recipePropTypes = {
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  ingredients: PropTypes.arrayOf(PropTypes.string).isRequired,
+  instructions: PropTypes.arrayOf(PropTypes.string).isRequired,
+};

@@ -13,3 +13,21 @@
   font-size: 1.2rem;
   color: #566270;
 }
+
+
+.no-favorites {
+  // text-align: center;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #999999;
+  span{
+    display: block;
+
+    &:first-of-type{
+      font-size: 1.4rem;
+    }
+  }
+}

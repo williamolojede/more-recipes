@@ -9,7 +9,7 @@
     }
 
     th{
-      
+
       &:last-of-type{
         text-align: right;
       }
@@ -33,13 +33,16 @@
     }
     .my-recipe__manage--table___action{
       text-align: right;
-      a{
+      button{
         font-size: 2rem;
         &:not(:last-of-type){
           margin-right: 1.5rem;
         }
         &:last-of-type{
           color: $site-bg;
+          -webkit-appearance: none;
+          border: 0;
+          background: none;
         }
       }
     }

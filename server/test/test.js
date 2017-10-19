@@ -411,19 +411,6 @@ describe('API Integration Tests', () => {
         });
     });
 
-    it('return 400 if invalid img url string is passed', (done) => {
-      const invalidUrl = Object.assign({}, data);
-      invalidUrl.recipe.img_url = 'https://www.google.com.ng/';
-
-      request.post(`${recipesUrl}?token=${userToken1}`)
-        .send(invalidUrl)
-        .end((err, res) => {
-          expect(res.status).to.equal(400);
-          expect(res.body.message).to.equal('invalid recipe image url');
-          done();
-        });
-    });
-
     it('return 400 if recipe img url contains only whitespace(s)', (done) => {
       const emptyUrl = Object.assign({}, data);
       emptyUrl.recipe.img_url = '';

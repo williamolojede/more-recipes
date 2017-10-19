@@ -15,6 +15,7 @@
     "consistent-return": 0,
     "no-param-reassign": 0,
     "comma-dangle": 0,
+    "no-return-assign": 0,
     "curly": ["error", "multi-line"],
     "import/no-unresolved": 0,
     "import/extensions": [2, { "js": "never"}],
@@ -25,6 +26,10 @@
       "requireParamDescription": false,
       "requireReturnDescription": true
     }],
+    // "jsx-a11y/label-has-for": [2, {
+    //   "required": {"every": ["nesting"]},
+    //   "allowChildren": true
+    // }]
     // "require-jsdoc": ["error", {
     //     "require": {
     //         "FunctionDeclaration": true,
