@@ -22,8 +22,8 @@ services:
   - postgresql
 
 before_script:
-  - createuser more-recipes -s -U postgres
-  - createdb more-recipes_test --username=more-recipes
+  - createuser william -s -U postgres
+  - createdb more-recipes_test --username=william
   - sequelize db:migrate
 
 after_success: npm run coverage

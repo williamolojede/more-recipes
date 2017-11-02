@@ -10,12 +10,16 @@ import Preloader from '../shared/Preloader.jsx';
 import ErrorDisplay from '../shared/ErrorDisplay.jsx';
 
 import loginUser from '../../actions/loginUser';
+import { removeAuthErrorMessage } from '../../actions/auth';
 
-/**
- * @class Login
- * @extends {Component}
- */
+
 class Login extends Component {
+  componentWillMount() {
+    if (this.props.errorMessage) {
+      this.props.dispatch(removeAuthErrorMessage());
+    }
+  }
+
   /**
    * @param {object} formData -
    * @returns {undefined} - return nothing
@@ -24,10 +28,6 @@ class Login extends Component {
     this.props.dispatch(loginUser(formData));
   }
 
-  /**
-   * @returns {view} - Renders tht login page view
-   * @memberof Login
-   */
   render() {
     const { isFetching, errorMessage, isAuthenticated, location } = this.props;
     const { from } = location.state || { from: { pathname: '/' } };

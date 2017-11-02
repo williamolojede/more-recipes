@@ -10,8 +10,15 @@ import Preloader from '../shared/Preloader.jsx';
 import ErrorDisplay from '../shared/ErrorDisplay.jsx';
 
 import signupUser from '../../actions/signupUser';
+import { removeAuthErrorMessage } from '../../actions/auth';
 
 class Signup extends Component {
+  componentWillMount() {
+    if (this.props.errorMessage) {
+      this.props.dispatch(removeAuthErrorMessage());
+    }
+  }
+
   userSignup = (formData) => {
     this.props.dispatch(signupUser(formData));
   }
