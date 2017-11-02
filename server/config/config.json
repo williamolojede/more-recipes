@@ -8,17 +8,9 @@
     "logging": false
   },
   "test": {
-    "username": "more-recipes",
-    "password": null,
-    "database": "more-recipes_test",
-    "host": "127.0.0.1",
-    "dialect": "postgres",
-    "logging": false
-  },
-  "test-local": {
     "username": "william",
     "password": null,
-    "database": "more-recipes_test-local",
+    "database": "more-recipes_test",
     "host": "127.0.0.1",
     "dialect": "postgres",
     "logging": false

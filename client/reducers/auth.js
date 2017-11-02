@@ -3,7 +3,8 @@ import {
   LOGIN_FAILURE,
   SIGNUP_SUCCESS,
   SIGNUP_FAILURE,
-  LOGOUT_SUCCESS
+  LOGOUT_SUCCESS,
+  REMOVE_AUTH_ERROR_MESSAGE
 } from '../actions/types';
 
 const initialState = {
@@ -22,6 +23,7 @@ const auth = (state = initialState, action) => {
       });
     case LOGIN_FAILURE:
     case SIGNUP_FAILURE:
+    case REMOVE_AUTH_ERROR_MESSAGE:
       return Object.assign({}, state, {
         isAuthenticated: false,
         errorMessage: action.message

@@ -6,6 +6,8 @@ export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
 export const SIGNUP_FAILURE = 'SIGNUP_FAILURE';
 
+export const REMOVE_AUTH_ERROR_MESSAGE = 'REMOVE_AUTH_ERROR_MESSAGE';
+
 // FOR API CALLS
 export const SET_FETCHING = 'SET_FETCHING';
 // note: doesn't mean its successful just that the api responded

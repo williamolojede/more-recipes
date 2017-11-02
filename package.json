@@ -10,10 +10,10 @@
     "build:docs": "cd docs-src && bundle exec middleman build --clean",
     "build:prod": "npm run clean && webpack -p --config webpack.config.prod.js",
     "build:dev": "npm run clean && webpack -p --config webpack.config.dev.js",
-    "test-local": "npm run migrate-test && cross-env NODE_ENV=test-local nyc mocha --timeout 10000 server/test",
+    "test:dev": "npm run migrate:test && cross-env NODE_ENV=test nyc mocha --timeout 10000 server/test",
     "test": "nyc mocha --timeout 10000 server/test",
     "migrate": "sequelize db:migrate:undo:all&&sequelize db:migrate",
-    "migrate-test": "sequelize db:migrate:undo:all --env=test-local&&sequelize db:migrate --env=test-local",
+    "migrate:test": "sequelize db:migrate:undo:all --env=test&&sequelize db:migrate --env=test",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "clean": "rimraf dist",
     "heroku-postbuild": "npm run build:prod"
