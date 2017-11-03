@@ -42,7 +42,8 @@ class Home extends Component {
         <header className="site-header">
           <SiteNav user={this.props.user} />
           <section className="site-header__hero">
-            <input className="site-header__hero--input" type="text" placeholder="find a recipe" />
+            <h2>Delicious recipes, just a search away...</h2>
+            <input className="site-header__hero--input" type="text" placeholder="what would you like to cook?" />
           </section>
         </header>
         <main>
