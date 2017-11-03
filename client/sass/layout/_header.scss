@@ -1,6 +1,6 @@
 .site-header{
   nav{
-    background-color: #fff; 
+    background-color: #fff;
     // box-shadow: none;
 
     a{
@@ -27,15 +27,39 @@
       width: 75%;
       margin: 0 auto;
 
+      h2{
+        color: #fff;
+        text-align: center;
+        margin-bottom: 2rem;
+        font-size: 2.5rem;
+        @media #{$medium-and-up} {
+          font-size: 4rem;
+        }
+      }
       .site-header__hero--input{
         border: 2px solid #566270;
         display: block;
         height: 70px;
         border-radius: 4px;
+        color: #fff;
         font-size: 2rem;
         padding: .5rem 1rem;
-        background: rgba(86, 98, 112, .3);
+        background-color: rgba(86, 98, 112, .3);
         box-sizing: border-box;
+        background-image: url('../assets/icons/search.svg');
+        padding-left: 60px;
+        background-position: .7rem center;
+        background-size: 50px 30px;
+        background-repeat: no-repeat;
+
+        &:focus{
+          border-bottom-color: #383A3F;
+          box-shadow: 0 1px 0 0 #383A3F;
+        }
+
+        // &::placeholder{
+        //   color: #fff;
+        // }
       }
     }
   }
