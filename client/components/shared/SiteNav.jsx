@@ -1,8 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-const SiteNav = ({ user }) => (
+import { logoutUser } from '../../actions/loginUser';
+
+const SiteNav = ({ user, dispatch }) => (
   <nav className="site-header__nav">
     <div className="nav-wrapper container">
       <Link to="/" className="brand-logo">MoreRecipes</Link>
@@ -10,10 +13,32 @@ const SiteNav = ({ user }) => (
         <li>
           <Link to={`/user/${user.id}`}>Profile</Link>
         </li>
+        <li>
+          <Link
+            to="/logout"
+            onClick={(e) => {
+              e.preventDefault();
+              dispatch(logoutUser());
+            }}
+          >
+            Sign Out
+          </Link>
+        </li>
       </ul>
       <ul className="side-nav" id="mobile-nav">
         <li>
           <Link to={`/user/${user.id}`}>Profile</Link>
+        </li>
+        <li>
+          <Link
+            to="/logout"
+            onClick={(e) => {
+              e.preventDefault();
+              dispatch(logoutUser());
+            }}
+          >
+            Sign Out
+          </Link>
         </li>
       </ul>
       <a href="#" data-activates="mobile-nav" className="button-collapse">
@@ -27,7 +52,8 @@ SiteNav.propTypes = {
   user: PropTypes.shape({
     id: PropTypes.number.isRequired,
     fullname: PropTypes.string.isRequired,
-  }).isRequired
+  }).isRequired,
+  dispatch: PropTypes.func.isRequired
 };
 
-export default SiteNav;
+export default connect(null)(SiteNav);
