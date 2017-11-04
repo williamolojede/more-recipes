@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import { fetchSingleRecipes, vote, favorite } from '../../actions/fetchRecipe';
 
@@ -25,6 +26,8 @@ class SingleRecipe extends Component {
   }
 
   render() {
+    if (Object.keys(this.props.recipe).length === 0) return null;
+
     const {
       id,
       name,
@@ -36,8 +39,7 @@ class SingleRecipe extends Component {
       upVoteCount,
       downVoteCount,
       favoriteCount,
-      viewCount,
-      User
+      viewCount
     } = this.props.recipe;
 
     const stats = {
@@ -47,7 +49,6 @@ class SingleRecipe extends Component {
       viewCount
     };
 
-    if (Object.keys(this.props.recipe).length === 0) return null;
 
     return (
       this.props.isFetching ?
@@ -66,19 +67,17 @@ class SingleRecipe extends Component {
                 <div className="col s12 m7">
                   <h4 className="recipe__name">{name}</h4>
                   <p className="recipe__description">{description}</p>
+                  <div className="row recipe__stats">
+                    <RecipeStats stats={stats} vote={this.vote} favorite={this.favorite} />
+                    <a href="#write-review" className="write-review">
+                      Write Review
+                    </a>
+                  </div>
                 </div>
               </div>
-              <div className="row recipe__stats">
-                <RecipeStats stats={stats} vote={this.vote} favorite={this.favorite} />
-                <a href="#write-review" className="write-review">
-                  Write Review
-                </a>
-              </div>
-              <div className="row">
-                <IngredientsList ingredients={ingredients} />
-                <div className="hide-on-small-only col m1" />
-                <InstructionsList instructions={instructions} />
-              </div>
+
+              <IngredientsList ingredients={ingredients} />
+              <InstructionsList instructions={instructions} />
               <Reviews reviews={reviews} user={this.props.user} id={id} />
             </div>
           </main>
@@ -87,6 +86,36 @@ class SingleRecipe extends Component {
     );
   }
 }
+
+SingleRecipe.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  isFetching: PropTypes.bool.isRequired,
+
+  recipe: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    img_url: PropTypes.string.isRequired,
+    ingredients: PropTypes.arrayOf(PropTypes.string).isRequired,
+    instructions: PropTypes.arrayOf(PropTypes.string).isRequired,
+    reviews: PropTypes.arrayOf(PropTypes.object).isRequired,
+    upVoteCount: PropTypes.number.isRequired,
+    downVoteCount: PropTypes.number.isRequired,
+    favoriteCount: PropTypes.number.isRequired,
+    viewCount: PropTypes.number.isRequired
+  }).isRequired,
+
+  user: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    fullname: PropTypes.string.isRequired,
+  }).isRequired,
+
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    })
+  }).isRequired,
+};
 
 const mapStateToProps = ({ recipe, isFetching, auth }) => ({
   recipe,

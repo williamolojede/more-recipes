@@ -10,5 +10,13 @@
         margin-bottom: .5rem;
       }
     }
+    @media #{$small-and-down} {
+      &:first-of-type{
+        margin-bottom: .5rem;
+      }
+      &:last-of-type{
+        margin-top: 0;
+      }
+    }
   }
 }
