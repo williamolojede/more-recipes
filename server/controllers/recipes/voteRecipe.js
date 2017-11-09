@@ -13,7 +13,10 @@ const voteRecipe = (req, res, next) => {
 
   // abstracted the vote creation so i'm not duplicating the code
   const createVote = (userId, recipeId, voteType) => Vote.create({ userId, recipeId, voteType })
-    .then(() => next())
+    .then(() => {
+      req.direction = dir;
+      next();
+    })
     .catch(error => systemErrorHandler(error, next));
 
   // find all votes for the current recipes
@@ -41,7 +44,7 @@ const voteRecipe = (req, res, next) => {
           return Vote.findById(userVote.dataValues.id)
             .then(vote => vote.destroy())
             .then(() => {
-              // req.removePrevious = true;
+              req.sameDirection = true;
               next();
             });
         }
@@ -51,7 +54,7 @@ const voteRecipe = (req, res, next) => {
         return Vote.findById(userVote.dataValues.id)
           .then(vote => vote.update({ voteType: dir }))
           .then(() => {
-            // req.removePrevious = true;
+            req.direction = dir;
             next();
           });
       }

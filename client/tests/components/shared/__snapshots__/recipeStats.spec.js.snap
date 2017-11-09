@@ -1,0 +1,435 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RecipeStats should downvote as expected 1`] = `
+<ul
+  className="recipe-stats"
+>
+  <li
+    className="recipe-stats__favorite"
+  >
+    <button
+      className={false}
+      onClick={[Function]}
+    >
+      <i
+        className="mdi mdi-heart"
+      />
+      <span>
+        0
+      </span>
+    </button>
+  </li>
+  <li
+    className="recipe-stats__vote-up"
+  >
+    <button
+      className={false}
+      onClick={[Function]}
+    >
+      <i
+        className="mdi mdi-thumb-up"
+      />
+      <span>
+        0
+      </span>
+    </button>
+  </li>
+  <li
+    className="recipe-stats__vote-down"
+  >
+    <button
+      className={false}
+      onClick={[Function]}
+    >
+      <i
+        className="mdi mdi-thumb-down"
+      />
+      <span>
+        0
+      </span>
+    </button>
+  </li>
+  <li
+    className="recipe-stats__views"
+  >
+    <i
+      className="mdi mdi-eye"
+    />
+    <span>
+      0
+    </span>
+  </li>
+</ul>
+`;
+
+exports[`RecipeStats should downvote as expected 2`] = `
+<ul
+  className="recipe-stats"
+>
+  <li
+    className="recipe-stats__favorite"
+  >
+    <button
+      className={false}
+      onClick={[Function]}
+    >
+      <i
+        className="mdi mdi-heart"
+      />
+      <span>
+        0
+      </span>
+    </button>
+  </li>
+  <li
+    className="recipe-stats__vote-up"
+  >
+    <button
+      className={false}
+      onClick={[Function]}
+    >
+      <i
+        className="mdi mdi-thumb-up"
+      />
+      <span>
+        0
+      </span>
+    </button>
+  </li>
+  <li
+    className="recipe-stats__vote-down"
+  >
+    <button
+      className="active"
+      onClick={[Function]}
+    >
+      <i
+        className="mdi mdi-thumb-down"
+      />
+      <span>
+        0
+      </span>
+    </button>
+  </li>
+  <li
+    className="recipe-stats__views"
+  >
+    <i
+      className="mdi mdi-eye"
+    />
+    <span>
+      0
+    </span>
+  </li>
+</ul>
+`;
+
+exports[`RecipeStats should favorite as expected 1`] = `
+<ul
+  className="recipe-stats"
+>
+  <li
+    className="recipe-stats__favorite"
+  >
+    <button
+      className={false}
+      onClick={[Function]}
+    >
+      <i
+        className="mdi mdi-heart"
+      />
+      <span>
+        0
+      </span>
+    </button>
+  </li>
+  <li
+    className="recipe-stats__vote-up"
+  >
+    <button
+      className={false}
+      onClick={[Function]}
+    >
+      <i
+        className="mdi mdi-thumb-up"
+      />
+      <span>
+        0
+      </span>
+    </button>
+  </li>
+  <li
+    className="recipe-stats__vote-down"
+  >
+    <button
+      className={false}
+      onClick={[Function]}
+    >
+      <i
+        className="mdi mdi-thumb-down"
+      />
+      <span>
+        0
+      </span>
+    </button>
+  </li>
+  <li
+    className="recipe-stats__views"
+  >
+    <i
+      className="mdi mdi-eye"
+    />
+    <span>
+      0
+    </span>
+  </li>
+</ul>
+`;
+
+exports[`RecipeStats should favorite as expected 2`] = `
+<ul
+  className="recipe-stats"
+>
+  <li
+    className="recipe-stats__favorite"
+  >
+    <button
+      className="active"
+      onClick={[Function]}
+    >
+      <i
+        className="mdi mdi-heart"
+      />
+      <span>
+        0
+      </span>
+    </button>
+  </li>
+  <li
+    className="recipe-stats__vote-up"
+  >
+    <button
+      className={false}
+      onClick={[Function]}
+    >
+      <i
+        className="mdi mdi-thumb-up"
+      />
+      <span>
+        0
+      </span>
+    </button>
+  </li>
+  <li
+    className="recipe-stats__vote-down"
+  >
+    <button
+      className={false}
+      onClick={[Function]}
+    >
+      <i
+        className="mdi mdi-thumb-down"
+      />
+      <span>
+        0
+      </span>
+    </button>
+  </li>
+  <li
+    className="recipe-stats__views"
+  >
+    <i
+      className="mdi mdi-eye"
+    />
+    <span>
+      0
+    </span>
+  </li>
+</ul>
+`;
+
+exports[`RecipeStats should render all expected elements 1`] = `
+<ul
+  className="recipe-stats"
+>
+  <li
+    className="recipe-stats__favorite"
+  >
+    <button
+      className={false}
+      onClick={[Function]}
+    >
+      <i
+        className="mdi mdi-heart"
+      />
+      <span>
+        0
+      </span>
+    </button>
+  </li>
+  <li
+    className="recipe-stats__vote-up"
+  >
+    <button
+      className={false}
+      onClick={[Function]}
+    >
+      <i
+        className="mdi mdi-thumb-up"
+      />
+      <span>
+        0
+      </span>
+    </button>
+  </li>
+  <li
+    className="recipe-stats__vote-down"
+  >
+    <button
+      className={false}
+      onClick={[Function]}
+    >
+      <i
+        className="mdi mdi-thumb-down"
+      />
+      <span>
+        0
+      </span>
+    </button>
+  </li>
+  <li
+    className="recipe-stats__views"
+  >
+    <i
+      className="mdi mdi-eye"
+    />
+    <span>
+      0
+    </span>
+  </li>
+</ul>
+`;
+
+exports[`RecipeStats should up vote as expected 1`] = `
+<ul
+  className="recipe-stats"
+>
+  <li
+    className="recipe-stats__favorite"
+  >
+    <button
+      className={false}
+      onClick={[Function]}
+    >
+      <i
+        className="mdi mdi-heart"
+      />
+      <span>
+        0
+      </span>
+    </button>
+  </li>
+  <li
+    className="recipe-stats__vote-up"
+  >
+    <button
+      className={false}
+      onClick={[Function]}
+    >
+      <i
+        className="mdi mdi-thumb-up"
+      />
+      <span>
+        0
+      </span>
+    </button>
+  </li>
+  <li
+    className="recipe-stats__vote-down"
+  >
+    <button
+      className={false}
+      onClick={[Function]}
+    >
+      <i
+        className="mdi mdi-thumb-down"
+      />
+      <span>
+        0
+      </span>
+    </button>
+  </li>
+  <li
+    className="recipe-stats__views"
+  >
+    <i
+      className="mdi mdi-eye"
+    />
+    <span>
+      0
+    </span>
+  </li>
+</ul>
+`;
+
+exports[`RecipeStats should up vote as expected 2`] = `
+<ul
+  className="recipe-stats"
+>
+  <li
+    className="recipe-stats__favorite"
+  >
+    <button
+      className={false}
+      onClick={[Function]}
+    >
+      <i
+        className="mdi mdi-heart"
+      />
+      <span>
+        0
+      </span>
+    </button>
+  </li>
+  <li
+    className="recipe-stats__vote-up"
+  >
+    <button
+      className="active"
+      onClick={[Function]}
+    >
+      <i
+        className="mdi mdi-thumb-up"
+      />
+      <span>
+        0
+      </span>
+    </button>
+  </li>
+  <li
+    className="recipe-stats__vote-down"
+  >
+    <button
+      className={false}
+      onClick={[Function]}
+    >
+      <i
+        className="mdi mdi-thumb-down"
+      />
+      <span>
+        0
+      </span>
+    </button>
+  </li>
+  <li
+    className="recipe-stats__views"
+  >
+    <i
+      className="mdi mdi-eye"
+    />
+    <span>
+      0
+    </span>
+  </li>
+</ul>
+`;

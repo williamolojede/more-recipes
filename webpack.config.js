@@ -28,6 +28,11 @@ module.exports = {
     publicPath: '/static/',
   },
 
+  resolve: {
+    // you can now require("file") instead of require("file.coffee")
+    extensions: ['.js', '.json', '.jsx']
+  },
+
   // used to prevent error when using jsonwebtoken npm package on client
   node: {
     net: 'empty',

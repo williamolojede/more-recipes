@@ -3,6 +3,8 @@ import { batchActions } from 'redux-batched-actions';
 import instance from '../config/axios';
 
 import { setFetching, unsetFetching } from './fetching';
+import { showNotification, hideNotification } from './notification';
+
 import {
   RECIEVE_TOP_RATED_RECIPE,
   RECIEVE_SINGLE_RECIPE,
@@ -82,39 +84,41 @@ export const postReview = (content, id) => (dispatch) => {
     });
 };
 
-export const vote = (dir, id) => (dispatch) => {
-  dispatch(setFetching());
-  return instance.post(`/recipes/${id}/vote-${dir}`)
-    .then((res) => {
-      dispatch(
-        batchActions([
-          recieveSingleRecipe(res.data.recipe),
-          unsetFetching()
-        ])
-      );
-    })
-    .catch((err) => {
-      console.log(err.response.data.message || err.message);
-      dispatch(unsetFetching());
-    });
-};
+export const vote = (dir, id) => dispatch => instance.post(`/recipes/${id}/vote-${dir}`)
+  .then((res) => {
+    dispatch(batchActions([
+      recieveSingleRecipe(res.data.recipe),
+      showNotification(res.data.message)
+    ]));
+    setTimeout(() => {
+      dispatch(hideNotification());
+    }, 3000);
+  })
+  .catch((err) => {
+    dispatch(showNotification(err.response.data.message));
+    setTimeout(() => {
+      dispatch(hideNotification());
+    }, 3000);
+  });
 
-export const favorite = id => (dispatch) => {
-  dispatch(setFetching());
-  return instance.post(`/recipes/${id}/favorite`)
-    .then((res) => {
-      dispatch(
-        batchActions([
-          recieveSingleRecipe(res.data.recipe),
-          unsetFetching()
-        ])
-      );
-    })
-    .catch((err) => {
-      console.log(err.response.data.message || err.message);
-      dispatch(unsetFetching());
-    });
-};
+
+export const favorite = id => dispatch => instance.post(`/recipes/${id}/favorite`)
+  .then((res) => {
+    dispatch(batchActions([
+      recieveSingleRecipe(res.data.recipe),
+      showNotification(res.data.message)
+    ]));
+    setTimeout(() => {
+      dispatch(hideNotification());
+    }, 3000);
+  })
+  .catch((err) => {
+    dispatch(showNotification(err.response.data.message));
+    setTimeout(() => {
+      dispatch(hideNotification());
+    }, 3000);
+  });
+
 
 export const addRecipe = recipe => (dispatch) => {
   dispatch(setFetching());

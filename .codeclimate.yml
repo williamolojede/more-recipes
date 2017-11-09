@@ -18,5 +18,6 @@ exclude_paths:
   - "node_modules/"
   - "template/*"
   - "server/test"
+  - "client/tests"
   - "server/migrations"
   - "server/models"

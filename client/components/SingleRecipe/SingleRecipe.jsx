@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+
 import { fetchSingleRecipes, vote, favorite } from '../../actions/fetchRecipe';
 
 import Preloader from '../shared/Preloader.jsx';
@@ -11,6 +12,7 @@ import IngredientsList from '../shared/IngredientsList.jsx';
 import InstructionsList from '../shared/InstructionsList.jsx';
 import Reviews from '../shared/Reviews/Reviews.jsx';
 import RecipeStats from '../shared/RecipeStats.jsx';
+import Notification from '../shared/Notification.jsx';
 
 class SingleRecipe extends Component {
   componentDidMount() {
@@ -81,6 +83,8 @@ class SingleRecipe extends Component {
               <Reviews reviews={reviews} user={this.props.user} id={id} />
             </div>
           </main>
+
+          <Notification notification={this.props.notification} />
           <SiteFooter />
         </div>
     );
@@ -115,11 +119,19 @@ SingleRecipe.propTypes = {
       id: PropTypes.string.isRequired,
     })
   }).isRequired,
+
+  notification: PropTypes.string.isRequired
 };
 
-const mapStateToProps = ({ recipe, isFetching, auth }) => ({
+const mapStateToProps = ({
   recipe,
   isFetching,
+  auth,
+  notification
+}) => ({
+  recipe,
+  isFetching,
+  notification,
   user: auth.user
 });
 
