@@ -11,6 +11,8 @@ import isFetching from './isFetching';
 import recipes from './recipes';
 import recipe from './recipe';
 import userProfile from './userProfile';
+import notification from './notification';
+
 
 const rootReducer = combineReducers({
   auth,
@@ -18,6 +20,7 @@ const rootReducer = combineReducers({
   recipes,
   recipe,
   userProfile,
+  notification,
   router: routerReducer
 });
 

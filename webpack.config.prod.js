@@ -24,6 +24,10 @@ module.exports = {
     filename: 'js/bundle.js',
     publicPath: '/static/',
   },
+  resolve: {
+    // you can now require("file") instead of require("file.coffee")
+    extensions: ['.js', '.json', '.jsx']
+  },
   node: {
     net: 'empty',
     tls: 'empty',

@@ -6,7 +6,12 @@
     "node": true,
     "browser": true,
     "es6": true,
-    "mocha": true
+    "mocha": true,
+    "jest": true
+  },
+  "globals": {
+    // enzyme's shallow is added a global in setupTest.js
+    "shallow": true
   },
   "rules": {
     "one-var": 0,
@@ -26,17 +31,7 @@
       "requireParamDescription": false,
       "requireReturnDescription": true
     }],
-    // "jsx-a11y/label-has-for": [2, {
-    //   "required": {"every": ["nesting"]},
-    //   "allowChildren": true
-    // }]
-    // "require-jsdoc": ["error", {
-    //     "require": {
-    //         "FunctionDeclaration": true,
-    //         "MethodDefinition": true,
-    //         "ClassDeclaration": true
-    //     }
-    // }],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/prefer-stateless-function": [0, { "ignorePureComponents": true }],
     "react/jsx-uses-react": 2,
     "react/react-in-jsx-scope": 2

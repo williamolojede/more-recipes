@@ -13,9 +13,15 @@ const count = (req, res, next) => {
     })
     .then(({ upVoteCount, downVoteCount }) => {
       // find recipe and update its values
+      let message = req.direction === 'up' ? 'You liked this recipe' : 'You disliked this recipe';
+
+      if (req.sameDirection) {
+        message = 'Vote removed';
+      }
+
       Recipe.findById(id)
         .then(recipe => recipe.update({ upVoteCount, downVoteCount })
-          .then(newRecipe => res.status(200).send({ recipe: newRecipe, status: 'success' })))
+          .then(newRecipe => res.status(200).send({ recipe: newRecipe, status: 'success', message })))
         .catch(error => systemErrorHandler(error, next));
     })
     .catch(error => systemErrorHandler(error, next));

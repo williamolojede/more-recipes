@@ -15,4 +15,20 @@ instance.interceptors.request.use((config) => {
   return config;
 });
 
+// intercept response and reload page
+// if request error is caused by an expired token
+instance.interceptors.response.use(
+  res => res,
+  (err) => {
+    const { response: { status, data } } = err;
+    if (status === 403 &&
+      data.message === 'expired user authorization token'
+    ) {
+      window.location.reload();
+    }
+
+    return Promise.reject(err);
+  }
+);
+
 export default instance;

@@ -21,18 +21,43 @@ ul.recipe-stats {
       border: 0;
       padding: 0;
       background: none;
+      transition:color 1s ease;
     }
     &.recipe-stats__views{
       i, span{ color: #5B96C4 !important; }
     }
     &.recipe-stats__favorite{
-      button{ color: #FEAA26 !important; }
+      button{
+        color: rgba(254, 170, 38, .5);
+        &.active{
+          color: rgb(254, 170, 38);
+        }
+        &:hover{
+          color: rgb(254, 170, 38);
+        }
+      }
     }
     &.recipe-stats__vote-down{
-      button{ color: red !important; }
+      button{
+        color: rgba(255, 0, 0, .5);
+        &.active{
+          color: rgb(255, 0, 0);
+        }
+        &:hover{
+          color: rgb(255, 0, 0);
+        }
+      }
     }
     &.recipe-stats__vote-up{
-      button{ color: #00A900 !important; }
+      button{
+        color: rgba(0, 169, 0, 0.5);
+        &.active{
+          color: rgb(0, 169, 0);
+        }
+        &:hover{
+          color: rgb(0, 169, 0);
+        }
+      }
     }
   }
 }

@@ -650,6 +650,7 @@ describe('API Integration Tests', () => {
           expect(res.status).to.equal(200);
           expect(res.body.recipe.upVoteCount).to.equal(1);
           expect(res.body.recipe.downVoteCount).to.equal(0);
+          expect(res.body.message).to.equal('You liked this recipe');
           expect(res.body.status).to.equal('success');
           done();
         });
@@ -663,6 +664,7 @@ describe('API Integration Tests', () => {
           expect(res.status).to.equal(200);
           expect(res.body.recipe.upVoteCount).to.equal(0);
           expect(res.body.recipe.downVoteCount).to.equal(1);
+          expect(res.body.message).to.equal('You disliked this recipe');
           expect(res.body.status).to.equal('success');
           done();
         });
@@ -676,6 +678,7 @@ describe('API Integration Tests', () => {
           expect(res.status).to.equal(200);
           expect(res.body.recipe.upVoteCount).to.equal(0);
           expect(res.body.recipe.downVoteCount).to.equal(2);
+          expect(res.body.message).to.equal('You disliked this recipe');
           expect(res.body.status).to.equal('success');
           done();
         });
@@ -689,6 +692,7 @@ describe('API Integration Tests', () => {
           expect(res.status).to.equal(200);
           expect(res.body.recipe.upVoteCount).to.equal(0);
           expect(res.body.recipe.downVoteCount).to.equal(1);
+          expect(res.body.message).to.equal('Vote removed');
           expect(res.body.status).to.equal('success');
           done();
         });
@@ -701,6 +705,7 @@ describe('API Integration Tests', () => {
           expect(res.status).to.equal(200);
           expect(res.body.recipe.upVoteCount).to.equal(1);
           expect(res.body.recipe.downVoteCount).to.equal(0);
+          expect(res.body.message).to.equal('You liked this recipe');
           expect(res.body.status).to.equal('success');
           done();
         });
