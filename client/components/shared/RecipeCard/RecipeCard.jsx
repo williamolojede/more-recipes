@@ -1,7 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-
-import { recipeCardPropTypes } from '../../../config/proptypes';
 
 import RecipeCardInfo from './RecipeCardInfo.jsx';
 
@@ -28,11 +27,11 @@ const RecipeCard = (props) => {
 
   return (
     <div className="recipe-card card">
-      <Link to={`/recipe/${id}`}>
+      <Link to={`/recipe/${id}`} className="recipe-card__img">
         <img
-          src={img_url}
+          src={img_url} /* eslint camelcase: 0 */
           alt="pancake"
-          className="recipe-card__img card-image"
+          className="card-image"
         />
       </Link>
       <div className="card-content">
@@ -47,6 +46,13 @@ const RecipeCard = (props) => {
 };
 
 // NOTE: not all keys are checked since they'll also be checked in `RecipeCardInfo`
-RecipeCard.propTypes = recipeCardPropTypes;
+RecipeCard.propTypes = {
+  recipe: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    img_url: PropTypes.string
+  }).isRequired
+};
 
 export default RecipeCard;

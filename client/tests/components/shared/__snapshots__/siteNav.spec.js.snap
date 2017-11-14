@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Site Nav should render with right amount of elements 1`] = `
+<nav
+  className="site-header__nav"
+>
+  <div
+    className="nav-wrapper container"
+  >
+    <Link
+      className="brand-logo"
+      replace={false}
+      to="/"
+    >
+      MoreRecipes
+    </Link>
+    <ul
+      className="right hide-on-med-and-down"
+    >
+      <li>
+        <Link
+          replace={false}
+          to="/user/1"
+        >
+          Profile
+        </Link>
+      </li>
+      <li>
+        <Link
+          className="logout__button"
+          onClick={[Function]}
+          replace={false}
+          to="/logout"
+        >
+          Sign Out
+        </Link>
+      </li>
+    </ul>
+    <ul
+      className="side-nav"
+      id="mobile-nav"
+    >
+      <li>
+        <Link
+          replace={false}
+          to="/user/1"
+        >
+          Profile
+        </Link>
+      </li>
+      <li
+        className="logout__button"
+      >
+        <Link
+          className="logout__button"
+          onClick={[Function]}
+          replace={false}
+          to="/logout"
+        >
+          Sign Out
+        </Link>
+      </li>
+    </ul>
+    <a
+      className="button-collapse"
+      data-activates="mobile-nav"
+      href="#"
+    >
+      <i
+        className="material-icons"
+      >
+        menu
+      </i>
+    </a>
+  </div>
+</nav>
+`;
