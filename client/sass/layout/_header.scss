@@ -42,7 +42,7 @@
         height: 70px;
         border-radius: 4px;
         color: #fff;
-        font-size: 2rem;
+        font-size: 1.3rem;
         padding: .5rem 1rem;
         background-color: rgba(86, 98, 112, .3);
         box-sizing: border-box;
@@ -51,6 +51,10 @@
         background-position: .7rem center;
         background-size: 50px 30px;
         background-repeat: no-repeat;
+
+        @media #{$medium-and-up} {
+          font-size: 2rem;
+        }
 
         &:focus{
           border-bottom-color: #383A3F;

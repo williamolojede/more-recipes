@@ -1,5 +1,13 @@
 .recipe-card{
+  .recipe-card__img{
+    height: 210px;
+    display: block;
+    overflow: hidden;
 
+    img{
+      height: 100%;
+    }
+  }
   .recipe-card__description {
     color: #7f7f7f !important;
   }

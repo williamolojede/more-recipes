@@ -4,14 +4,14 @@
 
 import { RECIEVE_TOP_RATED_RECIPE } from '../actions/types';
 
-const recipes = (state = [], action) => {
+const topRecipes = (state = {}, action) => {
   switch (action.type) {
     case RECIEVE_TOP_RATED_RECIPE:
-      return action.recipes;
+      return { recipes: action.recipes, metaData: action.metaData };
     default:
       return state;
   }
 };
 
 
-export default recipes;
+export default topRecipes;

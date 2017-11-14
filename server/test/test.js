@@ -839,12 +839,15 @@ describe('API Integration Tests', () => {
         });
     });
     it('return 200 for successfully returning a sorted recipe list', (done) => {
-      request.get(`${recipesUrl}?sort=upvotes&order=descending`)
+      request.get(`${recipesUrl}?sort=upvotes&order=descending&page=1&limit=6`)
         .send({ token: userToken1 })
         .end((err, res) => {
           expect(res.status).to.equal(200);
           expect(res.body.message).to.equal('success');
           expect(res.body.recipes[0].name).to.equal('Fried Rice');
+          expect(res.body.metaData.totalCount).to.equal(2);
+          expect(res.body.metaData.pages.length).to.equal(1);
+          expect(res.body.metaData.pageSize).to.equal(2);
           done();
         });
     });

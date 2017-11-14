@@ -10,8 +10,9 @@
     "jest": true
   },
   "globals": {
-    // enzyme's shallow is added a global in setupTest.js
-    "shallow": true
+    "shallow": true,
+    "mount": true,
+    "eventObject": true
   },
   "rules": {
     "one-var": 0,
@@ -24,6 +25,9 @@
     "curly": ["error", "multi-line"],
     "import/no-unresolved": 0,
     "import/extensions": [2, { "js": "never"}],
+    "jsx-a11y/anchor-is-valid": [ "error", {
+      "specialLink": [ "to" ]
+    }],
     "no-shadow": ["error", { "allow": ["req", "res", "err"] }],
     "valid-jsdoc": ["error", {
       "requireReturn": true,

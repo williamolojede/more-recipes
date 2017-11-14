@@ -12,9 +12,10 @@ import {
   RECIEVE_UPDATED_RECIPE
 } from './types';
 
-const recieveTopRecipes = recipes => ({
+const recieveTopRecipes = (recipes, metaData) => ({
   type: RECIEVE_TOP_RATED_RECIPE,
-  recipes
+  recipes,
+  metaData
 });
 
 const recieveSingleRecipe = recipe => ({
@@ -50,13 +51,13 @@ export const fetchSingleRecipes = id => (dispatch) => {
     });
 };
 
-export const fetchTopRecipes = () => (dispatch) => {
+export const fetchTopRecipes = (page, limit) => (dispatch) => {
   dispatch(setFetching());
-  return instance.get('/recipes?sort=upvotes&order=descending')
+  return instance.get(`/recipes?sort=upvotes&order=descending&page=${page}&limit=${limit}`)
     .then((res) => {
       dispatch(
         batchActions([
-          recieveTopRecipes(res.data.recipes),
+          recieveTopRecipes(res.data.recipes, res.data.metaData),
           unsetFetching()
         ])
       );

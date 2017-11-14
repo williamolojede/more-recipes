@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 import { logoutUser } from '../../actions/loginUser';
 
-const SiteNav = ({ user, dispatch }) => (
+export const SiteNav = ({ user, dispatch }) => (
   <nav className="site-header__nav">
     <div className="nav-wrapper container">
       <Link to="/" className="brand-logo">MoreRecipes</Link>
@@ -16,6 +16,7 @@ const SiteNav = ({ user, dispatch }) => (
         <li>
           <Link
             to="/logout"
+            className="logout__button"
             onClick={(e) => {
               e.preventDefault();
               dispatch(logoutUser());
@@ -29,9 +30,10 @@ const SiteNav = ({ user, dispatch }) => (
         <li>
           <Link to={`/user/${user.id}`}>Profile</Link>
         </li>
-        <li>
+        <li className="logout__button">
           <Link
             to="/logout"
+            className="logout__button"
             onClick={(e) => {
               e.preventDefault();
               dispatch(logoutUser());

@@ -27,15 +27,6 @@ describe('RecipeStats', () => {
     const tree = setup().component.toJSON();
     expect(tree).toMatchSnapshot();
   });
-
-  // it('should ', () => {
-  //   const { wrapper } = setup();
-  //   const onButtonClickSpy = jest.spyOn(wrapper.instance(), 'onButtonClick');
-  //   wrapper.instance().onButtonClick('favorite');
-  //   wrapper.instance().onButtonClick('vote', 'up');
-  //   wrapper.instance().onButtonClick('vote', 'up');
-  //   expect(onButtonClickSpy).toHaveBeenCalledTimes(3);
-  // });
   it('should favorite as expected', () => {
     const { wrapper } = setup();
     expect(wrapper).toMatchSnapshot();
