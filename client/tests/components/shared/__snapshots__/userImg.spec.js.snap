@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Top Rated Recipes List should render an img tag if user imgurl is present 1`] = `
+<div
+  className="user-image inReview"
+>
+  <img
+    alt="OneWord"
+    className="user-image__img"
+    src="https://www.worldcrunch.com/assets/img/avatars/thumbnails/default-user-img-profile.jpg"
+    title="OneWord"
+  />
+</div>
+`;
+
+exports[`Top Rated Recipes List should render properly if user fullname is just one word 1`] = `
+<div
+  className="user-image inReview"
+>
+  <div
+    className="user-image__no-img"
+  >
+    <span>
+      O
+    </span>
+    <span />
+  </div>
+</div>
+`;
+
+exports[`Top Rated Recipes List should render with right amount of elements 1`] = `
+<div
+  className="user-image inReview"
+>
+  <div
+    className="user-image__no-img"
+  >
+    <span>
+      J
+    </span>
+    <span>
+      D
+    </span>
+  </div>
+</div>
+`;

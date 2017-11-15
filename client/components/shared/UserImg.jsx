@@ -4,8 +4,15 @@ import { userImgPropTypes } from '../../config/proptypes';
 
 const UserImg = ({ user, type }) => {
   const buffer = user.fullname.split(' ');
-  const firstChar = buffer[0].charAt(0).toUpperCase();
-  const secondChar = buffer[1].charAt(0).toUpperCase();
+  let firstChar;
+  let secondChar;
+
+  if (buffer.length > 1) {
+    firstChar = buffer[0].charAt(0).toUpperCase();
+    secondChar = buffer[1].charAt(0).toUpperCase();
+  } else {
+    firstChar = buffer[0].charAt(0).toUpperCase();
+  }
 
   return (
     <div className={`user-image ${type}`}>
@@ -16,7 +23,7 @@ const UserImg = ({ user, type }) => {
             <span>{secondChar}</span>
           </div>
           :
-          <img src={user.imgUrl} alt={user.fullname} title={user.fullname} className="user-image__img"/>
+          <img src={user.imgUrl} alt={user.fullname} title={user.fullname} className="user-image__img" />
       }
     </div>
   );
