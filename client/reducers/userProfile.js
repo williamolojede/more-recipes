@@ -12,7 +12,7 @@ const userProfile = (state = {}, action) => {
     case RECIEVE_USER_PROFILE:
       return action.data;
     case RECIEVE_NEW_RECIPE:
-      oldState.recipes = oldState.recipes.concat(action.recipe);
+      oldState.user.recipes = oldState.user.recipes.concat(action.recipe);
       return oldState;
     case REMOVE_RECIPE_FROM_PROFILE:
       user = Object.assign({}, oldState.user);

@@ -121,22 +121,25 @@ export const favorite = id => dispatch => instance.post(`/recipes/${id}/favorite
   });
 
 
-export const addRecipe = recipe => (dispatch) => {
-  dispatch(setFetching());
-  return instance.post('/recipes', { recipe })
+export const addRecipe = recipe => dispatch =>
+  instance.post('/recipes', { recipe })
     .then((res) => {
       dispatch(
         batchActions([
           recieveNewRecipe(res.data.recipe),
-          unsetFetching()
+          showNotification(res.data.message),
         ])
       );
+      setTimeout(() => {
+        dispatch(hideNotification());
+      }, 3000);
     })
     .catch((err) => {
-      console.log(err.response.data.message || err.message);
-      dispatch(unsetFetching());
+      dispatch(showNotification(err.response.data.message));
+      setTimeout(() => {
+        dispatch(hideNotification());
+      }, 3000);
     });
-};
 
 export const updateRecipe = (recipe, index) => (dispatch) => {
   const { id, name, description, img_url, ingredients, instructions } = recipe;

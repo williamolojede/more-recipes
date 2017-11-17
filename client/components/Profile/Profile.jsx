@@ -18,6 +18,7 @@ import Preloader from '../shared/Preloader.jsx';
 import AddRecipeForm from './AddRecipeForm.jsx';
 import PersonalRecipes from './PersonalRecipes.jsx';
 import FavoriteRecipes from './FavoriteRecipes.jsx';
+import Notification from '../shared/Notification.jsx';
 
 class Profile extends Component {
   constructor(props) {
@@ -159,6 +160,7 @@ class Profile extends Component {
                   </Switch>
                 </div>
               </section>
+              <Notification notification={this.props.notification} />
             </div>
           </main>
         </div>
@@ -189,13 +191,20 @@ Profile.propTypes = {
   }).isRequired,
 
   isFetching: PropTypes.bool.isRequired,
-  dispatch: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired,
+  notification: PropTypes.string.isRequired
 };
 
-const mapStateToProps = ({ isFetching, auth, userProfile }) => ({
+const mapStateToProps = ({
+  isFetching,
+  auth,
+  userProfile,
+  notification
+}) => ({
   user: auth.user,
   isFetching,
-  userProfile
+  userProfile,
+  notification
 });
 
 export default connect(mapStateToProps)(Profile);
