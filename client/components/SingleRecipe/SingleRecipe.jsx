@@ -1,3 +1,5 @@
+/* eslint camelcase: 0 */
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -28,7 +30,7 @@ class SingleRecipe extends Component {
   }
 
   render() {
-    if (Object.keys(this.props.recipe).length === 0) return null;
+    if (Object.keys(this.props.recipe).length === 0) return (<Preloader />);
 
     const {
       id,
@@ -53,40 +55,40 @@ class SingleRecipe extends Component {
 
 
     return (
-      this.props.isFetching ?
-        <Preloader />
-        :
-        <div className="page page__recipe">
-          <header className="site-header">
-            <SiteNav user={this.props.user} />
-          </header>
-          <main>
-            <div className="container">
-              <div className="row">
-                <div className="col s12 m5">
-                  <img src={img_url} alt={name} />
-                </div>
-                <div className="col s12 m7">
-                  <h4 className="recipe__name">{name}</h4>
-                  <p className="recipe__description">{description}</p>
-                  <div className="row recipe__stats">
-                    <RecipeStats stats={stats} vote={this.vote} favorite={this.favorite} />
-                    <a href="#write-review" className="write-review">
+      // this.props.isFetching && this.state.postingReview ?
+      //   <Preloader />
+      //   :
+      <div className="page page__recipe">
+        <header className="site-header">
+          <SiteNav user={this.props.user} />
+        </header>
+        <main>
+          <div className="container">
+            <div className="row">
+              <div className="col s12 m5">
+                <img src={img_url} alt={name} />
+              </div>
+              <div className="col s12 m7">
+                <h4 className="recipe__name">{name}</h4>
+                <p className="recipe__description">{description}</p>
+                <div className="row recipe__stats">
+                  <RecipeStats stats={stats} vote={this.vote} favorite={this.favorite} />
+                  <a href="#write-review" className="write-review">
                       Write Review
-                    </a>
-                  </div>
+                  </a>
                 </div>
               </div>
-
-              <IngredientsList ingredients={ingredients} />
-              <InstructionsList instructions={instructions} />
-              <Reviews reviews={reviews} user={this.props.user} id={id} />
             </div>
-          </main>
 
-          <Notification notification={this.props.notification} />
-          <SiteFooter />
-        </div>
+            <IngredientsList ingredients={ingredients} />
+            <InstructionsList instructions={instructions} />
+            <Reviews reviews={reviews} user={this.props.user} id={id} />
+          </div>
+        </main>
+
+        <Notification notification={this.props.notification} />
+        <SiteFooter />
+      </div>
     );
   }
 }
