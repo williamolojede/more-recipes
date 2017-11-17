@@ -27,9 +27,9 @@ describe('Pagination', () => {
     it('should respond to click event', () => {
       const { wrapper } = setup();
       expect(wrapper).toMatchSnapshot();
-      const links = wrapper.find('li a');
+      const buttons = wrapper.find('li button');
       const getRecipesForPageSpy = jest.spyOn(wrapper.instance().props, 'getRecipesForPage');
-      links.forEach(link => link.simulate('click'));
+      buttons.forEach(button => button.simulate('click'));
       expect(getRecipesForPageSpy).toHaveBeenCalledTimes(7);
     });
   });

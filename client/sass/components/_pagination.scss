@@ -1,0 +1,38 @@
+.pagination{
+
+  li{
+    display: inline-block;
+    border-radius: 2px;
+    text-align: center;
+    vertical-align: top;
+    height: 30px;
+
+
+
+    button{
+      color: #444;
+      display: inline-block;
+      font-size: 1.2rem;
+      padding: 0 10px;
+      line-height: 30px;
+      background-color: transparent;
+      outline: none;
+      border: none;
+    }
+
+    &.active {
+      background-color: #ee6e73;
+
+      button{
+        color: #fff;
+      }
+    }
+
+    &.disabled {
+      button{
+        cursor: not-allowed;
+        color: #999;
+      }
+    }
+  }
+}

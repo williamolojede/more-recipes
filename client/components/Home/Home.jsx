@@ -29,7 +29,6 @@ export class Home extends Component {
 
   componentWillReceiveProps(newProps) {
     if (newProps.recipes) {
-      // console.log(newProps.recipes);
       const {
         recipes,
         metaData

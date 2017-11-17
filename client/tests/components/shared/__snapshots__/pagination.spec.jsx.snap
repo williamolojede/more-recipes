@@ -8,8 +8,7 @@ exports[`Pagination links should respond to click event 1`] = `
     className="disabled"
     id="pagination__prev"
   >
-    <a
-      href="#!"
+    <button
       onClick={[Function]}
     >
       <i
@@ -17,69 +16,63 @@ exports[`Pagination links should respond to click event 1`] = `
       >
         chevron_left
       </i>
-    </a>
+    </button>
   </li>
   <li
     className="active"
     key="1"
   >
-    <a
-      href="#!"
+    <button
       onClick={[Function]}
     >
       1
-    </a>
+    </button>
   </li>
   <li
     className="waves-effect"
     key="2"
   >
-    <a
-      href="#!"
+    <button
       onClick={[Function]}
     >
       2
-    </a>
+    </button>
   </li>
   <li
     className="waves-effect"
     key="3"
   >
-    <a
-      href="#!"
+    <button
       onClick={[Function]}
     >
       3
-    </a>
+    </button>
   </li>
   <li
     className="waves-effect"
     key="4"
   >
-    <a
-      href="#!"
+    <button
       onClick={[Function]}
     >
       4
-    </a>
+    </button>
   </li>
   <li
     className="waves-effect"
     key="5"
   >
-    <a
-      href="#!"
+    <button
       onClick={[Function]}
     >
       5
-    </a>
+    </button>
   </li>
   <li
     className="waves-effect"
     id="pagination__next"
   >
-    <a
-      href="#!"
+    <button
       onClick={[Function]}
     >
       <i
@@ -87,7 +80,7 @@ exports[`Pagination links should respond to click event 1`] = `
       >
         chevron_right
       </i>
-    </a>
+    </button>
   </li>
 </ul>
 `;
@@ -100,8 +93,7 @@ exports[`Pagination next link should be diabled if current page is the last 1`] 
     className="disabled"
     id="pagination__prev"
   >
-    <a
-      href="#!"
+    <button
       onClick={[Function]}
     >
       <i
@@ -109,69 +101,63 @@ exports[`Pagination next link should be diabled if current page is the last 1`] 
       >
         chevron_left
       </i>
-    </a>
+    </button>
   </li>
   <li
     className="active"
     key="1"
   >
-    <a
-      href="#!"
+    <button
       onClick={[Function]}
     >
       1
-    </a>
+    </button>
   </li>
   <li
     className="waves-effect"
     key="2"
   >
-    <a
-      href="#!"
+    <button
       onClick={[Function]}
     >
       2
-    </a>
+    </button>
   </li>
   <li
     className="waves-effect"
     key="3"
   >
-    <a
-      href="#!"
+    <button
       onClick={[Function]}
     >
       3
-    </a>
+    </button>
   </li>
   <li
     className="waves-effect"
     key="4"
   >
-    <a
-      href="#!"
+    <button
       onClick={[Function]}
     >
       4
-    </a>
+    </button>
   </li>
   <li
     className="waves-effect"
     key="5"
   >
-    <a
-      href="#!"
+    <button
       onClick={[Function]}
     >
       5
-    </a>
+    </button>
   </li>
   <li
     className="waves-effect"
     id="pagination__next"
   >
-    <a
-      href="#!"
+    <button
       onClick={[Function]}
     >
       <i
@@ -179,7 +165,7 @@ exports[`Pagination next link should be diabled if current page is the last 1`] 
       >
         chevron_right
       </i>
-    </a>
+    </button>
   </li>
 </ul>
 `;
@@ -192,8 +178,7 @@ exports[`Pagination next link should be diabled if current page is the last 2`] 
     className="waves-effect"
     id="pagination__prev"
   >
-    <a
-      href="#!"
+    <button
       onClick={[Function]}
     >
       <i
@@ -201,69 +186,63 @@ exports[`Pagination next link should be diabled if current page is the last 2`] 
       >
         chevron_left
       </i>
-    </a>
+    </button>
   </li>
   <li
     className="waves-effect"
     key="1"
   >
-    <a
-      href="#!"
+    <button
       onClick={[Function]}
     >
       1
-    </a>
+    </button>
   </li>
   <li
     className="waves-effect"
     key="2"
   >
-    <a
-      href="#!"
+    <button
       onClick={[Function]}
     >
       2
-    </a>
+    </button>
   </li>
   <li
     className="waves-effect"
     key="3"
   >
-    <a
-      href="#!"
+    <button
       onClick={[Function]}
     >
       3
-    </a>
+    </button>
   </li>
   <li
     className="waves-effect"
     key="4"
   >
-    <a
-      href="#!"
+    <button
       onClick={[Function]}
     >
       4
-    </a>
+    </button>
   </li>
   <li
     className="active"
     key="5"
   >
-    <a
-      href="#!"
+    <button
       onClick={[Function]}
     >
       5
-    </a>
+    </button>
   </li>
   <li
     className="disabled"
     id="pagination__next"
   >
-    <a
-      href="#!"
+    <button
       onClick={[Function]}
     >
       <i
@@ -271,7 +250,7 @@ exports[`Pagination next link should be diabled if current page is the last 2`] 
       >
         chevron_right
       </i>
-    </a>
+    </button>
   </li>
 </ul>
 `;
@@ -284,8 +263,7 @@ exports[`Pagination previous link should not be disabled if currentpage is not p
     className="disabled"
     id="pagination__prev"
   >
-    <a
-      href="#!"
+    <button
       onClick={[Function]}
     >
       <i
@@ -293,69 +271,63 @@ exports[`Pagination previous link should not be disabled if currentpage is not p
       >
         chevron_left
       </i>
-    </a>
+    </button>
   </li>
   <li
     className="active"
     key="1"
   >
-    <a
-      href="#!"
+    <button
       onClick={[Function]}
     >
       1
-    </a>
+    </button>
   </li>
   <li
     className="waves-effect"
     key="2"
   >
-    <a
-      href="#!"
+    <button
       onClick={[Function]}
     >
       2
-    </a>
+    </button>
   </li>
   <li
     className="waves-effect"
     key="3"
   >
-    <a
-      href="#!"
+    <button
       onClick={[Function]}
     >
       3
-    </a>
+    </button>
   </li>
   <li
     className="waves-effect"
     key="4"
   >
-    <a
-      href="#!"
+    <button
       onClick={[Function]}
     >
       4
-    </a>
+    </button>
   </li>
   <li
     className="waves-effect"
     key="5"
   >
-    <a
-      href="#!"
+    <button
       onClick={[Function]}
     >
       5
-    </a>
+    </button>
   </li>
   <li
     className="waves-effect"
     id="pagination__next"
   >
-    <a
-      href="#!"
+    <button
       onClick={[Function]}
     >
       <i
@@ -363,7 +335,7 @@ exports[`Pagination previous link should not be disabled if currentpage is not p
       >
         chevron_right
       </i>
-    </a>
+    </button>
   </li>
 </ul>
 `;
@@ -376,8 +348,7 @@ exports[`Pagination previous link should not be disabled if currentpage is not p
     className="waves-effect"
     id="pagination__prev"
   >
-    <a
-      href="#!"
+    <button
       onClick={[Function]}
     >
       <i
@@ -385,69 +356,63 @@ exports[`Pagination previous link should not be disabled if currentpage is not p
       >
         chevron_left
       </i>
-    </a>
+    </button>
   </li>
   <li
     className="waves-effect"
     key="1"
   >
-    <a
-      href="#!"
+    <button
       onClick={[Function]}
     >
       1
-    </a>
+    </button>
   </li>
   <li
     className="active"
     key="2"
   >
-    <a
-      href="#!"
+    <button
       onClick={[Function]}
     >
       2
-    </a>
+    </button>
   </li>
   <li
     className="waves-effect"
     key="3"
   >
-    <a
-      href="#!"
+    <button
       onClick={[Function]}
     >
       3
-    </a>
+    </button>
   </li>
   <li
     className="waves-effect"
     key="4"
   >
-    <a
-      href="#!"
+    <button
       onClick={[Function]}
     >
       4
-    </a>
+    </button>
   </li>
   <li
     className="waves-effect"
     key="5"
   >
-    <a
-      href="#!"
+    <button
       onClick={[Function]}
     >
       5
-    </a>
+    </button>
   </li>
   <li
     className="waves-effect"
     id="pagination__next"
   >
-    <a
-      href="#!"
+    <button
       onClick={[Function]}
     >
       <i
@@ -455,7 +420,7 @@ exports[`Pagination previous link should not be disabled if currentpage is not p
       >
         chevron_right
       </i>
-    </a>
+    </button>
   </li>
 </ul>
 `;
@@ -468,8 +433,7 @@ exports[`Pagination should render with right amount of elements 1`] = `
     className="disabled"
     id="pagination__prev"
   >
-    <a
-      href="#!"
+    <button
       onClick={[Function]}
     >
       <i
@@ -477,64 +441,58 @@ exports[`Pagination should render with right amount of elements 1`] = `
       >
         chevron_left
       </i>
-    </a>
+    </button>
   </li>
   <li
     className="active"
   >
-    <a
-      href="#!"
+    <button
       onClick={[Function]}
     >
       1
-    </a>
+    </button>
   </li>
   <li
     className="waves-effect"
   >
-    <a
-      href="#!"
+    <button
       onClick={[Function]}
     >
       2
-    </a>
+    </button>
   </li>
   <li
     className="waves-effect"
   >
-    <a
-      href="#!"
+    <button
       onClick={[Function]}
     >
       3
-    </a>
+    </button>
   </li>
   <li
     className="waves-effect"
   >
-    <a
-      href="#!"
+    <button
       onClick={[Function]}
     >
       4
-    </a>
+    </button>
   </li>
   <li
     className="waves-effect"
   >
-    <a
-      href="#!"
+    <button
       onClick={[Function]}
     >
       5
-    </a>
+    </button>
   </li>
   <li
     className="waves-effect"
     id="pagination__next"
   >
-    <a
-      href="#!"
+    <button
       onClick={[Function]}
     >
       <i
@@ -542,7 +500,7 @@ exports[`Pagination should render with right amount of elements 1`] = `
       >
         chevron_right
       </i>
-    </a>
+    </button>
   </li>
 </ul>
 `;

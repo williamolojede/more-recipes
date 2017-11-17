@@ -243,5 +243,12 @@ const recipes = [
     }
   },
 ];
+export const favoriteRecipes = () => {
+  const buffer = [];
+  for (let i = 0; i < recipes.length; i += 1) {
+    buffer.push({ Recipe: recipes[i] });
+  }
+  return buffer;
+};
 
 export default recipes;
