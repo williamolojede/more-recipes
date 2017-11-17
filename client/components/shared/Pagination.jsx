@@ -7,9 +7,9 @@ const Pagination = ({ currentPage, pages, getRecipesForPage }) => (
       className={currentPage === 1 ? 'disabled' : 'waves-effect'}
       id="pagination__prev"
     >
-      <a href="#!" onClick={() => getRecipesForPage(currentPage - 1)}>
+      <button onClick={() => getRecipesForPage(currentPage - 1)}>
         <i className="material-icons">chevron_left</i>
-      </a>
+      </button>
     </li>
     {
       pages.map(page => (
@@ -17,9 +17,9 @@ const Pagination = ({ currentPage, pages, getRecipesForPage }) => (
           className={page === currentPage ? 'active' : 'waves-effect'}
           key={page}
         >
-          <a href="#!" onClick={() => getRecipesForPage(page)}>
+          <button onClick={() => getRecipesForPage(page)}>
             {page}
-          </a>
+          </button>
         </li>
       ))
     }
@@ -30,9 +30,9 @@ const Pagination = ({ currentPage, pages, getRecipesForPage }) => (
       }
       id="pagination__next"
     >
-      <a href="#!" onClick={() => getRecipesForPage(currentPage + 1)}>
+      <button onClick={() => getRecipesForPage(currentPage + 1)}>
         <i className="material-icons">chevron_right</i>
-      </a>
+      </button>
     </li>
   </ul>
 );

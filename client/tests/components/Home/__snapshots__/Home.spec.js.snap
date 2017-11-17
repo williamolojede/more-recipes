@@ -656,8 +656,7 @@ exports[`Home should render with right amount of elements 1`] = `
                         className="disabled"
                         id="pagination__prev"
                       >
-                        <a
-                          href="#!"
+                        <button
                           onClick={[Function]}
                         >
                           <i
@@ -665,14 +664,13 @@ exports[`Home should render with right amount of elements 1`] = `
                           >
                             chevron_left
                           </i>
-                        </a>
+                        </button>
                       </li>
                       <li
                         className="waves-effect"
                         id="pagination__next"
                       >
-                        <a
-                          href="#!"
+                        <button
                           onClick={[Function]}
                         >
                           <i
@@ -680,7 +678,7 @@ exports[`Home should render with right amount of elements 1`] = `
                           >
                             chevron_right
                           </i>
-                        </a>
+                        </button>
                       </li>
                     </ul>
                   </Pagination>
