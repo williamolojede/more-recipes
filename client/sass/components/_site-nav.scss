@@ -1,0 +1,16 @@
+.site-header__nav{
+  button{
+    -webkit-appearance: none;
+    background-color: transparent;
+    color: #383A3F;
+    border: none;
+    padding: 0;
+    @media #{$medium-and-up}{
+      height: 64px;
+      line-height: 64px;
+    }
+    @media #{$large-and-up}{
+      display: none;
+    }
+  }
+}

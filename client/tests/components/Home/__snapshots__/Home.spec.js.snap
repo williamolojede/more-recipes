@@ -585,17 +585,16 @@ exports[`Home should render with right amount of elements 1`] = `
                         </Link>
                       </li>
                     </ul>
-                    <a
+                    <button
                       className="button-collapse"
                       data-activates="mobile-nav"
-                      href="#"
                     >
                       <i
                         className="material-icons"
                       >
                         menu
                       </i>
-                    </a>
+                    </button>
                   </div>
                 </nav>
               </SiteNav>

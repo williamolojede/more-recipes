@@ -12,7 +12,8 @@
   "globals": {
     "shallow": true,
     "mount": true,
-    "eventObject": true
+    "eventObject": true,
+    "$": true
   },
   "rules": {
     "one-var": 0,
