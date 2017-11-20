@@ -6,11 +6,12 @@ import scrollUp from '../../utils/scrollUp';
 
 import { fetchTopRecipes } from '../../actions/fetchRecipe';
 
-import TopRatedRecipeList from '../shared/TopRatedRecipeList.jsx';
-import Preloader from '../shared/Preloader.jsx';
-import ConnectedSiteNav from '../shared/SiteNav.jsx';
-import SiteFooter from '../shared/SiteFooter.jsx';
+import TopRatedRecipeList from '../shared/TopRatedRecipeList';
+import Preloader from '../shared/Preloader';
+import ConnectedSiteNav from '../shared/SiteNav';
+import SiteFooter from '../shared/SiteFooter';
 import Pagination from '../shared/Pagination';
+import Search from '../shared/Search';
 
 export class Home extends Component {
   constructor(props) {
@@ -19,7 +20,8 @@ export class Home extends Component {
       recipes: [],
       pages: [],
       currentPage: 1,
-      limit: 6
+      limit: 6,
+      isSearchActive: false
     };
   }
 
@@ -55,6 +57,12 @@ export class Home extends Component {
     });
   }
 
+  toggleSearch =() => {
+    this.setState({
+      isSearchActive: !this.state.isSearchActive
+    });
+  }
+
   renderBody = () => {
     const { isFetching } = this.props;
 
@@ -79,7 +87,12 @@ export class Home extends Component {
           <ConnectedSiteNav user={this.props.user} />
           <section className="site-header__hero">
             <h2>Delicious recipes, just a search away...</h2>
-            <input className="site-header__hero--input" type="text" placeholder="what would you like to cook?" />
+            <input
+              className="site-header__hero--input"
+              type="text"
+              onFocus={this.toggleSearch}
+              placeholder="what would you like to cook?"
+            />
           </section>
         </header>
         <main>
@@ -105,6 +118,9 @@ export class Home extends Component {
             </section>
           </div>
         </main>
+        {
+          this.state.isSearchActive && <Search toggleSearch={this.toggleSearch} />
+        }
         <SiteFooter />
       </div>
     );
