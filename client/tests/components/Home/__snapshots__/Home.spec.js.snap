@@ -23,6 +23,7 @@ exports[`Home should render a preloader 1`] = `
       </h2>
       <input
         className="site-header__hero--input"
+        onFocus={[Function]}
         placeholder="what would you like to cook?"
         type="text"
       />
@@ -71,6 +72,7 @@ exports[`Home should render top recipes when recipes props is received 1`] = `
       </h2>
       <input
         className="site-header__hero--input"
+        onFocus={[Function]}
         placeholder="what would you like to cook?"
         type="text"
       />
@@ -143,6 +145,7 @@ exports[`Home should render top recipes when recipes props is received 2`] = `
       </h2>
       <input
         className="site-header__hero--input"
+        onFocus={[Function]}
         placeholder="what would you like to cook?"
         type="text"
       />
@@ -607,6 +610,7 @@ exports[`Home should render with right amount of elements 1`] = `
               </h2>
               <input
                 className="site-header__hero--input"
+                onFocus={[Function]}
                 placeholder="what would you like to cook?"
                 type="text"
               />

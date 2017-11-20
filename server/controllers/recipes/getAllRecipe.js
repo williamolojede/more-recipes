@@ -3,7 +3,7 @@ import systemErrorHandler from '../../helpers/systemErrorHandler';
 import Paginate from '../../helpers/paginate';
 
 const getAllRecipe = (req, res, next) => {
-  const { sort, order } = req.query;
+  const { sort, order, search } = req.query;
 
   //  if query is passed
   if (sort && order) {
@@ -28,6 +28,17 @@ const getAllRecipe = (req, res, next) => {
           .getRecipesForPage(parseInt(req.query.page, 10));
         res.status(200).send({ recipes, metaData, message: 'success' });
       })
+      .catch(error => systemErrorHandler(error, next));
+  } else if (search) {
+    return Recipe.findAll({
+      where: {
+        $or: [
+          { name: { $ilike: `%${search}%` } },
+          { ingredients: { $contains: [search] } }
+        ],
+      }
+    })
+      .then(recipes => res.status(200).send({ recipes }))
       .catch(error => systemErrorHandler(error, next));
   }
   Recipe.findAll({
