@@ -46,6 +46,11 @@ exports[`Top Rated Recipes List should render with right amount of elements 1`] 
           "owner": 8,
           "reviews": Array [
             Object {
+              "User": Object {
+                "fullname": "John Bull",
+                "id": 8,
+                "username": null,
+              },
               "content": "gwbvgfda",
               "createdAt": "2017-11-04T07:28:31.732Z",
               "id": 5,
