@@ -1,54 +1,28 @@
-.card.review__card{
-  .card-image{
-    width: 100%;
-    text-align: center;
-    padding: 1rem;
-    // padding: $card-padding;
-    border-bottom: 2px solid #ddd;
+.review__card{
+  .wrapper{
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-
-    img{
-      width: 80px;
-      height: 80px;
-    }
-    .card-title{
-      color: initial;
-      padding: 0;
-      position: initial;
-      margin-bottom: 0;
-    }
   }
-  .card-content {
-    width: 100%;
-    min-height: 100px;
-    padding: 1rem;
-  }
-}
 
-@media #{$medium-and-up} {
-  .card.review__card{
-    display: flex;
-    .card-image{
-      width: 30%;
-      text-align: center;
-      // padding: 24px 0;
-      border-right: 2px solid #ddd;
-      border-bottom: none;
+  .review__card-card-content{
+    margin-left: 1rem;
+
+    .review__card-card-content___top{
       display: flex;
-      flex-direction: column;
-      justify-content: space-around;
-
-      .card-title{
-        color: initial;
-        padding: 0;
-        position: initial;
+      .user-name{
+        font-weight: 700;
+        margin: 0;
+        margin-right: 1.5rem;
+      }
+      .time-since{
+        color: rgb(136, 136, 136);
       }
     }
-    .card-content {
-      width: 70%;
+
+    p{
+      margin: 0;
     }
   }
+
+  margin-bottom: 1rem;
 }
+

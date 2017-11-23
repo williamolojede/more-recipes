@@ -19,16 +19,19 @@ const IngredientsList = ({ ingredients }) => {
   return (
     <div className="recipe__ingredients row">
       <h3>Ingredients</h3>
-      <ul className="col s12 m6">
-        {
-          ingredientListOne.map((ingredient, i) => <li key={i}>{ingredient}</li>)
-        }
-      </ul>
-      <ul className="col s12 m6">
-        {
-          ingredientListTwo.map((ingredient, i) => <li key={i}>{ingredient}</li>)
-        }
-      </ul>
+      <div>
+        <ul className="col s12 m6">
+          {
+            ingredientListOne.map((ingredient, i) => <li key={i}>{ingredient}</li>)
+          }
+        </ul>
+        <ul className="col s12 m6">
+          {
+            ingredientListTwo.map((ingredient, i) => <li key={i}>{ingredient}</li>)
+          }
+        </ul>
+      </div>
+
     </div>
   );
 };

@@ -38,7 +38,12 @@ const recipes = [
         createdAt: '2017-11-04T07:28:31.732Z',
         updatedAt: '2017-11-04T07:28:31.732Z',
         recipeId: 3,
-        userId: 8
+        userId: 8,
+        User: {
+          id: 8,
+          username: null,
+          fullname: 'John Bull'
+        }
       }
     ],
     User: {

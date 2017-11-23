@@ -14,11 +14,13 @@ function setup() {
     user
   };
   const shallowWrapper = shallow(<Home {...props} />);
-  const mountedWrapper = mount(<Provider store={store} >
-    <BrowserRouter>
-      <Home {...props} />
-    </BrowserRouter>
-  </Provider>);
+  const mountedWrapper = mount(
+    <Provider store={store}>
+      <BrowserRouter>
+        <Home {...props} />
+      </BrowserRouter>
+    </Provider>
+  );
 
   return {
     shallowWrapper,

@@ -202,6 +202,11 @@ exports[`Home should render top recipes when recipes props is received 2`] = `
                 "owner": 8,
                 "reviews": Array [
                   Object {
+                    "User": Object {
+                      "fullname": "John Bull",
+                      "id": 8,
+                      "username": null,
+                    },
                     "content": "gwbvgfda",
                     "createdAt": "2017-11-04T07:28:31.732Z",
                     "id": 5,

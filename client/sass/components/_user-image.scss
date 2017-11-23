@@ -24,13 +24,13 @@
   &.inReview{
     .user-image__no-img,
     .user-image__img{
-      width: 80px;
-      height: 80px;
+      width: 50px;
+      height: 50px;
     }
 
     .user-image__no-img{
-      line-height: 80px;
-      font-size: 2rem;
+      line-height: 50px;
+      font-size: 1.5rem;
     }
   }
 
