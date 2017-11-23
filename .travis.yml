@@ -1,6 +1,6 @@
 env:
   global:
-    - CC_TEST_REPORTER_ID: "e895d45cfaffba8fb9a9fb36c8b3175563b0292e639308921059da19bf4fc5d2"
+    - CC_TEST_REPORTER_ID: $CC_TEST_REPORTER_ID
 language: node_js
 node_js:
   - "6.10.0"
@@ -13,7 +13,7 @@ cache:
 
 addons:
   code_climate:
-    repo_token: "e895d45cfaffba8fb9a9fb36c8b3175563b0292e639308921059da19bf4fc5d2"
+    repo_token: $CODE_CLIMATE_TOKEN
 
 script:
   - npm run test

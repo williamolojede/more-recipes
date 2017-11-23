@@ -1,5 +1,6 @@
 import express from 'express';
 import path from 'path';
+import dotenv from 'dotenv';
 import logger from 'morgan';
 import bodyPaser from 'body-parser';
 import webpack from 'webpack';
@@ -8,6 +9,12 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 import config from '../webpack.config';
 
 import routes from './routes';
+
+
+/**
+ * environmental variable setup
+ */
+dotenv.config();
 
 const port = parseInt(process.env.PORT, 10) || 8000;
 
