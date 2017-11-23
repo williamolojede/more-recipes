@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import storage from '../../config/firebase';
 import defaultConfig from '../../config/default';
 import { recipePropTypes } from '../../config/proptypes';
-import { addRecipe, updateRecipe } from '../../actions/fetchRecipe';
+import { addRecipe, updateRecipe } from '../../actions/recipe';
 import scrollUp from '../../utils/scrollUp';
 
 

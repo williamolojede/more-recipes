@@ -3,7 +3,7 @@ import {
   LOGIN_FAILURE,
   SIGNUP_SUCCESS,
   SIGNUP_FAILURE,
-  LOGOUT_SUCCESS,
+  LOGOUT,
   REMOVE_AUTH_ERROR_MESSAGE
 } from '../actions/types';
 
@@ -28,7 +28,7 @@ const auth = (state = initialState, action) => {
         isAuthenticated: false,
         errorMessage: action.message
       });
-    case LOGOUT_SUCCESS:
+    case LOGOUT:
       return Object.assign({}, state, {
         isAuthenticated: false
       });

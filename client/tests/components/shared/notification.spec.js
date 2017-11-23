@@ -4,7 +4,8 @@ import Notification from '../../../components/shared/Notification';
 
 function setup() {
   const props = {
-    notification: 'you are testing this'
+    notification: 'you are testing this',
+    dispatch: jest.fn()
   };
   const component = renderer.create(<Notification {...props} />);
   return {

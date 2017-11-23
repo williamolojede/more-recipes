@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import UserImg from '../UserImg.jsx';
 
-const Review = ({review}) => (
+const Review = ({ review }) => (
   <li className="review__card card">
     <div className="card-image">
       <UserImg user={review.User} type="inReview" />
@@ -13,4 +14,13 @@ const Review = ({review}) => (
   </li>
 );
 
+Review.propTypes = {
+  review: PropTypes.shape({
+    content: PropTypes.string.isRequired,
+    User: PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      fullname: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired
+};
 export default Review;

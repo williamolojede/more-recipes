@@ -29,7 +29,12 @@ class Login extends Component {
   }
 
   render() {
-    const { isFetching, errorMessage, isAuthenticated, location } = this.props;
+    const {
+      isFetching,
+      errorMessage,
+      isAuthenticated,
+      location
+    } = this.props;
     const { from } = location.state || { from: { pathname: '/' } };
     if (isAuthenticated) {
       return (
