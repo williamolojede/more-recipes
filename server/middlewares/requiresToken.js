@@ -16,7 +16,7 @@ const requiresToken = (req, res, next) => {
 
   // check if token is valid
   try {
-    const decoded = jwt.verify(token, 'jsninja');
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
     user = decoded.user;
   } catch (error) {
     // check if token is outdated
@@ -26,7 +26,7 @@ const requiresToken = (req, res, next) => {
       return next(err);
     }
     // check if token is invalid/tampered with
-    const err = new Error('invalid user  authorization token');
+    const err = new Error('invalid user authorization token');
     err.status = 403;
     return next(err);
   }
