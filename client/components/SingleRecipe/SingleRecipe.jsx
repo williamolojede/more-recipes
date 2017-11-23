@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 
-import { fetchSingleRecipes, vote, favorite } from '../../actions/fetchRecipe';
+import { fetchSingleRecipes, vote, favorite } from '../../actions/recipe';
 
 import Preloader from '../shared/Preloader.jsx';
 import SiteNav from '../shared/SiteNav.jsx';
@@ -55,9 +55,6 @@ class SingleRecipe extends Component {
 
 
     return (
-      // this.props.isFetching && this.state.postingReview ?
-      //   <Preloader />
-      //   :
       <div className="page page__recipe">
         <header className="site-header">
           <SiteNav user={this.props.user} />
@@ -86,7 +83,7 @@ class SingleRecipe extends Component {
           </div>
         </main>
 
-        <Notification notification={this.props.notification} />
+        <Notification notification={this.props.notification} dispatch={this.props.dispatch} />
         <SiteFooter />
       </div>
     );
@@ -95,7 +92,6 @@ class SingleRecipe extends Component {
 
 SingleRecipe.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  isFetching: PropTypes.bool.isRequired,
 
   recipe: PropTypes.shape({
     id: PropTypes.number.isRequired,

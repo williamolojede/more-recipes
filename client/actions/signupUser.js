@@ -9,13 +9,8 @@ import { SIGNUP_SUCCESS, SIGNUP_FAILURE } from './types';
 
 const signupUser = (creds) => {
   const body = {
-    user: {
-      email: creds.email,
-      password: creds.password,
-      fullname: creds.fullname
-    }
+    user: creds
   };
-
   return (dispatch) => {
     dispatch(setFetching());
     return axios.post('/api/v1/users/signup', body)

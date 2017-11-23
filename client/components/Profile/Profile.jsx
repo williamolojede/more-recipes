@@ -6,12 +6,11 @@ import {
   Switch,
   Route,
   Redirect,
-  NavLink,
-  Link
+  NavLink
 } from 'react-router-dom';
 
 import fetchUserProfile, { removeRecipeFromUserProfile, deletePersonalRecipe } from '../../actions/userProfile';
-import { favorite } from '../../actions/fetchRecipe';
+import { favorite } from '../../actions/recipe';
 
 import SiteNav from '../shared/SiteNav.jsx';
 import Preloader from '../shared/Preloader.jsx';
@@ -105,7 +104,9 @@ class Profile extends Component {
                             <NavLink
                               to={`${userUrl}/add`}
                               activeClassName="selected"
-                            >Add</NavLink>
+                            >
+                              Add
+                            </NavLink>
                           </li>
                           :
                           null
@@ -160,7 +161,7 @@ class Profile extends Component {
                   </Switch>
                 </div>
               </section>
-              <Notification notification={this.props.notification} />
+              <Notification notification={this.props.notification} dispatch={this.props.dispatch} />
             </div>
           </main>
         </div>

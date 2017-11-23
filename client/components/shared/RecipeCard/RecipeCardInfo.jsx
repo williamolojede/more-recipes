@@ -8,7 +8,13 @@ import UserImg from '../UserImg.jsx';
 
 
 const RecipeCardInfo = (props) => {
-  const { User, upVoteCount, downVoteCount, favoriteCount, viewCount } = props.info;
+  const {
+    User,
+    upVoteCount,
+    downVoteCount,
+    favoriteCount,
+    viewCount
+  } = props.info;
   const stats = {
     upVoteCount,
     downVoteCount,
