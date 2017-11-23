@@ -1,7 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import UserImg from '../UserImg.jsx';
+import { reviewPropTypes } from '../../../config/proptypes';
 
-const Review = ({review}) => (
+const Review = ({ review }) => (
   <li className="review__card card">
     <div className="card-image">
       <UserImg user={review.User} type="inReview" />
@@ -13,4 +15,7 @@ const Review = ({review}) => (
   </li>
 );
 
+Review.propTypes = {
+  ...reviewPropTypes
+};
 export default Review;

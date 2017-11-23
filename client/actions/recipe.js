@@ -3,7 +3,7 @@ import { batchActions } from 'redux-batched-actions';
 import instance from '../config/axios';
 
 import { setFetching, unsetFetching } from './fetching';
-import { showNotification, hideNotification } from './notification';
+import { showNotification } from './notification';
 
 import {
   RECIEVE_TOP_RATED_RECIPE,
@@ -18,15 +18,11 @@ const recieveTopRecipes = (recipes, metaData) => ({
   metaData
 });
 
-const recieveSingleRecipe = recipe => ({
-  type: RECIEVE_SINGLE_RECIPE,
+const recieveSingleRecipe = (type, recipe) => ({
+  type,
   recipe
 });
 
-const recieveNewRecipe = recipe => ({
-  type: RECIEVE_NEW_RECIPE,
-  recipe
-});
 
 const recieveUpdatedRecipe = (recipe, index) => ({
   type: RECIEVE_UPDATED_RECIPE,
@@ -40,7 +36,7 @@ export const fetchSingleRecipes = id => (dispatch) => {
     .then((res) => {
       dispatch(
         batchActions([
-          recieveSingleRecipe(res.data.recipe),
+          recieveSingleRecipe(RECIEVE_SINGLE_RECIPE, res.data.recipe),
           unsetFetching()
         ])
       );
@@ -74,7 +70,7 @@ export const postReview = (content, id) => (dispatch) => {
     .then((res) => {
       dispatch(
         batchActions([
-          recieveSingleRecipe(res.data.recipe),
+          recieveSingleRecipe(RECIEVE_SINGLE_RECIPE, res.data.recipe),
           unsetFetching()
         ])
       );
@@ -88,72 +84,62 @@ export const postReview = (content, id) => (dispatch) => {
 export const vote = (dir, id) => dispatch => instance.post(`/recipes/${id}/vote-${dir}`)
   .then((res) => {
     dispatch(batchActions([
-      recieveSingleRecipe(res.data.recipe),
+      recieveSingleRecipe(RECIEVE_SINGLE_RECIPE, res.data.recipe),
       showNotification(res.data.message)
     ]));
-    setTimeout(() => {
-      dispatch(hideNotification());
-    }, 3000);
   })
   .catch((err) => {
     dispatch(showNotification(err.response.data.message));
-    setTimeout(() => {
-      dispatch(hideNotification());
-    }, 3000);
   });
 
 
 export const favorite = id => dispatch => instance.post(`/recipes/${id}/favorite`)
   .then((res) => {
     dispatch(batchActions([
-      recieveSingleRecipe(res.data.recipe),
+      recieveSingleRecipe(RECIEVE_SINGLE_RECIPE, res.data.recipe),
       showNotification(res.data.message)
     ]));
-    setTimeout(() => {
-      dispatch(hideNotification());
-    }, 3000);
   })
   .catch((err) => {
     dispatch(showNotification(err.response.data.message));
-    setTimeout(() => {
-      dispatch(hideNotification());
-    }, 3000);
   });
-
 
 export const addRecipe = recipe => dispatch =>
   instance.post('/recipes', { recipe })
     .then((res) => {
-      dispatch(
-        batchActions([
-          recieveNewRecipe(res.data.recipe),
-          showNotification(res.data.message),
-        ])
-      );
-      setTimeout(() => {
-        dispatch(hideNotification());
-      }, 3000);
+      dispatch(batchActions([
+        recieveSingleRecipe(RECIEVE_NEW_RECIPE, res.data.recipe),
+        showNotification(res.data.message),
+      ]));
     })
     .catch((err) => {
       dispatch(showNotification(err.response.data.message));
-      setTimeout(() => {
-        dispatch(hideNotification());
-      }, 3000);
     });
 
 export const updateRecipe = (recipe, index) => (dispatch) => {
-  const { id, name, description, img_url, ingredients, instructions } = recipe;
-  const update = { name, description, img_url, ingredients, instructions };
+  const {
+    id,
+    name,
+    description,
+    img_url,
+    ingredients,
+    instructions
+  } = recipe;
+  const update = {
+    name,
+    description,
+    img_url,
+    ingredients,
+    instructions
+  };
 
   dispatch(setFetching());
   return instance.put(`/recipes/${id}`, { update })
     .then((res) => {
-      dispatch(
-        batchActions([
-          recieveUpdatedRecipe(res.data.recipe, index),
-          unsetFetching()
-        ])
-      );
+      dispatch(batchActions([
+        recieveUpdatedRecipe(res.data.recipe, index),
+        unsetFetching()
+      ]));
     })
     .catch((err) => {
       console.log(err.message || err.response.data.message);

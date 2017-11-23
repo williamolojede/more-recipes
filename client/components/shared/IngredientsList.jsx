@@ -1,3 +1,5 @@
+/* eslint react/no-array-index-key: 0 */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 

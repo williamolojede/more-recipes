@@ -10,6 +10,7 @@ import { setUserData, logoutUser } from './actions/loginUser';
 
 
 // import css
+// eslint-disable-next-line no-unused-vars
 import css from './sass/main.scss';
 
 import App from './components/App.jsx';

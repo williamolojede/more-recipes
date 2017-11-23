@@ -46,7 +46,7 @@ const RecipeTableListingRow = ({
 
 RecipeTableListingRow.propTypes = {
   ...propTypes,
-  recipe: PropTypes.shape(recipePropTypes).isRequired,
+  ...recipePropTypes,
   removeRecipe: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired
 };

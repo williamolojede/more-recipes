@@ -6,12 +6,12 @@ import {
   Switch,
   Route,
   Redirect,
-  NavLink,
-  Link
+  NavLink
 } from 'react-router-dom';
 
+import { recipePropTypes } from '../../config/proptypes';
 import fetchUserProfile, { removeRecipeFromUserProfile, deletePersonalRecipe } from '../../actions/userProfile';
-import { favorite } from '../../actions/fetchRecipe';
+import { favorite } from '../../actions/recipe';
 
 import SiteNav from '../shared/SiteNav.jsx';
 import Preloader from '../shared/Preloader.jsx';
@@ -21,15 +21,6 @@ import FavoriteRecipes from './FavoriteRecipes.jsx';
 import Notification from '../shared/Notification.jsx';
 
 class Profile extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      modify: {
-        active: false,
-        recipe: {}
-      }
-    };
-  }
   componentDidMount() {
     this.props.dispatch(fetchUserProfile(this.props.match.params.uid));
   }
@@ -105,7 +96,9 @@ class Profile extends Component {
                             <NavLink
                               to={`${userUrl}/add`}
                               activeClassName="selected"
-                            >Add</NavLink>
+                            >
+                              Add
+                            </NavLink>
                           </li>
                           :
                           null
@@ -160,7 +153,7 @@ class Profile extends Component {
                   </Switch>
                 </div>
               </section>
-              <Notification notification={this.props.notification} />
+              <Notification notification={this.props.notification} dispatch={this.props.dispatch} />
             </div>
           </main>
         </div>
@@ -188,6 +181,13 @@ Profile.propTypes = {
       favorites: PropTypes.arrayOf(PropTypes.object).isRequired
     }),
     asOwner: PropTypes.bool.isRequired,
+  }).isRequired,
+
+  location: PropTypes.shape({
+    state: PropTypes.shape({
+      ...recipePropTypes,
+      index: PropTypes.number.isRequired
+    })
   }).isRequired,
 
   isFetching: PropTypes.bool.isRequired,

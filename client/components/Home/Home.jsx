@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import scrollUp from '../../utils/scrollUp';
 
-import { fetchTopRecipes } from '../../actions/fetchRecipe';
+import { fetchTopRecipes } from '../../actions/recipe';
 
 import TopRatedRecipeList from '../shared/TopRatedRecipeList';
 import Preloader from '../shared/Preloader';

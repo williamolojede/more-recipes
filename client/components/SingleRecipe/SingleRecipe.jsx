@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 
-import { fetchSingleRecipes, vote, favorite } from '../../actions/fetchRecipe';
+import { fetchSingleRecipes, vote, favorite } from '../../actions/recipe';
 
 import Preloader from '../shared/Preloader.jsx';
 import SiteNav from '../shared/SiteNav.jsx';
@@ -15,6 +15,7 @@ import InstructionsList from '../shared/InstructionsList.jsx';
 import Reviews from '../shared/Reviews/Reviews.jsx';
 import RecipeStats from '../shared/RecipeStats.jsx';
 import Notification from '../shared/Notification.jsx';
+import { recipePropTypes } from '../../config/proptypes';
 
 class SingleRecipe extends Component {
   componentDidMount() {
@@ -55,9 +56,6 @@ class SingleRecipe extends Component {
 
 
     return (
-      // this.props.isFetching && this.state.postingReview ?
-      //   <Preloader />
-      //   :
       <div className="page page__recipe">
         <header className="site-header">
           <SiteNav user={this.props.user} />
@@ -86,7 +84,7 @@ class SingleRecipe extends Component {
           </div>
         </main>
 
-        <Notification notification={this.props.notification} />
+        <Notification notification={this.props.notification} dispatch={this.props.dispatch} />
         <SiteFooter />
       </div>
     );
@@ -95,21 +93,8 @@ class SingleRecipe extends Component {
 
 SingleRecipe.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  isFetching: PropTypes.bool.isRequired,
 
-  recipe: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    img_url: PropTypes.string.isRequired,
-    ingredients: PropTypes.arrayOf(PropTypes.string).isRequired,
-    instructions: PropTypes.arrayOf(PropTypes.string).isRequired,
-    reviews: PropTypes.arrayOf(PropTypes.object).isRequired,
-    upVoteCount: PropTypes.number.isRequired,
-    downVoteCount: PropTypes.number.isRequired,
-    favoriteCount: PropTypes.number.isRequired,
-    viewCount: PropTypes.number.isRequired
-  }).isRequired,
+  ...recipePropTypes,
 
   user: PropTypes.shape({
     id: PropTypes.number.isRequired,

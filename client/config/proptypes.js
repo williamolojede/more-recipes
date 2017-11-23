@@ -18,27 +18,6 @@ export const authFormPropTypes = {
   authFormSubmit: PropTypes.func.isRequired,
 };
 
-// ErrorDisplay Component
-export const errorDisplayPropTypes = {
-  message: PropTypes.string.isRequired
-};
-
-// TopRatedRecipeList Component
-export const topRatedRecipeListPropTypes = {
-  recipes: PropTypes.arrayOf(PropTypes.object).isRequired
-};
-
-// RecipeCard Component
-// NOTE: not all keys are checked since they'll also be checked in `RecipeCardInfo`
-export const recipeCardPropTypes = {
-  recipe: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    img_url: PropTypes.string
-  }).isRequired
-};
-
 // RecipeCardInfo Component
 export const recipeCardInfoPropTypes = {
   info: PropTypes.shape({
@@ -72,10 +51,29 @@ export const userImgPropTypes = {
 };
 
 
-export const recipePropTypes = {
-  id: PropTypes.number.isRequired,
-  name: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  ingredients: PropTypes.arrayOf(PropTypes.string).isRequired,
-  instructions: PropTypes.arrayOf(PropTypes.string).isRequired,
+export const reviewPropTypes = {
+  review: PropTypes.shape({
+    content: PropTypes.string.isRequired,
+    User: PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      fullname: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired
 };
+
+export const recipePropTypes = {
+  recipe: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    img_url: PropTypes.string.isRequired,
+    ingredients: PropTypes.arrayOf(PropTypes.string).isRequired,
+    instructions: PropTypes.arrayOf(PropTypes.string).isRequired,
+    reviews: PropTypes.arrayOf(reviewPropTypes.review),
+    upVoteCount: PropTypes.number.isRequired,
+    downVoteCount: PropTypes.number.isRequired,
+    favoriteCount: PropTypes.number.isRequired,
+    viewCount: PropTypes.number.isRequired
+  }).isRequired,
+};
+

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import storage from '../../config/firebase';
 import defaultConfig from '../../config/default';
 import { recipePropTypes } from '../../config/proptypes';
-import { addRecipe, updateRecipe } from '../../actions/fetchRecipe';
+import { addRecipe, updateRecipe } from '../../actions/recipe';
 import scrollUp from '../../utils/scrollUp';
 
 
@@ -372,8 +372,9 @@ AddRecipeForm.defaultProps = {
 AddRecipeForm.propTypes = {
   dispatch: PropTypes.func.isRequired,
   asOwner: PropTypes.bool.isRequired,
-  recipe: PropTypes.shape(recipePropTypes),
+  ...recipePropTypes,
   isEditMode: PropTypes.bool.isRequired,
+  // eslint-disable-next-line react/require-default-props
   recipeIndex: PropTypes.number
 };
 

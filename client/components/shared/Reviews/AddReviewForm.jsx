@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { postReview } from '../../../actions/fetchRecipe';
+import { postReview } from '../../../actions/recipe';
 
 import UserImg from '../UserImg.jsx';
 import Preloader from '../Preloader';
