@@ -15,7 +15,7 @@ function setup() {
   };
   const shallowWrapper = shallow(<Home {...props} />);
   const mountedWrapper = mount(
-    <Provider store={store} >
+    <Provider store={store}>
       <BrowserRouter>
         <Home {...props} />
       </BrowserRouter>

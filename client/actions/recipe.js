@@ -107,30 +107,39 @@ export const favorite = id => dispatch => instance.post(`/recipes/${id}/favorite
 export const addRecipe = recipe => dispatch =>
   instance.post('/recipes', { recipe })
     .then((res) => {
-      dispatch(
-        batchActions([
-          recieveSingleRecipe(RECIEVE_NEW_RECIPE, res.data.recipe),
-          showNotification(res.data.message),
-        ])
-      );
+      dispatch(batchActions([
+        recieveSingleRecipe(RECIEVE_NEW_RECIPE, res.data.recipe),
+        showNotification(res.data.message),
+      ]));
     })
     .catch((err) => {
       dispatch(showNotification(err.response.data.message));
     });
 
 export const updateRecipe = (recipe, index) => (dispatch) => {
-  const { id, name, description, img_url, ingredients, instructions } = recipe;
-  const update = { name, description, img_url, ingredients, instructions };
+  const {
+    id,
+    name,
+    description,
+    img_url,
+    ingredients,
+    instructions
+  } = recipe;
+  const update = {
+    name,
+    description,
+    img_url,
+    ingredients,
+    instructions
+  };
 
   dispatch(setFetching());
   return instance.put(`/recipes/${id}`, { update })
     .then((res) => {
-      dispatch(
-        batchActions([
-          recieveUpdatedRecipe(res.data.recipe, index),
-          unsetFetching()
-        ])
-      );
+      dispatch(batchActions([
+        recieveUpdatedRecipe(res.data.recipe, index),
+        unsetFetching()
+      ]));
     })
     .catch((err) => {
       console.log(err.message || err.response.data.message);

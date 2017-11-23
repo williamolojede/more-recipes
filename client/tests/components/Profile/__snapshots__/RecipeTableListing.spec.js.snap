@@ -58,6 +58,11 @@ exports[`RecipeTableListing type: Favorites should render list of recipes with a
           "owner": 8,
           "reviews": Array [
             Object {
+              "User": Object {
+                "fullname": "John Bull",
+                "id": 8,
+                "username": null,
+              },
               "content": "gwbvgfda",
               "createdAt": "2017-11-04T07:28:31.732Z",
               "id": 5,
@@ -295,6 +300,11 @@ exports[`RecipeTableListing type: Favorites should render list of recipes withou
           "owner": 8,
           "reviews": Array [
             Object {
+              "User": Object {
+                "fullname": "John Bull",
+                "id": 8,
+                "username": null,
+              },
               "content": "gwbvgfda",
               "createdAt": "2017-11-04T07:28:31.732Z",
               "id": 5,
@@ -565,6 +575,11 @@ exports[`RecipeTableListing type: Personal-Recipes should render list of recipes
           "owner": 8,
           "reviews": Array [
             Object {
+              "User": Object {
+                "fullname": "John Bull",
+                "id": 8,
+                "username": null,
+              },
               "content": "gwbvgfda",
               "createdAt": "2017-11-04T07:28:31.732Z",
               "id": 5,
@@ -802,6 +817,11 @@ exports[`RecipeTableListing type: Personal-Recipes should render list of recipes
           "owner": 8,
           "reviews": Array [
             Object {
+              "User": Object {
+                "fullname": "John Bull",
+                "id": 8,
+                "username": null,
+              },
               "content": "gwbvgfda",
               "createdAt": "2017-11-04T07:28:31.732Z",
               "id": 5,

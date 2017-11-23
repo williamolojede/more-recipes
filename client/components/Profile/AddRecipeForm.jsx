@@ -372,8 +372,9 @@ AddRecipeForm.defaultProps = {
 AddRecipeForm.propTypes = {
   dispatch: PropTypes.func.isRequired,
   asOwner: PropTypes.bool.isRequired,
-  recipe: PropTypes.shape(recipePropTypes),
+  ...recipePropTypes,
   isEditMode: PropTypes.bool.isRequired,
+  // eslint-disable-next-line react/require-default-props
   recipeIndex: PropTypes.number
 };
 

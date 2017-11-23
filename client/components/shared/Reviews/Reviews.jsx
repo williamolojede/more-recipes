@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { userPrototypes } from '../../../config/proptypes';
+import { userPrototypes, reviewPropTypes } from '../../../config/proptypes';
 
 import Review from './Review.jsx';
 import AddReviewForm from './AddReviewForm.jsx';
@@ -24,7 +24,9 @@ const Reviews = ({ reviews, user, id }) => (
 );
 
 Reviews.propTypes = {
-  user: PropTypes.shape(userPrototypes).isRequired
+  reviews: PropTypes.arrayOf(reviewPropTypes.review).isRequired,
+  user: PropTypes.shape(userPrototypes).isRequired,
+  id: PropTypes.number.isRequired
 };
 
 export default Reviews;

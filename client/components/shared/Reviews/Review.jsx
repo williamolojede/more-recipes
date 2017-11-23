@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import UserImg from '../UserImg.jsx';
+import { reviewPropTypes } from '../../../config/proptypes';
 
 const Review = ({ review }) => (
   <li className="review__card card">
@@ -15,12 +16,6 @@ const Review = ({ review }) => (
 );
 
 Review.propTypes = {
-  review: PropTypes.shape({
-    content: PropTypes.string.isRequired,
-    User: PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      fullname: PropTypes.string.isRequired,
-    }).isRequired,
-  }).isRequired
+  ...reviewPropTypes
 };
 export default Review;
