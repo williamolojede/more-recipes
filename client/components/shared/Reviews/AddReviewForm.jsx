@@ -37,20 +37,21 @@ class AddReviewForm extends Component {
     const { user } = this.props;
 
     return (
-      <li className="review__card review__card-edit card" id="write-review">
-        {this.state.sendingreview && <Preloader />}
-        {!this.state.sendingreview &&
-          <div className="card-image">
+      <li className="review__card review__card-edit" id="write-review">
+        {this.state.sendingreview ?
+          <div className="wrapper">
+            <Preloader />
+          </div>
+          :
+          <div className="wrapper">
             <UserImg user={user} type="inReview" />
-            <h5 className="card-title">{user.fullname}</h5>
+            <div className="review__card-edit__form">
+              <textarea placeholder="your review..." ref={node => this.reviewInput = node} />
+              <button type="submit" className=" btn z-depth-1" onClick={this.addReview}>Submit</button>
+            </div>
           </div>
         }
-        {!this.state.sendingreview &&
-          <div className="card-content">
-            <textarea placeholder="your review..." ref={node => this.reviewInput = node} />
-            <button type="submit" className="z-depth-1" onClick={this.addReview}>Submit</button>
-          </div>
-        }
+
       </li>
     );
   }

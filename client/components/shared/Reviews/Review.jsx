@@ -1,16 +1,19 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import timeDifference from '../../../utils/timeDifference';
 import UserImg from '../UserImg.jsx';
 import { reviewPropTypes } from '../../../config/proptypes';
 
 const Review = ({ review }) => (
-  <li className="review__card card">
-    <div className="card-image">
+  <li className="review__card">
+    <div className="wrapper">
       <UserImg user={review.User} type="inReview" />
-      <h5 className="card-title">{review.User.fullname}</h5>
-    </div>
-    <div className="card-content">
-      <p>{review.content}</p>
+      <div className="review__card-card-content">
+        <div className="review__card-card-content___top">
+          <p className="user-name">{review.User.fullname}</p>
+          <span className="time-since">{timeDifference(review.createdAt)}</span>
+        </div>
+        <p className="review__card-card-content">{review.content}</p>
+      </div>
     </div>
   </li>
 );

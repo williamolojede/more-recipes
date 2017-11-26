@@ -21,12 +21,10 @@ const fetchUserProfile = id => (dispatch) => {
   dispatch(setFetching());
   instance.get(`/users/${id}`)
     .then((res) => {
-      dispatch(
-        batchActions([
-          receiveUserProfile({ user: res.data.user, asOwner: res.data.asOwner }),
-          unsetFetching()
-        ])
-      );
+      dispatch(batchActions([
+        receiveUserProfile({ user: res.data.user, asOwner: res.data.asOwner }),
+        unsetFetching()
+      ]));
     })
     .catch((err) => {
       console.log(err.message || err.response.data.message);
@@ -37,12 +35,10 @@ export const deletePersonalRecipe = (id, index) => (dispatch) => {
   dispatch(setFetching());
   instance.delete(`recipes/${id}`)
     .then(() => {
-      dispatch(
-        batchActions([
-          removeRecipeFromUserProfile(index, 'recipes'),
-          unsetFetching()
-        ])
-      );
+      dispatch(batchActions([
+        removeRecipeFromUserProfile(index, 'recipes'),
+        unsetFetching()
+      ]));
     })
     .catch((err) => {
       console.log(err.message || err.response.data.message);
