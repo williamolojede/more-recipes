@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const dotenv = require('dotenv');
@@ -18,7 +19,7 @@ module.exports = {
       './client/index.jsx',
     ]
   },
-  devtool: 'source-map',
+  devtool: 'cheap-module-source-map',
   output: {
     path: `${__dirname}/dist/client`,
     filename: 'js/bundle.js',
@@ -63,14 +64,23 @@ module.exports = {
       comments: false,
       minimize: true,
     }),
+    new CompressionPlugin({
+      asset: '[path].gz[query]',
+      algorithm: 'gzip',
+      test: /\.js$|\.css$|\.html$/,
+      threshold: 10240,
+      minRatio: 0.8
+    }),
     HtmlWebpackPluginConfig,
     new ExtractTextPlugin({
       filename: 'css/style.css',
     }),
     new webpack.DefinePlugin({
       'process.env': {
-        FIREBASE_STORAGE_BUCKET: JSON.stringify(process.env.FIREBASE_STORAGE_BUCKET)
+        FIREBASE_STORAGE_BUCKET: JSON.stringify(process.env.FIREBASE_STORAGE_BUCKET),
+        NODE_ENV: JSON.stringify('production')
       }
-    })
+    }),
+    new webpack.optimize.AggressiveMergingPlugin()
   ]
 };
