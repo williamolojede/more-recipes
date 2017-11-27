@@ -51,8 +51,15 @@ app.use('/api/docs-assets', express.static(path.resolve(__dirname, '..', 'docs')
 // API ROUTES
 app.use('/api', routes);
 
+
 // STATIC FILE FOR REACT FRONTEND
 app.use('/static', express.static(path.resolve(__dirname, '..', 'dist/client')));
+
+app.get('*.js', (req, res, next) => {
+  req.url += '.gz';
+  res.set('Content-Encoding', 'gzip');
+  next();
+});
 
 // RENDER REACT FRONTEND
 app.get('*', (req, res) => {

@@ -1,5 +1,5 @@
-const path = require('path');
 const webpack = require('webpack');
+const CompressionPlugin = require('compression-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
@@ -56,11 +56,28 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: true,
+      comments: false,
+      minimize: true,
+    }),
+    new CompressionPlugin({
+      asset: '[path].gz[query]',
+      algorithm: 'gzip',
+      test: /\.js$|\.css$|\.html$/,
+      threshold: 10240,
+      minRatio: 0.8
+    }),
     HtmlWebpackPluginConfig,
     new ExtractTextPlugin({
       filename: 'css/style.css',
-    })
+    }),
+    new webpack.DefinePlugin({
+      'process.env': {
+        FIREBASE_STORAGE_BUCKET: JSON.stringify(process.env.FIREBASE_STORAGE_BUCKET),
+        NODE_ENV: JSON.stringify('production')
+      }
+    }),
+    new webpack.optimize.AggressiveMergingPlugin()
   ]
 };
