@@ -19,11 +19,9 @@ const favoriteRecipe = (req, res, next) => {
 
       // get list of all userId that has already favorited the recipe
       const alreadyfavorited = [];
-      favorites.forEach((el) => {
-        alreadyfavorited.push(el.dataValues.userId);
-      });
+      favorites.forEach(favorite => alreadyfavorited.push(favorite.dataValues.userId));
 
-      const userFavorite = favorites.filter(el => el.dataValues.userId === userID)[0];
+      const userFavorite = favorites.filter(favorite => favorite.dataValues.userId === userID)[0];
 
       // if current user already favorited => remove
       if (alreadyfavorited.includes(userID)) {

@@ -16,7 +16,7 @@ const updateRecipe = (req, res, next) => {
     const rightKeys = Object.keys(right.dataValues);
     const wrongKeys = Object.keys(wrong);
     // filter for invalid key(s)
-    const invalid = wrongKeys.filter(el => !rightKeys.includes(el));
+    const invalid = wrongKeys.filter(wrongKey => !rightKeys.includes(wrongKey));
     if (invalid.length === 0) return false;
     return true;
   };

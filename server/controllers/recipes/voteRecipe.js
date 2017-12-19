@@ -30,13 +30,11 @@ const voteRecipe = (req, res, next) => {
 
       // get list of voters for a recipe
       const alreadyVoted = [];
-      votes.forEach((el) => {
-        alreadyVoted.push(el.dataValues.userId);
-      });
+      votes.forEach(vote => alreadyVoted.push(vote.dataValues.userId));
 
       if (alreadyVoted.includes(userID)) {
         // get current user's vote
-        const userVote = votes.filter(el => el.dataValues.userId === userID)[0];
+        const userVote = votes.filter(vote => vote.dataValues.userId === userID)[0];
 
         // delete the vote
         // if current votetype === previous votetype delete and

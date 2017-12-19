@@ -7,8 +7,8 @@ const count = (req, res, next) => {
   Vote.findAll({ where: { recipeId: id } })
     .then((votes) => {
       // count votes
-      const upVoteCount = votes.filter(el => el.dataValues.voteType === 'up').length;
-      const downVoteCount = votes.filter(el => el.dataValues.voteType === 'down').length;
+      const upVoteCount = votes.filter(vote => vote.dataValues.voteType === 'up').length;
+      const downVoteCount = votes.filter(vote => vote.dataValues.voteType === 'down').length;
       return { upVoteCount, downVoteCount };
     })
     .then(({ upVoteCount, downVoteCount }) => {
