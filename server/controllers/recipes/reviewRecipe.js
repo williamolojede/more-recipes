@@ -9,7 +9,7 @@ const reviewRecipe = (req, res, next) => {
 
   Review.create({ userId, recipeId, content })
     .then(() => findRecipe(recipeId))
-    .then(recipe => res.status(200).send({ status: 'success', recipe, message: 'your review has been recorded' }))
+    .then(recipe => res.status(200).send({ status: 'success', recipe, message: 'Your review has been recorded' }))
     .catch(error => systemErrorHandler({
       msg: error.errors[0].message,
       code: 400

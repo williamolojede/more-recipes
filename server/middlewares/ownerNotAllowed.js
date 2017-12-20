@@ -7,8 +7,8 @@ const ownerNotAllowed = (req, res, next) => {
 
   // ensures owner doesn't favorite their own recipe
   if (recipeOwner === userID) {
-    const err = new Error('you are not allowed to perform this action on your own recipe');
-    err.status = 403;
+    const err = new Error('You are not allowed to perform this action on your own recipe');
+    err.statusCode = 403;
     return next(err);
   }
 

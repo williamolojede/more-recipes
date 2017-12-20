@@ -6,7 +6,7 @@ const login = (req, res, next) => {
   User.authenticate(email, password, (err, user) => {
     if (err || !user || err === undefined) {
       const err = new Error('Wrong email or password');
-      err.status = 401;
+      err.statusCode = 401;
       return next(err);
     }
 
@@ -15,6 +15,7 @@ const login = (req, res, next) => {
 
     return res.status(200).send({
       status: 'success',
+      message: 'You are successfully logged in',
       user: userDetails,
       token: jwtAuth.encode({ user: userDetails })
     });

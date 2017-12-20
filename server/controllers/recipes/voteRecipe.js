@@ -7,7 +7,7 @@ const voteRecipe = (req, res, next) => {
   // validate vote url
   if (dir !== 'down' && dir !== 'up') {
     const err = new Error('Not Found');
-    err.status = 404;
+    err.statusCode = 404;
     return next(err);
   }
 

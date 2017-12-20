@@ -11,7 +11,7 @@ const getUserFavorites = (req, res, next) => {
 
   if (userID !== parseInt(uid, 10)) {
     const err = new Error('invalid user authorization token or user doesn\'t exist');
-    err.status = 403;
+    err.statusCode = 403;
     return next(err);
   }
 

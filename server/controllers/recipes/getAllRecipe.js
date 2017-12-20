@@ -10,7 +10,7 @@ const getAllRecipe = (req, res, next) => {
     // if the wrong sort order is passed
     if (order !== 'ascending' && order !== 'descending') {
       const err = new Error('invalid sort order');
-      err.status = 400;
+      err.statusCode = 400;
       return next(err);
     }
     return Recipe.findAll({

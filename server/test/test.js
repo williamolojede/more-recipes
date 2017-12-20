@@ -104,7 +104,7 @@ describe('API Integration Tests', () => {
         .end((err, res) => {
           expect(res.status).to.equal(201);
           expect(res.body.status).to.equal('success');
-          expect(res.body.message).to.equal('account created');
+          expect(res.body.message).to.equal('Account created');
           expect(res.body.token).to.be.a('string');
           expect(res.body.user.id).to.equal(1);
           expect(res.body.user.email).to.equal('example@user.com');
@@ -122,7 +122,7 @@ describe('API Integration Tests', () => {
         .end((err, res) => {
           expect(res.status).to.equal(201);
           expect(res.body.status).to.equal('success');
-          expect(res.body.message).to.equal('account created');
+          expect(res.body.message).to.equal('Account created');
           expect(res.body.token).to.be.a('string');
           expect(res.body.user.id).to.equal(2);
           expect(res.body.user.email).to.equal('test@test.com');
@@ -138,7 +138,7 @@ describe('API Integration Tests', () => {
         .send(invalidData)
         .end((err, res) => {
           expect(res.status).to.equal(400);
-          expect(res.body.message).to.equal('user with email already exists');
+          expect(res.body.message).to.equal('User with email already exists');
           done();
         });
     });
@@ -150,7 +150,7 @@ describe('API Integration Tests', () => {
         .send(invalidData)
         .end((err, res) => {
           expect(res.status).to.equal(400);
-          expect(res.body.message).to.equal('email field is required');
+          expect(res.body.message).to.equal('Email field is required');
           done();
         });
     });
@@ -162,7 +162,7 @@ describe('API Integration Tests', () => {
         .send(invalidData)
         .end((err, res) => {
           expect(res.status).to.equal(400);
-          expect(res.body.message).to.equal('email can not be empty');
+          expect(res.body.message).to.equal('Email can not be empty');
           done();
         });
     });
@@ -174,7 +174,7 @@ describe('API Integration Tests', () => {
         .send(invalidData)
         .end((err, res) => {
           expect(res.status).to.equal(400);
-          expect(res.body.message).to.equal('password can not be empty');
+          expect(res.body.message).to.equal('Password can not be empty');
           done();
         });
     });
@@ -199,7 +199,8 @@ describe('API Integration Tests', () => {
         .send(invalidData)
         .end((err, res) => {
           expect(res.status).to.equal(400);
-          expect(res.body.message).to.equal('password field is required');
+          expect(res.body.status).to.equal('fail');
+          expect(res.body.message).to.equal('Password field is required');
           done();
         });
     });
@@ -213,7 +214,8 @@ describe('API Integration Tests', () => {
         .send(invalidData)
         .end((err, res) => {
           expect(res.status).to.equal(400);
-          expect(res.body.message).to.equal('email and password fields are required');
+          expect(res.body.status).to.equal('fail');
+          expect(res.body.message).to.equal('Email and password fields are required');
           done();
         });
     });
@@ -226,7 +228,7 @@ describe('API Integration Tests', () => {
         .send(invalidData)
         .end((err, res) => {
           expect(res.status).to.equal(400);
-          expect(res.body.message).to.equal('fullname field is required');
+          expect(res.body.message).to.equal('Fullname field is required');
           done();
         });
     });
@@ -296,7 +298,7 @@ describe('API Integration Tests', () => {
         .send(invalidData)
         .end((err, res) => {
           expect(res.status).to.equal(400);
-          expect(res.body.message).to.equal('auth property is required on request body, see documentation');
+          expect(res.body.message).to.equal('Auth property is required on request body, see documentation');
           done();
         });
     });
@@ -309,7 +311,7 @@ describe('API Integration Tests', () => {
         .send(invalidData)
         .end((err, res) => {
           expect(res.status).to.equal(400);
-          expect(res.body.message).to.equal('email and password are required');
+          expect(res.body.message).to.equal('Email and password are required');
           done();
         });
     });
@@ -322,7 +324,7 @@ describe('API Integration Tests', () => {
         .send(invalidData)
         .end((err, res) => {
           expect(res.status).to.equal(400);
-          expect(res.body.message).to.equal('email and password are required');
+          expect(res.body.message).to.equal('Email and password are required');
           done();
         });
     });
@@ -389,7 +391,7 @@ describe('API Integration Tests', () => {
         .send(whitespaceName)
         .end((err, res) => {
           expect(res.status).to.equal(400);
-          expect(res.body.message).to.equal('recipe name can not be empty');
+          expect(res.body.message).to.equal('Recipe name can not be empty');
           done();
         });
     });
@@ -580,6 +582,7 @@ describe('API Integration Tests', () => {
       request.post(`${recipesUrl}/${recipeId}/vote-up`)
         .end((err, res) => {
           expect(res.status).to.equal(400);
+          expect(res.body.status).to.equal('fail');
           expect(res.body.message).to.equal('user authorization token required');
           done();
         });
@@ -589,6 +592,7 @@ describe('API Integration Tests', () => {
       request.post(`${recipesUrl}/${recipeId}/vote-down`)
         .end((err, res) => {
           expect(res.status).to.equal(400);
+          expect(res.body.status).to.equal('fail');
           expect(res.body.message).to.equal('user authorization token required');
           done();
         });
@@ -600,6 +604,7 @@ describe('API Integration Tests', () => {
         .send({ token: invalidToken })
         .end((err, res) => {
           expect(res.status).to.equal(403);
+          expect(res.body.status).to.equal('fail');
           expect(res.body.message).to.equal('invalid user authorization token');
           done();
         });
@@ -610,6 +615,7 @@ describe('API Integration Tests', () => {
         .send({ token: invalidToken })
         .end((err, res) => {
           expect(res.status).to.equal(403);
+          expect(res.body.status).to.equal('fail');
           expect(res.body.message).to.equal('invalid user authorization token');
           done();
         });
@@ -621,6 +627,7 @@ describe('API Integration Tests', () => {
         .send({ token: userToken1 })
         .end((err, res) => {
           expect(res.status).to.equal(404);
+          expect(res.body.status).to.equal('fail');
           expect(res.body.message).to.equal('Recipe not found');
           done();
         });
@@ -631,6 +638,7 @@ describe('API Integration Tests', () => {
         .send({ token: userToken1 })
         .end((err, res) => {
           expect(res.status).to.equal(404);
+          expect(res.body.status).to.equal('fail');
           expect(res.body.message).to.equal('Recipe not found');
           done();
         });
@@ -642,6 +650,7 @@ describe('API Integration Tests', () => {
         .send({ token: userToken2 })
         .end((err, res) => {
           expect(res.status).to.equal(404);
+          expect(res.body.status).to.equal('fail');
           expect(res.body.message).to.equal('Not Found');
           done();
         });
@@ -726,6 +735,7 @@ describe('API Integration Tests', () => {
         .send({ token: userToken1 })
         .end((err, res) => {
           expect(res.status).to.equal(404);
+          expect(res.body.status).to.equal('fail');
           expect(res.body.message).to.equal('Recipe not found');
           done();
         });
@@ -822,6 +832,7 @@ describe('API Integration Tests', () => {
         .send({ token: userToken1 })
         .end((err, res) => {
           expect(res.status).to.equal(404);
+          expect(res.body.status).to.equal('fail');
           expect(res.body.message).to.equal('Recipe not found');
           done();
         });
@@ -832,6 +843,7 @@ describe('API Integration Tests', () => {
         .send({ token: userToken2 })
         .end((err, res) => {
           expect(res.status).to.equal(400);
+          expect(res.body.status).to.equal('fail');
           expect(res.body.message).to.equal('the content of your review can not be empty');
           done();
         });
@@ -842,6 +854,7 @@ describe('API Integration Tests', () => {
         .send({ token: userToken2, content: '     ' })
         .end((err, res) => {
           expect(res.status).to.equal(400);
+          expect(res.body.status).to.equal('fail');
           expect(res.body.message).to.equal('the content of your review can not be empty');
           done();
         });
@@ -854,10 +867,11 @@ describe('API Integration Tests', () => {
         .end((err, res) => {
           expect(res.status).to.equal(200);
           expect(res.body.recipe).to.be.a('object');
+          expect(res.body.status).to.equal('success');
           expect(res.body.recipe.reviews).to.be.a('array');
           expect(res.body.recipe.reviews.length).to.be.equal(1);
           expect(res.body.recipe.reviews[0].content).to.be.equal('i created a shitty recipe');
-          expect(res.body.message).to.equal('your review has been recorded');
+          expect(res.body.message).to.equal('Your review has been recorded');
           done();
         });
     });
@@ -870,10 +884,11 @@ describe('API Integration Tests', () => {
           expect(res.status).to.equal(200);
           expect(res.body.recipe).to.be.a('object');
           expect(res.body.recipe.reviews).to.be.a('array');
+          expect(res.body.status).to.equal('success');
           expect(res.body.recipe.reviews.length).to.be.equal(2);
           expect(res.body.recipe.reviews[0].content).to.be.equal('this recipe is shit');
           expect(res.body.recipe.reviews[1].content).to.be.equal('i created a shitty recipe');
-          expect(res.body.message).to.equal('your review has been recorded');
+          expect(res.body.message).to.equal('Your review has been recorded');
           done();
         });
     });
@@ -888,6 +903,7 @@ describe('API Integration Tests', () => {
         .send({ token: userToken1 })
         .end((err, res) => {
           expect(res.status).to.equal(404);
+          expect(res.body.status).to.equal('fail');
           expect(res.body.message).to.equal('Recipe not found');
           done();
         });
@@ -899,7 +915,8 @@ describe('API Integration Tests', () => {
         .send({ token: userToken1 })
         .end((err, res) => {
           expect(res.status).to.equal(403);
-          expect(res.body.message).to.equal('you are not allowed to perform this action on your own recipe');
+          expect(res.body.status).to.equal('fail');
+          expect(res.body.message).to.equal('You are not allowed to perform this action on your own recipe');
           done();
         });
     });
@@ -911,7 +928,7 @@ describe('API Integration Tests', () => {
         .end((err, res) => {
           expect(res.status).to.equal(200);
           expect(res.body.recipe.favoriteCount).to.equal(1);
-          expect(res.body.message).to.equal('recipe added to your favorite list');
+          expect(res.body.message).to.equal('Recipe added to your favorite list');
           expect(res.body.status).to.equal('success');
           done();
         });
@@ -925,7 +942,7 @@ describe('API Integration Tests', () => {
           expect(res.status).to.equal(200);
           expect(res.body.recipe.favoriteCount).to.equal(0);
           expect(res.body.status).to.equal('success');
-          expect(res.body.message).to.equal('recipe removed from your favorite list');
+          expect(res.body.message).to.equal('Recipe removed from your favorite list');
           done();
         });
     });
@@ -938,7 +955,7 @@ describe('API Integration Tests', () => {
           expect(res.status).to.equal(200);
           expect(res.body.recipe.favoriteCount).to.equal(1);
           expect(res.body.status).to.equal('success');
-          expect(res.body.message).to.equal('recipe added to your favorite list');
+          expect(res.body.message).to.equal('Recipe added to your favorite list');
           done();
         });
     });
@@ -955,6 +972,7 @@ describe('API Integration Tests', () => {
         .send({ token: userToken1 })
         .end((err, res) => {
           expect(res.status).to.equal(403);
+          expect(res.body.status).to.equal('fail');
           expect(res.body.message).to.equal('invalid user authorization token or user doesn\'t exist');
           done();
         });
@@ -966,6 +984,7 @@ describe('API Integration Tests', () => {
         .send({ token: userToken2 })
         .end((err, res) => {
           expect(res.status).to.equal(403);
+          expect(res.body.status).to.equal('fail');
           expect(res.body.message).to.equal('invalid user authorization token or user doesn\'t exist');
           done();
         });
@@ -977,11 +996,12 @@ describe('API Integration Tests', () => {
         .end((err, res) => {
           expect(res.status).to.equal(200);
           expect(res.body.recipes).to.be.a('null');
+          expect(res.body.status).to.equal('success');
           expect(res.body.message).to.equal('user has no recipe in his/her favorite list');
           done();
         });
     });
-    //
+
     it('return 200 for a user with a favorite list', (done) => {
       request.get(`${usersUrl}/2/recipes`)
         .send({ token: userToken2 })
@@ -989,6 +1009,7 @@ describe('API Integration Tests', () => {
           expect(res.status).to.equal(200);
           expect(res.body.recipes).to.be.a('array');
           expect(res.body.recipes[0].name).to.equal('Fried Rice');
+          expect(res.body.status).to.equal('success');
           expect(res.body.message).to.equal('1 recipe(s) found in user\'s favorite list');
           done();
         });
@@ -1003,7 +1024,8 @@ describe('API Integration Tests', () => {
         .send({ token: userToken1 })
         .end((err, res) => {
           expect(res.status).to.equal(400);
-          expect(res.body.message).to.equal('update property required or can not be empty');
+          expect(res.body.status).to.equal('fail');
+          expect(res.body.message).to.equal('Update property required or can not be empty');
           done();
         });
     });
@@ -1013,6 +1035,7 @@ describe('API Integration Tests', () => {
         .send({ token: userToken2, update: { name: 'Jollof Rice' } })
         .end((err, res) => {
           expect(res.status).to.equal(403);
+          expect(res.body.status).to.equal('fail');
           expect(res.body.message).to.equal('Not authorized to modify this recipe');
           done();
         });
@@ -1023,6 +1046,7 @@ describe('API Integration Tests', () => {
         .send({ token: userToken1, update: { name: 'Jollof Rice' } })
         .end((err, res) => {
           expect(res.status).to.equal(404);
+          expect(res.body.status).to.equal('fail');
           expect(res.body.message).to.equal('Recipe not found');
           done();
         });
@@ -1034,7 +1058,8 @@ describe('API Integration Tests', () => {
         .send({ token: userToken1, update: { test: 'Jollof Rice' } })
         .end((err, res) => {
           expect(res.status).to.equal(400);
-          expect(res.body.message).to.equal('invalid property name(s) on update object');
+          expect(res.body.status).to.equal('fail');
+          expect(res.body.message).to.equal('Invalid property name(s) on update object');
           done();
         });
     });
@@ -1044,7 +1069,8 @@ describe('API Integration Tests', () => {
         .send({ token: userToken1, update: { name: '' } })
         .end((err, res) => {
           expect(res.status).to.equal(400);
-          expect(res.body.message).to.equal('recipe name can not be empty');
+          expect(res.body.status).to.equal('fail');
+          expect(res.body.message).to.equal('Recipe name can not be empty');
           done();
         });
     });
@@ -1054,7 +1080,8 @@ describe('API Integration Tests', () => {
         .send({ token: userToken1, update: { name: 'Jollof Rice' } })
         .end((err, res) => {
           expect(res.status).to.equal(200);
-          expect(res.body.message).to.equal('success');
+          expect(res.body.status).to.equal('success');
+          expect(res.body.message).to.equal('Recipe updated successfully');
           expect(res.body.recipe.name).to.equal('Jollof Rice');
           done();
         });
@@ -1069,6 +1096,7 @@ describe('API Integration Tests', () => {
         .send({ token: userToken2 })
         .end((err, res) => {
           expect(res.status).to.equal(403);
+          expect(res.body.status).to.equal('fail');
           expect(res.body.message).to.equal('Not authorized to delete this recipe');
           done();
         });
@@ -1079,6 +1107,7 @@ describe('API Integration Tests', () => {
         .send({ token: userToken1 })
         .end((err, res) => {
           expect(res.status).to.equal(404);
+          expect(res.body.status).to.equal('fail');
           expect(res.body.message).to.equal('Recipe not found');
           done();
         });
@@ -1089,7 +1118,8 @@ describe('API Integration Tests', () => {
         .send({ token: userToken1 })
         .end((err, res) => {
           expect(res.status).to.equal(200);
-          expect(res.body.message).to.equal('success');
+          expect(res.body.message).to.equal('Recipe deleted successfully');
+          expect(res.body.status).to.equal('success');
           done();
         });
     });

@@ -10,7 +10,7 @@ const requiresToken = (req, res, next) => {
   // check if token is passed
   if (!token) {
     const err = new Error('user authorization token required');
-    err.status = 400;
+    err.statusCode = 400;
     return next(err);
   }
 
@@ -22,12 +22,12 @@ const requiresToken = (req, res, next) => {
     // check if token is outdated
     if (error.name === 'TokenExpiredError') {
       const err = new Error('expired user authorization token');
-      err.status = 403;
+      err.statusCode = 403;
       return next(err);
     }
     // check if token is invalid/tampered with
     const err = new Error('invalid user authorization token');
-    err.status = 403;
+    err.statusCode = 403;
     return next(err);
   }
   // check if user exists
@@ -35,7 +35,7 @@ const requiresToken = (req, res, next) => {
     .then((userData) => {
       if (!userData) {
         const err = new Error('invalid user authorization token');
-        err.status = 403;
+        err.statusCode = 403;
         return next(err);
       }
       req.userID = user.id;

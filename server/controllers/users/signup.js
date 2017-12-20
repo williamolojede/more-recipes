@@ -11,7 +11,7 @@ const signup = (req, res, next) => {
 
       return res.status(201).send({
         status: 'success',
-        message: 'account created',
+        message: 'Account created',
         user: userDetails,
         token: jwtAuth.encode({ user: userDetails, })
       });

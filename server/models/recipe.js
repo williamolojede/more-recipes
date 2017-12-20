@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         notEmpty: {
           args: true,
-          msg: 'recipe name can not be empty'
+          msg: 'Recipe name can not be empty'
         }
       }
     },

@@ -9,7 +9,7 @@
 const itemDoesNotExist = (item, itemName, callback) => {
   if (!item) {
     const err = new Error(`${itemName} not found`);
-    err.status = 404;
+    err.statusCode = 404;
     callback(err);
   }
 };
