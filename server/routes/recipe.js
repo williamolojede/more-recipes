@@ -14,7 +14,7 @@ router.get('/', recipesController.getAllRecipe);
 router.post('/', middlewares.validateAddRecipe, recipesController.createRecipe);
 
 // checks if the recipe to be accessed exist
-router.use('/:id', middlewares.doesRecipeExist);
+router.use('/:id', middlewares.validateRecipeId);
 
 router.route('/:id')
   .get(middlewares.countViews, recipesController.getSingleRecipe)

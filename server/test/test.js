@@ -526,13 +526,34 @@ describe('API Integration Tests', () => {
   describe('Get User Detail', () => {
     tokenAuthentication(`${usersUrl}/1`, 'get');
 
+    it('return 400 if invalid recipe id used', (done) => {
+      request.get(`${usersUrl}/-15`)
+        .send({ token: userToken1 })
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.status).to.equal('fail');
+          expect(res.body.message).to.equal("-15 isn't a valid User id value, see documentation!");
+          done();
+        });
+    });
+
+    it('return 400 if invalid recipe id used', (done) => {
+      request.get(`${usersUrl}/giberrish`)
+        .send({ token: userToken1 })
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.status).to.equal('fail');
+          expect(res.body.message).to.equal("giberrish isn't a valid User id value, see documentation!");
+          done();
+        });
+    });
     // user doesn't exist
     it('return 404 if user not found', (done) => {
       request.get(`${usersUrl}/3`)
         .send({ token: userToken2 })
         .end((err, res) => {
           expect(res.status).to.equal(404);
-          expect(res.body.message).to.equal('user not found');
+          expect(res.body.message).to.equal('User not found');
           done();
         });
     });
@@ -728,6 +749,28 @@ describe('API Integration Tests', () => {
 
   describe('Get a single recipe', () => {
     tokenAuthentication(`${recipesUrl}/${recipeId}`, 'get');
+
+    it('return 400 if invalid recipe id used', (done) => {
+      request.get(`${recipesUrl}/-15`)
+        .send({ token: userToken1 })
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.status).to.equal('fail');
+          expect(res.body.message).to.equal("-15 isn't a valid Recipe id value, see documentation!");
+          done();
+        });
+    });
+
+    it('return 400 if invalid recipe id used', (done) => {
+      request.get(`${recipesUrl}/giberrish`)
+        .send({ token: userToken1 })
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.status).to.equal('fail');
+          expect(res.body.message).to.equal("giberrish isn't a valid Recipe id value, see documentation!");
+          done();
+        });
+    });
 
     // if recipe doesnt exist => 404
     it('return 404 if recipe is not found', (done) => {

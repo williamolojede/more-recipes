@@ -17,7 +17,7 @@ router.post('/login',
 
 router.get('/:uid',
   middlewares.requiresToken,
-  middlewares.doesUserExist,
+  middlewares.validateUserId,
   userController.getUserDetails
 );
 
