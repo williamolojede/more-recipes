@@ -5,7 +5,7 @@ import requiresToken from './requiresToken';
 import validateAddRecipe from './validateAddRecipe';
 import countVotes from './countVotes';
 import countFavorites from './countFavorites';
-import ownerNotAllowed from './ownerNotAllowed';
+import restrictOwnerActions from './restrictOwnerActions';
 import validateLogin from './validateLogin';
 import validateSignup from './validateSignup';
 
@@ -17,7 +17,7 @@ const middlewares = {
   validateAddRecipe,
   countVotes,
   countFavorites,
-  ownerNotAllowed,
+  restrictOwnerActions,
   validateLogin,
   validateSignup
 };

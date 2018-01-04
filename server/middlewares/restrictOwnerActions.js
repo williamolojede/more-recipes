@@ -1,8 +1,8 @@
 //  a middleware for all routes a the owner is not permited to perform action
-// Requires : doesRecipeExist to know the owner of the recipe
+// Requires : validateRecipeId to know the owner of the recipe
 // Requires : requiresToken to know the userId of the token used in the request
 
-const ownerNotAllowed = (req, res, next) => {
+const restrictOwnerActions = (req, res, next) => {
   const { userID, recipeOwner } = req;
 
   // ensures owner doesn't favorite their own recipe
@@ -15,4 +15,4 @@ const ownerNotAllowed = (req, res, next) => {
   return next();
 };
 
-export default ownerNotAllowed;
+export default restrictOwnerActions;

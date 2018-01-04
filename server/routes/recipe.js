@@ -22,7 +22,7 @@ router.route('/:id')
   .delete(recipesController.deleteRecipe);
 
 // checks if the user is owner is allowed to perform action on recipe
-// router.use('/:id/*', ownerNotAllowed);
+// router.use('/:id/*', restrictOwnerActions);
 
 router.post('/:id/vote-:dir',
   recipesController.voteRecipe,
@@ -30,7 +30,7 @@ router.post('/:id/vote-:dir',
 );
 
 router.post('/:id/favorite',
-  middlewares.ownerNotAllowed,
+  middlewares.restrictOwnerActions,
   recipesController.favoriteRecipe,
   middlewares.countFavorites
 );
