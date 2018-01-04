@@ -1,11 +1,11 @@
 const validateLogin = (req, res, next) => {
-  if (req.body.auth === undefined) {
-    const err = new Error('Auth property is required on request body, see documentation');
+  if (req.body.user === undefined) {
+    const err = new Error('User property is required on request body, see documentation!');
     err.statusCode = 400;
     return next(err);
   }
 
-  const { email, password } = req.body.auth;
+  const { email, password } = req.body.user;
 
   if (email && password) {
     return next();

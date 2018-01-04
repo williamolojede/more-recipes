@@ -10,7 +10,7 @@ const logout = () => ({
 
 const loginUser = (creds) => {
   const body = {
-    auth: {
+    user: {
       email: creds.email,
       password: creds.password
     }

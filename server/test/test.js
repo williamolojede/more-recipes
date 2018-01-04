@@ -239,7 +239,7 @@ describe('API Integration Tests', () => {
 
     beforeEach(() => {
       data = {
-        auth: {
+        user: {
           password: '123456',
           email: 'example@user.com',
         }
@@ -262,7 +262,7 @@ describe('API Integration Tests', () => {
     // wrong password for user 1
     it('return 401 for wrong password', (done) => {
       const wrongPassword = Object.assign({}, data);
-      wrongPassword.auth.password = 'wrongpassword';
+      wrongPassword.user.password = 'wrongpassword';
 
       request.post(loginURl)
         .send(wrongPassword)
@@ -278,7 +278,7 @@ describe('API Integration Tests', () => {
     // another user login
     it('return 200 for a successful login', (done) => {
       userdata2 = Object.assign({}, data);
-      userdata2.auth.email = 'test@test.com';
+      userdata2.user.email = 'test@test.com';
       request.post(loginURl)
         .send(userdata2)
         .end((err, res) => {
@@ -290,22 +290,22 @@ describe('API Integration Tests', () => {
         });
     });
 
-    it('return 400 if auth property is not is not passed', (done) => {
+    it('return 400 if user property is not is not passed', (done) => {
       const invalidData = Object.assign({}, data);
-      delete invalidData.auth;
+      delete invalidData.user;
 
       request.post(loginURl)
         .send(invalidData)
         .end((err, res) => {
           expect(res.status).to.equal(400);
-          expect(res.body.message).to.equal('Auth property is required on request body, see documentation');
+          expect(res.body.message).to.equal('User property is required on request body, see documentation!');
           done();
         });
     });
 
     it('return 400 for if no password is passed ', (done) => {
       const invalidData = Object.assign({}, data);
-      delete invalidData.auth.password;
+      delete invalidData.user.password;
 
       request.post(loginURl)
         .send(invalidData)
@@ -318,7 +318,7 @@ describe('API Integration Tests', () => {
 
     it('return 400 for if no email is passed ', (done) => {
       const invalidData = Object.assign({}, data);
-      delete invalidData.auth.email;
+      delete invalidData.user.email;
 
       request.post(loginURl)
         .send(invalidData)
@@ -331,7 +331,7 @@ describe('API Integration Tests', () => {
 
     it('return 401 for if user is not found for the email passed ', (done) => {
       const invalidData = Object.assign({}, data);
-      invalidData.auth.email = 'userdefdoesntexist@email.com';
+      invalidData.user.email = 'userdefdoesntexist@email.com';
       // you dont want people know if the email exists or not
 
       request.post(loginURl)
