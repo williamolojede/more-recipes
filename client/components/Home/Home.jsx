@@ -33,11 +33,11 @@ export class Home extends Component {
     if (newProps.recipes) {
       const {
         recipes,
-        metaData
+        pagination
       } = newProps;
       this.setState({
         recipes,
-        pages: metaData.pages
+        pages: pagination.pages
       });
     }
   }
@@ -138,7 +138,7 @@ Home.propTypes = {
 
 const mapStateToProps = ({ topRecipes, isFetching, auth }) => ({
   recipes: topRecipes.recipes,
-  metaData: topRecipes.metaData,
+  pagination: topRecipes.metaData,
   user: auth.user,
   isFetching
 });

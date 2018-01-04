@@ -53,7 +53,7 @@ export const fetchTopRecipes = (page, limit) => (dispatch) => {
     .then((res) => {
       dispatch(
         batchActions([
-          recieveTopRecipes(res.data.recipes, res.data.metaData),
+          recieveTopRecipes(res.data.recipes, res.data.pagination),
           unsetFetching()
         ])
       );

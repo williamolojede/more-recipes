@@ -815,9 +815,9 @@ describe('API Integration Tests', () => {
           expect(res.status).to.equal(200);
           expect(res.body.message).to.equal('success');
           expect(res.body.recipes[0].name).to.equal('Fried Rice');
-          expect(res.body.metaData.totalCount).to.equal(2);
-          expect(res.body.metaData.pages.length).to.equal(1);
-          expect(res.body.metaData.pageSize).to.equal(2);
+          expect(res.body.pagination.totalCount).to.equal(2);
+          expect(res.body.pagination.pages.length).to.equal(1);
+          expect(res.body.pagination.pageSize).to.equal(2);
           done();
         });
     });

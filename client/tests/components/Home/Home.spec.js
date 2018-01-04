@@ -39,7 +39,7 @@ describe('Home', () => {
     expect(shallowWrapper).toMatchSnapshot();
     shallowWrapper.setProps({
       recipes,
-      metaData: {
+      pagination: {
         pages: [1, 2, 3]
       }
     });

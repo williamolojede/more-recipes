@@ -1,33 +1,73 @@
 import { Recipe, Review, User } from '../../models/index';
 import systemErrorHandler from '../../helpers/systemErrorHandler';
-import Paginate from '../../helpers/paginate';
+
+// const allRecipe = (config = {}) => (Recipe.findAndCountAll({
+  // limit: 12,
+  // ...config
+// }));
+
+const allRecipe = (config = {}, limit = 12, page = 1) => {
+  console.log(limit, page);
+  const offset = (page - 1) * limit;
+
+  return Recipe.findAndCountAll({
+    limit,
+    offset,
+    ...config
+  })
+    .then(({ count: totalCount, rows: recipes }) => {
+      const last = Math.ceil(totalCount / limit);
+      const pages = [];
+      for (let i = 1; i <= last; i += 1) {
+        pages.push(i);
+      }
+
+      const pagination = {
+        pages,
+        totalCount,
+        pageSize: recipes.length,
+        page,
+        last
+      };
+      return {
+        recipes,
+        pagination
+      };
+    });
+};
 
 const getAllRecipe = (req, res, next) => {
   const { sort, order, search } = req.query;
 
   //  if query is passed
   if (sort && order) {
+    const sortTypes = ['upvotes', 'downvotes'];
+    const orderOptions = ['ascending', 'descending'];
+
     // if the wrong sort order is passed
-    if (order !== 'ascending' && order !== 'descending') {
+    if (!orderOptions.includes(order)) {
       const err = new Error('invalid sort order');
       err.statusCode = 400;
       return next(err);
     }
-    return Recipe.findAll({
-      order: [['upVoteCount', 'DESC']],
-      include: [
-        { model: Review, as: 'reviews' },
-        { model: User, attributes: ['id', 'username', 'fullname'] }
-      ]
-    })
-      .then((topRecipes) => {
-        const {
-          recipes,
-          metaData
-        } = (new Paginate(topRecipes, parseInt(req.query.limit, 10)))
-          .getRecipesForPage(parseInt(req.query.page, 10));
-        res.status(200).send({ recipes, metaData, message: 'success' });
-      })
+
+    if (!sortTypes.includes(sort)) {
+      const err = new Error('invalid sort type');
+      err.statusCode = 400;
+      return next(err);
+    }
+
+    return allRecipe(
+      {
+        order: [['upVoteCount', 'DESC']],
+        include: [{ model: User, attributes: ['id', 'username', 'fullname'] }],
+      },
+      parseInt(req.query.limit, 10) || undefined,
+      parseInt(req.query.page, 10) || undefined
+    )
+      .then(({ recipes, pagination }) => res.status(200).send(
+        { recipes, pagination, message: 'success' }
+      ))
       .catch(error => systemErrorHandler(error, next));
   } else if (search) {
     return Recipe.findAll({
@@ -41,13 +81,13 @@ const getAllRecipe = (req, res, next) => {
       .then(recipes => res.status(200).send({ recipes }))
       .catch(error => systemErrorHandler(error, next));
   }
-  Recipe.findAll({
+
+  allRecipe({
     include: [
-      { model: Review, as: 'reviews' },
       { model: User, attributes: ['id', 'username', 'fullname'] }
     ]
   })
-    .then(recipes => res.status(200).send({ recipes, message: 'success' }))
+    .then(({ recipes, pagination }) => res.status(200).send({ recipes, pagination, message: 'success' }))
     .catch(error => systemErrorHandler(error, next));
 };
 export default getAllRecipe;
