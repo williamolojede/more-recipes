@@ -35,6 +35,7 @@ router.post('/:id/favorite',
   middlewares.countFavorites
 );
 
-router.post('/:id/reviews', recipesController.reviewRecipe);
+router.post('/:id/reviews', recipesController.addReview);
+router.get('/:id/reviews', recipesController.getReviews);
 
 export default router;

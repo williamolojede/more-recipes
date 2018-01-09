@@ -5,11 +5,11 @@ import {
   REMOVE_AUTH_ERROR_MESSAGE
 } from './types';
 
-export const receiveAuth = (type, { user, token }) => ({
+export const receiveAuth = (type, { currentUser, token }) => ({
   type,
   isAuthenticated: true,
   token,
-  user,
+  currentUser,
 });
 
 export const authError = (type, message) => ({
@@ -24,12 +24,12 @@ export const removeAuthErrorMessage = () => ({
 });
 
 export const handleAuthSuccess = (res, dispatch, type) => {
-  const { user, token } = res.data;
+  const { user: currentUser, token } = res.data;
   // If signup was successful, set the token in local storage
   localStorage.setItem('token', token);
   // Dispatch the success action and unset fetching
   dispatch(batchActions([
-    receiveAuth(type, { user, token }),
+    receiveAuth(type, { currentUser, token }),
     unsetFetching()
   ]));
 };

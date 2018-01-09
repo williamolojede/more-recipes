@@ -13,7 +13,6 @@ let userdata2;
 // first and second user's token
 let userToken1, userToken2;
 // invalid because it won't exist on the user table
-// the shape of a valid token would be an object(user) with id key among others
 const invalidToken = jwt.sign({ user: { id: 15 } }, process.env.JWT_SECRET, { expiresIn: '3 days' });
 const expiredToken = jwt.sign({ user: { id: 15 } }, process.env.JWT_SECRET, { expiresIn: '2s' });
 let recipeId;
@@ -85,6 +84,26 @@ describe('API Integration Tests', () => {
       });
   });
 
+  it('should return html for react app', (done) => {
+    request.get('/')
+      .send(data)
+      .end((err, res) => {
+        expect(res.headers['content-type'], 'text/html; charset=UTF-8');
+        expect(res.status).to.equal(200);
+        done();
+      });
+  });
+
+  it('should return html for api docs', (done) => {
+    request.get('/api/docs')
+      .send(data)
+      .end((err, res) => {
+        expect(res.headers['content-type'], 'text/html; charset=UTF-8');
+        expect(res.status).to.equal(200);
+        done();
+      });
+  });
+
   describe('User signup', () => {
     const signupURl = `${rootURL}/users/signup`;
 
@@ -102,6 +121,12 @@ describe('API Integration Tests', () => {
       request.post(signupURl)
         .send(data)
         .end((err, res) => {
+          const { user } = jwt.decode(res.body.token);
+
+          // Ensures that only the id is used to create the token
+          expect(Object.keys(user).length).to.equal(1);
+          expect(user.id).to.equal(res.body.user.id);
+
           expect(res.status).to.equal(201);
           expect(res.body.status).to.equal('success');
           expect(res.body.message).to.equal('Account created');
@@ -245,12 +270,19 @@ describe('API Integration Tests', () => {
         }
       };
     });
+
     // main user login
     it('return 200 for a successful login', (done) => {
       request.post(loginURl)
         .send(data)
         .end((err, res) => {
           userToken1 = res.body.token;
+          const { user } = jwt.decode(userToken1);
+
+          // Ensures that only the id is used to create the token
+          expect(Object.keys(user).length).to.equal(1);
+          expect(user.id).to.equal(res.body.user.id);
+
           expect(res.status).to.equal(200);
           expect(res.body.status).to.equal('success');
           expect(res.body.user.id).to.equal(1);
@@ -259,6 +291,7 @@ describe('API Integration Tests', () => {
           done();
         });
     });
+
     // wrong password for user 1
     it('return 401 for wrong password', (done) => {
       const wrongPassword = Object.assign({}, data);
@@ -569,8 +602,6 @@ describe('API Integration Tests', () => {
           expect(res.body.user.email).to.equal('example@user.com');
           expect(res.body.user.fullname).to.equal('example user');
           expect(res.body.user.id).to.equal(1);
-          expect(res.body.user.recipes).to.be.a('array');
-          expect(res.body.user.favorites).to.be.a('array');
           expect(res.body.message).to.equal('user found');
           expect(res.body.asOwner).to.equal(false);
           done();
@@ -588,8 +619,6 @@ describe('API Integration Tests', () => {
           expect(res.body.user.email).to.equal('example@user.com');
           expect(res.body.user.fullname).to.equal('example user');
           expect(res.body.user.id).to.equal(1);
-          expect(res.body.user.recipes).to.be.a('array');
-          expect(res.body.user.favorites).to.be.a('array');
           expect(res.body.message).to.equal('user found');
           expect(res.body.asOwner).to.equal(true);
           done();
@@ -827,7 +856,7 @@ describe('API Integration Tests', () => {
         .send({ token: userToken1 })
         .end((err, res) => {
           expect(res.status).to.equal(200);
-          expect(res.body.message).to.equal('success');
+          expect(res.body.status).to.equal('success');
           expect(res.body.recipes.length).to.equal(2);
           expect(res.body.recipes[0].name).to.equal('Jollof Rice');
           expect(res.body.recipes[1].name).to.equal('Fried Rice');
@@ -851,6 +880,7 @@ describe('API Integration Tests', () => {
           done();
         });
     });
+
     it('return 200 for successfully returning a sorted recipe list', (done) => {
       request.get(`${recipesUrl}?sort=upvotes&order=descending&page=1&limit=6`)
         .send({ token: userToken1 })
@@ -865,6 +895,7 @@ describe('API Integration Tests', () => {
         });
     });
   });
+
 
   describe('Review a recipe', () => {
     tokenAuthentication(`${recipesUrl}/${recipeId}/reviews`, 'post');
@@ -909,11 +940,10 @@ describe('API Integration Tests', () => {
         .send({ token: userToken1, content: 'i created a shitty recipe' })
         .end((err, res) => {
           expect(res.status).to.equal(200);
-          expect(res.body.recipe).to.be.a('object');
           expect(res.body.status).to.equal('success');
-          expect(res.body.recipe.reviews).to.be.a('array');
-          expect(res.body.recipe.reviews.length).to.be.equal(1);
-          expect(res.body.recipe.reviews[0].content).to.be.equal('i created a shitty recipe');
+          expect(res.body.reviews).to.be.a('array');
+          expect(res.body.reviews.length).to.be.equal(1);
+          expect(res.body.reviews[0].content).to.be.equal('i created a shitty recipe');
           expect(res.body.message).to.equal('Your review has been recorded');
           done();
         });
@@ -925,13 +955,43 @@ describe('API Integration Tests', () => {
         .send({ token: userToken2, content: 'this recipe is shit' })
         .end((err, res) => {
           expect(res.status).to.equal(200);
-          expect(res.body.recipe).to.be.a('object');
-          expect(res.body.recipe.reviews).to.be.a('array');
+          expect(res.body.reviews).to.be.a('array');
           expect(res.body.status).to.equal('success');
-          expect(res.body.recipe.reviews.length).to.be.equal(2);
-          expect(res.body.recipe.reviews[0].content).to.be.equal('this recipe is shit');
-          expect(res.body.recipe.reviews[1].content).to.be.equal('i created a shitty recipe');
+          expect(res.body.reviews.length).to.be.equal(2);
+          expect(res.body.reviews[0].content).to.be.equal('this recipe is shit');
+          expect(res.body.reviews[1].content).to.be.equal('i created a shitty recipe');
           expect(res.body.message).to.equal('Your review has been recorded');
+          done();
+        });
+    });
+  });
+
+  describe('Get all reviews for a recipe', () => {
+    tokenAuthentication(`${recipesUrl}/${recipeId}/reviews`, 'get');
+
+    // if recipe doesnt exist no review => 404
+    it('return 404 if recipe is not found', (done) => {
+      request.get(`${recipesUrl}/15/reviews`)
+        .send({ token: userToken1 })
+        .end((err, res) => {
+          expect(res.status).to.equal(404);
+          expect(res.body.status).to.equal('fail');
+          expect(res.body.message).to.equal('Recipe not found');
+          done();
+        });
+    });
+
+    it('return 200 for successfully getting all reviews', (done) => {
+      request.get(`${recipesUrl}/${recipeId}/reviews`)
+        .send({ token: userToken1 })
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          expect(res.body.status).to.equal('success');
+          expect(res.body.reviews.length).to.equal(2);
+          expect(res.body.reviews[0].content).to.equal('this recipe is shit');
+          expect(res.body.reviews[1].content).to.equal('i created a shitty recipe');
+          expect(res.body.reviews[0].User.id).to.equal(2);
+          expect(res.body.reviews[1].User.id).to.equal(1);
           done();
         });
     });

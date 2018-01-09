@@ -12,6 +12,13 @@ export const authPropTypes = {
   isAuthenticated: PropTypes.bool.isRequired
 };
 
+export const currentUserPropTypes = {
+  currentUser: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    fullname: PropTypes.string.isRequired,
+  }).isRequired
+};
+
 // AuthForm Component
 export const authFormPropTypes = {
   type: PropTypes.string.isRequired,

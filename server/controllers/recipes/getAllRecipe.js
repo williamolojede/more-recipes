@@ -1,13 +1,7 @@
-import { Recipe, Review, User } from '../../models/index';
+import { Recipe, User } from '../../models/index';
 import systemErrorHandler from '../../helpers/systemErrorHandler';
 
-// const allRecipe = (config = {}) => (Recipe.findAndCountAll({
-  // limit: 12,
-  // ...config
-// }));
-
 const allRecipe = (config = {}, limit = 12, page = 1) => {
-  console.log(limit, page);
   const offset = (page - 1) * limit;
 
   return Recipe.findAndCountAll({
@@ -87,7 +81,7 @@ const getAllRecipe = (req, res, next) => {
       { model: User, attributes: ['id', 'username', 'fullname'] }
     ]
   })
-    .then(({ recipes, pagination }) => res.status(200).send({ recipes, pagination, message: 'success' }))
+    .then(({ recipes, pagination }) => res.status(200).send({ recipes, pagination, status: 'success' }))
     .catch(error => systemErrorHandler(error, next));
 };
 export default getAllRecipe;

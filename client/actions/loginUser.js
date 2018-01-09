@@ -25,8 +25,8 @@ const loginUser = (creds) => {
 };
 
 // add user and token to the store
-export const setUserData = ({ user, token }) => (dispatch) => {
-  dispatch(receiveAuth(LOGIN_SUCCESS, { user, token }));
+export const setUserData = ({ user: currentUser, token }) => (dispatch) => {
+  dispatch(receiveAuth(LOGIN_SUCCESS, { currentUser, token }));
 };
 
 export const logoutUser = () => (dispatch) => {

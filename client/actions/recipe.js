@@ -64,23 +64,6 @@ export const fetchTopRecipes = (page, limit) => (dispatch) => {
     });
 };
 
-export const postReview = (content, id) => (dispatch) => {
-  dispatch(setFetching());
-  return instance.post(`/recipes/${id}/reviews`, { content })
-    .then((res) => {
-      dispatch(
-        batchActions([
-          recieveSingleRecipe(RECIEVE_SINGLE_RECIPE, res.data.recipe),
-          unsetFetching()
-        ])
-      );
-    })
-    .catch((err) => {
-      console.log(err.response.data.message || err.message);
-      dispatch(unsetFetching());
-    });
-};
-
 export const vote = (dir, id) => dispatch => instance.post(`/recipes/${id}/vote-${dir}`)
   .then((res) => {
     dispatch(batchActions([

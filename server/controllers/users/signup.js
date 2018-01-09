@@ -1,21 +1,11 @@
 import { User } from '../../models/index';
 import systemErrorHandler from '../../helpers/systemErrorHandler';
-import jwtAuth from '../../helpers/jwtAuth';
+import sendAuthSuccess from '../../helpers/sendAuthSuccess';
 
 const signup = (req, res, next) => {
   const { email, fullname, password } = req.body.user;
   User.create({ email, fullname, password })
-    .then((user) => {
-      const userDetails = Object.assign({}, user.dataValues);
-      delete userDetails.password;
-
-      return res.status(201).send({
-        status: 'success',
-        message: 'Account created',
-        user: userDetails,
-        token: jwtAuth.encode({ user: userDetails, })
-      });
-    })
+    .then(user => sendAuthSuccess(res, user, 'Account created', 201))
     .catch(error => systemErrorHandler({
       msg: error.errors[0].message,
       code: 400

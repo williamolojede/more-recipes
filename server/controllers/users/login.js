@@ -1,5 +1,5 @@
 import { User } from '../../models/index';
-import jwtAuth from '../../helpers/jwtAuth';
+import sendAuthSuccess from '../../helpers/sendAuthSuccess';
 
 const login = (req, res, next) => {
   const { email, password } = req.body.user;
@@ -10,15 +10,7 @@ const login = (req, res, next) => {
       return next(err);
     }
 
-    const userDetails = Object.assign({}, user.dataValues);
-    delete userDetails.password;
-
-    return res.status(200).send({
-      status: 'success',
-      message: 'You are successfully logged in',
-      user: userDetails,
-      token: jwtAuth.encode({ user: userDetails })
-    });
+    sendAuthSuccess(res, user, 'You are successfully logged in', 200);
   });
 };
 
