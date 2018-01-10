@@ -1,5 +1,5 @@
 import { Review } from '../../models/index';
-import systemErrorHandler from '../../helpers/systemErrorHandler';
+import helpers from '../../helpers';
 import { findReviews } from './getReviews';
 
 const addReview = (req, res, next) => {
@@ -8,9 +8,14 @@ const addReview = (req, res, next) => {
   const { id: recipeId } = req.params;
 
   Review.create({ userId, recipeId, content })
-    .then(() => findReviews(recipeId))
-    .then(reviews => res.status(200).send({ status: 'success', reviews, message: 'Your review has been recorded' }))
-    .catch(error => systemErrorHandler({
+    .then(() => findReviews(req))
+    .then(({ rows: reviews, pagination }) => res.status(200).send({
+      status: 'success',
+      reviews,
+      pagination,
+      message: 'Your review has been recorded'
+    }))
+    .catch(error => helpers.systemErrorHandler({
       msg: error.errors[0].message,
       code: 400
     }, next));

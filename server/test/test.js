@@ -881,7 +881,17 @@ describe('API Integration Tests', () => {
         });
     });
 
-    it('return 200 for successfully returning a sorted recipe list', (done) => {
+    it('should return 400 for a wrong sort order', (done) => {
+      request.get(`${recipesUrl}?sort=notupvoteordownvote&order=descending`)
+        .send({ token: userToken1 })
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.message).to.equal('invalid sort type');
+          done();
+        });
+    });
+
+    it('should return 200 for successfully returning a sorted recipe list', (done) => {
       request.get(`${recipesUrl}?sort=upvotes&order=descending&page=1&limit=6`)
         .send({ token: userToken1 })
         .end((err, res) => {
@@ -894,8 +904,28 @@ describe('API Integration Tests', () => {
           done();
         });
     });
-  });
 
+    // Search
+    it('should return list of recipes that match search term by name', (done) => {
+      request.get(`${recipesUrl}?search=Fried+Rice`)
+        .send({ token: userToken1 })
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          expect(res.body.recipes.length).to.equal(1);
+          done();
+        });
+    });
+
+    it('should return list of recipes that match search term by ingredient name', (done) => {
+      request.get(`${recipesUrl}?search=canola+oil`)
+        .send({ token: userToken1 })
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          expect(res.body.recipes.length).to.equal(2);
+          done();
+        });
+    });
+  });
 
   describe('Review a recipe', () => {
     tokenAuthentication(`${recipesUrl}/${recipeId}/reviews`, 'post');
@@ -945,6 +975,7 @@ describe('API Integration Tests', () => {
           expect(res.body.reviews.length).to.be.equal(1);
           expect(res.body.reviews[0].content).to.be.equal('i created a shitty recipe');
           expect(res.body.message).to.equal('Your review has been recorded');
+          expect(res.body.pagination.pageSize).to.equal(1);
           done();
         });
     });
@@ -961,6 +992,7 @@ describe('API Integration Tests', () => {
           expect(res.body.reviews[0].content).to.be.equal('this recipe is shit');
           expect(res.body.reviews[1].content).to.be.equal('i created a shitty recipe');
           expect(res.body.message).to.equal('Your review has been recorded');
+          expect(res.body.pagination.pageSize).to.equal(2);
           done();
         });
     });
@@ -970,7 +1002,7 @@ describe('API Integration Tests', () => {
     tokenAuthentication(`${recipesUrl}/${recipeId}/reviews`, 'get');
 
     // if recipe doesnt exist no review => 404
-    it('return 404 if recipe is not found', (done) => {
+    it('should return 404 if recipe is not found', (done) => {
       request.get(`${recipesUrl}/15/reviews`)
         .send({ token: userToken1 })
         .end((err, res) => {
@@ -981,7 +1013,7 @@ describe('API Integration Tests', () => {
         });
     });
 
-    it('return 200 for successfully getting all reviews', (done) => {
+    it('should return 200 for successfully getting all reviews', (done) => {
       request.get(`${recipesUrl}/${recipeId}/reviews`)
         .send({ token: userToken1 })
         .end((err, res) => {
@@ -992,6 +1024,7 @@ describe('API Integration Tests', () => {
           expect(res.body.reviews[1].content).to.equal('i created a shitty recipe');
           expect(res.body.reviews[0].User.id).to.equal(2);
           expect(res.body.reviews[1].User.id).to.equal(1);
+          expect(res.body.pagination.pageSize).to.equal(2);
           done();
         });
     });
@@ -1001,7 +1034,7 @@ describe('API Integration Tests', () => {
     tokenAuthentication(`${recipesUrl}/${recipeId}/favorite`, 'post');
 
     // if recipe doesnt exist => 404
-    it('return 404 if recipe is not found', (done) => {
+    it('should return 404 if recipe is not found', (done) => {
       request.post(`${recipesUrl}/15/favorite`)
         .send({ token: userToken1 })
         .end((err, res) => {
@@ -1013,7 +1046,7 @@ describe('API Integration Tests', () => {
     });
 
     // if owner tries to favorite on his/her recipe => 403
-    it('return 403 if owner tries to favorite', (done) => {
+    it('should return 403 if owner tries to favorite', (done) => {
       request.post(`${recipesUrl}/${recipeId}/favorite`)
         .send({ token: userToken1 })
         .end((err, res) => {
@@ -1025,7 +1058,7 @@ describe('API Integration Tests', () => {
     });
 
     // if everything good => 200
-    it('return 200 if another user tries to favorite', (done) => {
+    it('should add recipe to favorite list if user favorites', (done) => {
       request.post(`${recipesUrl}/${recipeId}/favorite`)
         .send({ token: userToken2 })
         .end((err, res) => {
@@ -1038,7 +1071,7 @@ describe('API Integration Tests', () => {
     });
 
     // if user request again it will undo the favorite
-    it('return 200 if another user tries to favorite', (done) => {
+    it('should remove recipe from favorite list if user favorite again', (done) => {
       request.post(`${recipesUrl}/${recipeId}/favorite`)
         .send({ token: userToken2 })
         .end((err, res) => {
@@ -1049,9 +1082,10 @@ describe('API Integration Tests', () => {
           done();
         });
     });
+
     // if everything good => 200
     // this is just to make sure the favorite table isn't empty when its to be tested
-    it('return 200 if another user tries to favorite', (done) => {
+    it('should add recipe to favorite list if user favorites', (done) => {
       request.post(`${recipesUrl}/${recipeId}/favorite`)
         .send({ token: userToken2 })
         .end((err, res) => {
@@ -1064,56 +1098,75 @@ describe('API Integration Tests', () => {
     });
   });
 
-  describe('Get all user\'s favorite recipe(s)', () => {
+  describe('Get all user\'s personal recipe(s)', () => {
     // note: i'm using two here because only user 2 has favorited something
-    // no user token
     tokenAuthentication(`${usersUrl}/2/recipes`, 'get');
 
-    // user token decoded !== :id
-    it('return 403 for invalid user token used', (done) => {
-      request.get(`${usersUrl}/2/recipes`)
-        .send({ token: userToken1 })
-        .end((err, res) => {
-          expect(res.status).to.equal(403);
-          expect(res.body.status).to.equal('fail');
-          expect(res.body.message).to.equal('invalid user authorization token or user doesn\'t exist');
-          done();
-        });
-    });
-
     // user doesn't exist
-    it('return 403 for invalid user token used', (done) => {
+    it('should return 404 for a non existing user id', (done) => {
       request.get(`${usersUrl}/3/recipes`)
         .send({ token: userToken2 })
         .end((err, res) => {
-          expect(res.status).to.equal(403);
+          expect(res.status).to.equal(404);
           expect(res.body.status).to.equal('fail');
-          expect(res.body.message).to.equal('invalid user authorization token or user doesn\'t exist');
-          done();
-        });
-    });
-    // user has no favorites
-    it('return 200 for user has no recipes in favorite list', (done) => {
-      request.get(`${usersUrl}/1/recipes`)
-        .send({ token: userToken1 })
-        .end((err, res) => {
-          expect(res.status).to.equal(200);
-          expect(res.body.recipes).to.be.a('null');
-          expect(res.body.status).to.equal('success');
-          expect(res.body.message).to.equal('user has no recipe in his/her favorite list');
+          expect(res.body.message).to.equal('User not found');
           done();
         });
     });
 
-    it('return 200 for a user with a favorite list', (done) => {
+    it('should return 200 for a user with a personal recipes', (done) => {
       request.get(`${usersUrl}/2/recipes`)
+        .send({ token: userToken2 })
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          expect(res.body.recipes).to.be.a('array');
+          expect(res.body.recipes[0].name).to.equal('Jollof Rice');
+          expect(res.body.status).to.equal('success');
+          expect(res.body.pagination.pageSize).to.equal(1);
+          done();
+        });
+    });
+  });
+
+  describe('Get all user\'s favorite recipe(s)', () => {
+    // note: i'm using two here because only user 2 has favorited something
+    tokenAuthentication(`${usersUrl}/2/favorites`, 'get');
+
+    // user doesn't exist
+    it('should return 404 for a non existing user id', (done) => {
+      request.get(`${usersUrl}/3/favorites`)
+        .send({ token: userToken2 })
+        .end((err, res) => {
+          expect(res.status).to.equal(404);
+          expect(res.body.status).to.equal('fail');
+          expect(res.body.message).to.equal('User not found');
+          done();
+        });
+    });
+
+    // user has no favorites
+    it('should return 200 for user has no recipes in favorite list', (done) => {
+      request.get(`${usersUrl}/1/favorites`)
+        .send({ token: userToken1 })
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          expect(res.body.recipes).to.be.a('array');
+          expect(res.body.recipes.length).to.equal(0);
+          expect(res.body.status).to.equal('success');
+          expect(res.body.pagination.pageSize).to.equal(0);
+          done();
+        });
+    });
+
+    it('should return 200 for a user with a favorite list', (done) => {
+      request.get(`${usersUrl}/2/favorites`)
         .send({ token: userToken2 })
         .end((err, res) => {
           expect(res.status).to.equal(200);
           expect(res.body.recipes).to.be.a('array');
           expect(res.body.recipes[0].name).to.equal('Fried Rice');
           expect(res.body.status).to.equal('success');
-          expect(res.body.message).to.equal('1 recipe(s) found in user\'s favorite list');
+          expect(res.body.pagination.pageSize).to.equal(1);
           done();
         });
     });

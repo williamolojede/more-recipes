@@ -14,7 +14,6 @@ import Pagination from '../shared/Pagination';
 import Search from '../shared/Search';
 
 import { currentUserPropTypes } from '../../config/proptypes';
-import { currentUserDefaultProps } from '../../config/defaultPropTypes';
 
 export class Home extends Component {
   constructor(props) {
@@ -129,10 +128,6 @@ export class Home extends Component {
     );
   }
 }
-
-Home.defaultProps = {
-  ...currentUserDefaultProps
-};
 
 Home.propTypes = {
   dispatch: PropTypes.func.isRequired,

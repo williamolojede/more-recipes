@@ -1,21 +1,28 @@
 import { User, Review } from '../../models';
-import systemErrorHandler from '../../helpers/systemErrorHandler';
+import helpers from '../../helpers';
 
-export const findReviews = recipeId => Review.findAll({
-  where: { recipeId },
-  attributes: ['id', 'content', 'createdAt'],
-  include: [
-    { model: User, attributes: ['id', 'username', 'fullname'] }
-  ],
-  order: [['id', 'DESC']]
-});
+export const findReviews = (req) => {
+  const recipeId = parseInt(req.params.id, 10);
+  const config = {
+    where: { recipeId },
+    attributes: ['id', 'content', 'createdAt'],
+    include: [
+      { model: User, attributes: ['id', 'username', 'fullname'] }
+    ],
+    order: [['id', 'DESC']]
+  };
+
+  return helpers.fetch(config, req.query, Review);
+};
 
 const getReviews = (req, res, next) => {
-  const { id } = req.params;
-
-  findReviews(parseInt(id, 10))
-    .then(reviews => res.status(200).send({ status: 'success', reviews }))
-    .catch(error => systemErrorHandler(error, next));
+  findReviews(req)
+    .then(({ rows: reviews, pagination }) => res.status(200).send({
+      status: 'success',
+      reviews,
+      pagination
+    }))
+    .catch(error => helpers.systemErrorHandler(error, next));
 };
 
 export default getReviews;

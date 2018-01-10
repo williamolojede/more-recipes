@@ -11,7 +11,7 @@ function setup() {
   const props = {
     dispatch: jest.fn(),
     isFetching: false,
-    user
+    currentUser: user
   };
   const shallowWrapper = shallow(<Home {...props} />);
   const mountedWrapper = mount(

@@ -17,7 +17,6 @@ import RecipeStats from '../shared/RecipeStats.jsx';
 import Notification from '../shared/Notification.jsx';
 
 import { recipePropTypes, currentUserPropTypes } from '../../config/proptypes';
-import { currentUserDefaultProps } from '../../config/defaultPropTypes';
 
 class SingleRecipe extends Component {
   componentDidMount() {
@@ -42,7 +41,6 @@ class SingleRecipe extends Component {
       img_url,
       ingredients,
       instructions,
-      reviews,
       upVoteCount,
       downVoteCount,
       favoriteCount,
@@ -92,10 +90,6 @@ class SingleRecipe extends Component {
     );
   }
 }
-
-SingleRecipe.defaultProps = {
-  ...currentUserDefaultProps
-};
 
 SingleRecipe.propTypes = {
   dispatch: PropTypes.func.isRequired,

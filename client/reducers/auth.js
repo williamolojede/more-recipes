@@ -9,7 +9,11 @@ import {
 } from '../actions/types';
 
 const initialState = {
-  isAuthenticated: !!localStorage.getItem('token')
+  isAuthenticated: !!localStorage.getItem('token'),
+  currentUser: {
+    id: 1,
+    fullname: ''
+  }
 };
 
 const auth = (state = initialState, action) => {

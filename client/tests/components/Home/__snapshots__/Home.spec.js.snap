@@ -8,7 +8,7 @@ exports[`Home should render a preloader 1`] = `
     className="site-header"
   >
     <Connect(SiteNav)
-      user={
+      currentUser={
         Object {
           "fullname": "John Doe",
           "id": 1,
@@ -57,7 +57,7 @@ exports[`Home should render top recipes when recipes props is received 1`] = `
     className="site-header"
   >
     <Connect(SiteNav)
-      user={
+      currentUser={
         Object {
           "fullname": "John Doe",
           "id": 1,
@@ -130,7 +130,7 @@ exports[`Home should render top recipes when recipes props is received 2`] = `
     className="site-header"
   >
     <Connect(SiteNav)
-      user={
+      currentUser={
         Object {
           "fullname": "John Doe",
           "id": 1,
@@ -473,14 +473,14 @@ exports[`Home should render with right amount of elements 1`] = `
       }
     >
       <Home
-        dispatch={[Function]}
-        isFetching={false}
-        user={
+        currentUser={
           Object {
             "fullname": "John Doe",
             "id": 1,
           }
         }
+        dispatch={[Function]}
+        isFetching={false}
       >
         <div
           className="page page__home"
@@ -489,7 +489,7 @@ exports[`Home should render with right amount of elements 1`] = `
             className="site-header"
           >
             <Connect(SiteNav)
-              user={
+              currentUser={
                 Object {
                   "fullname": "John Doe",
                   "id": 1,
@@ -497,13 +497,13 @@ exports[`Home should render with right amount of elements 1`] = `
               }
             >
               <SiteNav
-                dispatch={[Function]}
-                user={
+                currentUser={
                   Object {
                     "fullname": "John Doe",
                     "id": 1,
                   }
                 }
+                dispatch={[Function]}
               >
                 <nav
                   className="site-header__nav"

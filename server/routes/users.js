@@ -15,20 +15,21 @@ router.post('/login',
   userController.login
 );
 
-router.get('/:uid',
+router.use('/:uid',
   middlewares.requiresToken,
-  middlewares.validateUserId,
+  middlewares.validateUserId
+);
+
+router.get('/:uid',
   userController.getUserDetails
 );
 
-// router.get('/:uid/recipes',
-//   middlewares.requiresToken,
-//   userController.getUserRecipes
-// );
-
 router.get('/:uid/recipes',
-  middlewares.requiresToken,
-  userController.getUserFavorites
+  userController.getPersonalRecipes
+);
+
+router.get('/:uid/favorites',
+  userController.getFavoriteRecipes
 );
 
 export default router;

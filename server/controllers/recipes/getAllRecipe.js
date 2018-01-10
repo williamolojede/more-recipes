@@ -1,34 +1,5 @@
 import { Recipe, User } from '../../models/index';
-import systemErrorHandler from '../../helpers/systemErrorHandler';
-
-const allRecipe = (config = {}, limit = 12, page = 1) => {
-  const offset = (page - 1) * limit;
-
-  return Recipe.findAndCountAll({
-    limit,
-    offset,
-    ...config
-  })
-    .then(({ count: totalCount, rows: recipes }) => {
-      const last = Math.ceil(totalCount / limit);
-      const pages = [];
-      for (let i = 1; i <= last; i += 1) {
-        pages.push(i);
-      }
-
-      const pagination = {
-        pages,
-        totalCount,
-        pageSize: recipes.length,
-        page,
-        last
-      };
-      return {
-        recipes,
-        pagination
-      };
-    });
-};
+import helpers from '../../helpers';
 
 const getAllRecipe = (req, res, next) => {
   const { sort, order, search } = req.query;
@@ -50,19 +21,18 @@ const getAllRecipe = (req, res, next) => {
       err.statusCode = 400;
       return next(err);
     }
-
-    return allRecipe(
+    return helpers.fetch(
       {
         order: [['upVoteCount', 'DESC']],
         include: [{ model: User, attributes: ['id', 'username', 'fullname'] }],
-      },
-      parseInt(req.query.limit, 10) || undefined,
-      parseInt(req.query.page, 10) || undefined
+      }, req.query, Recipe
     )
-      .then(({ recipes, pagination }) => res.status(200).send(
-        { recipes, pagination, message: 'success' }
-      ))
-      .catch(error => systemErrorHandler(error, next));
+      .then(({ rows: recipes, pagination }) => res.status(200).send({
+        recipes,
+        pagination,
+        message: 'success'
+      }))
+      .catch(error => helpers.systemErrorHandler(error, next));
   } else if (search) {
     return Recipe.findAll({
       where: {
@@ -73,15 +43,22 @@ const getAllRecipe = (req, res, next) => {
       }
     })
       .then(recipes => res.status(200).send({ recipes }))
-      .catch(error => systemErrorHandler(error, next));
+      .catch(error => helpers.systemErrorHandler(error, next));
   }
 
-  allRecipe({
-    include: [
-      { model: User, attributes: ['id', 'username', 'fullname'] }
-    ]
-  })
-    .then(({ recipes, pagination }) => res.status(200).send({ recipes, pagination, status: 'success' }))
-    .catch(error => systemErrorHandler(error, next));
+  helpers.fetch(
+    {
+      include: [
+        { model: User, attributes: ['id', 'username', 'fullname'] }
+      ]
+    },
+    req.query, Recipe
+  )
+    .then(({ rows: recipes, pagination }) => res.status(200).send({
+      recipes,
+      pagination,
+      status: 'success'
+    }))
+    .catch(error => helpers.systemErrorHandler(error, next));
 };
 export default getAllRecipe;

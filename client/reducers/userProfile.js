@@ -5,12 +5,22 @@ import {
   RECIEVE_UPDATED_RECIPE
 } from '../actions/types';
 
-const userProfile = (state = {}, action) => {
+const initialState = {
+  user: {
+    email: '',
+    fullname: ''
+  },
+  favoriteRecipes: {},
+  personalRecipes: {},
+  asOwner: false
+};
+
+const userProfile = (state = initialState, action) => {
   const oldState = Object.assign({}, state);
   let user;
   switch (action.type) {
     case RECIEVE_USER_PROFILE:
-      return action.data;
+      return { ...state, ...action.data };
     case RECIEVE_NEW_RECIPE:
       oldState.user.recipes = oldState.user.recipes.concat(action.recipe);
       return oldState;
