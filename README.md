@@ -20,6 +20,28 @@ A Full-Stack web application built for users to share their awesome and exciting
 ## API Documentation
  The full documentation for all api end point can be found [here](https://more-recipes.herokuapp.com/api/docs)
 
+## How to Install
+1. Clone the repo and enter directory 
+```sh
+git clone git@github.com:williamolojede/more-recipes.git && cd more-recipes
+```
+2. Install the project's dependecies
+```sh
+npm install
+```
+3. Create `.env` file and copy content of `.env.sample` to it and provide the appropriate values
+```sh
+cp .env.sample .env
+```
+4. Take a look at [config.json](https://github.com/williamolojede/more-recipes/blob/dev/server/config/config.json) and read [this](https://www.codementor.io/engineerapart/getting-started-with-postgresql-on-mac-osx-are8jcopb) to setup postgres/sequelize to create a db then run migration
+```sh
+npm run migrate
+```
+5. Finally, start the server
+```sh
+npm run start:dev
+```
+
 ## Demo
 View the web client live [here](https://more-recipes.herokuapp.com/)
 
