@@ -10,7 +10,7 @@ systemErrorHandler({ msg: 'some error' }, (err) => {
 describe('Error Handler', () => {
   it('corect error', (done) => {
     expect(error).to.be.a('error');
-    expect(error.status).to.equal(500);
+    expect(error.statusCode).to.equal(500);
     expect(error.message).to.equal('some error');
     done();
   });

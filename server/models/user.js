@@ -14,12 +14,12 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       unique: {
         args: true,
-        msg: 'user with email already exists'
+        msg: 'User with email already exists'
       },
       validate: {
         notEmpty: {
           args: true,
-          msg: 'email can not be empty'
+          msg: 'Email can not be empty'
         },
         isEmail: {
           args: true,
@@ -96,7 +96,7 @@ module.exports = (sequelize, DataTypes) => {
         // check if it finds no user
         if (!user) {
           const err = new Error('User not found');
-          err.status = 404;
+          err.statusCode = 404;
           return callback(err);
         }
         const isMatch = bcrypt.compareSync(password, user.password);

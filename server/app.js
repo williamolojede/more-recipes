@@ -46,7 +46,7 @@ app.get('/api/docs', (req, res) => {
 });
 
 // STATIC FILE FOR API DOCUMENTATION
-app.use('/api/docs-assets', express.static(path.resolve(__dirname, '..', 'docs')));
+app.use('/docs-assets', express.static(path.resolve(__dirname, '..', 'docs')));
 
 // API ROUTES
 app.use('/api', routes);
@@ -69,17 +69,20 @@ app.get('*', (req, res) => {
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
   const err = new Error('Not Found');
-  err.status = 404;
+  err.statusCode = 404;
   next(err);
 });
 
 // error handler
 // define as the last app.use callback
 /* eslint no-unused-vars: 0 */
-app.use((err, req, res, next) => {
+app.use(({ message, statusCode }, req, res, next) => {
   // defaults to internal server error
-  res.status(err.status || 500);
-  res.send({ message: err.message, });
+  res.status(statusCode || 500);
+  res.send({
+    message,
+    status: 'fail'
+  });
 });
 
 // http://www.marcusoft.net/2015/10/eaddrinuse-when-watching-tests-with-mocha-and-supertest.html

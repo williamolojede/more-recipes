@@ -22,6 +22,7 @@ services:
   - postgresql
 
 before_script:
+  - npm run build:client:dev
   - createuser william -s -U postgres
   - createdb more-recipes_test --username=william
   - sequelize db:migrate

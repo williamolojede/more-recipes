@@ -1,34 +1,36 @@
-import { Recipe, Review, User } from '../../models/index';
-import systemErrorHandler from '../../helpers/systemErrorHandler';
-import Paginate from '../../helpers/paginate';
+import { Recipe, User } from '../../models/index';
+import helpers from '../../helpers';
 
 const getAllRecipe = (req, res, next) => {
   const { sort, order, search } = req.query;
 
   //  if query is passed
   if (sort && order) {
+    const sortTypes = ['upvotes', 'downvotes'];
+    const orderOptions = ['ascending', 'descending'];
+
     // if the wrong sort order is passed
-    if (order !== 'ascending' && order !== 'descending') {
+    if (!orderOptions.includes(order)) {
       const err = new Error('invalid sort order');
-      err.status = 400;
+      err.statusCode = 400;
       return next(err);
     }
-    return Recipe.findAll({
+
+    if (!sortTypes.includes(sort)) {
+      const err = new Error('invalid sort type');
+      err.statusCode = 400;
+      return next(err);
+    }
+    return helpers.fetch({
       order: [['upVoteCount', 'DESC']],
-      include: [
-        { model: Review, as: 'reviews' },
-        { model: User, attributes: ['id', 'username', 'fullname'] }
-      ]
-    })
-      .then((topRecipes) => {
-        const {
-          recipes,
-          metaData
-        } = (new Paginate(topRecipes, parseInt(req.query.limit, 10)))
-          .getRecipesForPage(parseInt(req.query.page, 10));
-        res.status(200).send({ recipes, metaData, message: 'success' });
-      })
-      .catch(error => systemErrorHandler(error, next));
+      include: [{ model: User, attributes: ['id', 'username', 'fullname'] }],
+    }, req.query, Recipe)
+      .then(({ rows: recipes, pagination }) => res.status(200).send({
+        recipes,
+        pagination,
+        message: 'success'
+      }))
+      .catch(error => helpers.systemErrorHandler(error, next));
   } else if (search) {
     return Recipe.findAll({
       where: {
@@ -39,15 +41,22 @@ const getAllRecipe = (req, res, next) => {
       }
     })
       .then(recipes => res.status(200).send({ recipes }))
-      .catch(error => systemErrorHandler(error, next));
+      .catch(error => helpers.systemErrorHandler(error, next));
   }
-  Recipe.findAll({
-    include: [
-      { model: Review, as: 'reviews' },
-      { model: User, attributes: ['id', 'username', 'fullname'] }
-    ]
-  })
-    .then(recipes => res.status(200).send({ recipes, message: 'success' }))
-    .catch(error => systemErrorHandler(error, next));
+
+  helpers.fetch(
+    {
+      include: [
+        { model: User, attributes: ['id', 'username', 'fullname'] }
+      ]
+    },
+    req.query, Recipe
+  )
+    .then(({ rows: recipes, pagination }) => res.status(200).send({
+      recipes,
+      pagination,
+      status: 'success'
+    }))
+    .catch(error => helpers.systemErrorHandler(error, next));
 };
 export default getAllRecipe;

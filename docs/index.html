@@ -196,20 +196,21 @@
   color: #f92672;
 }
     </style>
-    <link href="docs-assets/stylesheets/screen.css" rel="stylesheet" media="screen" />
-    <link href="docs-assets/stylesheets/print.css" rel="stylesheet" media="print" />
-      <script src="docs-assets/javascripts/all.js"></script>
+    <link href="/docs-assets/stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="/docs-assets/stylesheets/print.css" rel="stylesheet" media="print" />
+      <script src="/docs-assets/javascripts/all.js"></script>
   </head>
 
   <body class="index" data-languages="[&quot;javascript&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
-        <img src="docs-assets/images/navbar.png" alt="Navbar" />
+        <img src="/docs-assets/images/navbar.png" alt="Navbar" />
       </span>
     </a>
     <div class="toc-wrapper">
-      <img src="docs-assets/images/logo.png" class="logo" alt="Logo" />
+      <h1 class="text-logo">MoreRecipes API</h1>
+       %>
         <div class="lang-selector">
               <a href="#" data-language-name="javascript">javascript</a>
         </div>
@@ -219,28 +220,42 @@
         <ul class="search-results"></ul>
       <div id="toc" class="toc-list-h1">
           <li>
-            <a href="#overview-morerecipes-api" class="toc-h1 toc-link" data-title="Overview - MoreRecipes API">Overview - MoreRecipes API</a>
+            <a href="#overview-mdash-morerecipes-api" class="toc-h1 toc-link" data-title="Overview — MoreRecipes Api">Overview — MoreRecipes Api</a>
           </li>
           <li>
-            <a href="#making-requests" class="toc-h1 toc-link" data-title="Making Requests">Making Requests</a>
+            <a href="#making-request" class="toc-h1 toc-link" data-title="Making Request">Making Request</a>
+          </li>
+          <li>
+            <a href="#returning-a-list-of-items" class="toc-h1 toc-link" data-title="Returning a list of items">Returning a list of items</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#query-parameters" class="toc-h2 toc-link" data-title="Query Parameters">Query Parameters</a>
+                  </li>
+                  <li>
+                    <a href="#pagination-metadata" class="toc-h2 toc-link" data-title="Pagination Metadata">Pagination Metadata</a>
+                  </li>
+              </ul>
           </li>
           <li>
             <a href="#user" class="toc-h1 toc-link" data-title="User">User</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#user-signup" class="toc-h2 toc-link" data-title="User">User signup</a>
+                    <a href="#user-signup" class="toc-h2 toc-link" data-title="User signup">User signup</a>
                   </li>
                   <li>
-                    <a href="#user-login" class="toc-h2 toc-link" data-title="User">User login</a>
+                    <a href="#user-login" class="toc-h2 toc-link" data-title="User login">User login</a>
                   </li>
                   <li>
-                    <a href="#user-detail" class="toc-h2 toc-link" data-title="User">User detail</a>
+                    <a href="#user-profile" class="toc-h2 toc-link" data-title="User profile">User profile</a>
                   </li>
                   <li>
-                    <a href="#user-detail-update" class="toc-h2 toc-link" data-title="User">User detail update</a>
+                    <a href="#user-profile-update" class="toc-h2 toc-link" data-title="User profile update">User profile update</a>
                   </li>
                   <li>
-                    <a href="#user-favorites" class="toc-h2 toc-link" data-title="User">User Favorites</a>
+                    <a href="#user-favorite-list" class="toc-h2 toc-link" data-title="User Favorite list">User Favorite list</a>
+                  </li>
+                  <li>
+                    <a href="#user-recipes-list" class="toc-h2 toc-link" data-title="User Recipes List">User Recipes List</a>
                   </li>
               </ul>
           </li>
@@ -248,28 +263,31 @@
             <a href="#recipes" class="toc-h1 toc-link" data-title="Recipes">Recipes</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#create-recipe" class="toc-h2 toc-link" data-title="Recipes">Create Recipe</a>
+                    <a href="#create-recipe" class="toc-h2 toc-link" data-title="Create recipe">Create recipe</a>
                   </li>
                   <li>
-                    <a href="#get-all-recipes" class="toc-h2 toc-link" data-title="Recipes">Get all recipes</a>
+                    <a href="#get-all-recipes" class="toc-h2 toc-link" data-title="Get all recipes">Get all recipes</a>
                   </li>
                   <li>
-                    <a href="#get-a-recipe" class="toc-h2 toc-link" data-title="Recipes">Get a Recipe</a>
+                    <a href="#get-a-recipe" class="toc-h2 toc-link" data-title="Get a recipe">Get a recipe</a>
                   </li>
                   <li>
-                    <a href="#modify-a-recipe" class="toc-h2 toc-link" data-title="Recipes">Modify a Recipe</a>
+                    <a href="#add-review-on-recipe" class="toc-h2 toc-link" data-title="Add review on recipe">Add review on recipe</a>
                   </li>
                   <li>
-                    <a href="#vote-on-a-recipe" class="toc-h2 toc-link" data-title="Recipes">Vote on a Recipe</a>
+                    <a href="#get-all-reviews-for-a-recipe" class="toc-h2 toc-link" data-title="Get all reviews for a recipe">Get all reviews for a recipe</a>
                   </li>
                   <li>
-                    <a href="#favorite-a-recipe" class="toc-h2 toc-link" data-title="Recipes">Favorite a Recipe</a>
+                    <a href="#modify-a-recipe" class="toc-h2 toc-link" data-title="Modify a recipe">Modify a recipe</a>
                   </li>
                   <li>
-                    <a href="#write-review-on-a-recipe" class="toc-h2 toc-link" data-title="Recipes">Write review on a Recipe</a>
+                    <a href="#up-down-vote-a-recipe" class="toc-h2 toc-link" data-title="(up, down)Vote a recipe">(up, down)Vote a recipe</a>
                   </li>
                   <li>
-                    <a href="#delete-a-recipe" class="toc-h2 toc-link" data-title="Recipes">Delete a Recipe</a>
+                    <a href="#favorite-a-recipe" class="toc-h2 toc-link" data-title="Favorite a recipe">Favorite a recipe</a>
+                  </li>
+                  <li>
+                    <a href="#delete-recipe" class="toc-h2 toc-link" data-title="Delete Recipe">Delete Recipe</a>
                   </li>
               </ul>
           </li>
@@ -277,32 +295,77 @@
             <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
           </li>
       </div>
-        <ul class="toc-footer">
-            <li><a href='#'>Sign Up for a Developer Key</a></li>
-            <li><a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a></li>
-        </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='overview-morerecipes-api'>Overview - MoreRecipes API</h1>
+        <h1 id='overview-mdash-morerecipes-api'>Overview &mdash; MoreRecipes Api</h1>
 <p>Welcome to the MoreRecipes API documentation. This is the API used by the MoreRecipes web interface, so everything the web ui is able to do can also be accomplished via the API.</p>
 
 <p>This API provides the means for you to share, view and manage your recipes and those of others.</p>
 
-<p><strong><code>base URI</code></strong> is <strong>https://more-recipes.herokuapp.com/api/v1/</strong></p>
-<h1 id='making-requests'>Making Requests</h1>
+<p><strong><code>BASE API URL:</code></strong> <code>https://more-recipes.herokuapp.com/api/v1/</code></p>
+<h1 id='making-request'>Making Request</h1>
 <p>An authorization token is required to access all endpoints except the signup and Login endpoints. Use the login/signup endpoint to get a token</p>
 
 <p>A token generated expires 48 hours after it has being generated.</p>
 
-<p>The token can be placed in <code>req.headers</code>, <code>req.body</code> or <code>req.query</code> </p>
+<p>The token can be placed in <code>req.headers</code>, <code>req.body</code> or <code>req.query</code></p>
 
 <p><code>token: averylongrandom.jsonwebtokenstring.requiredforauthentication</code></p>
 
 <aside class="notice">
-You must replace <code>averylongrandom.jsonwebtokenstring.requiredforauthentication</code> with your personal auth token.
+  You must replace <code>averylongrandom.jsonwebtokenstring.requiredforauthentication</code> with your personal auth token.
 </aside>
+<h1 id='returning-a-list-of-items'>Returning a list of items</h1>
+<p>All our api endpoints that returns a list of items are paginated by default, the response body includes pagination metadata which is described below. The pagination can be controlled using the query parameters page and limit</p>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>page</td>
+<td>1</td>
+<td>The page number</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>12</td>
+<td>The max number of items per page</td>
+</tr>
+</tbody></table>
+<h3 id='pagination-metadata'>Pagination Metadata</h3>
+<table><thead>
+<tr>
+<th>key</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>pages</td>
+<td>An array of all page numbers</td>
+</tr>
+<tr>
+<td>totalCount</td>
+<td>Total number of items in the database</td>
+</tr>
+<tr>
+<td>pageSize</td>
+<td>The number of items returned for a page</td>
+</tr>
+<tr>
+<td>page</td>
+<td>The current page</td>
+</tr>
+<tr>
+<td>last</td>
+<td>The last page available</td>
+</tr>
+</tbody></table>
 <h1 id='user'>User</h1><h2 id='user-signup'>User signup</h2>
 <blockquote>
 <p>Request Body</p>
@@ -310,7 +373,7 @@ You must replace <code>averylongrandom.jsonwebtokenstring.requiredforauthenticat
 <pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">
     </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="s2">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"William Olojede"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"william@olojede.com"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"william.olojede@yahoo.com"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"password"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
@@ -319,29 +382,30 @@ You must replace <code>averylongrandom.jsonwebtokenstring.requiredforauthenticat
 <p>Response Body</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"account created"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"william@olojede.com"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"William Olojede"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-17T23:21:18.057Z"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-17T23:21:18.057Z"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjIsImlhdCI6MTUwNTY5MDQ3OCwiZXhwIjoxNTA1ODYzMjc4fQ.qT1Ra_sgJYrtYhM--OKh0_8hLbaZnhmqCNRaRLMJNl8"</span><span class="w">
+      </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Account created"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"william.olojede@yahoo.com"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"William Olojede"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-01-12T10:31:54.659Z"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-01-12T10:31:54.659Z"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"imgUrl"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoyOX0sImlhdCI6MTUxNTc1MzExNCwiZXhwIjoxNTE1NzU2NzE0fQ.sG-zNYLLSMTm6MtuhQ3XGZuTzsMqykeZSSzROkUvkNw"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>Create a new user</p>
-<h3 id='request'>Request</h3>
+<p>Creates a new user</p>
+<h3 id='http-request'>HTTP Request</h3>
 <ul>
 <li>Endpoint: <code>/users/signin</code></li>
 <li>Verb: <code>POST</code></li>
 <li>Body: <code>(application/json)</code></li>
 </ul>
-<h3 id='response'>Response</h3>
+<h3 id='http-response'>HTTP Response</h3>
 <ul>
-<li>StatusCode: <code>201: Created</code></li>
+<li>StatusCode: <code>201 - Created</code></li>
 <li>Body: <code>(application/json)</code></li>
 </ul>
 <h2 id='user-login'>User login</h2>
@@ -349,8 +413,8 @@ You must replace <code>averylongrandom.jsonwebtokenstring.requiredforauthenticat
 <p>Request Body</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"auth"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"william@olojede.com"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"william.olojede@yahoo.com"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"password"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
@@ -360,391 +424,568 @@ You must replace <code>averylongrandom.jsonwebtokenstring.requiredforauthenticat
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">
     </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You are successfully logged in"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"william@olojede.com"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"william.olojede@yahoo.com"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"William Olojede"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-17T23:21:18.057Z"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-17T23:21:18.057Z"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+        </span><span class="s2">"imgUrl"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-01-12T10:31:54.659Z"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-01-12T10:31:54.659Z"</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySUQiOjIsImlhdCI6MTUwNTY5MTI3NCwiZXhwIjoxNTA1ODY0MDc0fQ.V1eGfJiKAzmhCUYID4piatU-FGq4XsShutTb3VMVP2s"</span><span class="w">
+    </span><span class="s2">"token"</span><span class="p">:</span><span class="s2">"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoyOX0sImlhdCI6MTUxNTc1Mzg2MywiZXhwIjoxNTE1NzU3NDYzfQ.KTXHD-SDIpJr_I5hixbm9R2OJtttDH1IKK58bCwGykE"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Logs in user</p>
-<h3 id='request-2'>Request</h3>
+<h3 id='http-request-2'>HTTP Request</h3>
 <ul>
 <li>Endpoint: <code>/users/login</code></li>
 <li>Verb: <code>POST</code></li>
 <li>Body: <code>(application/json)</code></li>
 </ul>
-<h3 id='response-2'>Response</h3>
+<h3 id='http-response-2'>HTTP Response</h3>
 <ul>
-<li>StatusCode: <code>200: Ok</code></li>
+<li>StatusCode: <code>200</code></li>
 <li>Body: <code>(application/json)</code></li>
 </ul>
-<h2 id='user-detail'>User detail</h2>
-<p>No endpoint available yet to get a user&#39;s detail</p>
-<h2 id='user-detail-update'>User detail update</h2>
-<p>No endpoint available yet to update a user&#39;s detail</p>
-<h2 id='user-favorites'>User Favorites</h2>
+<h2 id='user-profile'>User profile</h2>
 <blockquote>
 <p>Response Body</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"recipes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"very delicious dish"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is the recipe for a very delicious dish"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"img_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://imgurlfordish.com/verydelicousdish.jpg"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"ingredients"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="s2">"ingredient 1"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"ingredient 2"</span><span class="p">,</span><span class="w">
-          </span><span class="err">...</span><span class="w">
-        </span><span class="p">],</span><span class="w">
-        </span><span class="s2">"instructions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="s2">"This is the first step in cooking this delicious dish"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"This is the next step"</span><span class="p">,</span><span class="w">
-          </span><span class="err">...</span><span class="w">
-        </span><span class="p">],</span><span class="w">
-        </span><span class="s2">"upVoteCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"downVoteCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"favoriteCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"viewCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-17T07:52:15.103Z"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-18T23:16:21.324Z"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"owner"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">],</span><span class="w">
-    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1 recipe(s) found in user's favorite list"</span><span class="w">
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"user found"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"william.olojede@yahoo.com"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"William Olojede"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"imgUrl"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-01-12T10:31:54.659Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-01-12T10:31:54.659Z"</span><span class="w">
   </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='request-3'>Request</h3>
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Gets user profile</p>
+<h3 id='http-request-3'>HTTP Request</h3>
 <ul>
-<li>Endpoint: <code>/users/:uid/recipes</code></li>
+<li>Endpoint: <code>/users/:uid</code></li>
 <li>Verb: <code>GET</code></li>
-<li><code>:uid</code>: user id</li>
-<li><strong>Requires: token</strong></li>
-</ul>
-<h3 id='response-3'>Response</h3>
-<ul>
-<li>StatusCode: <code>200: Ok</code></li>
 <li>Body: <code>(application/json)</code></li>
 </ul>
-<h1 id='recipes'>Recipes</h1><h2 id='create-recipe'>Create Recipe</h2>
+<h3 id='http-response-3'>HTTP Response</h3>
+<ul>
+<li>StatusCode: <code>200</code></li>
+<li>Body: <code>(application/json)</code></li>
+</ul>
+<h2 id='user-profile-update'>User profile update</h2>
+<p>No endpoint available yet to update a user&#39;s detail</p>
+<h2 id='user-favorite-list'>User Favorite list</h2>
+<blockquote>
+<p>Response Body</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"recipes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jollof Rice"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"some random description"</span><span class="p">,</span><span class="w">
+          </span><span class="err">...</span><span class="w">
+          </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-17T10:51:14.594Z"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-17T10:51:14.594Z"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"owner"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="err">...</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"pagination"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"pages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="mi">1</span><span class="p">,</span><span class="w">
+          </span><span class="mi">2</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"totalCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">21</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"pageSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"page"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"last"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Gets a paginated list of all recipes favorited by a user</p>
+<h3 id='http-request-4'>HTTP Request</h3>
+<ul>
+<li>Endpoint: <code>/users/:uid/favorites</code></li>
+<li>Verb: <code>GET</code></li>
+<li>Body: <code>(application/json)</code></li>
+</ul>
+<h3 id='http-response-4'>HTTP Response</h3>
+<ul>
+<li>StatusCode: <code>200</code></li>
+<li>Body: <code>(application/json)</code></li>
+</ul>
+<h2 id='user-recipes-list'>User Recipes List</h2>
+<blockquote>
+<p>Response Body</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"recipes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jollof Rice"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"some random description"</span><span class="p">,</span><span class="w">
+          </span><span class="err">...</span><span class="w">
+          </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-17T10:51:14.594Z"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-17T10:51:14.594Z"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"owner"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="err">...</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"pagination"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"pages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="mi">1</span><span class="p">,</span><span class="w">
+          </span><span class="mi">2</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"totalCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">21</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"pageSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"page"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"last"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Gets a paginated list of all recipes created by a user</p>
+<h3 id='http-request-5'>HTTP Request</h3>
+<ul>
+<li>Endpoint: <code>/users/:uid/favorites</code></li>
+<li>Verb: <code>GET</code></li>
+<li>Body: <code>(application/json)</code></li>
+</ul>
+<h3 id='http-response-5'>HTTP Response</h3>
+<ul>
+<li>StatusCode: <code>200</code></li>
+<li>Body: <code>(application/json)</code></li>
+</ul>
+<h1 id='recipes'>Recipes</h1><h2 id='create-recipe'>Create recipe</h2>
 <blockquote>
 <p>Request Body</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"recipe"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"very delicious dish"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is the recipe for a very delicious dish"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"img_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://imgurlfordish.com/verydelicousdish.jpg"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"ingredients"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="s2">"ingredient 1"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"ingredient 2"</span><span class="w">
-      </span><span class="p">],</span><span class="w">
-      </span><span class="s2">"instructions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="s2">"This is the first step in cooking this delicious dish"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"This is the next step"</span><span class="w">
-      </span><span class="p">]</span><span class="w">
-    </span><span class="p">}</span><span class="w">
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"recipe"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"very delicious dish"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is the recipe for a very delicious dish"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"img_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://imgurlfordish.com/verydelicousdish.jpg"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ingredients"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"ingredient 1"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"ingredient 2"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"instructions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"This is the first step in cooking this delicious dish"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"This is the next step"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
   </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
 <p>Response Body</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"recipe"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"upVoteCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"downVoteCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"favoriteCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"viewCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"very delicious dish"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is the recipe for a very delicious dish"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"img_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://imgurlfordish.com/verydelicousdish.jpg"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"ingredients"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="s2">"ingredient 1"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"ingredient 2"</span><span class="w">
-      </span><span class="p">],</span><span class="w">
-      </span><span class="s2">"instructions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="s2">"This is the first step in cooking this delicious dish"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"This is the next step"</span><span class="w">
-      </span><span class="p">],</span><span class="w">
-      </span><span class="s2">"owner"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-19T00:01:20.221Z"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-19T00:01:20.221Z"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"recipe created successfully"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"recipe"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"upVoteCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"downVoteCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"favoriteCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"viewCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"very delicious dish"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is the recipe for a very delicious dish"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"img_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://imgurlfordish.com/verydelicousdish.jpg"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ingredients"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"ingredient 1"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"ingredient 2"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"instructions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"This is the first step in cooking this delicious dish"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"This is the next step"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"owner"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-01-12T13:21:52.287Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-01-12T13:21:52.287Z"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"recipe created successfully"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>Creates a new recipe</p>
-<h3 id='request-4'>Request</h3>
+<h3 id='http-request-6'>HTTP Request</h3>
 <ul>
 <li>Endpoint: <code>/recipes</code></li>
 <li>Verb: <code>POST</code></li>
-<li><strong>Requires: token</strong></li>
+<li><strong>Requires Token: True</strong></li>
 </ul>
-<h3 id='response-4'>Response</h3>
+<h3 id='http-response-6'>HTTP Response</h3>
 <ul>
 <li>StatusCode: <code>201: Created</code></li>
 <li>Body: <code>(application/json)</code></li>
 </ul>
 <h2 id='get-all-recipes'>Get all recipes</h2>
 <blockquote>
-<p>Response Body</p>
+<p>Response body</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"recipes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"very distasteful dish"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is the recipe for a very delicious dish"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"img_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://imgurlfordish.com/verydelicousdish.jpg"</span><span class="p">,</span><span class="w">
-        </span><span class="err">...</span><span class="w">
-        </span><span class="s2">"User"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John doe"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ogbono"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"some random recipe"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"img_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://images.meredith.com/fitness/images/recipe/ss_R137043.jpg"</span><span class="p">,</span><span class="w">
-        </span><span class="err">...</span><span class="w">
-        </span><span class="s2">"User"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jane Doe"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">},</span><span class="w">
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"recipes"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">27</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"very delicious dish"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is one of my 'go to' recipes "</span><span class="p">,</span><span class="w">
       </span><span class="err">...</span><span class="w">
+      </span><span class="s2">"User"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Email Mail"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="err">...</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">28</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"very delicious dish"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is one of my 'go to' recipes "</span><span class="p">,</span><span class="w">
+      </span><span class="err">...</span><span class="w">
+      </span><span class="s2">"User"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Email Mail"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"pagination"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"pages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+        </span><span class="mi">10</span><span class="p">,</span><span class="w">
+        </span><span class="mi">11</span><span class="p">,</span><span class="w">
+        </span><span class="mi">12</span><span class="w">
     </span><span class="p">],</span><span class="w">
-    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='request-5'>Request</h3>
+    </span><span class="s2">"totalCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">139</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"pageSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"page"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"last"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='http-request-7'>HTTP Request</h3>
 <ul>
 <li>Endpoint: <code>/recipes</code></li>
 <li>Verb: <code>GET</code></li>
-<li><strong>Requires: token</strong></li>
 </ul>
-<h3 id='response-5'>Response</h3>
+<h3 id='http-response-7'>HTTP Response</h3>
 <ul>
 <li>StatusCode: <code>200: Ok</code></li>
 <li>Body: <code>(application/json)</code></li>
 </ul>
-<h2 id='get-a-recipe'>Get a Recipe</h2>
+<h3 id='query-parameters-2'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Values</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>sort</td>
+<td>upvotes</td>
+<td>Sort by criteria</td>
+</tr>
+<tr>
+<td>order</td>
+<td>descending</td>
+<td>Direction of ordering</td>
+</tr>
+</tbody></table>
+<h2 id='get-a-recipe'>Get a recipe</h2>
 <blockquote>
 <p>Response Body</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"recipe"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"very delicious dish"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is the recipe for a very delicious dish"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"img_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://imgurlfordish.com/verydelicousdish.jpg"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"ingredients"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="s2">"ingredient 1"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"ingredient 2"</span><span class="w">
-      </span><span class="p">],</span><span class="w">
-      </span><span class="s2">"instructions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="s2">"This is the first step in cooking this delicious dish"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"Thix is the next step"</span><span class="w">
-      </span><span class="p">],</span><span class="w">
-      </span><span class="s2">"upVoteCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"downVoteCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"favoriteCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"viewCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-19T00:01:20.221Z"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-25T07:07:43.303Z"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"owner"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"reviews"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
-      </span><span class="s2">"User"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John doe"</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='request-6'>Request</h3>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"recipe"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">35</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"very delicious dish"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is the recipe for a very delicious dish"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"img_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://imgurlfordish.com/verydelicousdish.jpg"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ingredients"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"ingredient 1"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"ingredient 2"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"instructions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="s2">"This is the first step in cooking this delicious dish"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"This is the next step"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"upVoteCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"downVoteCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"favoriteCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"viewCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-11T09:07:14.446Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-01-12T14:05:39.097Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"owner"</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"User"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Email Mail"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='http-request-8'>HTTP Request</h3>
 <ul>
 <li>Endpoint: <code>/recipes/:id</code></li>
 <li>Verb: <code>GET</code></li>
-<li><code>:id</code>: recipe id</li>
-<li><strong>Requires: token</strong></li>
+<li><code>:id</code>: <code>recipe id</code></li>
 </ul>
-<h3 id='response-6'>Response</h3>
+<h3 id='http-response-8'>HTTP Response</h3>
 <ul>
 <li>StatusCode: <code>200: Ok</code></li>
 <li>Body: <code>(application/json)</code></li>
 </ul>
-<h2 id='modify-a-recipe'>Modify a Recipe</h2>
+<h2 id='add-review-on-recipe'>Add review on recipe</h2>
 <blockquote>
 <p>Request Body</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"update"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"very distasteful dish"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Whoever told u that u can cook is a bloody liar"</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
 <p>Response Body</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"recipe"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"very distasteful dish"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is the recipe for a very delicious dish"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"img_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://imgurlfordish.com/verydelicousdish.jpg"</span><span class="p">,</span><span class="w">
-      </span><span class="err">...</span><span class="w">
-      </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-19T00:01:20.221Z"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-19T00:13:27.991Z"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"owner"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='request-7'>Request</h3>
-<ul>
-<li>Endpoint: <code>/recipes/:id</code></li>
-<li>Verb: <code>PUT</code></li>
-<li><strong>Requires: token</strong></li>
-<li><code>:id</code>: recipe id</li>
-<li>Must be owner</li>
-</ul>
-<h3 id='response-7'>Response</h3>
-<ul>
-<li>StatusCode: <code>200: Ok</code></li>
-<li>Body: <code>(application/json)</code></li>
-</ul>
-<h2 id='vote-on-a-recipe'>Vote on a Recipe</h2>
-<blockquote>
-<p>Response Body</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"recipe"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"very distasteful dish"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is the recipe for a very delicious dish"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"img_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://imgurlfordish.com/verydelicousdish.jpg"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"upVoteCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"downVoteCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="err">...</span><span class="w">
-      </span><span class="s2">"favoriteCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"viewCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"owner"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"reviews"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">86</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Whoever told u that u can cook is a bloody liar"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-01-13T00:41:59.673Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"User"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"William Olojede"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='request-8'>Request</h3>
-<ul>
-<li>Endpoint: <code>/recipes/:id/vote-:dir</code></li>
-<li>Verb: <code>POST</code></li>
-<li><code>:id</code>: recipe id</li>
-<li><code>:dir</code>: vote direction <code>up</code> or <code>down</code></li>
-<li><strong>Requires: token</strong></li>
-</ul>
-<h3 id='response-8'>Response</h3>
-<ul>
-<li>StatusCode: <code>200: Ok</code></li>
-<li>Body: <code>(application/json)</code></li>
-</ul>
-<h2 id='favorite-a-recipe'>Favorite a Recipe</h2>
-<blockquote>
-<p>Response Body</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"recipe"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"very distasteful dish"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is the recipe for a very delicious dish"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"img_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://imgurlfordish.com/verydelicousdish.jpg"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"upVoteCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"downVoteCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-      </span><span class="err">...</span><span class="w">
-      </span><span class="s2">"favoriteCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"viewCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"owner"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='request-9'>Request</h3>
-<ul>
-<li>Endpoint: <code>/recipes/:id/favorite</code></li>
-<li>Verb: <code>POST</code></li>
-<li><code>:id</code>: recipe id</li>
-<li><strong>Requires: token</strong></li>
-</ul>
-<h3 id='response-9'>Response</h3>
-<ul>
-<li>StatusCode: <code>200: Ok</code></li>
-<li>Body: <code>(application/json)</code></li>
-</ul>
-<h2 id='write-review-on-a-recipe'>Write review on a Recipe</h2>
-<blockquote>
-<p>Request Body</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Whoever told u that u can cook is a bloody liar"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span></code></pre>
-<blockquote>
-<p>Response Body</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"recipe"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"very distasteful dish"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is the recipe for a very delicious dish"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"img_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://imgurlfordish.com/verydelicousdish.jpg"</span><span class="p">,</span><span class="w">
-      </span><span class="err">...</span><span class="w">
-      </span><span class="s2">"reviews"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Whoever told u that u can cook is a bloody liar"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-25T08:34:51.952Z"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-09-25T08:34:51.952Z"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"recipeId"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"userId"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">]</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"your review has been recorded"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='request-10'>Request</h3>
+    </span><span class="err">...</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="s2">"pagination"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"pages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="mi">3</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"totalCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"pageSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"page"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"last"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Your review has been recorded"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='http-request-9'>HTTP Request</h3>
 <ul>
 <li>Endpoint: <code>/recipes/:id/reviews</code></li>
 <li>Verb: <code>POST</code></li>
-<li><code>:id</code>: recipe id</li>
-<li><strong>Requires: token</strong></li>
+<li><code>:id</code>: <code>recipe id</code></li>
 </ul>
-<h3 id='response-10'>Response</h3>
+<h3 id='http-response-9'>HTTP Response</h3>
+<ul>
+<li>StatusCode: <code>201: Created</code></li>
+<li>Body: <code>(application/json)</code></li>
+</ul>
+<h2 id='get-all-reviews-for-a-recipe'>Get all reviews for a recipe</h2>
+<blockquote>
+<p>Response Body</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"reviews"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">84</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dude really???"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-01-09T03:33:40.835Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"User"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">27</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ajale Aj"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="err">...</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">83</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"shit sucks3"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-01-09T03:27:25.255Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"User"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">27</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"fullname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Ajale Aj"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"pagination"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"pages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="mi">1</span><span class="p">,</span><span class="w">
+            </span><span class="mi">2</span><span class="p">,</span><span class="w">
+            </span><span class="mi">3</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"totalCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"pageSize"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"page"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"last"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='http-request-10'>HTTP Request</h3>
+<ul>
+<li>Endpoint: <code>/recipes/:id/reviews</code></li>
+<li>Verb: <code>GET</code></li>
+<li><code>:id</code>: <code>recipe id</code></li>
+</ul>
+<h3 id='http-response-10'>HTTP Response</h3>
 <ul>
 <li>StatusCode: <code>200: Ok</code></li>
 <li>Body: <code>(application/json)</code></li>
 </ul>
-<h2 id='delete-a-recipe'>Delete a Recipe</h2>
+<h2 id='modify-a-recipe'>Modify a recipe</h2>
 <blockquote>
-<p>Response Body</p>
+<p>Request Body</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="w">  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="w">
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"update"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"some random very delicious dish"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Response body</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Recipe updated successfully"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"recipe"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">169</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"some random very delicious dish"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is the recipe for a very delicious dish"</span><span class="p">,</span><span class="w">
+    </span><span class="err">...</span><span class="w">
+    </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-01-13T00:09:15.646Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-01-13T00:10:48.024Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"owner"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="w">
   </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='request-11'>Request</h3>
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='http-request-11'>HTTP Request</h3>
+<ul>
+<li>Endpoint: <code>/recipes/:id</code></li>
+<li>Verb: <code>PUT</code></li>
+<li><code>:id</code>: <code>recipe id</code></li>
+<li><strong>Must be owner</strong></li>
+</ul>
+<h3 id='http-response-11'>HTTP Response</h3>
+<ul>
+<li>StatusCode: <code>200: Ok</code></li>
+<li>Body: <code>(application/json)</code></li>
+</ul>
+<h2 id='up-down-vote-a-recipe'>(up, down)Vote a recipe</h2>
+<blockquote>
+<p>Response body &mdash; downVote</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"recipe"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">169</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"some random very delicious dish"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is the recipe for a very delicious dish"</span><span class="p">,</span><span class="w">
+    </span><span class="err">...</span><span class="w">
+    </span><span class="s2">"upVoteCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"downVoteCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"favoriteCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"viewCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-01-13T00:09:15.646Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-01-13T00:13:58.362Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"owner"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You disliked this recipe"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Response body &mdash; upVote</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"recipe"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">169</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"some random very delicious dish"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is the recipe for a very delicious dish"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"img_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://imgurlfordish.com/verydelicousdish.jpg"</span><span class="p">,</span><span class="w">
+    </span><span class="err">...</span><span class="w">
+    </span><span class="s2">"upVoteCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"downVoteCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"favoriteCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"viewCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-01-13T00:09:15.646Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-01-13T00:17:57.324Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"owner"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You liked this recipe"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='http-request-12'>HTTP Request</h3>
+<ul>
+<li>Endpoint: <code>/recipes/:id/vote-{up, down}</code></li>
+<li>Verb: <code>POST</code></li>
+<li><code>:id</code>: <code>recipe id</code></li>
+</ul>
+<h3 id='http-response-12'>HTTP Response</h3>
+<ul>
+<li>StatusCode: <code>200: Ok</code></li>
+<li>Body: <code>(application/json)</code></li>
+</ul>
+<h2 id='favorite-a-recipe'>Favorite a recipe</h2>
+<blockquote>
+<p>Response body</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"recipe"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jollof Rice"</span><span class="p">,</span><span class="w">
+    </span><span class="err">...</span><span class="w">
+    </span><span class="s2">"upVoteCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"downVoteCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"favoriteCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"viewCount"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"createdAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-10-23T08:08:47.566Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"updatedAt"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-01-13T00:34:03.699Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"owner"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Recipe added to your favorite list"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='http-request-13'>HTTP Request</h3>
+<ul>
+<li>Endpoint: <code>/recipes/:id/favorite</code></li>
+<li>Verb: <code>POST</code></li>
+<li><code>:id</code>: <code>recipe id</code></li>
+</ul>
+<h3 id='http-response-13'>HTTP Response</h3>
+<ul>
+<li>StatusCode: <code>200: Ok</code></li>
+<li>Body: <code>(application/json)</code></li>
+</ul>
+<h2 id='delete-recipe'>Delete Recipe</h2>
+<blockquote>
+<p>Response body</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Recipe deleted successfully"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='http-request-14'>HTTP Request</h3>
 <ul>
 <li>Endpoint: <code>/recipes/:id</code></li>
 <li>Verb: <code>DELETE</code></li>
-<li><strong>Requires: token</strong></li>
+<li><code>:id</code>: <code>recipe id</code></li>
 <li><strong>Must be owner</strong></li>
 </ul>
-<h3 id='response-11'>Response</h3>
+<h3 id='http-response-14'>HTTP Response</h3>
 <ul>
 <li>StatusCode: <code>200: Ok</code></li>
 <li>Body: <code>(application/json)</code></li>

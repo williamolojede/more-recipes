@@ -4,11 +4,16 @@ import {
   SIGNUP_SUCCESS,
   SIGNUP_FAILURE,
   LOGOUT,
-  REMOVE_AUTH_ERROR_MESSAGE
+  REMOVE_AUTH_ERROR_MESSAGE,
+  RECEIVE_CURRENT_USER
 } from '../actions/types';
 
 const initialState = {
-  isAuthenticated: !!localStorage.getItem('token')
+  isAuthenticated: !!localStorage.getItem('token'),
+  currentUser: {
+    id: 1,
+    fullname: ''
+  }
 };
 
 const auth = (state = initialState, action) => {
@@ -19,7 +24,7 @@ const auth = (state = initialState, action) => {
         isAuthenticated: true,
         errorMessage: '',
         token: action.token,
-        user: action.user
+        currentUser: action.currentUser
       });
     case LOGIN_FAILURE:
     case SIGNUP_FAILURE:
@@ -32,6 +37,8 @@ const auth = (state = initialState, action) => {
       return Object.assign({}, state, {
         isAuthenticated: false
       });
+    case RECEIVE_CURRENT_USER:
+      return { ...state, currentUser: action.data.user };
     default:
       return state;
   }

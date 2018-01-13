@@ -11,6 +11,8 @@ instance.interceptors.request.use((config) => {
   const { token } = store.getState().auth;
   if (token) {
     config.headers.token = token;
+  } else {
+    config.headers.token = localStorage.getItem('token');
   }
   return config;
 });

@@ -14,8 +14,14 @@ engines:
 ratings:
   paths:
   - "server/**/*.js"
-exclude_paths:
+  - "client/**/*.js"
+  - "client/**/*.jsx"
+
+exclude_patterns:
+  - "webpack.config.*.js"
+  - "client/config/firebase.js"
   - "node_modules/"
+  - "client/__mocks__/"
   - "template/*"
   - "server/test"
   - "client/tests"

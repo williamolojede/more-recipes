@@ -4,8 +4,8 @@ import systemErrorHandler from '../helpers/systemErrorHandler';
 const count = (req, res, next) => {
   const { id } = req.params;
   let message;
-  if (req.favoriteDelete) message = 'recipe removed from your favorite list';
-  else message = 'recipe added to your favorite list';
+  if (req.favoriteDelete) message = 'Recipe removed from your favorite list';
+  else message = 'Recipe added to your favorite list';
 
   Favorite.count({ where: { recipeId: id } })
     .then((favoriteCount) => {

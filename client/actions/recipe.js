@@ -53,30 +53,13 @@ export const fetchTopRecipes = (page, limit) => (dispatch) => {
     .then((res) => {
       dispatch(
         batchActions([
-          recieveTopRecipes(res.data.recipes, res.data.metaData),
+          recieveTopRecipes(res.data.recipes, res.data.pagination),
           unsetFetching()
         ])
       );
     })
     .catch((err) => {
       console.log(err.message || err.response.data.message);
-      dispatch(unsetFetching());
-    });
-};
-
-export const postReview = (content, id) => (dispatch) => {
-  dispatch(setFetching());
-  return instance.post(`/recipes/${id}/reviews`, { content })
-    .then((res) => {
-      dispatch(
-        batchActions([
-          recieveSingleRecipe(RECIEVE_SINGLE_RECIPE, res.data.recipe),
-          unsetFetching()
-        ])
-      );
-    })
-    .catch((err) => {
-      console.log(err.response.data.message || err.message);
       dispatch(unsetFetching());
     });
 };

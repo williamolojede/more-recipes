@@ -3,13 +3,14 @@ import { batchActions } from 'redux-batched-actions';
 import instance from '../config/axios';
 
 import { setFetching, unsetFetching } from './fetching';
-import { RECIEVE_USER_PROFILE, REMOVE_RECIPE_FROM_PROFILE } from './types';
+import { REMOVE_RECIPE_FROM_PROFILE } from './types';
 
 
-const receiveUserProfile = data => ({
-  type: RECIEVE_USER_PROFILE,
+const receiveUserProfile = (data, type) => ({
+  type,
   data,
 });
+
 
 export const removeRecipeFromUserProfile = (index, from) => ({
   type: REMOVE_RECIPE_FROM_PROFILE,
@@ -17,12 +18,12 @@ export const removeRecipeFromUserProfile = (index, from) => ({
   from,
 });
 
-const fetchUserProfile = id => (dispatch) => {
+const fetchUserProfile = (id, type) => (dispatch) => {
   dispatch(setFetching());
   instance.get(`/users/${id}`)
     .then((res) => {
       dispatch(batchActions([
-        receiveUserProfile({ user: res.data.user, asOwner: res.data.asOwner }),
+        receiveUserProfile({ user: res.data.user, asOwner: res.data.asOwner }, type),
         unsetFetching()
       ]));
     })

@@ -1,12 +1,16 @@
 import systemErrorHandler from '../../helpers/systemErrorHandler';
-import findRecipe from '../../helpers/findRecipe';
+import { Recipe, User } from '../../models';
 
-const reviewRecipe = (req, res, next) => {
+const getSingleRecipe = (req, res, next) => {
   const { id } = req.params;
 
-  findRecipe(id)
-    .then(recipe => res.status(200).send({ recipe, message: 'success' }))
+  Recipe.findById(id, {
+    include: [
+      { model: User, attributes: ['id', 'username', 'fullname'] }
+    ]
+  })
+    .then(recipe => res.status(200).send({ recipe, status: 'success' }))
     .catch(error => systemErrorHandler(error, next));
 };
 
-export default reviewRecipe;
+export default getSingleRecipe;

@@ -1,4 +1,4 @@
-import { User, Recipe, Favorite } from '../../models';
+import { User } from '../../models';
 import systemErrorHandler from '../../helpers/systemErrorHandler';
 
 const getUserDetails = (req, res, next) => {
@@ -7,11 +7,7 @@ const getUserDetails = (req, res, next) => {
 
   const asOwner = (userID === parseInt(uid, 10));
   User.findOne({
-    where: { id: req.params.uid },
-    include: [
-      { model: Recipe, as: 'recipes' },
-      { model: Favorite, as: 'favorites', include: { model: Recipe } }
-    ]
+    where: { id: req.params.uid }
   })
     .then((user) => {
       const userDetails = Object.assign({}, user.dataValues);

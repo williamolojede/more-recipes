@@ -8,14 +8,15 @@ import PropTypes from 'prop-types';
 import { fetchSingleRecipes, vote, favorite } from '../../actions/recipe';
 
 import Preloader from '../shared/Preloader.jsx';
-import SiteNav from '../shared/SiteNav.jsx';
+import ConnectedSiteNav from '../shared/SiteNav.jsx';
 import SiteFooter from '../shared/SiteFooter.jsx';
 import IngredientsList from '../shared/IngredientsList.jsx';
 import InstructionsList from '../shared/InstructionsList.jsx';
 import Reviews from '../shared/Reviews/Reviews.jsx';
 import RecipeStats from '../shared/RecipeStats.jsx';
 import Notification from '../shared/Notification.jsx';
-import { recipePropTypes } from '../../config/proptypes';
+
+import { recipePropTypes, currentUserPropTypes } from '../../config/proptypes';
 
 class SingleRecipe extends Component {
   componentDidMount() {
@@ -40,7 +41,6 @@ class SingleRecipe extends Component {
       img_url,
       ingredients,
       instructions,
-      reviews,
       upVoteCount,
       downVoteCount,
       favoriteCount,
@@ -58,7 +58,7 @@ class SingleRecipe extends Component {
     return (
       <div className="page page__recipe">
         <header className="site-header">
-          <SiteNav user={this.props.user} />
+          <ConnectedSiteNav currentUser={this.props.currentUser} />
         </header>
         <main>
           <div className="container">
@@ -80,7 +80,7 @@ class SingleRecipe extends Component {
 
             <IngredientsList ingredients={ingredients} />
             <InstructionsList instructions={instructions} />
-            <Reviews reviews={reviews} user={this.props.user} id={id} />
+            <Reviews recipeId={id} />
           </div>
         </main>
 
@@ -95,11 +95,7 @@ SingleRecipe.propTypes = {
   dispatch: PropTypes.func.isRequired,
 
   ...recipePropTypes,
-
-  user: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    fullname: PropTypes.string.isRequired,
-  }).isRequired,
+  ...currentUserPropTypes,
 
   match: PropTypes.shape({
     params: PropTypes.shape({
@@ -113,13 +109,13 @@ SingleRecipe.propTypes = {
 const mapStateToProps = ({
   recipe,
   isFetching,
-  auth,
+  auth: { currentUser },
   notification
 }) => ({
   recipe,
   isFetching,
   notification,
-  user: auth.user
+  currentUser,
 });
 
 export default connect(mapStateToProps)(SingleRecipe);

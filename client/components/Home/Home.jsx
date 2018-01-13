@@ -13,6 +13,8 @@ import SiteFooter from '../shared/SiteFooter';
 import Pagination from '../shared/Pagination';
 import Search from '../shared/Search';
 
+import { currentUserPropTypes } from '../../config/proptypes';
+
 export class Home extends Component {
   constructor(props) {
     super(props);
@@ -33,11 +35,11 @@ export class Home extends Component {
     if (newProps.recipes) {
       const {
         recipes,
-        metaData
+        pagination
       } = newProps;
       this.setState({
         recipes,
-        pages: metaData.pages
+        pages: pagination.pages
       });
     }
   }
@@ -84,7 +86,7 @@ export class Home extends Component {
     return (
       <div className="page page__home">
         <header className="site-header">
-          <ConnectedSiteNav user={this.props.user} />
+          <ConnectedSiteNav currentUser={this.props.currentUser} />
           <section className="site-header__hero">
             <h2>Delicious recipes, just a search away...</h2>
             <input
@@ -130,16 +132,18 @@ export class Home extends Component {
 Home.propTypes = {
   dispatch: PropTypes.func.isRequired,
   isFetching: PropTypes.bool.isRequired,
-  user: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    fullname: PropTypes.string.isRequired,
-  }).isRequired
+
+  ...currentUserPropTypes
 };
 
-const mapStateToProps = ({ topRecipes, isFetching, auth }) => ({
+const mapStateToProps = ({
+  topRecipes,
+  isFetching,
+  auth: { currentUser }
+}) => ({
   recipes: topRecipes.recipes,
-  metaData: topRecipes.metaData,
-  user: auth.user,
+  pagination: topRecipes.metaData,
+  currentUser,
   isFetching
 });
 

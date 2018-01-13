@@ -4,22 +4,22 @@
 const validateAddRecipe = (req, res, next) => {
   if (req.body.recipe === undefined) {
     const err = new Error('Recipe property is required on request body, see documentation');
-    err.status = 400;
+    err.statusCode = 400;
     return next(err);
   }
 
   const { name, description } = req.body.recipe;
   if (name === undefined && description === undefined) {
     const err = new Error('Recipe name and description are required');
-    err.status = 400;
+    err.statusCode = 400;
     return next(err);
   } else if (name === undefined) {
     const err = new Error('Recipe name is required');
-    err.status = 400;
+    err.statusCode = 400;
     return next(err);
   } else if (description === undefined) {
     const err = new Error('Recipe description is required');
-    err.status = 400;
+    err.statusCode = 400;
     return next(err);
   }
 

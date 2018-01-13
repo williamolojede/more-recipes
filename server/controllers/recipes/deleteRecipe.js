@@ -8,11 +8,11 @@ const deleteRecipe = (req, res, next) => {
     .then((recipe) => {
       if (userID !== recipe.owner) {
         const err = new Error('Not authorized to delete this recipe');
-        err.status = 403;
+        err.statusCode = 403;
         return next(err);
       }
       recipe.destroy()
-        .then(() => res.status(200).send({ message: 'success' }))
+        .then(() => res.status(200).send({ status: 'success', message: 'Recipe deleted successfully' }))
         .catch(error => systemErrorHandler(error, next));
     })
     .catch(error => systemErrorHandler(error, next));

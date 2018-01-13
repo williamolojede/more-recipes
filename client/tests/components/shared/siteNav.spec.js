@@ -4,7 +4,7 @@ import user from '../../../__mocks__/user.mock';
 
 function setup() {
   const props = {
-    user,
+    currentUser: user,
     dispatch: jest.fn(),
   };
   const wrapper = shallow(<SiteNav {...props} />);

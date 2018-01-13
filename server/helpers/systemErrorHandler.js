@@ -2,7 +2,7 @@
 
 const systemErrorHandler = (error, callback) => {
   const err = new Error(error.msg);
-  err.status = error.code || 500;
+  err.statusCode = error.code || 500;
   return callback(err);
 };
 

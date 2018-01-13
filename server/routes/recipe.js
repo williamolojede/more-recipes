@@ -14,7 +14,7 @@ router.get('/', recipesController.getAllRecipe);
 router.post('/', middlewares.validateAddRecipe, recipesController.createRecipe);
 
 // checks if the recipe to be accessed exist
-router.use('/:id', middlewares.doesRecipeExist);
+router.use('/:id', middlewares.validateRecipeId);
 
 router.route('/:id')
   .get(middlewares.countViews, recipesController.getSingleRecipe)
@@ -22,7 +22,7 @@ router.route('/:id')
   .delete(recipesController.deleteRecipe);
 
 // checks if the user is owner is allowed to perform action on recipe
-// router.use('/:id/*', ownerNotAllowed);
+// router.use('/:id/*', restrictOwnerActions);
 
 router.post('/:id/vote-:dir',
   recipesController.voteRecipe,
@@ -30,11 +30,12 @@ router.post('/:id/vote-:dir',
 );
 
 router.post('/:id/favorite',
-  middlewares.ownerNotAllowed,
+  middlewares.restrictOwnerActions,
   recipesController.favoriteRecipe,
   middlewares.countFavorites
 );
 
-router.post('/:id/reviews', recipesController.reviewRecipe);
+router.post('/:id/reviews', recipesController.addReview);
+router.get('/:id/reviews', recipesController.getReviews);
 
 export default router;

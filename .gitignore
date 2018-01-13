@@ -67,3 +67,4 @@ typings/
 
 dist/
 docs-src/
+.ackrc

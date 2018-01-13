@@ -9,11 +9,12 @@ import {
   NavLink
 } from 'react-router-dom';
 
-import { recipePropTypes } from '../../config/proptypes';
+import { recipePropTypes, currentUserPropTypes } from '../../config/proptypes';
 import fetchUserProfile, { removeRecipeFromUserProfile, deletePersonalRecipe } from '../../actions/userProfile';
 import { favorite } from '../../actions/recipe';
 
-import SiteNav from '../shared/SiteNav.jsx';
+import { RECIEVE_USER_PROFILE } from '../../actions/types';
+import ConnectedSiteNav from '../shared/SiteNav.jsx';
 import Preloader from '../shared/Preloader.jsx';
 import AddRecipeForm from './AddRecipeForm.jsx';
 import PersonalRecipes from './PersonalRecipes.jsx';
@@ -22,7 +23,7 @@ import Notification from '../shared/Notification.jsx';
 
 class Profile extends Component {
   componentDidMount() {
-    this.props.dispatch(fetchUserProfile(this.props.match.params.uid));
+    this.props.dispatch(fetchUserProfile(this.props.match.params.uid, RECIEVE_USER_PROFILE));
   }
 
   removeRecipe = (e, id, type, index) => {
@@ -52,7 +53,7 @@ class Profile extends Component {
 
     if (Object.keys(this.props.userProfile).length === 0) return null;
 
-    const { user } = this.props;
+    const { currentUser } = this.props;
     const userUrl = `/user/${uid}`;
 
     const {
@@ -70,7 +71,7 @@ class Profile extends Component {
         :
         <div className="page page__profile">
           <header className="site-header">
-            <SiteNav user={user} />
+            <ConnectedSiteNav currentUser={currentUser} />
           </header>
           <main>
             <div className="container">
@@ -95,7 +96,7 @@ class Profile extends Component {
                           <li className="tab col s4">
                             <NavLink
                               to={`${userUrl}/add`}
-                              activeClassName="selected"
+                              activeClassName="active"
                             >
                               Add
                             </NavLink>
@@ -104,21 +105,29 @@ class Profile extends Component {
                           null
                       }
                       <li className={tabClassName}>
-                        <NavLink to={`${userUrl}/recipes`} activeClassName="selected">
+                        <NavLink to={`${userUrl}/recipes`} activeClassName="active">
                           {
                             asOwner ? 'Personal Recipes' : 'User\'s Recipes'
                           }
                         </NavLink>
                       </li>
                       <li className={tabClassName}>
-                        <NavLink to={`${userUrl}/favorites`} activeClassName="selected">Favorites</NavLink>
+                        <NavLink to={`${userUrl}/favorites`} activeClassName="active">Favorites</NavLink>
                       </li>
                     </ul>
                   </div>
                   <Switch>
-                    <Route path={'/user/:uid/add'} component={() => <AddRecipeForm asOwner={asOwner} isEditMode={false} />} />
                     <Route
-                      path={'/user/:uid/modify-recipe'}
+                      path="/user/:uid/add"
+                      component={() => (
+                        <AddRecipeForm
+                          asOwner={asOwner}
+                          isEditMode={false}
+                        />)
+                      }
+                    />
+                    <Route
+                      path="/user/:uid/modify-recipe"
                       component={() => (
                         <AddRecipeForm
                           asOwner={asOwner}
@@ -162,10 +171,7 @@ class Profile extends Component {
 }
 
 Profile.propTypes = {
-  user: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    fullname: PropTypes.string.isRequired,
-  }).isRequired,
+  ...currentUserPropTypes,
 
   match: PropTypes.shape({
     params: PropTypes.shape({
@@ -197,11 +203,11 @@ Profile.propTypes = {
 
 const mapStateToProps = ({
   isFetching,
-  auth,
+  auth: { currentUser },
   userProfile,
   notification
 }) => ({
-  user: auth.user,
+  currentUser,
   isFetching,
   userProfile,
   notification

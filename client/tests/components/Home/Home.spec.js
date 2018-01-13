@@ -11,7 +11,7 @@ function setup() {
   const props = {
     dispatch: jest.fn(),
     isFetching: false,
-    user
+    currentUser: user
   };
   const shallowWrapper = shallow(<Home {...props} />);
   const mountedWrapper = mount(
@@ -39,7 +39,7 @@ describe('Home', () => {
     expect(shallowWrapper).toMatchSnapshot();
     shallowWrapper.setProps({
       recipes,
-      metaData: {
+      pagination: {
         pages: [1, 2, 3]
       }
     });
