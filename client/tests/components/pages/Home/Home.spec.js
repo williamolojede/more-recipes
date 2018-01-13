@@ -1,10 +1,10 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import store from '../../../store';
-import { Home } from '../../../components/Home/Home';
-import user from '../../../__mocks__/user.mock';
-import recipes from '../../../__mocks__/recipes.mock';
+import store from '../../../../store';
+import { PureHome } from '../../../../components/pages/Home';
+import user from '../../../../__mocks__/user.mock';
+import recipes from '../../../../__mocks__/recipes.mock';
 
 
 function setup() {
@@ -13,11 +13,11 @@ function setup() {
     isFetching: false,
     currentUser: user
   };
-  const shallowWrapper = shallow(<Home {...props} />);
+  const shallowWrapper = shallow(<PureHome {...props} />);
   const mountedWrapper = mount(
     <Provider store={store}>
       <BrowserRouter>
-        <Home {...props} />
+        <PureHome {...props} />
       </BrowserRouter>
     </Provider>
   );
@@ -49,7 +49,7 @@ describe('Home', () => {
   });
   it('should render a preloader', () => {
     const { props } = setup();
-    const wrapper = shallow(<Home {...{ ...props, ...{ isFetching: true } }} />);
+    const wrapper = shallow(<PureHome {...{ ...props, ...{ isFetching: true } }} />);
     expect(wrapper).toMatchSnapshot();
   });
 

@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 import RecipeTableListingRow from './RecipeTableListingRow';
 
-import Paginate from '../../../server/helpers/paginate';
-import Pagination from '../shared/Pagination';
-import scrollUp from '../../utils/scrollUp';
+import Paginate from '../../../../server/helpers/paginate';
+import Pagination from '../../shared/Pagination';
+import scrollUp from '../../../utils/scrollUp';
 
 const propTypes = {
   type: PropTypes.oneOf(['favorites', 'personal-recipes']).isRequired,

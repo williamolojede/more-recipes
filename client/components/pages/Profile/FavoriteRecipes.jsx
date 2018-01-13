@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import RecipeTableListing from './RecipeTableListing.jsx';
-import { recipePropTypes } from '../../config/proptypes';
+import { recipePropTypes } from '../../../config/proptypes';
 
 const FavoriteRecipes = ({ favoriteRecipes, asOwner, removeRecipe }) => (
   <div className="col s12 my-recipe__manage z-depth-1" id="favorites">

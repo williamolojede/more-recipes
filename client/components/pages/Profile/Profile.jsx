@@ -9,17 +9,17 @@ import {
   NavLink
 } from 'react-router-dom';
 
-import { recipePropTypes, currentUserPropTypes } from '../../config/proptypes';
-import fetchUserProfile, { removeRecipeFromUserProfile, deletePersonalRecipe } from '../../actions/userProfile';
-import { favorite } from '../../actions/recipe';
+import { recipePropTypes, currentUserPropTypes } from '../../../config/proptypes';
+import fetchUserProfile, { removeRecipeFromUserProfile, deletePersonalRecipe } from '../../../actions/userProfile';
+import { favorite } from '../../../actions/recipe';
 
-import { RECIEVE_USER_PROFILE } from '../../actions/types';
-import ConnectedSiteNav from '../shared/SiteNav.jsx';
-import Preloader from '../shared/Preloader.jsx';
+import { RECIEVE_USER_PROFILE } from '../../../actions/types';
+import ConnectedSiteNav from '../../shared/SiteNav.jsx';
+import Preloader from '../../shared/Preloader.jsx';
 import AddRecipeForm from './AddRecipeForm.jsx';
 import PersonalRecipes from './PersonalRecipes.jsx';
 import FavoriteRecipes from './FavoriteRecipes.jsx';
-import Notification from '../shared/Notification.jsx';
+import Notification from '../../shared/Notification.jsx';
 
 class Profile extends Component {
   componentDidMount() {

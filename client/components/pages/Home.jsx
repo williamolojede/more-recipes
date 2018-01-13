@@ -15,7 +15,7 @@ import Search from '../shared/Search';
 
 import { currentUserPropTypes } from '../../config/proptypes';
 
-export class Home extends Component {
+class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -147,5 +147,5 @@ const mapStateToProps = ({
   isFetching
 });
 
-
+export { Home as PureHome };
 export default connect(mapStateToProps)(Home);

@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import storage from '../../config/firebase';
-import defaultConfig from '../../config/default';
-import { recipePropTypes } from '../../config/proptypes';
-import { addRecipe, updateRecipe } from '../../actions/recipe';
-import scrollUp from '../../utils/scrollUp';
+
+import storage from '../../../config/firebase';
+import defaultConfig from '../../../config/default';
+import { recipePropTypes } from '../../../config/proptypes';
+import { addRecipe, updateRecipe } from '../../../actions/recipe';
+import scrollUp from '../../../utils/scrollUp';
 
 
-import ErrorDisplay from '../shared/ErrorDisplay.jsx';
+import ErrorDisplay from '../../shared/ErrorDisplay.jsx';
 
 
 class AddRecipeForm extends Component {

@@ -1,6 +1,6 @@
 import React from 'react';
-import RecipeTableListing from '../../../components/Profile/RecipeTableListing';
-import recipes, { favoriteRecipes } from '../../../__mocks__/recipes.mock';
+import RecipeTableListing from '../../../../components/pages/Profile/RecipeTableListing';
+import recipes, { favoriteRecipes } from '../../../../__mocks__/recipes.mock';
 
 function setup(type, asOwner, recipesData) {
   const props = {
