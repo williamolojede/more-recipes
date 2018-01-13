@@ -42,7 +42,7 @@ const tokenAuthentication = (url, method) => {
         request[method](url)
           .send({ token: expiredToken })
           .end((err, res) => {
-            expect(res.status).to.equal(403);
+            expect(res.status).to.equal(401);
             expect(res.body.message).to.equal('expired user authorization token');
             done();
           });
@@ -54,7 +54,7 @@ const tokenAuthentication = (url, method) => {
       request[method](url)
         .send({ token: `${userToken1}hfdgnh` })
         .end((err, res) => {
-          expect(res.status).to.equal(403);
+          expect(res.status).to.equal(401);
           expect(res.body.message).to.equal('invalid user authorization token');
           done();
         });
@@ -65,7 +65,7 @@ const tokenAuthentication = (url, method) => {
       request[method](url)
         .send({ token: invalidToken })
         .end((err, res) => {
-          expect(res.status).to.equal(403);
+          expect(res.status).to.equal(401);
           expect(res.body.message).to.equal('invalid user authorization token');
           done();
         });
@@ -653,7 +653,7 @@ describe('API Integration Tests', () => {
       request.post(`${recipesUrl}/${recipeId}/vote-up`)
         .send({ token: invalidToken })
         .end((err, res) => {
-          expect(res.status).to.equal(403);
+          expect(res.status).to.equal(401);
           expect(res.body.status).to.equal('fail');
           expect(res.body.message).to.equal('invalid user authorization token');
           done();
@@ -664,7 +664,7 @@ describe('API Integration Tests', () => {
       request.post(`${recipesUrl}/${recipeId}/vote-down`)
         .send({ token: invalidToken })
         .end((err, res) => {
-          expect(res.status).to.equal(403);
+          expect(res.status).to.equal(401);
           expect(res.body.status).to.equal('fail');
           expect(res.body.message).to.equal('invalid user authorization token');
           done();
@@ -934,7 +934,7 @@ describe('API Integration Tests', () => {
     tokenAuthentication(`${recipesUrl}/${recipeId}/reviews`, 'post');
 
     // if recipe doesnt exist no review => 404
-    it('return 404 if recipe is not found', (done) => {
+    it('should return 404 if recipe is not found', (done) => {
       request.post(`${recipesUrl}/15/reviews`)
         .send({ token: userToken1 })
         .end((err, res) => {
@@ -945,7 +945,7 @@ describe('API Integration Tests', () => {
         });
     });
 
-    it('return 400 if no content is passed', (done) => {
+    it('should return 400 if no content is passed', (done) => {
       request.post(`${recipesUrl}/${recipeId}/reviews`)
         .send({ token: userToken2 })
         .end((err, res) => {
@@ -956,7 +956,7 @@ describe('API Integration Tests', () => {
         });
     });
 
-    it('return 400 if content is passed but is an empty string', (done) => {
+    it('should return 400 if content is passed but is an empty string', (done) => {
       request.post(`${recipesUrl}/${recipeId}/reviews`)
         .send({ token: userToken2, content: '     ' })
         .end((err, res) => {
@@ -967,12 +967,12 @@ describe('API Integration Tests', () => {
         });
     });
 
-    // if everything good => 200
-    it('return 200 if owner tries to review', (done) => {
+    // if everything good => 201
+    it('should return 201 if owner tries to review', (done) => {
       request.post(`${recipesUrl}/${recipeId}/reviews`)
         .send({ token: userToken1, content: 'i created a shitty recipe' })
         .end((err, res) => {
-          expect(res.status).to.equal(200);
+          expect(res.status).to.equal(201);
           expect(res.body.status).to.equal('success');
           expect(res.body.reviews).to.be.a('array');
           expect(res.body.reviews.length).to.be.equal(1);
@@ -983,12 +983,12 @@ describe('API Integration Tests', () => {
         });
     });
 
-    // if everything good => 200
-    it('return 200 if another user tries to review', (done) => {
+    // if everything good => 201
+    it('should return 201 if another user tries to review', (done) => {
       request.post(`${recipesUrl}/${recipeId}/reviews`)
         .send({ token: userToken2, content: 'this recipe is shit' })
         .end((err, res) => {
-          expect(res.status).to.equal(200);
+          expect(res.status).to.equal(201);
           expect(res.body.reviews).to.be.a('array');
           expect(res.body.status).to.equal('success');
           expect(res.body.reviews.length).to.be.equal(2);
@@ -1248,6 +1248,7 @@ describe('API Integration Tests', () => {
   });
 
   describe('Delete Recipe', () => {
+    console.log(recipeId, '<<<recipeID>>>');
     tokenAuthentication(`${recipesUrl}/${recipeId}`, 'delete');
 
     it('return 403 if a user user is not the owner of the recipe', (done) => {
