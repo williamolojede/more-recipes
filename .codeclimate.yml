@@ -20,9 +20,6 @@ ratings:
 exclude_patterns:
   - "webpack.config.*.js"
   - "client/config/firebase.js"
-
-
-exclude_paths:
   - "node_modules/"
   - "client/__mocks__/"
   - "template/*"

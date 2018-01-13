@@ -118,7 +118,7 @@ class Profile extends Component {
                   </div>
                   <Switch>
                     <Route
-                      path={'/user/:uid/add'}
+                      path="/user/:uid/add"
                       component={() => (
                         <AddRecipeForm
                           asOwner={asOwner}
@@ -127,7 +127,7 @@ class Profile extends Component {
                       }
                     />
                     <Route
-                      path={'/user/:uid/modify-recipe'}
+                      path="/user/:uid/modify-recipe"
                       component={() => (
                         <AddRecipeForm
                           asOwner={asOwner}

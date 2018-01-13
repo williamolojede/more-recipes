@@ -1248,7 +1248,6 @@ describe('API Integration Tests', () => {
   });
 
   describe('Delete Recipe', () => {
-    console.log(recipeId, '<<<recipeID>>>');
     tokenAuthentication(`${recipesUrl}/${recipeId}`, 'delete');
 
     it('return 403 if a user user is not the owner of the recipe', (done) => {

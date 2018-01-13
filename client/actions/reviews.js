@@ -17,12 +17,10 @@ export const fetchReviews = id => (dispatch) => {
   dispatch(setFetching());
   return instance.get(`/recipes/${id}/reviews`)
     .then((res) => {
-      dispatch(
-        batchActions([
-          receiveRecipeReviews(RECEIVE_RECIPE_REVIEWS, res.data.reviews),
-          unsetFetching()
-        ])
-      );
+      dispatch(batchActions([
+        receiveRecipeReviews(RECEIVE_RECIPE_REVIEWS, res.data.reviews),
+        unsetFetching()
+      ]));
     })
     .catch((err) => {
       console.log(err.message || err.response.data.message);
@@ -35,12 +33,10 @@ export const postReview = (content, id) => (dispatch) => {
   dispatch(setFetching());
   return instance.post(`/recipes/${id}/reviews`, { content })
     .then((res) => {
-      dispatch(
-        batchActions([
-          receiveRecipeReviews(RECEIVE_RECIPE_REVIEWS, res.data.reviews),
-          unsetFetching()
-        ])
-      );
+      dispatch(batchActions([
+        receiveRecipeReviews(RECEIVE_RECIPE_REVIEWS, res.data.reviews),
+        unsetFetching()
+      ]));
     })
     .catch((err) => {
       console.log(err.response.data.message || err.message);

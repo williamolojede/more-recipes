@@ -5,7 +5,7 @@ import validateIdParam from '../helpers/validateIdParam';
 const validateUserId = (req, res, next) => {
   const uid = parseInt(req.params.uid, 10);
 
-  if (isNaN(uid) || uid < 0) {
+  if (Number.isNaN(uid) || uid < 0) {
     return validateIdParam({ type: 'invalid-param-value', value: req.params.uid }, 'User', next);
   }
 

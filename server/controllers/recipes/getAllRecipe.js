@@ -21,12 +21,10 @@ const getAllRecipe = (req, res, next) => {
       err.statusCode = 400;
       return next(err);
     }
-    return helpers.fetch(
-      {
-        order: [['upVoteCount', 'DESC']],
-        include: [{ model: User, attributes: ['id', 'username', 'fullname'] }],
-      }, req.query, Recipe
-    )
+    return helpers.fetch({
+      order: [['upVoteCount', 'DESC']],
+      include: [{ model: User, attributes: ['id', 'username', 'fullname'] }],
+    }, req.query, Recipe)
       .then(({ rows: recipes, pagination }) => res.status(200).send({
         recipes,
         pagination,

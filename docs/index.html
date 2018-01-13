@@ -784,7 +784,18 @@
   </span><span class="p">},</span><span class="w">
   </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Your review has been recorded"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h2 id='get-all-reviews-for-a-recipe'>Get all reviews for a recipe</h2>
+</span></code></pre><h3 id='http-request-9'>HTTP Request</h3>
+<ul>
+<li>Endpoint: <code>/recipes/:id/reviews</code></li>
+<li>Verb: <code>POST</code></li>
+<li><code>:id</code>: <code>recipe id</code></li>
+</ul>
+<h3 id='http-response-9'>HTTP Response</h3>
+<ul>
+<li>StatusCode: <code>201: Created</code></li>
+<li>Body: <code>(application/json)</code></li>
+</ul>
+<h2 id='get-all-reviews-for-a-recipe'>Get all reviews for a recipe</h2>
 <blockquote>
 <p>Response Body</p>
 </blockquote>
@@ -825,13 +836,13 @@
         </span><span class="s2">"last"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='http-request-9'>HTTP Request</h3>
+</span></code></pre><h3 id='http-request-10'>HTTP Request</h3>
 <ul>
 <li>Endpoint: <code>/recipes/:id/reviews</code></li>
 <li>Verb: <code>GET</code></li>
 <li><code>:id</code>: <code>recipe id</code></li>
 </ul>
-<h3 id='http-response-9'>HTTP Response</h3>
+<h3 id='http-response-10'>HTTP Response</h3>
 <ul>
 <li>StatusCode: <code>200: Ok</code></li>
 <li>Body: <code>(application/json)</code></li>
@@ -862,14 +873,14 @@
     </span><span class="s2">"owner"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='http-request-10'>HTTP Request</h3>
+</span></code></pre><h3 id='http-request-11'>HTTP Request</h3>
 <ul>
 <li>Endpoint: <code>/recipes/:id</code></li>
 <li>Verb: <code>PUT</code></li>
 <li><code>:id</code>: <code>recipe id</code></li>
 <li><strong>Must be owner</strong></li>
 </ul>
-<h3 id='http-response-10'>HTTP Response</h3>
+<h3 id='http-response-11'>HTTP Response</h3>
 <ul>
 <li>StatusCode: <code>200: Ok</code></li>
 <li>Body: <code>(application/json)</code></li>
@@ -917,13 +928,13 @@
   </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You liked this recipe"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='http-request-11'>HTTP Request</h3>
+</span></code></pre><h3 id='http-request-12'>HTTP Request</h3>
 <ul>
 <li>Endpoint: <code>/recipes/:id/vote-{up, down}</code></li>
 <li>Verb: <code>POST</code></li>
 <li><code>:id</code>: <code>recipe id</code></li>
 </ul>
-<h3 id='http-response-11'>HTTP Response</h3>
+<h3 id='http-response-12'>HTTP Response</h3>
 <ul>
 <li>StatusCode: <code>200: Ok</code></li>
 <li>Body: <code>(application/json)</code></li>
@@ -948,13 +959,13 @@
   </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Recipe added to your favorite list"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='http-request-12'>HTTP Request</h3>
+</span></code></pre><h3 id='http-request-13'>HTTP Request</h3>
 <ul>
 <li>Endpoint: <code>/recipes/:id/favorite</code></li>
 <li>Verb: <code>POST</code></li>
 <li><code>:id</code>: <code>recipe id</code></li>
 </ul>
-<h3 id='http-response-12'>HTTP Response</h3>
+<h3 id='http-response-13'>HTTP Response</h3>
 <ul>
 <li>StatusCode: <code>200: Ok</code></li>
 <li>Body: <code>(application/json)</code></li>
@@ -967,14 +978,14 @@
   </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"success"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Recipe deleted successfully"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='http-request-13'>HTTP Request</h3>
+</span></code></pre><h3 id='http-request-14'>HTTP Request</h3>
 <ul>
 <li>Endpoint: <code>/recipes/:id</code></li>
 <li>Verb: <code>DELETE</code></li>
 <li><code>:id</code>: <code>recipe id</code></li>
 <li><strong>Must be owner</strong></li>
 </ul>
-<h3 id='http-response-13'>HTTP Response</h3>
+<h3 id='http-response-14'>HTTP Response</h3>
 <ul>
 <li>StatusCode: <code>200: Ok</code></li>
 <li>Body: <code>(application/json)</code></li>
@@ -994,7 +1005,7 @@
 </tr>
 <tr>
 <td>401</td>
-<td>Unauthorized -- Your API key is wrong.</td>
+<td>Unauthorized</td>
 </tr>
 <tr>
 <td>403</td>
