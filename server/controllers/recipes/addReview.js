@@ -9,7 +9,7 @@ const addReview = (req, res, next) => {
 
   Review.create({ userId, recipeId, content })
     .then(() => findReviews(req))
-    .then(({ rows: reviews, pagination }) => res.status(200).send({
+    .then(({ rows: reviews, pagination }) => res.status(201).send({
       status: 'success',
       reviews,
       pagination,

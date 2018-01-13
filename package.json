@@ -9,7 +9,7 @@
     "start:docs": "cd docs-src && bundle exec middleman server",
     "build:docs": "cd docs-src && bundle exec middleman build --clean",
     "build:client:prod": "npm run clean && webpack -p --config webpack.config.prod.js",
-    "build:client:dev": "npm run clean && webpack -p --config webpack.config.dev.js",
+    "build:client:dev": "npm run clean && webpack -p --config webpack.config.js",
     "test:server": "cross-env NODE_ENV=test nyc mocha --timeout 10000 server/test",
     "test:server:dev": "npm run migrate:test && npm run test:server",
     "test:client": "jest",
