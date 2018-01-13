@@ -6,11 +6,11 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import requireAuthentication from '../utils/requiresAuth.jsx';
 
 
-import Home from './Home/Home.jsx';
-import SingleRecipe from './SingleRecipe/SingleRecipe.jsx';
-import Login from './Login/Login.jsx';
-import Signup from './Signup/Signup.jsx';
-import Profile from './Profile/Profile.jsx';
+import Home from './pages/Home';
+import SingleRecipe from './pages/SingleRecipe';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import Profile from './pages/Profile/Profile';
 
 /**
  * @export

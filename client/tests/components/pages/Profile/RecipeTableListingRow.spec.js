@@ -1,6 +1,6 @@
 import React from 'react';
-import RecipeTableListingRow from '../../../components/Profile/RecipeTableListingRow';
-import recipes from '../../../__mocks__/recipes.mock';
+import RecipeTableListingRow from '../../../../components/pages/Profile/RecipeTableListingRow';
+import recipes from '../../../../__mocks__/recipes.mock';
 
 function setup(type, asOwner) {
   const props = {

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import { recipePropTypes } from '../../config/proptypes';
+import { recipePropTypes } from '../../../config/proptypes';
 
 const propTypes = {
   type: PropTypes.oneOf(['favorites', 'personal-recipes']).isRequired,
