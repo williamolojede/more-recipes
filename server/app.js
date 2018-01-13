@@ -46,7 +46,7 @@ app.get('/api/docs', (req, res) => {
 });
 
 // STATIC FILE FOR API DOCUMENTATION
-app.use('/api/docs-assets', express.static(path.resolve(__dirname, '..', 'docs')));
+app.use('/docs-assets', express.static(path.resolve(__dirname, '..', 'docs')));
 
 // API ROUTES
 app.use('/api', routes);

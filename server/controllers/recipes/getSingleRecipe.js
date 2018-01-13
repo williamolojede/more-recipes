@@ -9,7 +9,7 @@ const getSingleRecipe = (req, res, next) => {
       { model: User, attributes: ['id', 'username', 'fullname'] }
     ]
   })
-    .then(recipe => res.status(200).send({ recipe, message: 'success' }))
+    .then(recipe => res.status(200).send({ recipe, status: 'success' }))
     .catch(error => systemErrorHandler(error, next));
 };
 
