@@ -9,7 +9,7 @@ import { routerReducer } from 'react-router-redux';
 import auth from './auth';
 import isFetching from './isFetching';
 import topRecipes from './topRecipes';
-import recipe from './recipe';
+import singleRecipe from './recipe';
 import recipeReviews from './recipeReviews';
 import userProfile from './userProfile';
 import notification from './notification';
@@ -19,7 +19,7 @@ const rootReducer = combineReducers({
   auth,
   isFetching,
   topRecipes,
-  recipe,
+  singleRecipe,
   recipeReviews,
   userProfile,
   notification,

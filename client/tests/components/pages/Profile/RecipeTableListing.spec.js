@@ -1,6 +1,6 @@
 import React from 'react';
 import RecipeTableListing from '../../../../components/pages/Profile/RecipeTableListing';
-import recipes, { favoriteRecipes } from '../../../../__mocks__/recipes.mock';
+import recipesMock, { favoriteRecipes } from '../../../__mocks__/recipes.mock';
 
 function setup(type, asOwner, recipesData) {
   const props = {
@@ -58,14 +58,14 @@ describe('RecipeTableListing', () => {
     });
 
     it('should render list of recipes without actions if not owner', () => {
-      const { wrapper } = setup(type, false, recipes);
+      const { wrapper } = setup(type, false, recipesMock.recipes);
       expect(wrapper.find('th').length).toBe(1);
       expect(wrapper.find('RecipeTableListingRow').length).toBe(wrapper.instance().state.limit);
       expect(wrapper).toMatchSnapshot();
     });
 
     it('should render list of recipes with actions if owner', () => {
-      const { wrapper } = setup(type, true, recipes);
+      const { wrapper } = setup(type, true, recipesMock.recipes);
       expect(wrapper.find('th').length).toBe(2);
       expect(wrapper.find('RecipeTableListingRow').length).toBe(wrapper.instance().state.limit);
       expect(wrapper).toMatchSnapshot();
@@ -81,7 +81,7 @@ describe('RecipeTableListing', () => {
     });
 
     it('should do nothing if called to get recipes for pages outside available pages', () => {
-      const { wrapper } = setup('personal-recipes', true, recipes);
+      const { wrapper } = setup('personal-recipes', true, recipesMock.recipes);
       expect(wrapper.instance().getRecipesForPage(-1)).toBe(undefined);
       expect(wrapper.instance().getRecipesForPage(100)).toBe(undefined);
       expect(wrapper.instance().state.currentPage)
@@ -89,12 +89,12 @@ describe('RecipeTableListing', () => {
     });
 
     it('should update currentpage state when called within range', () => {
-      const { wrapper } = setup('personal-recipes', true, recipes);
+      const { wrapper } = setup('personal-recipes', true, recipesMock.recipes);
       wrapper.instance().getRecipesForPage(2);
       expect(wrapper.instance().state.currentPage).toBe(2);
       // this will break depending on the length of `recipes` and `...state.limit`
       expect(wrapper.instance().state.recipes.length)
-        .toBe(recipes.length % wrapper.instance().state.limit);
+        .toBe(recipesMock.recipes.length % wrapper.instance().state.limit);
     });
   });
 });

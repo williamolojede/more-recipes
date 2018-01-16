@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Notification should render with right amount of elements 1`] = `
+<li
+  className="review__card"
+>
+  <div
+    className="wrapper"
+  >
+    <UserImg
+      type="inReview"
+      user={
+        Object {
+          "fullname": "John Doe",
+          "id": 1,
+        }
+      }
+    />
+    <div
+      className="review__card-card-content"
+    >
+      <div
+        className="review__card-card-content___top"
+      >
+        <p
+          className="user-name"
+        >
+          John Doe
+        </p>
+        <span
+          className="time-since"
+        >
+          a few seconds ago
+        </span>
+      </div>
+      <p
+        className="review__card-card-content"
+      >
+        Shitty recipe
+      </p>
+    </div>
+  </div>
+</li>
+`;

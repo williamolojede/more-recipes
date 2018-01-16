@@ -9,13 +9,16 @@ import {
   RECIEVE_TOP_RATED_RECIPE,
   RECIEVE_SINGLE_RECIPE,
   RECIEVE_NEW_RECIPE,
-  RECIEVE_UPDATED_RECIPE
+  RECIEVE_UPDATED_RECIPE,
+  FETCH_SINGLE_RECIPE_ERROR,
+  RESET_SINGLE_RECIPE,
+  FETCH_TOP_RECIPES_ERROR
 } from './types';
 
-const recieveTopRecipes = (recipes, metaData) => ({
+const recieveTopRecipes = (recipes, pagination) => ({
   type: RECIEVE_TOP_RATED_RECIPE,
   recipes,
-  metaData
+  pagination
 });
 
 const recieveSingleRecipe = (type, recipe) => ({
@@ -30,19 +33,19 @@ const recieveUpdatedRecipe = (recipe, index) => ({
   index
 });
 
-export const fetchSingleRecipes = id => (dispatch) => {
+export const resetSingleRecipe = () => ({
+  type: RESET_SINGLE_RECIPE
+});
+
+export const fetchSingleRecipe = id => (dispatch) => {
   dispatch(setFetching());
   return instance.get(`/recipes/${id}`)
     .then((res) => {
-      dispatch(
-        batchActions([
-          recieveSingleRecipe(RECIEVE_SINGLE_RECIPE, res.data.recipe),
-          unsetFetching()
-        ])
-      );
+      dispatch(recieveSingleRecipe(RECIEVE_SINGLE_RECIPE, res.data.recipe));
+      dispatch(unsetFetching());
     })
     .catch((err) => {
-      console.log(err.message || err.response.data.message);
+      dispatch({ type: FETCH_SINGLE_RECIPE_ERROR, errorMessage: err.response.data.message });
       dispatch(unsetFetching());
     });
 };
@@ -51,25 +54,22 @@ export const fetchTopRecipes = (page, limit) => (dispatch) => {
   dispatch(setFetching());
   return instance.get(`/recipes?sort=upvotes&order=descending&page=${page}&limit=${limit}`)
     .then((res) => {
-      dispatch(
-        batchActions([
-          recieveTopRecipes(res.data.recipes, res.data.pagination),
-          unsetFetching()
-        ])
-      );
+      dispatch(recieveTopRecipes(res.data.recipes, res.data.pagination));
+      dispatch(unsetFetching());
     })
     .catch((err) => {
-      console.log(err.message || err.response.data.message);
+      dispatch({
+        type: FETCH_TOP_RECIPES_ERROR,
+        errorMessage: err.response.data.message
+      });
       dispatch(unsetFetching());
     });
 };
 
 export const vote = (dir, id) => dispatch => instance.post(`/recipes/${id}/vote-${dir}`)
   .then((res) => {
-    dispatch(batchActions([
-      recieveSingleRecipe(RECIEVE_SINGLE_RECIPE, res.data.recipe),
-      showNotification(res.data.message)
-    ]));
+    dispatch(recieveSingleRecipe(RECIEVE_SINGLE_RECIPE, res.data.recipe));
+    dispatch(showNotification(res.data.message));
   })
   .catch((err) => {
     dispatch(showNotification(err.response.data.message));
@@ -78,10 +78,8 @@ export const vote = (dir, id) => dispatch => instance.post(`/recipes/${id}/vote-
 
 export const favorite = id => dispatch => instance.post(`/recipes/${id}/favorite`)
   .then((res) => {
-    dispatch(batchActions([
-      recieveSingleRecipe(RECIEVE_SINGLE_RECIPE, res.data.recipe),
-      showNotification(res.data.message)
-    ]));
+    dispatch(recieveSingleRecipe(RECIEVE_SINGLE_RECIPE, res.data.recipe));
+    dispatch(showNotification(res.data.message));
   })
   .catch((err) => {
     dispatch(showNotification(err.response.data.message));

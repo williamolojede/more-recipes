@@ -1,6 +1,9 @@
 import React from 'react';
 import { SiteNav } from '../../../components/shared/SiteNav';
-import user from '../../../__mocks__/user.mock';
+import user from '../../__mocks__/user.mock';
+
+// jquery mock
+global.$ = () => ({ sideNav: () => {} });
 
 function setup() {
   const props = {

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { postReview } from '../../../actions/reviews';
@@ -25,7 +24,14 @@ class AddReviewForm extends Component {
       this.setState({
         sendingreview: true,
       });
-      this.props.dispatch(postReview(content, this.props.recipeId))
+
+      const payload = {
+        content,
+        recipeId: this.props.recipeId,
+        limit: this.props.limit
+      };
+
+      this.props.dispatch(postReview(payload))
         .then(() => {
           this.setState({
             sendingreview: false,
@@ -38,7 +44,7 @@ class AddReviewForm extends Component {
     const { currentUser } = this.props;
 
     return (
-      <li className="review__card review__card-edit" id="write-review">
+      <div className="review__card review__card-edit" id="write-review">
         {this.state.sendingreview ?
           <div className="wrapper">
             <Preloader />
@@ -48,12 +54,12 @@ class AddReviewForm extends Component {
             <UserImg user={currentUser} type="inReview" />
             <div className="review__card-edit__form">
               <textarea placeholder="your review..." ref={node => this.reviewInput = node} />
-              <button type="submit" className=" btn z-depth-1" onClick={this.addReview}>Submit</button>
+              <button type="button" className=" btn z-depth-1" onClick={this.addReview}>Submit</button>
             </div>
           </div>
         }
 
-      </li>
+      </div>
     );
   }
 }
@@ -61,7 +67,8 @@ class AddReviewForm extends Component {
 AddReviewForm.propTypes = {
   dispatch: PropTypes.func.isRequired,
   ...currentUserPropTypes,
-  recipeId: PropTypes.number.isRequired
+  recipeId: PropTypes.number.isRequired,
+  limit: PropTypes.number.isRequired
 };
 
-export default connect(null)(AddReviewForm);
+export default AddReviewForm;

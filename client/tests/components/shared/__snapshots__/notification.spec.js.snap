@@ -1,11 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Notification should render with right amount of elements 1`] = `
-<div
-  className="notification z-depth-1"
+<CSSTransition
+  classNames="notification"
+  in={true}
+  timeout={3000}
 >
-  <p>
-    you are testing this
-  </p>
-</div>
+  <div
+    className="notification z-depth-1"
+  >
+    <p>
+      you are testing this
+    </p>
+  </div>
+</CSSTransition>
 `;

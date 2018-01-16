@@ -7,12 +7,12 @@ exports[`Recipe Card should render with right amount of elements 1`] = `
   <Link
     className="recipe-card__img"
     replace={false}
-    to="/recipe/3"
+    to="/recipe/2"
   >
     <img
       alt="pancake"
       className="card-image"
-      src="https://firebasestorage.googleapis.com/v0/b/more-recipes.appspot.com/o/recipes%2F1509702436404?alt=media&token=da3a7ac8-58d3-46da-a71d-c2c1c0cbdfeb"
+      src="http://www.africanbites.com/wp-content/uploads/2014/05/IMG_9677-2-1-150x150.jpg"
     />
   </Link>
   <div
@@ -20,32 +20,32 @@ exports[`Recipe Card should render with right amount of elements 1`] = `
   >
     <Link
       replace={false}
-      to="/recipe/3"
+      to="/recipe/2"
     >
       <h4
         className="recipe-card__title card-title"
       >
-        Chef John's Spaghetti with Red Clam Sauce
+        Jollof Rice
       </h4>
     </Link>
     <p
       className="recipe-card__description"
     >
-      This is one of my 'go to' recipes and it takes only about 15 minutes from start to finish. The only prep work really is mashing the garlic. The sauce is great on any pasta, but I prefer angel hair or spaghetti.
+      It is simply better than ghanian jollof
     </p>
   </div>
   <RecipeCardInfo
     info={
       Object {
         "User": Object {
-          "fullname": "John Bull",
-          "id": 8,
+          "fullname": "example user",
+          "id": 2,
           "username": null,
         },
-        "downVoteCount": 0,
-        "favoriteCount": 0,
-        "upVoteCount": 1,
-        "viewCount": 1,
+        "downVoteCount": 1,
+        "favoriteCount": 3,
+        "upVoteCount": 3,
+        "viewCount": 6,
       }
     }
   />

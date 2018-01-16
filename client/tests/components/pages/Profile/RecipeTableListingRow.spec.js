@@ -1,12 +1,12 @@
 import React from 'react';
 import RecipeTableListingRow from '../../../../components/pages/Profile/RecipeTableListingRow';
-import recipes from '../../../../__mocks__/recipes.mock';
+import recipesMock from '../../../__mocks__/recipes.mock';
 
 function setup(type, asOwner) {
   const props = {
     type,
     asOwner,
-    recipe: recipes[0],
+    recipe: recipesMock.recipes[0],
     removeRecipe: jest.fn(),
     index: 1
   };

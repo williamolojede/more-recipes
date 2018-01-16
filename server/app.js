@@ -66,13 +66,6 @@ app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '..', 'dist', 'client/index.html'));
 });
 
-// catch 404 and forward to error handler
-app.use((req, res, next) => {
-  const err = new Error('Not Found');
-  err.statusCode = 404;
-  next(err);
-});
-
 // error handler
 // define as the last app.use callback
 /* eslint no-unused-vars: 0 */

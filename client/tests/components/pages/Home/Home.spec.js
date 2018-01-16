@@ -3,8 +3,8 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import store from '../../../../store';
 import { PureHome } from '../../../../components/pages/Home';
-import user from '../../../../__mocks__/user.mock';
-import recipes from '../../../../__mocks__/recipes.mock';
+import user from '../../../__mocks__/user.mock';
+import recipesMock from '../../../__mocks__/recipes.mock';
 
 
 function setup() {
@@ -34,32 +34,39 @@ describe('Home', () => {
     const { mountedWrapper } = setup();
     expect(mountedWrapper).toMatchSnapshot();
   });
+
   it('should render top recipes when recipes props is received', () => {
     const { shallowWrapper } = setup();
     expect(shallowWrapper).toMatchSnapshot();
     shallowWrapper.setProps({
-      recipes,
-      pagination: {
-        pages: [1, 2, 3]
-      }
+      recipes: recipesMock.recipes,
+      pagination: recipesMock.pagination
     });
     expect(shallowWrapper).toMatchSnapshot();
     expect(shallowWrapper.instance().state.recipes.length).toBe(6);
-    expect(shallowWrapper.instance().state.pages.length).toBe(3);
   });
+
   it('should render a preloader', () => {
     const { props } = setup();
     const wrapper = shallow(<PureHome {...{ ...props, ...{ isFetching: true } }} />);
     expect(wrapper).toMatchSnapshot();
   });
 
-  describe('getRecipesForPage', () => {
+  it('should render a search modal when search input is focused', () => {
+    const { shallowWrapper } = setup();
+    const searchInput = shallowWrapper.find('.site-header__hero--input');
+
+    searchInput.simulate('focus');
+    expect(shallowWrapper.instance().state.isSearchActive).toBe(true);
+  });
+
+  describe('handlePageClick', () => {
     it('should update currentpage state when called', () => {
       const { shallowWrapper } = setup();
-      const getRecipesForPageSpy = jest.spyOn(shallowWrapper.instance(), 'getRecipesForPage');
-      shallowWrapper.instance().getRecipesForPage(2);
+      const handlePageClickSpy = jest.spyOn(shallowWrapper.instance(), 'handlePageClick');
+      shallowWrapper.instance().handlePageClick({ selected: 1 });
       expect(shallowWrapper.instance().state.currentPage).toBe(2);
-      expect(getRecipesForPageSpy).toHaveBeenCalledTimes(1);
+      expect(handlePageClickSpy).toHaveBeenCalledTimes(1);
     });
   });
 });

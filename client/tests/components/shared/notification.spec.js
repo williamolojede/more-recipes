@@ -1,22 +1,34 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
 import Notification from '../../../components/shared/Notification';
+
+jest.useFakeTimers();
 
 function setup() {
   const props = {
     notification: 'you are testing this',
     dispatch: jest.fn()
   };
-  const component = renderer.create(<Notification {...props} />);
+  const wrapper = shallow(<Notification {...props} />);
   return {
-    component
+    wrapper
   };
 }
 
 
 describe('Notification', () => {
   it('should render with right amount of elements', () => {
-    const tree = setup().component.toJSON();
-    expect(tree).toMatchSnapshot();
+    const { wrapper } = setup();
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should dispatch action to remove notification 3 seconds after rendering', () => {
+    const { wrapper } = setup();
+    const dispatchSpy = jest.spyOn(wrapper.instance().props, 'dispatch');
+    expect(wrapper.instance().state.timeout).toBe(3000);
+    wrapper.setProps({ notification: 'new notification' });
+
+    jest.runAllTimers();
+
+    expect(dispatchSpy).toHaveBeenCalledTimes(1);
   });
 });

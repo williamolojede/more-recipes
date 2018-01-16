@@ -5,7 +5,7 @@ import validateIdParam from '../helpers/validateIdParam';
 const validateRecipeId = (req, res, next) => {
   const id = parseInt(req.params.id, 10);
 
-  if (Number.isNaN(id) || id < 0) {
+  if (isNaN(id) || /[a-zA-Z]+$/.test(req.params.id) || req.params.id < 0) {
     return validateIdParam({ type: 'invalid-param-value', value: req.params.id }, 'Recipe', next);
   }
 
