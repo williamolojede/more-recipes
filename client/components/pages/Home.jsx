@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
-import scrollUp from '../../utils/scrollUp';
+import ReactPaginate from 'react-paginate';
 
 import { fetchTopRecipes } from '../../actions/recipe';
 
@@ -10,7 +9,6 @@ import TopRatedRecipeList from '../shared/TopRatedRecipeList';
 import Preloader from '../shared/Preloader';
 import ConnectedSiteNav from '../shared/SiteNav';
 import SiteFooter from '../shared/SiteFooter';
-import Pagination from '../shared/Pagination';
 import Search from '../shared/Search';
 
 import { currentUserPropTypes } from '../../config/proptypes';
@@ -20,9 +18,9 @@ class Home extends Component {
     super(props);
     this.state = {
       recipes: [],
-      pages: [],
       currentPage: 1,
       limit: 6,
+      last: 1,
       isSearchActive: false
     };
   }
@@ -39,29 +37,26 @@ class Home extends Component {
       } = newProps;
       this.setState({
         recipes,
-        pages: pagination.pages
+        last: pagination.last
       });
     }
   }
+
   componentDidUpdate(prevProps, prevState) {
     if (prevState.currentPage !== this.state.currentPage) {
       this.props.dispatch(fetchTopRecipes(this.state.currentPage, this.state.limit));
     }
   }
-  getRecipesForPage = (pageNumber) => {
-    if (this.state.currentPage === pageNumber) return;
-    if (pageNumber < 1 || pageNumber > this.state.pages[this.state.pages.length - 1]) {
-      return;
-    }
-    scrollUp('16.66', '50');
-    this.setState({
-      currentPage: pageNumber
-    });
-  }
 
   toggleSearch =() => {
     this.setState({
       isSearchActive: !this.state.isSearchActive
+    });
+  }
+
+  handlePageClick = ({ selected }) => {
+    this.setState({
+      currentPage: selected + 1
     });
   }
 
@@ -106,16 +101,20 @@ class Home extends Component {
               {
                 this.renderBody()
               }
-              {
-                !this.props.isFetching ?
-                  <footer>
-                    <Pagination
-                      currentPage={this.state.currentPage}
-                      getRecipesForPage={this.getRecipesForPage}
-                      pages={this.state.pages}
-                    />
-                  </footer> : null
-              }
+              <footer>
+                <ReactPaginate
+                  previousLabel={<i className="material-icons">chevron_left</i>}
+                  nextLabel={<i className="material-icons">chevron_right</i>}
+                  pageCount={this.state.last}
+                  marginPagesDisplayed={2}
+                  pageClassName="waves-effect"
+                  pageRangeDisplayed={4}
+                  onPageChange={this.handlePageClick}
+                  activeClassName="active"
+                  containerClassName="pagination"
+                />
+              </footer>
+
 
             </section>
           </div>
@@ -137,12 +136,12 @@ Home.propTypes = {
 };
 
 const mapStateToProps = ({
-  topRecipes,
+  topRecipes: { recipes, pagination },
   isFetching,
   auth: { currentUser }
 }) => ({
-  recipes: topRecipes.recipes,
-  pagination: topRecipes.metaData,
+  recipes,
+  pagination,
   currentUser,
   isFetching
 });

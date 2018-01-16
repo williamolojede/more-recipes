@@ -1,0 +1,709 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Reviews Component should render a no-reviews page if there are no reviews 1`] = `
+<div
+  className="recipe__reviews row"
+>
+  <h3>
+    Reviews
+  </h3>
+  <AddReviewForm
+    currentUser={
+      Object {
+        "fullname": "John Doe",
+        "id": 1,
+      }
+    }
+    dispatch={[Function]}
+    limit={6}
+    recipeId={2}
+  />
+  <ul
+    className="review__list"
+  >
+    <li
+      className="no-reviews"
+    >
+      eyah 
+      <span
+        aria-label="sad"
+        role="img"
+      >
+        😢  
+      </span>
+       no reviews yet
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`Reviews Component should render pagination links if last page is greater than one 1`] = `
+<div
+  className="recipe__reviews row"
+>
+  <h3>
+    Reviews
+  </h3>
+  <AddReviewForm
+    currentUser={
+      Object {
+        "fullname": "John Doe",
+        "id": 1,
+      }
+    }
+    dispatch={[Function]}
+    limit={6}
+    recipeId={2}
+  />
+  <ul
+    className="review__list"
+  >
+    <Review
+      key="0"
+      review={
+        Object {
+          "User": Object {
+            "fullname": "John Bull",
+            "id": 8,
+            "username": null,
+          },
+          "content": "i",
+          "createdAt": "2018-01-15T01:15:46.499Z",
+          "id": 162,
+        }
+      }
+    />
+    <Review
+      key="1"
+      review={
+        Object {
+          "User": Object {
+            "fullname": "John Bull",
+            "id": 8,
+            "username": null,
+          },
+          "content": "kilode",
+          "createdAt": "2018-01-15T01:12:49.228Z",
+          "id": 161,
+        }
+      }
+    />
+    <Review
+      key="2"
+      review={
+        Object {
+          "User": Object {
+            "fullname": "John Bull",
+            "id": 8,
+            "username": null,
+          },
+          "content": "no",
+          "createdAt": "2018-01-15T01:04:33.114Z",
+          "id": 160,
+        }
+      }
+    />
+    <Review
+      key="3"
+      review={
+        Object {
+          "User": Object {
+            "fullname": "John Bull",
+            "id": 8,
+            "username": null,
+          },
+          "content": "trefqbiupavjnk;r edwjsklnvre;fwiblknv r;efjkbwnv sr4uefjkwbn bvrknefdw ;svrknefwbkletfdnbsn;tjklrfnwd;sbklnefwdsbtefbwtv4refbwtewhb4trefwhg5reag54trefwgs5rewgs5tr4fewg54trewgh5t",
+          "createdAt": "2018-01-15T01:04:13.717Z",
+          "id": 159,
+        }
+      }
+    />
+    <Review
+      key="4"
+      review={
+        Object {
+          "User": Object {
+            "fullname": "John Bull",
+            "id": 8,
+            "username": null,
+          },
+          "content": "b",
+          "createdAt": "2018-01-15T00:30:09.398Z",
+          "id": 151,
+        }
+      }
+    />
+    <Review
+      key="5"
+      review={
+        Object {
+          "User": Object {
+            "fullname": "John Bull",
+            "id": 8,
+            "username": null,
+          },
+          "content": "no",
+          "createdAt": "2018-01-14T23:53:57.316Z",
+          "id": 150,
+        }
+      }
+    />
+    <Review
+      key="6"
+      review={
+        Object {
+          "User": Object {
+            "fullname": "John Bull",
+            "id": 8,
+            "username": null,
+          },
+          "content": "hi",
+          "createdAt": "2018-01-14T23:53:38.073Z",
+          "id": 149,
+        }
+      }
+    />
+    <Review
+      key="7"
+      review={
+        Object {
+          "User": Object {
+            "fullname": "John Bull",
+            "id": 8,
+            "username": null,
+          },
+          "content": "ki lo so",
+          "createdAt": "2018-01-14T23:24:37.770Z",
+          "id": 148,
+        }
+      }
+    />
+    <Review
+      key="8"
+      review={
+        Object {
+          "User": Object {
+            "fullname": "John Bull",
+            "id": 8,
+            "username": null,
+          },
+          "content": "what say you",
+          "createdAt": "2018-01-14T23:24:24.406Z",
+          "id": 147,
+        }
+      }
+    />
+    <Review
+      key="9"
+      review={
+        Object {
+          "User": Object {
+            "fullname": "John Bull",
+            "id": 8,
+            "username": null,
+          },
+          "content": "nope",
+          "createdAt": "2018-01-13T20:45:18.432Z",
+          "id": 145,
+        }
+      }
+    />
+    <Review
+      key="10"
+      review={
+        Object {
+          "User": Object {
+            "fullname": "John Bull",
+            "id": 8,
+            "username": null,
+          },
+          "content": "dgffgd",
+          "createdAt": "2018-01-13T20:32:33.124Z",
+          "id": 142,
+        }
+      }
+    />
+    <Review
+      key="11"
+      review={
+        Object {
+          "User": Object {
+            "fullname": "John Bull",
+            "id": 8,
+            "username": null,
+          },
+          "content": "dd",
+          "createdAt": "2018-01-13T20:32:30.688Z",
+          "id": 141,
+        }
+      }
+    />
+  </ul>
+  <PaginationBoxView
+    activeClassName="active"
+    breakLabel="..."
+    containerClassName="pagination"
+    disableInitialCallback={false}
+    disabledClassName="disabled"
+    marginPagesDisplayed={3}
+    nextClassName="next"
+    nextLabel={
+      <i
+        className="material-icons"
+      >
+        chevron_right
+      </i>
+    }
+    onPageChange={[Function]}
+    pageClassName="waves-effect"
+    pageCount={7}
+    pageRangeDisplayed={2}
+    previousClassName="previous"
+    previousLabel={
+      <i
+        className="material-icons"
+      >
+        chevron_left
+      </i>
+    }
+  />
+</div>
+`;
+
+exports[`Reviews Component should render with the right amount of elements 1`] = `
+<div
+  className="recipe__reviews row"
+>
+  <h3>
+    Reviews
+  </h3>
+  <AddReviewForm
+    currentUser={
+      Object {
+        "fullname": "John Doe",
+        "id": 1,
+      }
+    }
+    dispatch={[Function]}
+    limit={6}
+    recipeId={2}
+  />
+  <ul
+    className="review__list"
+  >
+    <Review
+      key="0"
+      review={
+        Object {
+          "User": Object {
+            "fullname": "John Bull",
+            "id": 8,
+            "username": null,
+          },
+          "content": "i",
+          "createdAt": "2018-01-15T01:15:46.499Z",
+          "id": 162,
+        }
+      }
+    />
+    <Review
+      key="1"
+      review={
+        Object {
+          "User": Object {
+            "fullname": "John Bull",
+            "id": 8,
+            "username": null,
+          },
+          "content": "kilode",
+          "createdAt": "2018-01-15T01:12:49.228Z",
+          "id": 161,
+        }
+      }
+    />
+    <Review
+      key="2"
+      review={
+        Object {
+          "User": Object {
+            "fullname": "John Bull",
+            "id": 8,
+            "username": null,
+          },
+          "content": "no",
+          "createdAt": "2018-01-15T01:04:33.114Z",
+          "id": 160,
+        }
+      }
+    />
+    <Review
+      key="3"
+      review={
+        Object {
+          "User": Object {
+            "fullname": "John Bull",
+            "id": 8,
+            "username": null,
+          },
+          "content": "trefqbiupavjnk;r edwjsklnvre;fwiblknv r;efjkbwnv sr4uefjkwbn bvrknefdw ;svrknefwbkletfdnbsn;tjklrfnwd;sbklnefwdsbtefbwtv4refbwtewhb4trefwhg5reag54trefwgs5rewgs5tr4fewg54trewgh5t",
+          "createdAt": "2018-01-15T01:04:13.717Z",
+          "id": 159,
+        }
+      }
+    />
+    <Review
+      key="4"
+      review={
+        Object {
+          "User": Object {
+            "fullname": "John Bull",
+            "id": 8,
+            "username": null,
+          },
+          "content": "b",
+          "createdAt": "2018-01-15T00:30:09.398Z",
+          "id": 151,
+        }
+      }
+    />
+    <Review
+      key="5"
+      review={
+        Object {
+          "User": Object {
+            "fullname": "John Bull",
+            "id": 8,
+            "username": null,
+          },
+          "content": "no",
+          "createdAt": "2018-01-14T23:53:57.316Z",
+          "id": 150,
+        }
+      }
+    />
+    <Review
+      key="6"
+      review={
+        Object {
+          "User": Object {
+            "fullname": "John Bull",
+            "id": 8,
+            "username": null,
+          },
+          "content": "hi",
+          "createdAt": "2018-01-14T23:53:38.073Z",
+          "id": 149,
+        }
+      }
+    />
+    <Review
+      key="7"
+      review={
+        Object {
+          "User": Object {
+            "fullname": "John Bull",
+            "id": 8,
+            "username": null,
+          },
+          "content": "ki lo so",
+          "createdAt": "2018-01-14T23:24:37.770Z",
+          "id": 148,
+        }
+      }
+    />
+    <Review
+      key="8"
+      review={
+        Object {
+          "User": Object {
+            "fullname": "John Bull",
+            "id": 8,
+            "username": null,
+          },
+          "content": "what say you",
+          "createdAt": "2018-01-14T23:24:24.406Z",
+          "id": 147,
+        }
+      }
+    />
+    <Review
+      key="9"
+      review={
+        Object {
+          "User": Object {
+            "fullname": "John Bull",
+            "id": 8,
+            "username": null,
+          },
+          "content": "nope",
+          "createdAt": "2018-01-13T20:45:18.432Z",
+          "id": 145,
+        }
+      }
+    />
+    <Review
+      key="10"
+      review={
+        Object {
+          "User": Object {
+            "fullname": "John Bull",
+            "id": 8,
+            "username": null,
+          },
+          "content": "dgffgd",
+          "createdAt": "2018-01-13T20:32:33.124Z",
+          "id": 142,
+        }
+      }
+    />
+    <Review
+      key="11"
+      review={
+        Object {
+          "User": Object {
+            "fullname": "John Bull",
+            "id": 8,
+            "username": null,
+          },
+          "content": "dd",
+          "createdAt": "2018-01-13T20:32:30.688Z",
+          "id": 141,
+        }
+      }
+    />
+  </ul>
+</div>
+`;
+
+exports[`Reviews Component should update state when component receive reviews and pagination as props 1`] = `
+<div
+  className="recipe__reviews row"
+>
+  <h3>
+    Reviews
+  </h3>
+  <AddReviewForm
+    currentUser={
+      Object {
+        "fullname": "John Doe",
+        "id": 1,
+      }
+    }
+    dispatch={[Function]}
+    limit={6}
+    recipeId={2}
+  />
+  <ul
+    className="review__list"
+  >
+    <Review
+      key="0"
+      review={
+        Object {
+          "User": Object {
+            "fullname": "John Bull",
+            "id": 8,
+            "username": null,
+          },
+          "content": "i",
+          "createdAt": "2018-01-15T01:15:46.499Z",
+          "id": 162,
+        }
+      }
+    />
+    <Review
+      key="1"
+      review={
+        Object {
+          "User": Object {
+            "fullname": "John Bull",
+            "id": 8,
+            "username": null,
+          },
+          "content": "kilode",
+          "createdAt": "2018-01-15T01:12:49.228Z",
+          "id": 161,
+        }
+      }
+    />
+    <Review
+      key="2"
+      review={
+        Object {
+          "User": Object {
+            "fullname": "John Bull",
+            "id": 8,
+            "username": null,
+          },
+          "content": "no",
+          "createdAt": "2018-01-15T01:04:33.114Z",
+          "id": 160,
+        }
+      }
+    />
+    <Review
+      key="3"
+      review={
+        Object {
+          "User": Object {
+            "fullname": "John Bull",
+            "id": 8,
+            "username": null,
+          },
+          "content": "trefqbiupavjnk;r edwjsklnvre;fwiblknv r;efjkbwnv sr4uefjkwbn bvrknefdw ;svrknefwbkletfdnbsn;tjklrfnwd;sbklnefwdsbtefbwtv4refbwtewhb4trefwhg5reag54trefwgs5rewgs5tr4fewg54trewgh5t",
+          "createdAt": "2018-01-15T01:04:13.717Z",
+          "id": 159,
+        }
+      }
+    />
+    <Review
+      key="4"
+      review={
+        Object {
+          "User": Object {
+            "fullname": "John Bull",
+            "id": 8,
+            "username": null,
+          },
+          "content": "b",
+          "createdAt": "2018-01-15T00:30:09.398Z",
+          "id": 151,
+        }
+      }
+    />
+    <Review
+      key="5"
+      review={
+        Object {
+          "User": Object {
+            "fullname": "John Bull",
+            "id": 8,
+            "username": null,
+          },
+          "content": "no",
+          "createdAt": "2018-01-14T23:53:57.316Z",
+          "id": 150,
+        }
+      }
+    />
+    <Review
+      key="6"
+      review={
+        Object {
+          "User": Object {
+            "fullname": "John Bull",
+            "id": 8,
+            "username": null,
+          },
+          "content": "hi",
+          "createdAt": "2018-01-14T23:53:38.073Z",
+          "id": 149,
+        }
+      }
+    />
+    <Review
+      key="7"
+      review={
+        Object {
+          "User": Object {
+            "fullname": "John Bull",
+            "id": 8,
+            "username": null,
+          },
+          "content": "ki lo so",
+          "createdAt": "2018-01-14T23:24:37.770Z",
+          "id": 148,
+        }
+      }
+    />
+    <Review
+      key="8"
+      review={
+        Object {
+          "User": Object {
+            "fullname": "John Bull",
+            "id": 8,
+            "username": null,
+          },
+          "content": "what say you",
+          "createdAt": "2018-01-14T23:24:24.406Z",
+          "id": 147,
+        }
+      }
+    />
+    <Review
+      key="9"
+      review={
+        Object {
+          "User": Object {
+            "fullname": "John Bull",
+            "id": 8,
+            "username": null,
+          },
+          "content": "nope",
+          "createdAt": "2018-01-13T20:45:18.432Z",
+          "id": 145,
+        }
+      }
+    />
+    <Review
+      key="10"
+      review={
+        Object {
+          "User": Object {
+            "fullname": "John Bull",
+            "id": 8,
+            "username": null,
+          },
+          "content": "dgffgd",
+          "createdAt": "2018-01-13T20:32:33.124Z",
+          "id": 142,
+        }
+      }
+    />
+    <Review
+      key="11"
+      review={
+        Object {
+          "User": Object {
+            "fullname": "John Bull",
+            "id": 8,
+            "username": null,
+          },
+          "content": "dd",
+          "createdAt": "2018-01-13T20:32:30.688Z",
+          "id": 141,
+        }
+      }
+    />
+  </ul>
+  <PaginationBoxView
+    activeClassName="active"
+    breakLabel="..."
+    containerClassName="pagination"
+    disableInitialCallback={false}
+    disabledClassName="disabled"
+    marginPagesDisplayed={3}
+    nextClassName="next"
+    nextLabel={
+      <i
+        className="material-icons"
+      >
+        chevron_right
+      </i>
+    }
+    onPageChange={[Function]}
+    pageClassName="waves-effect"
+    pageCount={7}
+    pageRangeDisplayed={2}
+    previousClassName="previous"
+    previousLabel={
+      <i
+        className="material-icons"
+      >
+        chevron_left
+      </i>
+    }
+  />
+</div>
+`;

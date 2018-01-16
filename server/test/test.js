@@ -74,8 +74,8 @@ const tokenAuthentication = (url, method) => {
 };
 
 describe('API Integration Tests', () => {
-  it('return 404 for any route asides /api', (done) => {
-    request.post('/wrong')
+  it('return 404 for any api end-point not provided', (done) => {
+    request.post('/api/wrong')
       .send(data)
       .end((err, res) => {
         expect(res.status).to.equal(404);
@@ -156,13 +156,13 @@ describe('API Integration Tests', () => {
         });
     });
 
-    it('return 400 for an already existing email ', (done) => {
+    it('return 409 for an already existing email ', (done) => {
       const invalidData = Object.assign({}, data);
       invalidData.user.fullname = 'example user2';
       request.post(signupURl)
         .send(invalidData)
         .end((err, res) => {
-          expect(res.status).to.equal(400);
+          expect(res.status).to.equal(409);
           expect(res.body.message).to.equal('User with email already exists');
           done();
         });
@@ -559,7 +559,7 @@ describe('API Integration Tests', () => {
   describe('Get User Detail', () => {
     tokenAuthentication(`${usersUrl}/1`, 'get');
 
-    it('return 400 if invalid recipe id used', (done) => {
+    it('return 400 if invalid user id used', (done) => {
       request.get(`${usersUrl}/-15`)
         .send({ token: userToken1 })
         .end((err, res) => {
@@ -570,7 +570,7 @@ describe('API Integration Tests', () => {
         });
     });
 
-    it('return 400 if invalid recipe id used', (done) => {
+    it('return 400 if invalid user id used', (done) => {
       request.get(`${usersUrl}/giberrish`)
         .send({ token: userToken1 })
         .end((err, res) => {
@@ -580,6 +580,7 @@ describe('API Integration Tests', () => {
           done();
         });
     });
+
     // user doesn't exist
     it('return 404 if user not found', (done) => {
       request.get(`${usersUrl}/3`)

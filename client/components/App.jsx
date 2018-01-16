@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import requireAuthentication from '../utils/requiresAuth.jsx';
+import requireAuthentication from './hoc/requiresAuth';
 
 
 import Home from './pages/Home';

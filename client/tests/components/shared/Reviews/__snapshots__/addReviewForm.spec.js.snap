@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Add review form  should render with the right amount of elements 1`] = `
+<AddReviewForm
+  currentUser={
+    Object {
+      "fullname": "John Doe",
+      "id": 1,
+    }
+  }
+  dispatch={[Function]}
+  limit={6}
+  recipeId={1}
+>
+  <div
+    className="review__card review__card-edit"
+    id="write-review"
+  >
+    <div
+      className="wrapper"
+    >
+      <UserImg
+        type="inReview"
+        user={
+          Object {
+            "fullname": "John Doe",
+            "id": 1,
+          }
+        }
+      >
+        <div
+          className="user-image inReview"
+        >
+          <div
+            className="user-image__no-img"
+          >
+            <span>
+              J
+            </span>
+            <span>
+              D
+            </span>
+          </div>
+        </div>
+      </UserImg>
+      <div
+        className="review__card-edit__form"
+      >
+        <textarea
+          placeholder="your review..."
+        />
+        <button
+          className=" btn z-depth-1"
+          onClick={[Function]}
+          type="button"
+        >
+          Submit
+        </button>
+      </div>
+    </div>
+  </div>
+</AddReviewForm>
+`;

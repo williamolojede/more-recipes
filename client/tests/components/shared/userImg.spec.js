@@ -1,6 +1,6 @@
 import React from 'react';
 import UserImg from '../../../components/shared/UserImg';
-import user from '../../../__mocks__/user.mock';
+import user from '../../__mocks__/user.mock';
 
 function setup() {
   const props = {

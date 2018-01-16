@@ -1,10 +1,10 @@
 import React from 'react';
 import RecipeCard from '../../../components/shared/RecipeCard/RecipeCard';
-import recipes from '../../../__mocks__/recipes.mock';
+import recipesMock from '../../__mocks__/recipes.mock';
 
 function setup() {
   const props = {
-    recipe: recipes[0],
+    recipe: recipesMock.recipes[0],
   };
   const wrapper = shallow(<RecipeCard {...props} />);
 

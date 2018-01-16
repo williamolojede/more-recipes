@@ -36,6 +36,12 @@
           font-size: 1.2rem;
         }
       }
+
+      .recipe__reviews{
+        .review__list{
+          position: relative;
+        }
+      }
     }
   }
 }

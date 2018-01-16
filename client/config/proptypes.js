@@ -57,6 +57,11 @@ export const userImgPropTypes = {
   type: PropTypes.string.isRequired
 };
 
+export const paginationPropTypes = {
+  pagination: PropTypes.shape({
+    last: PropTypes.number.isRequired
+  }).isRequired
+};
 
 export const reviewPropTypes = {
   review: PropTypes.shape({

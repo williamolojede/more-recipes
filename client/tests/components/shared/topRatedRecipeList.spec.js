@@ -1,7 +1,8 @@
 import React from 'react';
 import TopRatedRecipeList from '../../../components/shared/TopRatedRecipeList';
-import recipes from '../../../__mocks__/recipes.mock';
+import recipesMock from '../../__mocks__/recipes.mock';
 
+const { recipes } = recipesMock;
 function setup() {
   const props = {
     recipes,
