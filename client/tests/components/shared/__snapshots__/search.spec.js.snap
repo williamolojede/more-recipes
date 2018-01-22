@@ -1,0 +1,127 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Search should render a list of recipe names that match search term 1`] = `
+<BrowserRouter>
+  <Router
+    history={
+      Object {
+        "action": "POP",
+        "block": [Function],
+        "createHref": [Function],
+        "go": [Function],
+        "goBack": [Function],
+        "goForward": [Function],
+        "length": 1,
+        "listen": [Function],
+        "location": Object {
+          "hash": "",
+          "pathname": "blank",
+          "search": "",
+          "state": undefined,
+        },
+        "push": [Function],
+        "replace": [Function],
+      }
+    }
+  >
+    <Search
+      toggleSearch={[Function]}
+    >
+      <div
+        className="search"
+      >
+        <div
+          className="search__container"
+        >
+          <div
+            className="search__top"
+          >
+            <p>
+              Search
+            </p>
+            <button
+              className="search__cancel-button"
+              onClick={[Function]}
+            >
+              <i
+                className="material-icons"
+              >
+                clear
+              </i>
+            </button>
+          </div>
+          <textarea
+            onChange={[Function]}
+          />
+          <ul
+            className="search__results"
+          />
+        </div>
+      </div>
+    </Search>
+  </Router>
+</BrowserRouter>
+`;
+
+exports[`Search should render with right amount of elements 1`] = `
+<BrowserRouter>
+  <Router
+    history={
+      Object {
+        "action": "POP",
+        "block": [Function],
+        "createHref": [Function],
+        "go": [Function],
+        "goBack": [Function],
+        "goForward": [Function],
+        "length": 1,
+        "listen": [Function],
+        "location": Object {
+          "hash": "",
+          "pathname": "blank",
+          "search": "",
+          "state": undefined,
+        },
+        "push": [Function],
+        "replace": [Function],
+      }
+    }
+  >
+    <Search
+      toggleSearch={[Function]}
+    >
+      <div
+        className="search"
+      >
+        <div
+          className="search__container"
+        >
+          <div
+            className="search__top"
+          >
+            <p>
+              Search
+            </p>
+            <button
+              className="search__cancel-button"
+              onClick={[Function]}
+            >
+              <i
+                className="material-icons"
+              >
+                clear
+              </i>
+            </button>
+          </div>
+          <textarea
+            onChange={[Function]}
+          />
+          <ul
+            className="search__results"
+          />
+        </div>
+      </div>
+    </Search>
+  </Router>
+</BrowserRouter>
+`;

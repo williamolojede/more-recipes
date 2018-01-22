@@ -136,7 +136,7 @@ SingleRecipe.propTypes = {
   notification: PropTypes.string.isRequired
 };
 
-const mapStateToProps = ({
+export const mapStateToProps = ({
   singleRecipe: { recipe, errorMessage },
   isFetching,
   auth: { currentUser },
@@ -149,4 +149,5 @@ const mapStateToProps = ({
   currentUser,
 });
 
+export { SingleRecipe as PureSingleRecipe };
 export default connect(mapStateToProps)(SingleRecipe);

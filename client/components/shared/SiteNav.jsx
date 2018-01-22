@@ -6,55 +6,52 @@ import { Link } from 'react-router-dom';
 import { currentUserPropTypes } from '../../config/proptypes';
 import { logoutUser } from '../../actions/loginUser';
 
+import NavDropDown from './NavDropDown';
+
+import UserImg from './UserImg';
+
 export class SiteNav extends Component {
-  componentDidMount() {
-    if (typeof $ !== 'undefined') {
-      $('.button-collapse').sideNav();
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      navOpen: false
+    };
+  }
+
+  toggleNav = () => {
+    this.setState({ navOpen: !this.state.navOpen });
+  }
+
+  logout = (e) => {
+    e.preventDefault();
+    this.props.dispatch(logoutUser());
   }
 
   render() {
-    const { currentUser, dispatch } = this.props;
+    const { currentUser } = this.props;
     return (
       <nav className="site-header__nav">
         <div className="nav-wrapper container">
-          <Link to="/" className="brand-logo">MoreRecipes</Link>
-          <ul className="right hide-on-med-and-down">
-            <li>
-              <Link to={`/user/${currentUser.id}`}>Profile</Link>
-            </li>
-            <li>
-              <Link
-                to="/logout"
-                className="logout__button"
-                onClick={(e) => {
-                  e.preventDefault();
-                  dispatch(logoutUser());
-                }}
-              >
-              Sign Out
-              </Link>
-            </li>
-          </ul>
-          <ul className="side-nav" id="mobile-nav">
-            <li>
-              <Link to={`/user/${currentUser.id}`}>Profile</Link>
-            </li>
-            <li className="logout__button">
-              <Link
-                to="/logout"
-                className="logout__button"
-                onClick={(e) => {
-                  e.preventDefault();
-                  dispatch(logoutUser());
-                }}
-              >
-              Sign Out
-              </Link>
-            </li>
-          </ul>
-          <button data-activates="mobile-nav" className="button-collapse">
-            <i className="material-icons">menu</i>
+          <Link to="/" className="left brand-logo">MoreRecipes</Link>
+
+          <button className="dropdown right" onClick={this.toggleNav}>
+            <UserImg user={currentUser} type="inSiteNav" />
+            {
+              this.state.navOpen &&
+              <NavDropDown
+                fullname={currentUser.fullname}
+                handleLogout={this.logout}
+              />
+            }
+            {
+              this.state.navOpen &&
+              <div
+                className="dropdown-overlay"
+                role="button"
+                tabIndex={0}
+                onClick={this.toggleNav}
+              />
+            }
           </button>
         </div>
       </nav>

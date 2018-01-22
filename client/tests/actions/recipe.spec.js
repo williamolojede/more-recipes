@@ -23,7 +23,7 @@ describe('Recipe Action Creators', () => {
     moxios.uninstall(instance);
   });
 
-  it('creates RECIEVE_SINGLE_RECIPE after successfuly fetching recipe', () => {
+  it('creates RECEIVE_SINGLE_RECIPE after successfuly fetching recipe', () => {
     moxios.wait(() => {
       const request = moxios.requests.mostRecent();
       request.respondWith({
@@ -37,7 +37,7 @@ describe('Recipe Action Creators', () => {
 
     const expectedActions = [
       { type: actionTypes.SET_FETCHING, isFetching: true },
-      { type: actionTypes.RECIEVE_SINGLE_RECIPE, recipe: recipes[0] },
+      { type: actionTypes.RECEIVE_SINGLE_RECIPE, recipe: recipes[0] },
       { type: actionTypes.UNSET_FETCHING, isFetching: false }
     ];
 
@@ -81,7 +81,7 @@ describe('Recipe Action Creators', () => {
     });
   });
 
-  it('creates RECIEVE_SINGLE_RECIPE after successfuly voting on a recipe', () => {
+  it('creates RECEIVE_SINGLE_RECIPE after successfuly voting on a recipe', () => {
     moxios.wait(() => {
       const request = moxios.requests.mostRecent();
       request.respondWith({
@@ -95,7 +95,7 @@ describe('Recipe Action Creators', () => {
     });
 
     const expectedActions = [
-      { type: actionTypes.RECIEVE_SINGLE_RECIPE, recipe: recipes[0] },
+      { type: actionTypes.RECEIVE_SINGLE_RECIPE, recipe: recipes[0] },
       { type: actionTypes.SHOW_NOTIFICATION, message: 'You liked this recipe' }
     ];
 
@@ -137,7 +137,7 @@ describe('Recipe Action Creators', () => {
     });
   });
 
-  it('creates RECIEVE_SINGLE_RECIPE after successfuly favoriting a recipe', () => {
+  it('creates RECEIVE_SINGLE_RECIPE after successfuly favoriting a recipe', () => {
     moxios.wait(() => {
       const request = moxios.requests.mostRecent();
       request.respondWith({
@@ -151,7 +151,7 @@ describe('Recipe Action Creators', () => {
     });
 
     const expectedActions = [
-      { type: actionTypes.RECIEVE_SINGLE_RECIPE, recipe: recipes[0] },
+      { type: actionTypes.RECEIVE_SINGLE_RECIPE, recipe: recipes[0] },
       { type: actionTypes.SHOW_NOTIFICATION, message: 'Recipe added to your favorite list' }
     ];
 
@@ -193,7 +193,7 @@ describe('Recipe Action Creators', () => {
     });
   });
 
-  it('creates RECIEVE_TOP_RATED_RECIPE after successfuly fetching all top recipes', () => {
+  it('creates RECEIVE_TOP_RATED_RECIPES after successfuly fetching all top recipes', () => {
     moxios.wait(() => {
       const request = moxios.requests.mostRecent();
       request.respondWith({
@@ -208,7 +208,7 @@ describe('Recipe Action Creators', () => {
 
     const expectedActions = [
       { type: actionTypes.SET_FETCHING, isFetching: true },
-      { type: actionTypes.RECIEVE_TOP_RATED_RECIPE, recipes, pagination },
+      { type: actionTypes.RECEIVE_TOP_RATED_RECIPES, recipes, pagination },
       { type: actionTypes.UNSET_FETCHING, isFetching: false }
     ];
 
@@ -248,5 +248,303 @@ describe('Recipe Action Creators', () => {
       expect(expectedActions.length).toBe(3);
       expect(store.getActions()).toEqual(expectedActions);
     });
+  });
+
+  it('creates RECEIVE_PERSONAL_RECIPES after successfuly fetching users recipes', () => {
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+      request.respondWith({
+        status: 200,
+        response: {
+          recipes,
+          pagination,
+          status: 'success',
+        },
+      });
+    });
+
+    const expectedActions = [
+      { type: actionTypes.SET_FETCHING, isFetching: true },
+      { type: actionTypes.RECEIVE_PERSONAL_RECIPES, recipes, pagination },
+      { type: actionTypes.UNSET_FETCHING, isFetching: false }
+    ];
+
+    const store = mockStore({
+      personalRecipes: {}
+    });
+
+    return store.dispatch(actions.fetchPersonalRecipes({
+      userId: 8,
+      page: 1,
+      limit: 5
+    })).then(() => {
+      expect(expectedActions.length).toBe(3);
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+
+  it('creates FETCH_PERSONAL_RECIPES_ERROR if tere is an error fetching top recipes', () => {
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+      request.respondWith({
+        status: 500,
+        response: {
+          status: 'fail',
+          message: 'Internal Server error'
+        },
+      });
+    });
+
+    const expectedActions = [
+      { type: actionTypes.SET_FETCHING, isFetching: true },
+      { type: actionTypes.FETCH_PERSONAL_RECIPES_ERROR, errorMessage: 'Internal Server error' },
+      { type: actionTypes.UNSET_FETCHING, isFetching: false }
+    ];
+
+    const store = mockStore({
+      personalRecipes: {}
+    });
+
+    return store.dispatch(actions.fetchPersonalRecipes({
+      userId: 8,
+      page: 1,
+      limit: 5
+    })).then(() => {
+      expect(expectedActions.length).toBe(3);
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+
+  it('creates RECEIVE_FAVORITE_RECIPES after successfuly fetching users favorite recipes', () => {
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+      request.respondWith({
+        status: 200,
+        response: {
+          recipes,
+          pagination,
+          status: 'success',
+        },
+      });
+    });
+
+    const expectedActions = [
+      { type: actionTypes.SET_FETCHING, isFetching: true },
+      { type: actionTypes.RECEIVE_FAVORITE_RECIPES, recipes, pagination },
+      { type: actionTypes.UNSET_FETCHING, isFetching: false }
+    ];
+
+    const store = mockStore({
+      favoriteRecipes: {}
+    });
+
+    return store.dispatch(actions.fetchFavoriteRecipes({
+      userId: 8,
+      page: 1,
+      limit: 5
+    })).then(() => {
+      expect(expectedActions.length).toBe(3);
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+
+  it('creates FETCH_FAVORITE_RECIPES_ERROR if there is an error fetching top recipes', () => {
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+      request.respondWith({
+        status: 500,
+        response: {
+          status: 'fail',
+          message: 'Internal Server error'
+        },
+      });
+    });
+
+    const expectedActions = [
+      { type: actionTypes.SET_FETCHING, isFetching: true },
+      { type: actionTypes.FETCH_FAVORITE_RECIPES_ERROR, errorMessage: 'Internal Server error' },
+      { type: actionTypes.UNSET_FETCHING, isFetching: false }
+    ];
+
+    const store = mockStore({
+      personalRecipes: {}
+    });
+
+    return store.dispatch(actions.fetchFavoriteRecipes({
+      userId: 8,
+      page: 1,
+      limit: 5
+    })).then(() => {
+      expect(expectedActions.length).toBe(3);
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+
+  it('dispatches an action to show success notification when recipe is created', () => {
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+      request.respondWith({
+        status: 200,
+        response: {
+          recipe: recipesMock.recipes[1],
+          message: 'recipe created successfully',
+          status: 'success'
+        },
+      });
+    });
+
+    const expectedActions = [
+      { type: actionTypes.SHOW_NOTIFICATION, message: 'recipe created successfully' }
+    ];
+
+    const store = mockStore({
+      recipe: {}
+    });
+
+    return store.dispatch(actions.addRecipe(recipesMock.recipes[1]))
+      .then(() => {
+        expect(expectedActions.length).toBe(1);
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+  });
+
+  it('dispatches an action to show error notification when there is an error creating recipe', () => {
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+      request.respondWith({
+        status: 400,
+        response: {
+          message: 'Recipe description is required',
+          status: 'fail'
+        },
+      });
+    });
+
+    const expectedActions = [
+      { type: actionTypes.SHOW_NOTIFICATION, message: 'Recipe description is required' }
+    ];
+
+    const store = mockStore({
+      recipes: {}
+    });
+
+    return store.dispatch(actions.addRecipe({ name: 'some recipe' }))
+      .then(() => {
+        expect(expectedActions.length).toBe(1);
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+  });
+
+  it('dispatches an action to show success notification when recipe is deleted', () => {
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+      request.respondWith({
+        status: 200,
+        response: {
+          status: 'success',
+          message: 'Recipe deleted successfully'
+        },
+      });
+    });
+
+    const expectedActions = [
+      { type: actionTypes.SET_FETCHING, isFetching: true },
+      { type: actionTypes.SHOW_NOTIFICATION, message: 'Recipe deleted successfully' },
+      { type: actionTypes.UNSET_FETCHING, isFetching: false }
+    ];
+
+    const store = mockStore({
+      recipe: {}
+    });
+
+    return store.dispatch(actions.deleteRecipe(195))
+      .then(() => {
+        expect(expectedActions.length).toBe(3);
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+  });
+
+  it('dispatches an action to show error notification when there is an error deleting recipe', () => {
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+      request.respondWith({
+        status: 403,
+        response: {
+          message: 'Not authorized to delete this recipe',
+          status: 'fail'
+        },
+      });
+    });
+
+    const expectedActions = [
+      { type: actionTypes.SET_FETCHING, isFetching: true },
+      { type: actionTypes.SHOW_NOTIFICATION, message: 'Not authorized to delete this recipe' },
+      { type: actionTypes.UNSET_FETCHING, isFetching: false }
+    ];
+
+    const store = mockStore({
+      recipes: {}
+    });
+
+    return store.dispatch(actions.deleteRecipe(200))
+      .then(() => {
+        expect(expectedActions.length).toBe(3);
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+  });
+
+  it('dispatches an action to show success notification when recipe is updated', () => {
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+      request.respondWith({
+        status: 200,
+        response: {
+          status: 'success',
+          message: 'Recipe updated successfully',
+          recipe: recipesMock.recipes[1]
+        },
+      });
+    });
+
+    const expectedActions = [
+      { type: actionTypes.SHOW_NOTIFICATION, message: 'Recipe updated successfully' }
+    ];
+
+    const store = mockStore({
+      recipe: {}
+    });
+
+    return store.dispatch(actions.updateRecipe(195))
+      .then(() => {
+        expect(expectedActions.length).toBe(1);
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+  });
+
+  it('dispatches an action to show error notification when there is an error updating recipe', () => {
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+      request.respondWith({
+        status: 500,
+        response: {
+          message: 'Internal server error',
+          status: 'fail'
+        },
+      });
+    });
+
+    const expectedActions = [
+      { type: actionTypes.SHOW_NOTIFICATION, message: 'Internal server error' },
+    ];
+
+    const store = mockStore({
+      recipes: {}
+    });
+
+    return store.dispatch(actions.updateRecipe(195))
+      .then(() => {
+        expect(expectedActions.length).toBe(1);
+        expect(store.getActions()).toEqual(expectedActions);
+      });
   });
 });

@@ -21,7 +21,7 @@ export const currentUserPropTypes = {
 
 // AuthForm Component
 export const authFormPropTypes = {
-  type: PropTypes.string.isRequired,
+  type: PropTypes.oneOf(['signup', 'login']).isRequired,
   authFormSubmit: PropTypes.func.isRequired,
 };
 
@@ -54,7 +54,7 @@ export const userPrototypes = {
 
 export const userImgPropTypes = {
   user: PropTypes.shape(userPrototypes).isRequired,
-  type: PropTypes.string.isRequired
+  type: PropTypes.oneOf(['inRecipeCard', 'inReview', 'inSiteNav']).isRequired
 };
 
 export const paginationPropTypes = {

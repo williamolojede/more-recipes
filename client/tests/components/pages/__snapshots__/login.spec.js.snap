@@ -1,0 +1,123 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Personal Recipes Page should redirect to previous page or home if user is already authenticated 1`] = `
+<Redirect
+  push={false}
+  to={Object {}}
+/>
+`;
+
+exports[`Personal Recipes Page should render a preloader 1`] = `
+<div
+  className="page page__login"
+>
+  <header
+    className="header center"
+  >
+    <a
+      className="white-text brand-logo"
+      href="/"
+    >
+      MoreRecipes
+    </a>
+  </header>
+  <main>
+    <div
+      className="container"
+    >
+      <div
+        className="row"
+      >
+        <div
+          className="login-card card col s11 m6"
+        >
+          <div
+            className="card-content"
+          >
+            <h1
+              className="card-title center"
+            >
+              Log in to MoreRecipes
+            </h1>
+            <AuthForm
+              authFormSubmit={[Function]}
+              type="login"
+            />
+          </div>
+        </div>
+      </div>
+      <p
+        className="white-text center"
+      >
+        Don’t have an account?
+        <Link
+          className="white-text"
+          replace={false}
+          to="/signup"
+        >
+           Signup now
+        </Link>
+      </p>
+      <Preloader />
+    </div>
+  </main>
+  <Footer />
+</div>
+`;
+
+exports[`Personal Recipes Page should render with right amount of elements 1`] = `
+<div
+  className="page page__login"
+>
+  <header
+    className="header center"
+  >
+    <a
+      className="white-text brand-logo"
+      href="/"
+    >
+      MoreRecipes
+    </a>
+  </header>
+  <main>
+    <div
+      className="container"
+    >
+      <div
+        className="row"
+      >
+        <div
+          className="login-card card col s11 m6"
+        >
+          <div
+            className="card-content"
+          >
+            <h1
+              className="card-title center"
+            >
+              Log in to MoreRecipes
+            </h1>
+            <AuthForm
+              authFormSubmit={[Function]}
+              type="login"
+            />
+          </div>
+        </div>
+      </div>
+      <p
+        className="white-text center"
+      >
+        Don’t have an account?
+        <Link
+          className="white-text"
+          replace={false}
+          to="/signup"
+        >
+           Signup now
+        </Link>
+      </p>
+    </div>
+  </main>
+  <Footer />
+</div>
+`;

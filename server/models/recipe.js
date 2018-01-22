@@ -22,17 +22,12 @@ module.exports = (sequelize, DataTypes) => {
     },
     img_url: {
       allowNull: true,
-      // defaultValue: 'null',
       type: DataTypes.STRING,
       validate: {
         notEmpty: {
           args: true,
           msg: 'recipe img url can not be empty'
-        },
-        // is: {
-        //   args: /\.(jpeg|jpg|gif|png)$/,
-        //   msg: 'invalid recipe image url'
-        // }
+        }
       }
     },
     ingredients: {

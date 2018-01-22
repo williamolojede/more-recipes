@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Profile should render a preloader 1`] = `<Preloader />`;
+
+exports[`Profile should render with right amount of elements 1`] = `
+<div
+  className="page page__profile"
+>
+  <header
+    className="site-header"
+  >
+    <Connect(SiteNav)
+      currentUser={
+        Object {
+          "email": "test@test.com",
+          "fullname": "John Doe",
+          "id": 1,
+        }
+      }
+    />
+  </header>
+  <main>
+    <div
+      className="container z-depth-1"
+    >
+      <section
+        className="profile"
+      >
+        <h3
+          className="profile__title"
+        >
+          Profile
+        </h3>
+        <div
+          className="profile__body"
+        >
+          <ImageUpload
+            altText="John Doe"
+            className="profile__image"
+            defaultImgUrl="https://catholic-foundation.org/wp-content/uploads/2017/07/unisex-avatar.png"
+            imageUploadHandler={[Function]}
+            imageUploadProgress="pending"
+            imgUrl=""
+          />
+          <div
+            className="profile__details"
+          >
+            <label
+              htmlFor="fullname"
+            >
+              Name
+              <input
+                id="fullname"
+                onChange={[Function]}
+                type="text"
+                value="John Doe"
+              />
+            </label>
+            <label
+              htmlFor="email"
+            >
+              Email
+              <input
+                id="email"
+                onChange={[Function]}
+                type="text"
+                value="test@test.com"
+              />
+            </label>
+            <SubmitButton
+              handleClick={[Function]}
+              submitLoading={false}
+              submitText="Save Changes"
+            />
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+  <Notification
+    dispatch={[Function]}
+    notification=""
+  />
+  <SiteFooter />
+</div>
+`;

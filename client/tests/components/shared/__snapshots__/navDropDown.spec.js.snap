@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Nav Dropdown should render with right amount of elements 1`] = `
+<ul
+  className="dropdown-menu z-depth-1"
+>
+  <li
+    className="dropdown-header"
+  >
+    Signed in as
+    <p>
+      John Doe
+    </p>
+  </li>
+  <li
+    className="dropdown-item divider"
+  />
+  <li
+    className="dropdown-item"
+  >
+    <Link
+      replace={false}
+      to="/user"
+    >
+      Your Profile
+    </Link>
+  </li>
+  <li
+    className="dropdown-item"
+  >
+    <Link
+      replace={false}
+      to="/user/recipes"
+    >
+      Your Recipes
+    </Link>
+  </li>
+  <li
+    className="dropdown-item"
+  >
+    <Link
+      replace={false}
+      to="/user/favorites"
+    >
+      Your Favorite Recipes
+    </Link>
+  </li>
+  <li
+    className="dropdown-item divider"
+  />
+  <li
+    className="dropdown-item"
+  >
+    <Link
+      replace={false}
+      to="/user/recipes/create"
+    >
+      Create New Recipe
+    </Link>
+  </li>
+  <li
+    className="dropdown-footer"
+  >
+    <Link
+      className="logout__button"
+      onClick={[Function]}
+      replace={false}
+      to="/logout"
+    >
+      Sign Out
+    </Link>
+  </li>
+</ul>
+`;

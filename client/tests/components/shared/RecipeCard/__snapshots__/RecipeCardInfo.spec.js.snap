@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Recipe Card Info should render with right amount of elements 1`] = `
+<div
+  className="card-action recipe-card__info"
+>
+  <UserImg
+    type="inRecipeCard"
+    user={
+      Object {
+        "fullname": "Email Mail",
+        "id": 11,
+        "username": null,
+      }
+    }
+  />
+  <div
+    className="recipe-card__info"
+  >
+    <RecipeStats
+      stats={
+        Object {
+          "downVoteCount": 0,
+          "favoriteCount": 0,
+          "upVoteCount": 0,
+          "viewCount": 1,
+        }
+      }
+    />
+  </div>
+</div>
+`;

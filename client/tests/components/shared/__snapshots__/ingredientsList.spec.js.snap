@@ -1,0 +1,145 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Ingredients List should render with right amount of elements when number of ingredient is even 1`] = `
+<IngredientsList
+  ingredients={
+    Array [
+      "rice",
+      "canola oil",
+    ]
+  }
+>
+  <div
+    className="recipe__ingredients row"
+  >
+    <h3>
+      Ingredients
+    </h3>
+    <div>
+      <ul
+        className="col s12 m6"
+      >
+        <li
+          key="0"
+        >
+          rice
+        </li>
+      </ul>
+      <ul
+        className="col s12 m6"
+      >
+        <li
+          key="0"
+        >
+          canola oil
+        </li>
+      </ul>
+    </div>
+  </div>
+</IngredientsList>
+`;
+
+exports[`Ingredients List should render with right amount of elements when number of ingredient is odd 1`] = `
+<IngredientsList
+  ingredients={
+    Array [
+      "2 tablespoons olive oil",
+      "3 cloves garlic",
+      "2 tablespoons capers",
+      "1 tablespoon anchovy paste",
+      "1 teaspoon red pepper flakes",
+      "1 (24 ounce) jar tomato pasta sauce",
+      "1/4 cup water",
+      "1 cup good-quality crisp white wine",
+      "2 (6.5 ounce) cans chopped clams, drained with juice reserved",
+      "salt and pepper to taste",
+      "1 pound dry spaghetti",
+      "1/4 cup freshly grated Parmesan cheese",
+      "Chopped fresh basil leaves or parsley",
+    ]
+  }
+>
+  <div
+    className="recipe__ingredients row"
+  >
+    <h3>
+      Ingredients
+    </h3>
+    <div>
+      <ul
+        className="col s12 m6"
+      >
+        <li
+          key="0"
+        >
+          2 tablespoons olive oil
+        </li>
+        <li
+          key="1"
+        >
+          3 cloves garlic
+        </li>
+        <li
+          key="2"
+        >
+          2 tablespoons capers
+        </li>
+        <li
+          key="3"
+        >
+          1 tablespoon anchovy paste
+        </li>
+        <li
+          key="4"
+        >
+          1 teaspoon red pepper flakes
+        </li>
+        <li
+          key="5"
+        >
+          1 (24 ounce) jar tomato pasta sauce
+        </li>
+        <li
+          key="6"
+        >
+          1/4 cup water
+        </li>
+      </ul>
+      <ul
+        className="col s12 m6"
+      >
+        <li
+          key="0"
+        >
+          1 cup good-quality crisp white wine
+        </li>
+        <li
+          key="1"
+        >
+          2 (6.5 ounce) cans chopped clams, drained with juice reserved
+        </li>
+        <li
+          key="2"
+        >
+          salt and pepper to taste
+        </li>
+        <li
+          key="3"
+        >
+          1 pound dry spaghetti
+        </li>
+        <li
+          key="4"
+        >
+          1/4 cup freshly grated Parmesan cheese
+        </li>
+        <li
+          key="5"
+        >
+          Chopped fresh basil leaves or parsley
+        </li>
+      </ul>
+    </div>
+  </div>
+</IngredientsList>
+`;

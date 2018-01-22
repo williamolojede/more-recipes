@@ -56,10 +56,6 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: {
           args: true,
           msg: 'user img url can not be empty'
-        },
-        is: {
-          args: /\.(jpeg|jpg|gif|png)$/,
-          msg: 'invalid user image url'
         }
       }
     }

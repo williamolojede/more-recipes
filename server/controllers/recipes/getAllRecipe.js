@@ -1,4 +1,4 @@
-import { Recipe, User } from '../../models/index';
+import { Recipe } from '../../models/index';
 import helpers from '../../helpers';
 
 const getAllRecipe = (req, res, next) => {
@@ -23,7 +23,7 @@ const getAllRecipe = (req, res, next) => {
     }
     return helpers.fetch({
       order: [['upVoteCount', 'DESC']],
-      include: [{ model: User, attributes: ['id', 'username', 'fullname'] }],
+      include: [helpers.includeUser()],
     }, req.query, Recipe)
       .then(({ rows: recipes, pagination }) => res.status(200).send({
         recipes,
@@ -44,14 +44,7 @@ const getAllRecipe = (req, res, next) => {
       .catch(error => helpers.systemErrorHandler(error, next));
   }
 
-  helpers.fetch(
-    {
-      include: [
-        { model: User, attributes: ['id', 'username', 'fullname'] }
-      ]
-    },
-    req.query, Recipe
-  )
+  helpers.fetch({ include: [helpers.includeUser()] }, req.query, Recipe)
     .then(({ rows: recipes, pagination }) => res.status(200).send({
       recipes,
       pagination,

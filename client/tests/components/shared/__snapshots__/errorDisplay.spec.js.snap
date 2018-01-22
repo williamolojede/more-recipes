@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Error Display should render with right amount of elements 1`] = `
+<div
+  className="error z-depth-1"
+>
+  <span
+    className="error__cancel"
+  >
+    X
+  </span>
+  <p
+    className="error__message"
+  >
+    shit went wrong
+  </p>
+</div>
+`;

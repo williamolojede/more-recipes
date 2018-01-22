@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Recipe Card Info should render with right amount of elements 1`] = `
+<li
+  className="col s12 m6 l4 x4 recipes-list-item"
+>
+  <div
+    className="card"
+  >
+    <Link
+      className="recipes-list-item__name"
+      replace={false}
+      to="/recipe/28"
+    >
+      Chef John's Spaghetti with Red Clam Sauce dfbefadb nifek fedckltefdkletfdmlefdleff eifdanlkref
+    </Link>
+    <div
+      className="recipes-list-item__actions"
+    >
+      <Link
+        className="recipes-list-item__actions-edit"
+        replace={false}
+        to="/user/recipes/28/edit"
+      >
+        <i
+          className="mdi mdi-pencil"
+        />
+      </Link>
+      <button
+        className="recipes-list-item__actions-delete"
+        onClick={[Function]}
+      >
+        <i
+          className="mdi mdi-delete"
+        />
+      </button>
+    </div>
+  </div>
+</li>
+`;

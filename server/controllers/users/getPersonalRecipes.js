@@ -6,6 +6,7 @@ const getPersonalRecipes = (req, res, next) => {
 
   const config = {
     where: { owner: parseInt(uid, 10) },
+    order: [['id', 'DESC']]
   };
 
   helpers.fetch(config, req.query, Recipe)

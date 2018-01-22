@@ -13,10 +13,12 @@ const initialState = {
 
 const recipeReviews = (state = initialState, action) => {
   switch (action.type) {
-    case RECEIVE_RECIPE_REVIEWS:
-      return { ...state, ...action.recipeReviews };
+    case RECEIVE_RECIPE_REVIEWS: {
+      const { reviews, pagination } = action.recipeReviews;
+      return { ...state, reviews, pagination };
+    }
     case FETCH_RECIPE_REVIEWS_ERROR:
-      return { ...state, ...action.errorMessage };
+      return { ...state, errorMessage: action.errorMessage };
     default:
       return state;
   }

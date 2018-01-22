@@ -1,4 +1,4 @@
-import { User, Review } from '../../models';
+import { Review } from '../../models';
 import helpers from '../../helpers';
 
 export const findReviews = (req) => {
@@ -7,7 +7,7 @@ export const findReviews = (req) => {
     where: { recipeId },
     attributes: ['id', 'content', 'createdAt'],
     include: [
-      { model: User, attributes: ['id', 'username', 'fullname'] }
+      helpers.includeUser()
     ],
     order: [['id', 'DESC']]
   };

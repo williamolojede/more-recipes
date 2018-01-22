@@ -2,9 +2,6 @@ import React from 'react';
 import { SiteNav } from '../../../components/shared/SiteNav';
 import user from '../../__mocks__/user.mock';
 
-// jquery mock
-global.$ = () => ({ sideNav: () => {} });
-
 function setup() {
   const props = {
     currentUser: user,
@@ -24,13 +21,21 @@ describe('Site Nav', () => {
     const { wrapper } = setup();
     expect(wrapper).toMatchSnapshot();
   });
-  describe('Logout Button', () => {
-    it('should dispatch an action to log user out', () => {
-      const { wrapper } = setup();
-      const logoutButtons = wrapper.find('.logout__button');
-      const dispatchSpy = jest.spyOn(wrapper.instance().props, 'dispatch');
-      logoutButtons.forEach(button => button.simulate('click', eventObject));
-      expect(dispatchSpy).toHaveBeenCalledTimes(2);
-    });
+
+  it('should dispatch an action to log user out when logout method is called', () => {
+    const { wrapper } = setup();
+    const dispatchSpy = jest.spyOn(wrapper.instance().props, 'dispatch');
+    wrapper.instance().logout(eventObject);
+    expect(dispatchSpy).toHaveBeenCalledTimes(1);
+  });
+
+  it('should render a dropdown when the dropdown button is clicked', () => {
+    const { wrapper } = setup();
+    expect(wrapper).toMatchSnapshot();
+    const dropdownButton = wrapper.find('.dropdown.right');
+    expect(dropdownButton.length).toBe(1);
+    dropdownButton.simulate('click');
+    expect(wrapper).toMatchSnapshot();
+    expect(wrapper.instance().state.navOpen).toBe(true);
   });
 });

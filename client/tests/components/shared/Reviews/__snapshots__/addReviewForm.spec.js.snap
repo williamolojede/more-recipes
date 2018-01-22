@@ -30,6 +30,8 @@ exports[`Add review form  should render with the right amount of elements 1`] = 
       >
         <div
           className="user-image inReview"
+          data-for="username-inReview"
+          data-tip="John Doe"
         >
           <div
             className="user-image__no-img"

@@ -1,4 +1,23 @@
 .page__profile{
+
+  main{
+    background-color: #f4f4f4;
+
+    .container{
+      margin-top: 5rem;
+      margin-bottom: 5rem;
+      border-radius: 5px;
+
+      @media only screen and (min-width: 993px){
+        width: 60%;
+      }
+
+      @media #{$medium-and-up} {
+        margin-top: 10rem;
+      }
+    }
+  }
+
   .profile__details{
     label{
       font-size: 1.2rem;

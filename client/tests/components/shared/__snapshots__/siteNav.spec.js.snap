@@ -1,5 +1,79 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Site Nav should render a dropdown when the dropdown button is clicked 1`] = `
+<nav
+  className="site-header__nav"
+>
+  <div
+    className="nav-wrapper container"
+  >
+    <Link
+      className="left brand-logo"
+      replace={false}
+      to="/"
+    >
+      MoreRecipes
+    </Link>
+    <button
+      className="dropdown right"
+      onClick={[Function]}
+    >
+      <UserImg
+        type="inSiteNav"
+        user={
+          Object {
+            "fullname": "John Doe",
+            "id": 1,
+          }
+        }
+      />
+    </button>
+  </div>
+</nav>
+`;
+
+exports[`Site Nav should render a dropdown when the dropdown button is clicked 2`] = `
+<nav
+  className="site-header__nav"
+>
+  <div
+    className="nav-wrapper container"
+  >
+    <Link
+      className="left brand-logo"
+      replace={false}
+      to="/"
+    >
+      MoreRecipes
+    </Link>
+    <button
+      className="dropdown right"
+      onClick={[Function]}
+    >
+      <UserImg
+        type="inSiteNav"
+        user={
+          Object {
+            "fullname": "John Doe",
+            "id": 1,
+          }
+        }
+      />
+      <NavDropDown
+        fullname="John Doe"
+        handleLogout={[Function]}
+      />
+      <div
+        className="dropdown-overlay"
+        onClick={[Function]}
+        role="button"
+        tabIndex={0}
+      />
+    </button>
+  </div>
+</nav>
+`;
+
 exports[`Site Nav should render with right amount of elements 1`] = `
 <nav
   className="site-header__nav"
@@ -8,68 +82,25 @@ exports[`Site Nav should render with right amount of elements 1`] = `
     className="nav-wrapper container"
   >
     <Link
-      className="brand-logo"
+      className="left brand-logo"
       replace={false}
       to="/"
     >
       MoreRecipes
     </Link>
-    <ul
-      className="right hide-on-med-and-down"
-    >
-      <li>
-        <Link
-          replace={false}
-          to="/user/1"
-        >
-          Profile
-        </Link>
-      </li>
-      <li>
-        <Link
-          className="logout__button"
-          onClick={[Function]}
-          replace={false}
-          to="/logout"
-        >
-          Sign Out
-        </Link>
-      </li>
-    </ul>
-    <ul
-      className="side-nav"
-      id="mobile-nav"
-    >
-      <li>
-        <Link
-          replace={false}
-          to="/user/1"
-        >
-          Profile
-        </Link>
-      </li>
-      <li
-        className="logout__button"
-      >
-        <Link
-          className="logout__button"
-          onClick={[Function]}
-          replace={false}
-          to="/logout"
-        >
-          Sign Out
-        </Link>
-      </li>
-    </ul>
     <button
-      className="button-collapse"
-      data-activates="mobile-nav"
+      className="dropdown right"
+      onClick={[Function]}
     >
-      <i
-        className="material-icons"
-      >
-        menu
-      </i>
+      <UserImg
+        type="inSiteNav"
+        user={
+          Object {
+            "fullname": "John Doe",
+            "id": 1,
+          }
+        }
+      />
     </button>
   </div>
 </nav>

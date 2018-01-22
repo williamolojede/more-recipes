@@ -7,15 +7,9 @@ const signup = (req, res, next) => {
   User.create({ email, fullname, password })
     .then(user => sendAuthSuccess(res, user, 'Account created', 201))
     .catch((error) => {
-      if (error.name === 'SequelizeUniqueConstraintError') {
-        return systemErrorHandler({
-          msg: error.errors[0].message,
-          code: 409
-        }, next);
-      }
       systemErrorHandler({
         msg: error.errors[0].message,
-        code: 400
+        code: error.errors[0].type === 'unique violation' ? 409 : 400
       }, next);
     });
 };

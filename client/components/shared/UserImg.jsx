@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactTooltip from 'react-tooltip';
 
 import { userImgPropTypes } from '../../config/proptypes';
 
@@ -15,7 +16,15 @@ const UserImg = ({ user, type }) => {
   }
 
   return (
-    <div className={`user-image ${type}`}>
+    <div
+      className={`user-image ${type}`}
+      data-tip={user.fullname}
+      data-for={`username-${type}`}
+    >
+      {
+        type === 'inRecipeCard' && <ReactTooltip id="username-inRecipeCard" place="right" effect="solid" />
+      }
+
       {
         !user.imgUrl ?
           <div className="user-image__no-img">

@@ -1176,6 +1176,78 @@ describe('API Integration Tests', () => {
     });
   });
 
+  describe('Update users details', () => {
+    tokenAuthentication(`${usersUrl}/${recipeId}`, 'put');
+
+    it('should fail if update data is not passed', (done) => {
+      request.put(`${usersUrl}/1`)
+        .send({ token: userToken1 })
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.status).to.equal('fail');
+          expect(res.body.message).to.equal('Update property required or can not be empty');
+          done();
+        });
+    });
+
+    it('should fail if a user details update is not by the owner', (done) => {
+      request.put(`${usersUrl}/1`)
+        .send({ token: userToken2, update: { fullname: 'Fake Name' } })
+        .end((err, res) => {
+          expect(res.status).to.equal(403);
+          expect(res.body.status).to.equal('fail');
+          expect(res.body.message).to.equal('Not authorized to modify this user');
+          done();
+        });
+    });
+
+    it('should fail if user is not found', (done) => {
+      request.put(`${usersUrl}/15`)
+        .send({ token: userToken1, update: { fullname: 'Fake Name' } })
+        .end((err, res) => {
+          expect(res.status).to.equal(404);
+          expect(res.body.status).to.equal('fail');
+          expect(res.body.message).to.equal('User not found');
+          done();
+        });
+    });
+
+
+    it('should fail if update object has an greater than zero invalid key name(s)', (done) => {
+      request.put(`${usersUrl}/1`)
+        .send({ token: userToken1, update: { test: 'Fake Name' } })
+        .end((err, res) => {
+          expect(res.status).to.equal(400);
+          expect(res.body.status).to.equal('fail');
+          expect(res.body.message).to.equal('Invalid property name(s) on update object');
+          done();
+        });
+    });
+
+    it('should fail if user tries update with an already existing email', (done) => {
+      request.put(`${usersUrl}/1`)
+        .send({ token: userToken1, update: { email: 'test@test.com' } })
+        .end((err, res) => {
+          expect(res.status).to.equal(409);
+          expect(res.body.status).to.equal('fail');
+          expect(res.body.message).to.equal('User with email already exists');
+          done();
+        });
+    });
+
+    it('return 200 if the user details is updated', (done) => {
+      request.put(`${usersUrl}/1`)
+        .send({ token: userToken1, update: { email: 'newemail@mailer.com' } })
+        .end((err, res) => {
+          expect(res.status).to.equal(200);
+          expect(res.body.status).to.equal('success');
+          expect(res.body.message).to.equal('User Details updated successfully');
+          expect(res.body.user.email).to.equal('newemail@mailer.com');
+          done();
+        });
+    });
+  });
+
   describe('Modify a recipe', () => {
     tokenAuthentication(`${recipesUrl}/${recipeId}`, 'put');
 
