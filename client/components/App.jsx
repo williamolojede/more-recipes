@@ -2,7 +2,12 @@
  * Root Component
  */
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import {
+  BrowserRouter,
+  Route,
+  Switch,
+  Redirect
+} from 'react-router-dom';
 import requireAuthentication from './hoc/requiresAuth';
 
 
@@ -14,6 +19,7 @@ import AddRecipePage from './pages/AddRecipePage';
 import PersonalRecipesPage from './pages/PersonalRecipesPage';
 import FavoriteRecipesPage from './pages/FavoriteRecipesPage';
 import Profile from './pages/Profile';
+import NotFound from './pages/NotFound';
 
 /**
  * @export
@@ -42,6 +48,8 @@ class App extends React.Component {
           <Route exact path="/user/favorites" component={requireAuthentication(FavoriteRecipesPage)} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
+          <Route exact path="/not-found" component={NotFound} />
+          <Redirect to="/not-found" />
         </Switch>
       </BrowserRouter>
     );

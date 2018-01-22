@@ -1,0 +1,23 @@
+.page__not-found{
+  main{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 1rem;
+    text-align: center;
+
+    h1{
+      margin: 0;
+    }
+
+    p, a{
+      font-size: 1.5rem;
+    }
+
+    a{
+      text-decoration: underline;
+    }
+  }
+}
