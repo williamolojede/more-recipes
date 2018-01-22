@@ -1,46 +1,36 @@
-.my-recipe__manage{
-  padding: 0 !important;
-  table.my-recipe__manage--table{
+.page-manage__recipes{
+  position: relative;
+  min-height: 200px;
+  .preloader{
+    background: transparent;
+  }
+  .recipes-list{
 
-    td, th{
-      width: calc(100%/3);
-      font-size: 1.5rem;
-      padding: 1rem !important;
-    }
+    .recipes-list-item{
+      .card{
+        font-size: 1.2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
 
-    th{
-
-      &:last-of-type{
-        text-align: right;
-      }
-    }
-    thead{
-      border-bottom: 2px solid #ddd;
-    }
-    tr{
-      border-top: 1px solid #ddd;
-    }
-    td.my-recipe__manage--table___name a{
-      color: initial;
-    }
-    tfoot{
-      border-top: 2px solid #ddd;
-      td {
-        text-align: center;
-      }
-    }
-    .my-recipe__manage--table___action{
-      text-align: right;
-      button{
-        font-size: 2rem;
-        &:not(:last-of-type){
-          margin-right: 1.5rem;
+        .recipes-list-item__name{
+          color: #ddd;
+          text-decoration: underline;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: inline-block;
+          max-width: 76%;
         }
-        &:last-of-type{
-          color: $site-bg;
-          -webkit-appearance: none;
-          border: 0;
-          background: none;
+
+        .recipes-list-item__actions{
+          .recipes-list-item__actions-delete{
+            color: $site-bg;
+            -webkit-appearance: none;
+            border: 0;
+            background: none;
+          }
         }
       }
     }

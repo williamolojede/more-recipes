@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer should render with right amount of elements 1`] = `
+<footer
+  className="page-footer"
+>
+  <div
+    className="container"
+  >
+    <p>
+      Crafted with 
+      <i
+        className="mdi mdi-heart"
+      />
+       by 
+      <a
+        href="http://william.ng/"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        William I. Olojede
+      </a>
+    </p>
+  </div>
+</footer>
+`;

@@ -84,15 +84,14 @@ Login.defaultProps = {
 
 Login.propTypes = authPropTypes;
 
-const mapStateToProps = ({ auth, isFetching }) => {
-  const { isAuthenticated, errorMessage, user } = auth;
-  // whichever is undefined thats is not in auth wont be added to the props
+export const mapStateToProps = ({ auth, isFetching }) => {
+  const { isAuthenticated, errorMessage } = auth;
   return {
     isAuthenticated,
     errorMessage,
-    user,
     isFetching
   };
 };
 
+export { Login as PureLogin };
 export default connect(mapStateToProps)(Login);

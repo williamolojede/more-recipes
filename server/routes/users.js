@@ -13,6 +13,8 @@ router.use('/:uid', middlewares.requiresToken, middlewares.validateUserId);
 
 router.get('/:uid', userController.getUserDetails);
 
+router.put('/:uid', middlewares.validateUpdate, userController.updateUserDetails);
+
 router.get('/:uid/recipes', userController.getPersonalRecipes);
 
 router.get('/:uid/favorites', userController.getFavoriteRecipes);

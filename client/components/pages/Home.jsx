@@ -111,7 +111,7 @@ class Home extends Component {
                   pageRangeDisplayed={4}
                   onPageChange={this.handlePageClick}
                   activeClassName="active"
-                  containerClassName="pagination"
+                  containerClassName={`pagination ${this.props.isFetching ? 'is-fetching' : ''}`}
                 />
               </footer>
 
@@ -135,7 +135,7 @@ Home.propTypes = {
   ...currentUserPropTypes
 };
 
-const mapStateToProps = ({
+export const mapStateToProps = ({
   topRecipes: { recipes, pagination },
   isFetching,
   auth: { currentUser }

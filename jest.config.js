@@ -12,10 +12,16 @@ module.exports = {
   collectCoverageFrom: [
     '**/*.{js,jsx}',
   ],
+  collectCoverage: true,
+  coverageReporters: ['json', 'lcov', 'text-summary'],
   coveragePathIgnorePatterns: [
     '<rootDir>/tests/setupTest.js',
     '<rootDir>/config/',
+    '<rootDir>/utils/imageUpload.js',
+    '<rootDir>/components/App.jsx',
     '<rootDir>/coverage/',
+    '<rootDir>/index.jsx',
+    '<rootDir>/components/hoc',
     '<rootDir>/tests/__mocks__'
   ],
 };

@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Add Recipe Page should render with right amount of elements 1`] = `
+<Connect(ManageRecipes)>
+  <Connect(AddRecipeForm)
+    isEditMode={false}
+  />
+</Connect(ManageRecipes)>
+`;

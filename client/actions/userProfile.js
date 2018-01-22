@@ -1,50 +1,44 @@
-import { batchActions } from 'redux-batched-actions';
-
 import instance from '../config/axios';
+import * as actionTypes from './types';
 
 import { setFetching, unsetFetching } from './fetching';
-import { REMOVE_RECIPE_FROM_PROFILE } from './types';
+import { showNotification } from './notification';
 
-
-const receiveUserProfile = (data, type) => ({
-  type,
-  data,
+const receiveUserProfile = user => ({
+  type: actionTypes.RECEIVE_CURRENT_USER,
+  user,
 });
 
-
-export const removeRecipeFromUserProfile = (index, from) => ({
-  type: REMOVE_RECIPE_FROM_PROFILE,
-  index,
-  from,
-});
-
-const fetchUserProfile = (id, type) => (dispatch) => {
+export const fetchUserProfile = id => (dispatch) => {
   dispatch(setFetching());
-  instance.get(`/users/${id}`)
+  return instance.get(`/users/${id}`)
     .then((res) => {
-      dispatch(batchActions([
-        receiveUserProfile({ user: res.data.user, asOwner: res.data.asOwner }, type),
-        unsetFetching()
-      ]));
-    })
-    .catch((err) => {
-      console.log(err.message || err.response.data.message);
+      dispatch(receiveUserProfile(res.data.user));
       dispatch(unsetFetching());
-    });
-};
-export const deletePersonalRecipe = (id, index) => (dispatch) => {
-  dispatch(setFetching());
-  instance.delete(`recipes/${id}`)
-    .then(() => {
-      dispatch(batchActions([
-        removeRecipeFromUserProfile(index, 'recipes'),
-        unsetFetching()
-      ]));
     })
     .catch((err) => {
-      console.log(err.message || err.response.data.message);
+      dispatch({
+        type: actionTypes.RECEIVE_CURRENT_USER_ERROR,
+        errorMessage: err.response.data.message
+      });
       dispatch(unsetFetching());
     });
 };
 
-export default fetchUserProfile;
+export const updateUserProfile = user => (dispatch) => {
+  const {
+    id: userId,
+    email,
+    imgUrl,
+    fullname
+  } = user;
+
+  return instance.put(`/users/${userId}`, { update: { email, imgUrl, fullname } })
+    .then((res) => {
+      dispatch(receiveUserProfile(res.data.user));
+      dispatch(showNotification(res.data.message));
+    })
+    .catch((err) => {
+      dispatch(showNotification(err.response.data.message));
+    });
+};

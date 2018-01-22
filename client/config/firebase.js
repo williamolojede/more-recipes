@@ -1,4 +1,5 @@
 import firebase from 'firebase';
+import 'firebase/storage';
 
 const app = firebase.initializeApp({
   apiKey: process.env.FIREBASE_API_KEY,

@@ -1,0 +1,27 @@
+button.submit-btn{
+  background: $site-bg;
+  border-style: none;
+  font-size: 1.4rem;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 2px;
+  padding: .5rem;
+  color: #fff;
+  transition: 0.1s ease-in background, .1s linear width;
+
+  &:hover,
+  &:disabled{
+    background: $site-bg * .9;
+  }
+
+  .loading-icon{
+    display: none;
+  }
+
+  &.submit-loading{
+    .loading-icon{
+      margin-left: 1rem;
+      display: block;
+    }
+  }
+}

@@ -15,3 +15,17 @@ exports[`Notification should render with right amount of elements 1`] = `
   </div>
 </CSSTransition>
 `;
+
+exports[`Notification should render with right amount of elements when notifiacation is empty 1`] = `
+<CSSTransition
+  classNames="notification"
+  in={false}
+  timeout={3000}
+>
+  <div
+    className="notification z-depth-1"
+  >
+    <p />
+  </div>
+</CSSTransition>
+`;

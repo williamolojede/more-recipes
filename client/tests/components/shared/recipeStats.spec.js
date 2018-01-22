@@ -22,7 +22,7 @@ function setup() {
   };
 }
 
-describe('RecipeStats', () => {
+describe('Recipe Stats', () => {
   it('should render all expected elements', () => {
     const tree = setup().component.toJSON();
     expect(tree).toMatchSnapshot();

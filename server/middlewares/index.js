@@ -8,6 +8,7 @@ import countFavorites from './countFavorites';
 import restrictOwnerActions from './restrictOwnerActions';
 import validateLogin from './validateLogin';
 import validateSignup from './validateSignup';
+import validateUpdate from './validateUpdate';
 
 const middlewares = {
   countViews,
@@ -19,7 +20,8 @@ const middlewares = {
   countFavorites,
   restrictOwnerActions,
   validateLogin,
-  validateSignup
+  validateSignup,
+  validateUpdate
 };
 
 export default middlewares;

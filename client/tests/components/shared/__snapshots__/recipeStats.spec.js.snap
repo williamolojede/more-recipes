@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`RecipeStats should downvote as expected 1`] = `
+exports[`Recipe Stats should downvote as expected 1`] = `
 <ul
   className="recipe-stats"
 >
@@ -62,7 +62,7 @@ exports[`RecipeStats should downvote as expected 1`] = `
 </ul>
 `;
 
-exports[`RecipeStats should downvote as expected 2`] = `
+exports[`Recipe Stats should downvote as expected 2`] = `
 <ul
   className="recipe-stats"
 >
@@ -124,7 +124,7 @@ exports[`RecipeStats should downvote as expected 2`] = `
 </ul>
 `;
 
-exports[`RecipeStats should favorite as expected 1`] = `
+exports[`Recipe Stats should favorite as expected 1`] = `
 <ul
   className="recipe-stats"
 >
@@ -186,7 +186,7 @@ exports[`RecipeStats should favorite as expected 1`] = `
 </ul>
 `;
 
-exports[`RecipeStats should favorite as expected 2`] = `
+exports[`Recipe Stats should favorite as expected 2`] = `
 <ul
   className="recipe-stats"
 >
@@ -248,7 +248,7 @@ exports[`RecipeStats should favorite as expected 2`] = `
 </ul>
 `;
 
-exports[`RecipeStats should render all expected elements 1`] = `
+exports[`Recipe Stats should render all expected elements 1`] = `
 <ul
   className="recipe-stats"
 >
@@ -310,7 +310,7 @@ exports[`RecipeStats should render all expected elements 1`] = `
 </ul>
 `;
 
-exports[`RecipeStats should up vote as expected 1`] = `
+exports[`Recipe Stats should up vote as expected 1`] = `
 <ul
   className="recipe-stats"
 >
@@ -372,7 +372,7 @@ exports[`RecipeStats should up vote as expected 1`] = `
 </ul>
 `;
 
-exports[`RecipeStats should up vote as expected 2`] = `
+exports[`Recipe Stats should up vote as expected 2`] = `
 <ul
   className="recipe-stats"
 >

@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Manage Recipes should render with right amount of elements 1`] = `
+<div
+  className="page page-manage"
+>
+  <header
+    className="site-header"
+  >
+    <Connect(SiteNav)
+      currentUser={
+        Object {
+          "fullname": "John Doe",
+          "id": 1,
+        }
+      }
+    />
+  </header>
+  <main>
+    <div
+      className="page-manage__header-image"
+    />
+    <ul
+      className="page-manage__nav tabs z-depth-1"
+    >
+      <li
+        className="tab col s4"
+      >
+        <NavLink
+          activeClassName="active"
+          ariaCurrent="true"
+          exact={true}
+          to="/user/recipes/create"
+        >
+          Add
+        </NavLink>
+      </li>
+      <li
+        className="tab col s4"
+      >
+        <NavLink
+          activeClassName="active"
+          ariaCurrent="true"
+          exact={true}
+          to="/user/recipes"
+        >
+          Recipes
+        </NavLink>
+      </li>
+      <li
+        className="tab col s4"
+      >
+        <NavLink
+          activeClassName="active"
+          ariaCurrent="true"
+          exact={true}
+          to="/user/favorites"
+        >
+          Favorites
+        </NavLink>
+      </li>
+    </ul>
+    <h1>
+      Yo
+    </h1>
+  </main>
+  <Notification
+    dispatch={[Function]}
+    notification=""
+  />
+  <SiteFooter />
+</div>
+`;

@@ -1,5 +1,8 @@
 .pagination{
   text-align:  center;
+  &.is-fetching{
+    display: none;
+  }
 
   li{
     display: inline-block;

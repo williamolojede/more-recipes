@@ -11,8 +11,9 @@ import isFetching from './isFetching';
 import topRecipes from './topRecipes';
 import singleRecipe from './recipe';
 import recipeReviews from './recipeReviews';
-import userProfile from './userProfile';
 import notification from './notification';
+import personalRecipes from './personalRecipes';
+import favoriteRecipes from './favoriteRecipes';
 
 
 const rootReducer = combineReducers({
@@ -21,8 +22,9 @@ const rootReducer = combineReducers({
   topRecipes,
   singleRecipe,
   recipeReviews,
-  userProfile,
   notification,
+  personalRecipes,
+  favoriteRecipes,
   router: routerReducer
 });
 

@@ -8,14 +8,14 @@ describe('notifications reducer', () => {
   });
 
   it('should handle show notification', () => {
-    expect(reducer('', {
+    expect(reducer(undefined, {
       type: types.SHOW_NOTIFICATION,
       message: 'Run the tests'
     })).toEqual('Run the tests');
   });
 
   it('should handle hide notification', () => {
-    expect(reducer('', {
+    expect(reducer(undefined, {
       type: types.HIDE_NOTIFICATION
     })).toEqual('');
   });

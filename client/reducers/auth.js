@@ -11,7 +11,7 @@ import {
 const initialState = {
   isAuthenticated: !!localStorage.getItem('token'),
   currentUser: {
-    id: 1,
+    id: 0,
     fullname: ''
   }
 };
@@ -38,7 +38,7 @@ const auth = (state = initialState, action) => {
         isAuthenticated: false
       });
     case RECEIVE_CURRENT_USER:
-      return { ...state, currentUser: action.data.user };
+      return { ...state, currentUser: action.user };
     default:
       return state;
   }

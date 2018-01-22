@@ -16,12 +16,11 @@ class AuthForm extends React.Component {
     const email = this.emailInput.value;
     const password = this.passwordInput.value;
     if (this.props.type === 'login') {
-      this.props.authFormSubmit({ email, password });
-    } else if (this.props.type === 'signup') {
-      const fullname = this.fullnameInput.value;
-      this.props.authFormSubmit({ email, password, fullname });
+      return this.props.authFormSubmit({ email, password });
     }
 
+    const fullname = this.fullnameInput.value;
+    this.props.authFormSubmit({ email, password, fullname });
     this.authForm.reset();
   }
 

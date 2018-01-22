@@ -1,0 +1,115 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Personal Recipes Page should render a list of recipes 1`] = `
+<Connect(ManageRecipes)>
+  <div
+    className="container page-manage__recipes"
+  >
+    <ul
+      className="row recipes-list"
+    >
+      <RecipeCardShort
+        id={2}
+        key="2"
+        name="Jollof Rice"
+        removeRecipe={[Function]}
+        type="personal"
+      />
+      <RecipeCardShort
+        id={5}
+        key="5"
+        name="Chef John's Spaghetti with Red Clam Sauce dfbefadb nifek fedckltefdkletfdmlefdleff eifdanlkref"
+        removeRecipe={[Function]}
+        type="personal"
+      />
+      <RecipeCardShort
+        id={169}
+        key="169"
+        name="some random very delicious dish"
+        removeRecipe={[Function]}
+        type="personal"
+      />
+      <RecipeCardShort
+        id={25}
+        key="25"
+        name="Chef John's Spaghetti with Red Clam Sauce dfbefadb nifek fedckltefdkletfdmlefdleff eifdanlkref"
+        removeRecipe={[Function]}
+        type="personal"
+      />
+      <RecipeCardShort
+        id={91}
+        key="91"
+        name="Chef John's Spaghetti with Red Clam Sauce dfbefadb nifek fedckltefdkletfdmlefdleff eifdanlkref"
+        removeRecipe={[Function]}
+        type="personal"
+      />
+      <RecipeCardShort
+        id={28}
+        key="28"
+        name="Chef John's Spaghetti with Red Clam Sauce dfbefadb nifek fedckltefdkletfdmlefdleff eifdanlkref"
+        removeRecipe={[Function]}
+        type="personal"
+      />
+    </ul>
+    <footer>
+      <PaginationBoxView
+        activeClassName="active"
+        breakLabel="..."
+        containerClassName="pagination "
+        disableInitialCallback={false}
+        disabledClassName="disabled"
+        marginPagesDisplayed={2}
+        nextClassName="next"
+        nextLabel={
+          <i
+            className="material-icons"
+          >
+            chevron_right
+          </i>
+        }
+        onPageChange={[Function]}
+        pageClassName="waves-effect"
+        pageCount={24}
+        pageRangeDisplayed={4}
+        previousClassName="previous"
+        previousLabel={
+          <i
+            className="material-icons"
+          >
+            chevron_left
+          </i>
+        }
+      />
+    </footer>
+  </div>
+</Connect(ManageRecipes)>
+`;
+
+exports[`Personal Recipes Page should render a preloader 1`] = `
+<Connect(ManageRecipes)>
+  <div
+    className="container page-manage__recipes"
+  >
+    <Preloader />
+  </div>
+</Connect(ManageRecipes)>
+`;
+
+exports[`Personal Recipes Page should render with right amount of elements 1`] = `
+<Connect(ManageRecipes)>
+  <div
+    className="container page-manage__recipes"
+  >
+    <div
+      className="no-favorites"
+    >
+      <span>
+        You don't have any personal recipes yet.
+      </span>
+      <span>
+        Share your own culinary creations! Add a recipe
+      </span>
+    </div>
+  </div>
+</Connect(ManageRecipes)>
+`;

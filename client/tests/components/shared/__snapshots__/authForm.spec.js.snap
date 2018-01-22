@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Nav Dropdown should render with right amount of elements for a login form 1`] = `
+<AuthForm
+  authFormSubmit={[Function]}
+  type="login"
+>
+  <form
+    className="auth-form form"
+    onSubmit={[Function]}
+  >
+    <input
+      className="form__input"
+      id="usr-email"
+      name="usr-email"
+      placeholder="email"
+      required={true}
+      type="email"
+    />
+    <input
+      className="form__input"
+      id="usr-pswd"
+      name="usr-pswd"
+      placeholder="password"
+      required={true}
+      type="password"
+    />
+    <button
+      className="form__submit z-depth-1"
+      type="submit"
+    >
+      Login
+    </button>
+  </form>
+</AuthForm>
+`;
+
+exports[`Nav Dropdown should render with right amount of elements for a signup form 1`] = `
+<AuthForm
+  authFormSubmit={[Function]}
+  type="signup"
+>
+  <form
+    className="auth-form form"
+    onSubmit={[Function]}
+  >
+    <input
+      className="form__input"
+      name="usr-name"
+      placeholder="fullname"
+      required={true}
+      type="text"
+    />
+    <input
+      className="form__input"
+      id="usr-email"
+      name="usr-email"
+      placeholder="email"
+      required={true}
+      type="email"
+    />
+    <input
+      className="form__input"
+      id="usr-pswd"
+      name="usr-pswd"
+      placeholder="password"
+      required={true}
+      type="password"
+    />
+    <button
+      className="form__submit z-depth-1"
+      type="submit"
+    >
+      Register
+    </button>
+  </form>
+</AuthForm>
+`;

@@ -5,12 +5,20 @@
     color: #383A3F;
     border: none;
     padding: 0;
-    @media #{$medium-and-up}{
-      height: 64px;
-      line-height: 64px;
-    }
-    @media #{$large-and-up}{
-      display: none;
+    height: 100%;
+  }
+
+  button.dropdown{
+    position: relative;
+
+    .dropdown-overlay{
+      position: fixed;
+      background: transparent;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 10;
     }
   }
 }

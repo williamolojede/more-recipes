@@ -1,5 +1,6 @@
-.my-recipe__add{
+.page-manage__add{
   .my-recipe__add--form{
+    position: relative;
 
     input, textarea, fieldset, label, .label{
       font-size: 1.2rem;
@@ -24,20 +25,16 @@
       }
     }
 
-    button{
-      background: $site-bg;
-      border-style: none;
-      font-size: 1.4rem;
-      // width: 100%;
-      border-radius: 2px;
-      padding: .5rem;
-      color: #fff;
-      transition: 0.1s ease-in background;
-
-      &:hover{
-        background: $site-bg * .9;
+    .form-btns{
+      a{
+        font-size: 1.2rem;
+        margin-left: 1rem;
+        text-decoration: underline;
+        text-underline-position: under;
       }
     }
+
+
 
     input, textarea, select{
       transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
@@ -47,7 +44,7 @@
         border: 1px solid $site-border-focused !important;
         box-shadow: 0 0 5px 1px $site-border-focused !important;
       }
-    }    
+    }
 
     .description-image{
 
@@ -170,18 +167,18 @@
 }
 
 @media #{$medium-and-up} {
-  .my-recipe__add{
+  .page-manage__add{
     .my-recipe__add--form{
       .ingredients-instruction{
         display: flex;
         justify-content: space-between;
 
         .ingredients-form.my-recipe__add--form___ingredients{
-          width: 55%;
+          width: 40%;
           margin-bottom: 0;
         }
         .instructions-form.my-recipe__add--form___instructions{
-          width: 40%;
+          width: 55%;
         }
       }
     }

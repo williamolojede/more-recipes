@@ -117,7 +117,7 @@ Reviews.propTypes = {
   ...paginationPropTypes
 };
 
-const mapStateToProps = ({
+export const mapStateToProps = ({
   recipeReviews: { reviews, pagination },
   isFetching,
   auth: { currentUser }

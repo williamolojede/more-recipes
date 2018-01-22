@@ -10,7 +10,10 @@ import Home from './pages/Home';
 import SingleRecipe from './pages/SingleRecipe';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
-import Profile from './pages/Profile/Profile';
+import AddRecipePage from './pages/AddRecipePage';
+import PersonalRecipesPage from './pages/PersonalRecipesPage';
+import FavoriteRecipesPage from './pages/FavoriteRecipesPage';
+import Profile from './pages/Profile';
 
 /**
  * @export
@@ -28,7 +31,15 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/" component={requireAuthentication(Home)} />
           <Route exact path="/recipe/:id" component={requireAuthentication(SingleRecipe)} />
-          <Route path="/user/:uid" component={requireAuthentication(Profile)} />
+          <Route exact path="/user" component={requireAuthentication(Profile)} />
+          <Route exact path="/user/recipes/create" component={requireAuthentication(AddRecipePage)} />
+          <Route exact path="/user/recipes" component={requireAuthentication(PersonalRecipesPage)} />
+          <Route
+            exact
+            path="/user/recipes/:recipeId/edit"
+            component={requireAuthentication(props => (<AddRecipePage {...props} isEditMode />))}
+          />
+          <Route exact path="/user/favorites" component={requireAuthentication(FavoriteRecipesPage)} />
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
         </Switch>

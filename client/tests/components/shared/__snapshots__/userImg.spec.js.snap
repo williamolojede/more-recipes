@@ -3,11 +3,13 @@
 exports[`Top Rated Recipes List should render an img tag if user imgurl is present 1`] = `
 <div
   className="user-image inReview"
+  data-for="username-inReview"
+  data-tip="OneWord"
 >
   <img
     alt="OneWord"
     className="user-image__img"
-    src="https://www.worldcrunch.com/assets/img/avatars/thumbnails/default-user-img-profile.jpg"
+    src="https://catholic-foundation.org/wp-content/uploads/2017/07/unisex-avatar.png"
     title="OneWord"
   />
 </div>
@@ -16,6 +18,8 @@ exports[`Top Rated Recipes List should render an img tag if user imgurl is prese
 exports[`Top Rated Recipes List should render properly if user fullname is just one word 1`] = `
 <div
   className="user-image inReview"
+  data-for="username-inReview"
+  data-tip="OneWord"
 >
   <div
     className="user-image__no-img"
@@ -31,6 +35,8 @@ exports[`Top Rated Recipes List should render properly if user fullname is just 
 exports[`Top Rated Recipes List should render with right amount of elements 1`] = `
 <div
   className="user-image inReview"
+  data-for="username-inReview"
+  data-tip="John Doe"
 >
   <div
     className="user-image__no-img"

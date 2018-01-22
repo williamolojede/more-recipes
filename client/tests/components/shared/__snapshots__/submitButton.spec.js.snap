@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Submit Button should render with right amount of elements 1`] = `
+<button
+  className="
+    submit-btn z-depth-1
+    
+    "
+  disabled={false}
+  onClick={[Function]}
+  type="submit"
+>
+  <span>
+    Send Message
+  </span>
+  <Loading
+    className="loading-icon"
+    color="#fff"
+    delay={1000}
+    height="25px"
+    type="spokes"
+    width="25px"
+  />
+</button>
+`;

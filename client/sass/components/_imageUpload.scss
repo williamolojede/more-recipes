@@ -1,0 +1,48 @@
+.image-upload{
+  border: 2px solid $site-border;
+  padding: 1rem;
+  border-radius: $border-radius;
+
+  .image-upload__preview{
+    position: relative;
+    min-height: 120px;
+    max-height: 300px;
+    overflow: hidden;
+  }
+
+  .image-upload__progress{
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      width: 50px;
+      height: 50px;
+    }
+  }
+
+  label{
+    text-align: center;
+    display: block;
+    width: 100%;
+    padding: .5rem 0;
+    background-color: #eff3f6;
+    border-radius: $border-radius;
+    cursor: pointer;
+    margin-top: .5rem;
+    border: 1px solid #ddd;
+  }
+
+  .label{
+    margin: 0;
+  }
+
+  input{
+    display: none;
+  }
+}

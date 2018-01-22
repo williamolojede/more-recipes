@@ -1,0 +1,109 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Image Upload should render a loading component when imgageUploadProgress is started 1`] = `
+<ImageUpload
+  altText="beautiful image"
+  className=""
+  defaultImgUrl="https://catholic-foundation.org/wp-content/uploads/2017/07/unisex-avatar.png"
+  imageUploadHandler={[Function]}
+  imageUploadProgress="started"
+  imgUrl=""
+>
+  <div
+    className="image-upload "
+  >
+    <div
+      className="image-upload__preview"
+    >
+      <img
+        alt="beautiful image"
+        className="image-upload__preview___image"
+        src="https://catholic-foundation.org/wp-content/uploads/2017/07/unisex-avatar.png"
+      />
+      <div
+        className="image-upload__progress"
+      >
+        <Loading
+          className="loading-icon"
+          color="#000"
+          delay={1000}
+          height="65px"
+          type="spokes"
+          width="65px"
+        >
+          <div
+            className="loading-icon"
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "<svg class=\\"icon-blank\\" xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 32 32\\"></svg>
+",
+              }
+            }
+            style={
+              Object {
+                "fill": "#000",
+                "height": "65px",
+                "width": "65px",
+              }
+            }
+          />
+        </Loading>
+      </div>
+    </div>
+    <label
+      className="z-depth-1"
+      htmlFor="recipe-image"
+    >
+      Upload new picture
+    </label>
+    <input
+      accept="image/gif, image/jpeg, image/png"
+      id="recipe-image"
+      name="filename"
+      onChange={[Function]}
+      type="file"
+    />
+  </div>
+</ImageUpload>
+`;
+
+exports[`Image Upload should render with right amount of elements 1`] = `
+<ImageUpload
+  altText="beautiful image"
+  className=""
+  defaultImgUrl="https://catholic-foundation.org/wp-content/uploads/2017/07/unisex-avatar.png"
+  imageUploadHandler={[Function]}
+  imageUploadProgress="pending"
+  imgUrl=""
+>
+  <div
+    className="image-upload "
+  >
+    <div
+      className="image-upload__preview"
+    >
+      <img
+        alt="beautiful image"
+        className="image-upload__preview___image"
+        src="https://catholic-foundation.org/wp-content/uploads/2017/07/unisex-avatar.png"
+      />
+      <div
+        className="image-upload__progress"
+      />
+    </div>
+    <label
+      className="z-depth-1"
+      htmlFor="recipe-image"
+    >
+      Upload new picture
+    </label>
+    <input
+      accept="image/gif, image/jpeg, image/png"
+      id="recipe-image"
+      name="filename"
+      onChange={[Function]}
+      type="file"
+    />
+  </div>
+</ImageUpload>
+`;

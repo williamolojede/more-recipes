@@ -1,0 +1,55 @@
+.profile{
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 5px;
+
+
+  .profile__title{
+    margin: 0;
+    text-decoration: underline;
+    font-size: 2rem;
+    text-underline-position: under;
+
+    @media #{$medium-and-up} {
+      margin-bottom: 2rem;
+    }
+  }
+
+  .profile__body{
+    display: flex;
+
+    flex-direction: column;
+
+    @media #{$medium-and-up} {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    .image-upload.profile__image{
+      width: 200px;
+      margin: 2rem auto;
+      padding: 0;
+      border: none;
+
+      @media #{$medium-and-up} {
+        margin: 0 2rem 0 0;
+        width: 230px;
+      }
+
+      label{
+        font-size: 1.2rem;
+      }
+
+      .image-upload__preview___image{
+        border-radius: 5px;
+        width: 200px;
+        height: 200px;
+
+        @media #{$medium-and-up} {
+          width: 230px;
+          height: 230px;
+        }
+      }
+    }
+  }
+}

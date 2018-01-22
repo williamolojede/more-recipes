@@ -18,11 +18,8 @@ router.use('/:id', middlewares.validateRecipeId);
 
 router.route('/:id')
   .get(middlewares.countViews, recipesController.getSingleRecipe)
-  .put(recipesController.updateRecipe)
+  .put(middlewares.validateUpdate, recipesController.updateRecipe)
   .delete(recipesController.deleteRecipe);
-
-// checks if the user is owner is allowed to perform action on recipe
-// router.use('/:id/*', restrictOwnerActions);
 
 router.post('/:id/vote-:dir',
   recipesController.voteRecipe,

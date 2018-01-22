@@ -1,5 +1,5 @@
 import React from 'react';
-import { PureReviews } from '../../../../components/shared/Reviews';
+import { PureReviews, mapStateToProps } from '../../../../components/shared/Reviews';
 import user from '../../../__mocks__/user.mock';
 import allReviews from '../../../__mocks__/reviews.mock';
 
@@ -59,6 +59,31 @@ describe('Reviews Component', () => {
       wrapper.instance().handlePageClick({ selected: 1 });
       expect(wrapper.instance().state.currentPage).toBe(2);
       expect(handlePageClickSpy).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('mapStateToProps', () => {
+    it('should return an object with props required by component from store', () => {
+      const store = {
+        recipeReviews: {
+          reviews: allReviews.reviews,
+          pagination: allReviews.pagination
+        },
+        auth: { currentUser: user },
+        isFetching: false
+      };
+
+      const {
+        reviews,
+        pagination,
+        currentUser,
+        isFetching
+      } = mapStateToProps(store);
+
+      expect(reviews.length).toBe(allReviews.reviews.length);
+      expect(pagination.last).toBe(allReviews.pagination.last);
+      expect(currentUser.fullname).toBe(user.fullname);
+      expect(isFetching).toBe(false);
     });
   });
 });

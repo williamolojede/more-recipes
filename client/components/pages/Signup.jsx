@@ -72,16 +72,15 @@ class Signup extends Component {
 
 Signup.propTypes = authPropTypes;
 
-const mapStateToProps = ({ auth, isFetching }) => {
-  const { isAuthenticated, errorMessage, user } = auth;
-  // whichever is undefined thats is not in auth wont be added to the props
+export const mapStateToProps = ({ auth, isFetching }) => {
+  const { isAuthenticated, errorMessage } = auth;
   return {
     isAuthenticated,
     errorMessage,
-    user,
     isFetching
   };
 };
 
+export { Signup as PureSignup };
 export default connect(mapStateToProps)(Signup);
 

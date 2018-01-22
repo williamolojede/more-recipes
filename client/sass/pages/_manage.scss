@@ -1,0 +1,44 @@
+.page-manage{
+  main{
+    background-color: #f4f4f4;
+
+    .page-manage__header-image{
+      background: url("https://images.unsplash.com/photo-1452251889946-8ff5ea7b27ab?auto=format&fit=crop&w=1030&q=80") 0px 100% no-repeat;
+      height: 20vh;
+      background-size: cover;
+      background-color: #462814;
+    }
+
+    .page-manage__nav{
+      text-align: center;
+      a.active{
+        border-bottom: 2px solid currentColor;
+      }
+    }
+
+    .page-manage__add{
+      margin-bottom: 5rem;
+      margin-top: 5rem;
+      border-radius: 5px;
+
+      @media #{$small-and-down} {
+        margin-bottom: 0;
+        margin-top: 0;
+        border-radius: 0px;
+        width: 100%;
+
+        .my-recipe__add--form{
+          border-radius: 0px;
+          margin-top: 5px;
+        }
+      }
+
+      .my-recipe__add--form{
+        padding: 2rem;
+        background-color: #fff;
+        border-radius: 5px;
+      }
+    }
+  }
+
+}
