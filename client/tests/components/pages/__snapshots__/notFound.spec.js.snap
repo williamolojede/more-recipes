@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Manage Recipes should render with right amount of elements 1`] = `
+<div
+  className="page page__not-found"
+>
+  <main>
+    <h1>
+      404
+    </h1>
+    <p>
+      Sorry, the web page your are looking for is missing
+      <span
+        aria-label="cry"
+        role="img"
+      >
+        😭
+      </span>
+    </p>
+    <Link
+      replace={false}
+      to="/"
+    >
+      Go back to the home page
+    </Link>
+  </main>
+</div>
+`;
