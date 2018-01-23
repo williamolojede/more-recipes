@@ -1,13 +1,14 @@
 import React from 'react';
 import { PureManageRecipes, mapStateToProps } from '../../../components/shared/ManageRecipes';
 import userMock from '../../__mocks__/user.mock';
+import notifiacationMock from '../../__mocks__/notification.mock';
 
 function setup() {
   const props = {
     dispatch: jest.fn(),
     currentUser: userMock,
     children: (() => (<h1>Yo</h1>))(),
-    notification: ''
+    notification: notifiacationMock
   };
   const wrapper = shallow(<PureManageRecipes {...props} />);
 

@@ -14,6 +14,14 @@ const mockStore = configureMockStore(middlewares);
 
 const { recipes, pagination } = recipesMock;
 
+const showNotification = (message, type) => ({
+  type: actionTypes.SHOW_NOTIFICATION,
+  payload: {
+    message,
+    type
+  }
+});
+
 describe('Recipe Action Creators', () => {
   beforeEach(() => {
     moxios.install(instance);
@@ -96,7 +104,7 @@ describe('Recipe Action Creators', () => {
 
     const expectedActions = [
       { type: actionTypes.RECEIVE_SINGLE_RECIPE, recipe: recipes[0] },
-      { type: actionTypes.SHOW_NOTIFICATION, message: 'You liked this recipe' }
+      showNotification('You liked this recipe', 'success')
     ];
 
     const store = mockStore({
@@ -123,7 +131,7 @@ describe('Recipe Action Creators', () => {
     });
 
     const expectedActions = [
-      { type: actionTypes.SHOW_NOTIFICATION, message: 'Internal Server error' }
+      showNotification('Internal Server error', 'error')
     ];
 
     const store = mockStore({
@@ -152,7 +160,7 @@ describe('Recipe Action Creators', () => {
 
     const expectedActions = [
       { type: actionTypes.RECEIVE_SINGLE_RECIPE, recipe: recipes[0] },
-      { type: actionTypes.SHOW_NOTIFICATION, message: 'Recipe added to your favorite list' }
+      showNotification('Recipe added to your favorite list', 'success')
     ];
 
     const store = mockStore({
@@ -179,7 +187,7 @@ describe('Recipe Action Creators', () => {
     });
 
     const expectedActions = [
-      { type: actionTypes.SHOW_NOTIFICATION, message: 'You are not allowed to perform this action on your own recipe' }
+      showNotification('You are not allowed to perform this action on your own recipe', 'error')
     ];
 
     const store = mockStore({
@@ -394,7 +402,7 @@ describe('Recipe Action Creators', () => {
     });
 
     const expectedActions = [
-      { type: actionTypes.SHOW_NOTIFICATION, message: 'recipe created successfully' }
+      showNotification('recipe created successfully', 'success')
     ];
 
     const store = mockStore({
@@ -421,7 +429,7 @@ describe('Recipe Action Creators', () => {
     });
 
     const expectedActions = [
-      { type: actionTypes.SHOW_NOTIFICATION, message: 'Recipe description is required' }
+      showNotification('Recipe description is required', 'error')
     ];
 
     const store = mockStore({
@@ -429,7 +437,7 @@ describe('Recipe Action Creators', () => {
     });
 
     return store.dispatch(actions.addRecipe({ name: 'some recipe' }))
-      .then(() => {
+      .then(() => {}, () => {
         expect(expectedActions.length).toBe(1);
         expect(store.getActions()).toEqual(expectedActions);
       });
@@ -449,7 +457,7 @@ describe('Recipe Action Creators', () => {
 
     const expectedActions = [
       { type: actionTypes.SET_FETCHING, isFetching: true },
-      { type: actionTypes.SHOW_NOTIFICATION, message: 'Recipe deleted successfully' },
+      showNotification('Recipe deleted successfully', 'success'),
       { type: actionTypes.UNSET_FETCHING, isFetching: false }
     ];
 
@@ -478,7 +486,7 @@ describe('Recipe Action Creators', () => {
 
     const expectedActions = [
       { type: actionTypes.SET_FETCHING, isFetching: true },
-      { type: actionTypes.SHOW_NOTIFICATION, message: 'Not authorized to delete this recipe' },
+      showNotification('Not authorized to delete this recipe', 'error'),
       { type: actionTypes.UNSET_FETCHING, isFetching: false }
     ];
 
@@ -507,7 +515,7 @@ describe('Recipe Action Creators', () => {
     });
 
     const expectedActions = [
-      { type: actionTypes.SHOW_NOTIFICATION, message: 'Recipe updated successfully' }
+      showNotification('Recipe updated successfully', 'success')
     ];
 
     const store = mockStore({
@@ -534,7 +542,7 @@ describe('Recipe Action Creators', () => {
     });
 
     const expectedActions = [
-      { type: actionTypes.SHOW_NOTIFICATION, message: 'Internal server error' },
+      showNotification('Internal server error', 'error')
     ];
 
     const store = mockStore({
@@ -542,7 +550,7 @@ describe('Recipe Action Creators', () => {
     });
 
     return store.dispatch(actions.updateRecipe(195))
-      .then(() => {
+      .then(() => {}, () => {
         expect(expectedActions.length).toBe(1);
         expect(store.getActions()).toEqual(expectedActions);
       });

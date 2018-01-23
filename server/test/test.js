@@ -530,6 +530,17 @@ describe('API Integration Tests', () => {
         });
     });
 
+    it('should return conflict error if user has a recipe with the provide name already', (done) => {
+      request.post(`${recipesUrl}?token=${userToken1}`)
+        .send(data)
+        .end((err, res) => {
+          expect(res.status).to.equal(409);
+          expect(res.body.message).to.equal('You already created a recipe with this name!');
+          expect(res.body.status).to.equal('fail');
+          done();
+        });
+    });
+
     // CREATE RECIPE FOR USER 2
     it('return 201 for a successful recipe creation', (done) => {
       const user2Recipe = Object.assign({}, data);
@@ -1284,7 +1295,6 @@ describe('API Integration Tests', () => {
         });
     });
 
-
     it('return 400 update object has an invalid key name', (done) => {
       request.put(`${recipesUrl}/${recipeId}`)
         .send({ token: userToken1, update: { test: 'Jollof Rice' } })
@@ -1306,6 +1316,8 @@ describe('API Integration Tests', () => {
           done();
         });
     });
+
+    // TODO: should return conflict error if user has a recipe with the provide name already
 
     it('return 200 if the recipe is updated', (done) => {
       request.put(`${recipesUrl}/${recipeId}`)

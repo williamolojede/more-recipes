@@ -118,21 +118,21 @@ class AddRecipeForm extends Component {
     } else {
       this.setState({ submitLoading: true });
       this.props.dispatch(addRecipe(this.state.recipe))
-        .then(this.handleFormSubmitSuccess);
+        .then(this.handleFormSubmitSuccess, () => { this.setState({ submitLoading: false }); });
     }
   }
 
   updateRecipe = () => {
     this.setState({ submitLoading: true });
     this.props.dispatch(updateRecipe(this.state.recipe))
-      .then(this.handleFormSubmitSuccess);
+      .then(this.handleFormSubmitSuccess, () => { this.setState({ submitLoading: false }); });
   }
 
   handleFormSubmitSuccess = () => {
     // set submit loading to false and redirect to
     //  all recipes page after .5s
     this.setState({ submitLoading: false });
-    setTimeout(() => this.props.history.push('/user/recipes'), 500);
+    setTimeout(() => this.props.history.push('/user/recipes'), 4000);
   }
 
   submitForm = (e) => {

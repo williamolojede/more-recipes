@@ -21,7 +21,7 @@ const user = {
   updatedAt: '2018-01-20T13:33:27.202Z'
 };
 
-describe('Review Action Creators', () => {
+describe('User Profile Action Creators', () => {
   beforeEach(() => {
     moxios.install(instance);
   });
@@ -71,7 +71,7 @@ describe('Review Action Creators', () => {
       request.respondWith({
         status: 200,
         response: {
-          status: 'fail',
+          status: 'success',
           message: 'User Details updated successfully',
           user
         },
@@ -80,7 +80,13 @@ describe('Review Action Creators', () => {
 
     const expectedActions = [
       { type: actionTypes.RECEIVE_CURRENT_USER, user },
-      { type: actionTypes.SHOW_NOTIFICATION, message: 'User Details updated successfully' }
+      {
+        type: actionTypes.SHOW_NOTIFICATION,
+        payload: {
+          message: 'User Details updated successfully',
+          type: 'success'
+        }
+      }
     ];
 
     const store = mockStore({
@@ -111,7 +117,13 @@ describe('Review Action Creators', () => {
     });
 
     const expectedActions = [
-      { type: actionTypes.SHOW_NOTIFICATION, message: 'User with email already exists' }
+      {
+        type: actionTypes.SHOW_NOTIFICATION,
+        payload: {
+          message: 'User with email already exists',
+          type: 'error'
+        }
+      }
     ];
 
     const store = mockStore({

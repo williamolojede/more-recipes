@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { currentUserPropTypes } from '../../config/proptypes';
+import { currentUserPropTypes, notificationPropTypes } from '../../config/proptypes';
 import { updateUserProfile } from '../../actions/userProfile';
 import defaultConfig from '../../config/default';
 import imageUpload from '../../utils/imageUpload';
@@ -131,7 +131,7 @@ Profile.propTypes = {
   ...currentUserPropTypes,
   isFetching: PropTypes.bool.isRequired,
   dispatch: PropTypes.func.isRequired,
-  notification: PropTypes.string.isRequired
+  ...notificationPropTypes
 };
 
 export const mapStateToProps = ({

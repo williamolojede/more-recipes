@@ -1,13 +1,14 @@
 import React from 'react';
 import { PureProfile, mapStateToProps } from '../../../components/pages/Profile';
 import userMock from '../../__mocks__/user.mock';
+import notificationMock from '../../__mocks__/notification.mock';
 
 function setup() {
   const props = {
     currentUser: { ...userMock, email: 'test@test.com' },
     isFetching: false,
     dispatch: jest.fn().mockReturnValue(Promise.resolve()),
-    notification: ''
+    notification: notificationMock
   };
   const wrapper = shallow(<PureProfile {...props} />);
 

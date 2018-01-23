@@ -7,7 +7,10 @@ import ConnectedSiteNav from '../shared/SiteNav';
 import SiteFooter from '../shared/SiteFooter.jsx';
 import Notification from '../shared/Notification.jsx';
 
-import { currentUserPropTypes } from '../../config/proptypes';
+import {
+  currentUserPropTypes,
+  notificationPropTypes
+} from '../../config/proptypes';
 
 class ManageRecipes extends Component {
   render() {
@@ -43,7 +46,7 @@ ManageRecipes.propTypes = {
   dispatch: PropTypes.func.isRequired,
   ...currentUserPropTypes,
   children: PropTypes.element.isRequired,
-  notification: PropTypes.string.isRequired
+  ...notificationPropTypes
 };
 
 export const mapStateToProps = ({

@@ -19,7 +19,12 @@ exports[`Single Recipe Page should render a preloader 1`] = `
   <Preloader />
   <Notification
     dispatch={[Function]}
-    notification=""
+    notification={
+      Object {
+        "message": "",
+        "type": "success",
+      }
+    }
   />
   <SiteFooter />
 </div>
@@ -56,7 +61,12 @@ exports[`Single Recipe Page should render recipe not found view if there is an e
   </div>
   <Notification
     dispatch={[Function]}
-    notification=""
+    notification={
+      Object {
+        "message": "",
+        "type": "success",
+      }
+    }
   />
   <SiteFooter />
 </div>
@@ -165,7 +175,12 @@ exports[`Single Recipe Page should render with right amount of elements 1`] = `
   </main>
   <Notification
     dispatch={[Function]}
-    notification=""
+    notification={
+      Object {
+        "message": "",
+        "type": "success",
+      }
+    }
   />
   <SiteFooter />
 </div>

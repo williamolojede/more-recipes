@@ -1,5 +1,5 @@
 .notification{
-  background-color: #323232;
+  background-color: #4BB543;
   color: #f1f1f1;
   min-height: 48px;
   min-width: 288px;
@@ -10,9 +10,13 @@
   margin: 12px;
   padding: 8px 24px;
   border-radius: 2px;
-  transition: transform 0.3s, opacity 0.3s;
+  transition: transform .3s, opacity .3s;
   opacity: 0;
   transform: translateY(100px);
+
+  &.error{
+    background-color: #E71D36;
+  }
 }
 
 .notification-enter {

@@ -11,15 +11,25 @@ const router = express.Router();
 router.use('*', middlewares.requiresToken);
 
 router.get('/', recipesController.getAllRecipe);
-router.post('/', middlewares.validateAddRecipe, recipesController.createRecipe);
+router.post(
+  '/',
+  middlewares.validateAddRecipe,
+  middlewares.validateExistingRecipeName,
+  recipesController.createRecipe
+);
 
 // checks if the recipe to be accessed exist
 router.use('/:id', middlewares.validateRecipeId);
 
 router.route('/:id')
   .get(middlewares.countViews, recipesController.getSingleRecipe)
-  .put(middlewares.validateUpdate, recipesController.updateRecipe)
-  .delete(recipesController.deleteRecipe);
+  .put(
+    middlewares.validateUpdate,
+    middlewares.isOwner,
+    middlewares.validateExistingRecipeName,
+    recipesController.updateRecipe
+  )
+  .delete(middlewares.isOwner, recipesController.deleteRecipe);
 
 router.post('/:id/vote-:dir',
   recipesController.voteRecipe,
