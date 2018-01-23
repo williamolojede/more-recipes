@@ -3,6 +3,7 @@ import { CSSTransition } from 'react-transition-group';
 import PropTypes from 'prop-types';
 
 import { hideNotification } from '../../actions/notification';
+import { notificationPropTypes } from '../../config/proptypes';
 
 class Notification extends Component {
   constructor(props) {
@@ -20,15 +21,15 @@ class Notification extends Component {
   }
 
   render() {
-    const { notification } = this.props;
+    const { notification: { message, type } } = this.props;
     return (
       <CSSTransition
         classNames="notification"
-        in={!!notification}
+        in={!!message}
         timeout={this.state.timeout}
       >
-        <div className="notification z-depth-1">
-          <p>{notification}</p>
+        <div className={`notification z-depth-1 ${type}`}>
+          <p>{message}</p>
         </div>
       </CSSTransition>
     );
@@ -36,7 +37,7 @@ class Notification extends Component {
 }
 
 Notification.propTypes = {
-  notification: PropTypes.string.isRequired,
-  dispatch: PropTypes.func.isRequired
+  ...notificationPropTypes,
+  dispatch: PropTypes.func.isRequired,
 };
 export default Notification;

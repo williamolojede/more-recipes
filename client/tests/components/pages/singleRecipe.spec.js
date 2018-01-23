@@ -2,6 +2,7 @@ import React from 'react';
 import { PureSingleRecipe, mapStateToProps } from '../../../components/pages/SingleRecipe';
 import userMock from '../../__mocks__/user.mock';
 import recipesMock from '../../__mocks__/recipes.mock';
+import notificationMock from '../../__mocks__/notification.mock';
 import { initialState } from '../../../reducers/recipe';
 
 function setup() {
@@ -14,7 +15,7 @@ function setup() {
         id: '5',
       }
     },
-    notification: ''
+    notification: notificationMock
   };
   const wrapper = shallow(<PureSingleRecipe {...props} />);
 

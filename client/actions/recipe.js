@@ -24,6 +24,19 @@ const fetchRecipesError = (err, dispatch, type) => {
   dispatch(unsetFetching());
 };
 
+const showSuccessNotification = (res, dispatch) => {
+  dispatch(showNotification({
+    message: res.data.message,
+    type: 'success'
+  }));
+};
+
+const showErrorNotification = (err, dispatch) => {
+  dispatch(showNotification({
+    message: err.response.data.message,
+    type: 'error'
+  }));
+};
 
 export const resetSingleRecipe = () => ({
   type: actionTypes.RESET_SINGLE_RECIPE
@@ -72,33 +85,34 @@ export const fetchTopRecipes = (page, limit) => (dispatch) => {
 export const vote = (dir, id) => dispatch => instance.post(`/recipes/${id}/vote-${dir}`)
   .then((res) => {
     dispatch(recieveSingleRecipe(actionTypes.RECEIVE_SINGLE_RECIPE, res.data.recipe));
-    dispatch(showNotification(res.data.message));
+    showSuccessNotification(res, dispatch);
   })
   .catch((err) => {
-    dispatch(showNotification(err.response.data.message));
+    showErrorNotification(err, dispatch);
   });
 
 
 export const favorite = id => dispatch => instance.post(`/recipes/${id}/favorite`)
   .then((res) => {
     dispatch(recieveSingleRecipe(actionTypes.RECEIVE_SINGLE_RECIPE, res.data.recipe));
-    dispatch(showNotification(res.data.message));
+    showSuccessNotification(res, dispatch);
 
     // Return true to confirm delete
     // occurred used in favorite recipe page
     return true;
   })
   .catch((err) => {
-    dispatch(showNotification(err.response.data.message));
+    showErrorNotification(err, dispatch);
   });
 
 export const addRecipe = recipe => dispatch =>
   instance.post('/recipes', { recipe })
     .then((res) => {
-      dispatch(showNotification(res.data.message));
+      showSuccessNotification(res, dispatch);
     })
     .catch((err) => {
-      dispatch(showNotification(err.response.data.message));
+      showErrorNotification(err, dispatch);
+      return Promise.reject(err);
     });
 
 export const updateRecipe = recipe => (dispatch) => {
@@ -119,10 +133,11 @@ export const updateRecipe = recipe => (dispatch) => {
   };
   return instance.put(`/recipes/${id}`, { update })
     .then((res) => {
-      dispatch(showNotification(res.data.message));
+      showSuccessNotification(res, dispatch);
     })
     .catch((err) => {
-      dispatch(showNotification(err.response.data.message));
+      showErrorNotification(err, dispatch);
+      return Promise.reject(err);
     });
 };
 
@@ -130,7 +145,7 @@ export const deleteRecipe = id => (dispatch) => {
   dispatch(setFetching());
   return instance.delete(`recipes/${id}`)
     .then((res) => {
-      dispatch(showNotification(res.data.message));
+      showSuccessNotification(res, dispatch);
       dispatch(unsetFetching());
 
       // Return true to confirm delete
@@ -138,7 +153,7 @@ export const deleteRecipe = id => (dispatch) => {
       return true;
     })
     .catch((err) => {
-      dispatch(showNotification(err.response.data.message));
+      showErrorNotification(err, dispatch);
       dispatch(unsetFetching());
     });
 };

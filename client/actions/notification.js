@@ -1,8 +1,11 @@
 import { SHOW_NOTIFICATION, HIDE_NOTIFICATION } from './types';
 
-export const showNotification = message => ({
+export const showNotification = ({ message, type }) => ({
   type: SHOW_NOTIFICATION,
-  message
+  payload: {
+    message,
+    type
+  }
 });
 
 export const hideNotification = () => ({

@@ -36,9 +36,9 @@ export const updateUserProfile = user => (dispatch) => {
   return instance.put(`/users/${userId}`, { update: { email, imgUrl, fullname } })
     .then((res) => {
       dispatch(receiveUserProfile(res.data.user));
-      dispatch(showNotification(res.data.message));
+      dispatch(showNotification({ message: res.data.message, type: 'success' }));
     })
     .catch((err) => {
-      dispatch(showNotification(err.response.data.message));
+      dispatch(showNotification({ message: err.response.data.message, type: 'error' }));
     });
 };

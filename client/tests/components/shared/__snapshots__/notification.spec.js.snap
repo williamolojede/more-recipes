@@ -7,7 +7,7 @@ exports[`Notification should render with right amount of elements 1`] = `
   timeout={3000}
 >
   <div
-    className="notification z-depth-1"
+    className="notification z-depth-1 success"
   >
     <p>
       you are testing this
@@ -23,7 +23,7 @@ exports[`Notification should render with right amount of elements when notifiaca
   timeout={3000}
 >
   <div
-    className="notification z-depth-1"
+    className="notification z-depth-1 success"
   >
     <p />
   </div>

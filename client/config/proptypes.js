@@ -15,7 +15,14 @@ export const authPropTypes = {
 export const currentUserPropTypes = {
   currentUser: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    fullname: PropTypes.string.isRequired,
+    fullname: PropTypes.string.isRequired
+  }).isRequired
+};
+
+export const notificationPropTypes = {
+  notification: PropTypes.shape({
+    message: PropTypes.string.isRequired,
+    type: PropTypes.oneOf(['success', 'error']).isRequired
   }).isRequired
 };
 

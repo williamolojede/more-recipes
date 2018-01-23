@@ -79,7 +79,12 @@ exports[`Profile should render with right amount of elements 1`] = `
   </main>
   <Notification
     dispatch={[Function]}
-    notification=""
+    notification={
+      Object {
+        "message": "",
+        "type": "success",
+      }
+    }
   />
   <SiteFooter />
 </div>

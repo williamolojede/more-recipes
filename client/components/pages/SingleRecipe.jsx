@@ -22,7 +22,11 @@ import Reviews from '../shared/Reviews';
 import RecipeStats from '../shared/RecipeStats.jsx';
 import Notification from '../shared/Notification.jsx';
 
-import { recipePropTypes, currentUserPropTypes } from '../../config/proptypes';
+import {
+  recipePropTypes,
+  currentUserPropTypes,
+  notificationPropTypes
+} from '../../config/proptypes';
 
 class SingleRecipe extends Component {
   componentDidMount() {
@@ -133,7 +137,7 @@ SingleRecipe.propTypes = {
     })
   }).isRequired,
 
-  notification: PropTypes.string.isRequired
+  ...notificationPropTypes
 };
 
 export const mapStateToProps = ({

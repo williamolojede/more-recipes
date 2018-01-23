@@ -9,6 +9,8 @@ import restrictOwnerActions from './restrictOwnerActions';
 import validateLogin from './validateLogin';
 import validateSignup from './validateSignup';
 import validateUpdate from './validateUpdate';
+import validateExistingRecipeName from './validateExistingRecipeName';
+import isOwner from './isOwner';
 
 const middlewares = {
   countViews,
@@ -21,7 +23,9 @@ const middlewares = {
   restrictOwnerActions,
   validateLogin,
   validateSignup,
-  validateUpdate
+  validateUpdate,
+  validateExistingRecipeName,
+  isOwner
 };
 
 export default middlewares;
