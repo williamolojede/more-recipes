@@ -5,22 +5,26 @@
   "main": "server/app.js",
   "scripts": {
     "start": "babel-node server/app.js",
+    "start:e2e": "cross-env NODE_ENV=test babel-node server/app.js",
     "start:dev": "cross-env NODE_ENV=development nodemon --exec babel-node server/app.js",
     "start:docs": "cd docs-src && bundle exec middleman server",
     "build:docs": "cd docs-src && bundle exec middleman build --clean",
     "build:client:prod": "npm run clean && webpack -p --config webpack.config.prod.js",
     "build:client:dev": "npm run clean && webpack -p --config webpack.config.js",
-    "test:server": "cross-env NODE_ENV=test BABEL_ENV=test-server nyc mocha --timeout 10000 server/test",
-    "test:server:dev": "npm run migrate:test && npm run test:server",
+    "pretest:server": "npm run migrate:test && npm run seed",
+    "test:server": "cross-env NODE_ENV=test BABEL_ENV=test-server nyc mocha --timeout 10000 \"server/test/**/*.spec.js\"",
     "test:client": "jest",
-    "test:client:coverage": "npm run test:client -- --coverage",
     "test:client:watch": "npm run test:client -- --watch",
+    "pretest:e2e": "npm run migrate:test",
+    "test:e2e": "nightwatch ./e2e_tests/*.spec.js",
     "test": "npm run test:server && npm run test:client -- -u",
+    "seed": "cross-env NODE_ENV=test sequelize db:seed:all",
     "migrate": "sequelize db:migrate:undo:all&&sequelize db:migrate",
     "migrate:test": "sequelize db:migrate:undo:all --env=test&&sequelize db:migrate --env=test",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "clean": "rimraf dist",
-    "heroku-postbuild": "npm run build:client:prod"
+    "heroku-postbuild": "npm run build:client:prod",
+    "e2e-setup": "selenium-standalone install"
   },
   "nyc": {
     "require": [
@@ -69,9 +73,11 @@
     "mocha": "^3.4.2",
     "mocha-lcov-reporter": "^1.3.0",
     "moxios": "^0.4.0",
+    "nightwatch": "^0.9.19",
     "nyc": "^11.1.0",
     "react-test-renderer": "^15.6.1",
     "redux-mock-store": "^1.4.0",
+    "selenium-standalone": "^6.12.0",
     "supertest": "^3.0.0"
   },
   "dependencies": {

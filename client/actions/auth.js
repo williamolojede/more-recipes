@@ -43,6 +43,6 @@ export const handleAuthFailure = (err, dispatch, type) => {
     ]));
     setTimeout(() => {
       dispatch(removeAuthErrorMessage());
-    }, 2000);
+    }, 5000);
   }
 };

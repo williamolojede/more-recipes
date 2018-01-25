@@ -68,3 +68,4 @@ typings/
 dist/
 docs-src/
 .ackrc
+e2e_reports/
