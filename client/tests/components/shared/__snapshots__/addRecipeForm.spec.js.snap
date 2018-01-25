@@ -249,7 +249,7 @@ exports[`AddRecipeForm Edit Mode should render with right amount of elements 1`]
           </li>
         </ol>
         <a
-          className="add-new"
+          className="add-new add-new__ingredient"
           href="/add-new"
           onClick={[Function]}
         >
@@ -312,7 +312,7 @@ exports[`AddRecipeForm Edit Mode should render with right amount of elements 1`]
           </li>
         </ol>
         <a
-          className="add-new"
+          className="add-new add-new__instruction"
           href="/add-new"
           onClick={[Function]}
         >
@@ -680,7 +680,7 @@ exports[`AddRecipeForm should render with right amount of elements 1`] = `
             </li>
           </ol>
           <a
-            className="add-new"
+            className="add-new add-new__ingredient"
             href="/add-new"
             onClick={[Function]}
           >
@@ -743,7 +743,7 @@ exports[`AddRecipeForm should render with right amount of elements 1`] = `
             </li>
           </ol>
           <a
-            className="add-new"
+            className="add-new add-new__instruction"
             href="/add-new"
             onClick={[Function]}
           >

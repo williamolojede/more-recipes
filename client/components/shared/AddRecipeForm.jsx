@@ -281,7 +281,7 @@ class AddRecipeForm extends Component {
                 onBlur={e => this.hideInput(e, 'ingredient')}
               />
               :
-              <a href="/add-new" className="add-new" onClick={e => this.showInput(e, 'ingredient')}>
+              <a href="/add-new" className="add-new add-new__ingredient" onClick={e => this.showInput(e, 'ingredient')}>
                 <i className="mdi mdi-plus" />
                 <span>Add an ingredient</span>
               </a>
@@ -306,7 +306,7 @@ class AddRecipeForm extends Component {
                 onBlur={e => this.hideInput(e, 'instruction')}
               />
               :
-              <a href="/add-new" className="add-new" onClick={e => this.showInput(e, 'instruction')}>
+              <a href="/add-new" className="add-new add-new__instruction" onClick={e => this.showInput(e, 'instruction')}>
                 <i className="mdi mdi-plus" />
                 <span>Add an instruction</span>
               </a>

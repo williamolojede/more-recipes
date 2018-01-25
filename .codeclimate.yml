@@ -24,6 +24,8 @@ exclude_patterns:
   - "client/__mocks__/"
   - "template/*"
   - "server/test"
+  - "e2e_tests"
   - "client/tests"
   - "server/migrations"
   - "server/models"
+  - "server/seeders"
