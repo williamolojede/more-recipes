@@ -2,6 +2,7 @@ import express from 'express';
 import path from 'path';
 import dotenv from 'dotenv';
 import logger from 'morgan';
+import cors from 'cors';
 import bodyPaser from 'body-parser';
 import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
@@ -19,6 +20,8 @@ dotenv.config();
 const port = parseInt(process.env.PORT, 10) || 8000;
 
 const app = express();
+
+app.use(cors());
 
 // Run Webpack dev server in development mode
 if (process.env.NODE_ENV === 'development') {
